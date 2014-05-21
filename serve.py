@@ -63,16 +63,23 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 	levelUnit = CharField(choices=(('cm', 'Centimeters'),('in', 'Inches'),('ft', 'Feet'), ('m', 'Meters')))
 	access = BooleanField(default=False)
 	description = TextField(null=True)
+	
+class GageAdmin(ModelAdmin):
+	columns = ('name','location')
 
 class Sample(db.Model):
-	id = ForeignKeyField(Gage, related_name='samples')
+	gage = ForeignKeyField(Gage, related_name='samples')
 	timestamp = DateTimeField()
 	level = FloatField()
 	battery = FloatField()
 
+class SampleAdmin(ModelAdmin):
+	columns = ('gage', 'timestamp', 'level', 'battery')
+	foreign_key_lookups = {'gage': 'name'}
 
-class GageAdmin(ModelAdmin):
-	columns = ('name','location')
+
+
+
 	
 	
 
@@ -81,7 +88,7 @@ auth = Auth(app, db)
 
 admin = Admin(app, auth)
 admin.register(Gage, GageAdmin)
-admin.register(Sample)
+admin.register(Sample, SampleAdmin)
 auth.register_admin(admin)
 
 admin.setup()
@@ -113,7 +120,13 @@ class SampleAPI(restful.Resource):
 
 class RecentLevelAPI(restful.Resource):
 	def get(self, id):
-		return {'Rest API': 'RecentLevelAPI', 'Gage': Gage.get(Gage.id == id).name}
+		output = dict()
+		for sample in Sample.select().where(Sample.gage == id).order_by(Sample.timestamp.desc()).limit(1):
+			output['Gage'] = Gage.get(Gage.id == id).name
+			output['Level'] = sample.level
+			output['Unit'] = Gage.get(Gage.id == id).levelUnit
+			# output['Battery'] = sample.battery
+		return output #{'Rest API': 'RecentLevelAPI', 'Gage': Gage.get(Gage.id == id).name, 'Level':}
 	
 
 
