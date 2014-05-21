@@ -2,10 +2,11 @@
 
 '''
 REST methods
-HTTP Method	URI												Action
-GET			http://[hostname]/[version]/gage			Retrieve list of gages
-GET			http://[hostname]/[version]/gage/[gageID]	Retrieve gage details
-POST		http://[hostname]/[version]/sample/[gageID]	Create a new sample
+HTTP Method	URI													Action
+GET			http://[hostname]/[version]/gage					Retrieve list of gages
+GET			http://[hostname]/[version]/gage/[gageID]			Retrieve gage details
+GET			http://[hostname]/[version]/gage/[gageID]/recent	Retrieve most recent sample value
+POST		http://[hostname]/[version]/gage/[gageID]/sample	Create a new sample
 
 
 Gage fields
@@ -47,7 +48,7 @@ api = restful.Api(app)
 # instantiate the db wrapper
 db = Database(app)
 
-class Gage(db.Model):
+class Gage(db.Model): # TODO: add other fields that would be useful to generate config files
 	name = CharField()
 	location = CharField()
 	password = CharField(default=md5(str(random.randint(0,9999999999999))).hexdigest()[:8])
@@ -104,11 +105,11 @@ class GageAPI(restful.Resource): # TODO: needs to fail cleanly if the ID doesn't
 		return {'name': output.name, 'location': output.location}
 
 class SampleAPI(restful.Resource):
-	def get(self):
-		return {'Rest API': 'SampleAPI'}
+	def get(self, id):
+		return {'Rest API': 'SampleAPI', 'Gage': Gage.get(Gage.id == id).name}
 	
-	def post(self, id):
-		new_sample = Sample.create()
+#	def post(self, id):
+#		new_sample = Sample.create()
 
 class RecentLevelAPI(restful.Resource):
 	def get(self, id):
@@ -118,7 +119,7 @@ class RecentLevelAPI(restful.Resource):
 
 api.add_resource(GageListAPI, '/0.1/gage/')
 api.add_resource(GageAPI, '/0.1/gage/<int:id>')
-api.add_resource(SampleAPI, '/0.1/sample/')
+api.add_resource(SampleAPI, '/0.1/gage/<int:id>/sample')
 api.add_resource(RecentLevelAPI, '/0.1/gage/<int:id>/recent') # TODO: get the most recent level from a gage
 	
 
