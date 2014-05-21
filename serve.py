@@ -93,24 +93,33 @@ sample_parser = reqparse.RequestParser()
 
 class GageListAPI(restful.Resource):
 	def get(self):
-		return {'Rest API': 'GageListAPI'}
+		output = dict() # create a dictionary to retur
+		for gage in Gage.select(): 
+			output[gage.id] = gage.name # add a gage id and a name for each gage to output dictionary
+		return output
 
-class GageAPI(restful.Resource):
+class GageAPI(restful.Resource): # TODO: needs to fail cleanly if the ID doesn't exist
 	def get(self, id):
-		return {'REST API': 'GageAPI'}
+		output = Gage.get(Gage.id == id)
+		return {'name': output.name, 'location': output.location}
 
 class SampleAPI(restful.Resource):
 	def get(self):
 		return {'Rest API': 'SampleAPI'}
 	
-	def post(self):
-		new_sample = Sample.create(id)
+	def post(self, id):
+		new_sample = Sample.create()
+
+class RecentLevelAPI(restful.Resource):
+	def get(self, id):
+		return {'Rest API': 'RecentLevelAPI', 'Gage': Gage.get(Gage.id == id).name}
 	
 
 
 api.add_resource(GageListAPI, '/0.1/gage/')
 api.add_resource(GageAPI, '/0.1/gage/<int:id>')
 api.add_resource(SampleAPI, '/0.1/sample/')
+api.add_resource(RecentLevelAPI, '/0.1/gage/<int:id>/recent') # TODO: get the most recent level from a gage
 	
 
 
