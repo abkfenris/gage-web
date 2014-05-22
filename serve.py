@@ -27,7 +27,7 @@ from peewee import *
 from flask_peewee.auth import Auth
 from flask_peewee.admin import Admin, ModelAdmin
 from flask.ext import restful
-from flask.ext.restful import reqparse
+from flask.ext.restful import reqparse, fields
 from hashlib import md5
 import random
 
@@ -98,6 +98,9 @@ admin.setup()
 gage_parser = reqparse.RequestParser()
 
 sample_parser = reqparse.RequestParser()
+sample_parser.add_argument('level', type=float)
+sample_parser.add_argument('battery', type=float)
+sample_parser.add_argument('timestamp')
 
 class GageListAPI(restful.Resource):
 	def get(self):
@@ -115,8 +118,17 @@ class SampleAPI(restful.Resource):
 	def get(self, id):
 		return {'Rest API': 'SampleAPI', 'Gage': Gage.get(Gage.id == id).name}
 	
-#	def post(self, id):
-#		new_sample = Sample.create()
+	def post(self, id):
+		gage = Gage.get(Gage.id == id)
+		args = sample_parser.parse_args()
+		new_sample = Sample.create(gage=gage, timestamp=args['timestamp'], level=args['level'], battery=args['battery'])
+		output = dict()
+		output['Gage_id'] = Gage.get(Gage.id == id).name
+		output['Level'] = new_sample.level
+		output['Timestamp'] = new_sample.timestamp
+		output['Battery'] = new_sample.battery
+		
+		return output, 201
 
 class RecentLevelAPI(restful.Resource):
 	def get(self, id):
