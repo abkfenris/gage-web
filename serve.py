@@ -153,4 +153,4 @@ if __name__ == '__main__':
 	auth.User.create_table(fail_silently=True)
 	Gage.create_table(fail_silently=True)
 	Sample.create_table(fail_silently=True)
-	app.run()
+	app.run(host='0.0.0.0')
