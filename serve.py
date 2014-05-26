@@ -19,19 +19,33 @@ elevation
 elevationUnits
 
 '''
-
+# import flask and extensions
 from flask import Flask, make_response, send_file, request, Response
-from flask_peewee.db import Database
-import datetime
-from peewee import *
-from flask_peewee.auth import Auth
-from flask_peewee.admin import Admin, ModelAdmin
 from flask.ext import restful
 from flask.ext.restful import reqparse, fields
+from flask.ext.httpauth import HTTPBasicAuth
+
+# import peewee and extensions
+from peewee import *
+from flask_peewee.db import Database
+from flask_peewee.auth import Auth
+from flask_peewee.admin import Admin, ModelAdmin
+
+#import other system stuff
 from hashlib import md5
 from functools import wraps
 import random
 import StringIO
+import datetime
+
+# import matplotlib and extensions
+import matplotlib
+matplotlib.use('Agg')
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.figure import Figure
+from matplotlib.dates import DateFormatter, datestr2num
+# from matplotlib import pyplot
+# import numpy
 
 
 
@@ -82,10 +96,7 @@ class SampleAdmin(ModelAdmin):
 
 
 
-
-	
-	
-
+# Build the peewee gage admin, probably should change the name auth at some point
 
 auth = Auth(app, db)
 
@@ -95,6 +106,11 @@ admin.register(Sample, SampleAdmin)
 auth.register_admin(admin)
 
 admin.setup()
+
+
+
+
+# Rest endpoints
 
 # start the parsers
 
@@ -109,7 +125,7 @@ class GageListAPI(restful.Resource):
 	def get(self):
 		output = dict() # create a dictionary to retur
 		for gage in Gage.select(): 
-			output[gage.id] = gage.name # add a gage id and a name for each gage to output dictionary
+			output[gage.id] = gage.name, gage.location # add a gage id and a name for each gage to output dictionary
 		return output
 
 class GageAPI(restful.Resource): # TODO: needs to fail cleanly if the ID doesn't exist
@@ -117,38 +133,7 @@ class GageAPI(restful.Resource): # TODO: needs to fail cleanly if the ID doesn't
 		output = Gage.get(Gage.id == id)
 		return {'name': output.name, 'location': output.location}
 
-# def gage_auth(f): # http://www.wiredmonk.me/customizing-flask-restful.html
-
-from flask.ext.httpauth import HTTPBasicAuth
-
-# auth = HTTPBasicAuth()
-
-#@auth.verify_password
-# def gage_authentication(id, password):
-# 	gage = Gage.get(Gage.id == id)
-# 	if not gage or not password == gage.password:
-# 		return False
-# 	g.user = gage
-# 	return True
-# 	
-# 
-# 
-from functools import wraps
-# def gage_auth(func):
-#     @wraps(func)
-#     def wrapper(*args, **kwargs):
-#         if not getattr(func, 'authenticated', True):
-#             return func(*args, **kwargs)
-# 
-#         acct = gage_authentication()  # custom account lookup function
-# 
-#         if acct:
-#             return func(*args, **kwargs)
-# 
-#         restful.abort(401)
-#     return wrapper
-	
-
+# Authenicate the gages as they post to the REST endpoint, currently it does not match the gage to the one it's claiming to post to though... http://flask.pocoo.org/snippets/8/
 
 def check_gage_auth(id, password):
     """This function is called to check if a gage id /
@@ -173,7 +158,6 @@ def wrong_gage():
 	'You have to login with proper credentials', 401,
 	{'WWW-Authenticate': 'Basic realm="Login Required"'})
 
-
 def requires_auth(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -182,7 +166,6 @@ def requires_auth(f):
             return authenticate()
         return f(*args, **kwargs)
     return decorated
-
 
 class SampleAPI(restful.Resource):
 	def get(self, id):
@@ -210,28 +193,26 @@ class RecentLevelAPI(restful.Resource):
 			output['Level'] = sample.level
 			output['Unit'] = Gage.get(Gage.id == id).levelUnit
 			# output['Battery'] = sample.battery
-		return output #{'Rest API': 'RecentLevelAPI', 'Gage': Gage.get(Gage.id == id).name, 'Level':}
-	
+		return output
 
 
-api.add_resource(GageListAPI, '/0.1/gage', '/0.1/gage/')
-api.add_resource(GageAPI, '/0.1/gage/<int:id>', '/0.1/gage/<int:id>/')
+
+
+# REST endpoints
+
+api.add_resource(GageListAPI, '/0.1/gage/')
+api.add_resource(GageAPI, '/0.1/gage/<int:id>/')
 api.add_resource(SampleAPI, '/0.1/gage/<int:id>/sample')
-api.add_resource(RecentLevelAPI, '/0.1/gage/<int:id>/recent') # TODO: get the most recent level from a gage
+api.add_resource(RecentLevelAPI, '/0.1/gage/<int:id>/recent/')
 
-import matplotlib
-matplotlib.use('Agg')
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-from matplotlib.figure import Figure
-from matplotlib.dates import DateFormatter, datestr2num
-from matplotlib import pyplot
-import numpy
 
 
  
+# Draw plots https://gist.github.com/wilsaj/862153
 
- 
-@app.route('/plot.png') #https://gist.github.com/wilsaj/862153
+# test if matplotlib causes things to explode even when you have no samples
+@app.route('/testplot/') 
+@app.route('/testplot.png')
 def plot():
 	fig = Figure()
 	ax = fig.add_subplot(1, 1, 1)
@@ -254,6 +235,7 @@ def plot():
 	return response
 
 @app.route('/gage/<int:id>/level/')
+@app.route('/gage/<int:id>/level.png')
 def gagelevelplot(id):
 	fig = Figure()
 	ax = fig.add_subplot(1, 1, 1)
@@ -276,6 +258,7 @@ def gagelevelplot(id):
 	return response
 
 @app.route('/gage/<int:id>/battery/')
+@app.route('/gage/<int:id>/battery.png')
 def gagebatteryplot(id):
 	fig = Figure()
 	ax = fig.add_subplot(1, 1, 1)
