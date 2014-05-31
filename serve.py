@@ -183,6 +183,7 @@ class SampleAPI(restful.Resource):
 		output['Level'] = new_sample.level
 		output['Timestamp'] = new_sample.timestamp
 		output['Battery'] = new_sample.battery
+		output['server_sample_id'] = new_sample.id
 		
 		return output, 201
 
