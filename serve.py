@@ -2,11 +2,12 @@
 
 '''
 REST methods
-HTTP Method	URI													Action
-GET			http://[hostname]/[version]/gage					Retrieve list of gages
-GET			http://[hostname]/[version]/gage/[gageID]			Retrieve gage details
-GET			http://[hostname]/[version]/gage/[gageID]/recent	Retrieve most recent sample value
-POST		http://[hostname]/[version]/gage/[gageID]/sample	Create a new sample
+HTTP Method	URI															Action
+GET			http://[hostname]/[version]/gage							Retrieve list of gages
+GET			http://[hostname]/[version]/gage/[gageID]					Retrieve gage details
+GET			http://[hostname]/[version]/gage/[gageID]/recent			Retrieve most recent sample value
+POST		http://[hostname]/[version]/gage/[gageID]/sample			Create a new sample
+GET			http://[hostname]/[version]/gage/[gageID]/sample/recent		Most recent sample timestamp mainly for gages to verify what they have uploaded already
 
 
 Gage fields
@@ -195,6 +196,13 @@ class RecentLevelAPI(restful.Resource):
 			# output['Battery'] = sample.battery
 		return output
 
+class RecentSampleAPI(restful.Resource):
+	def get(self, id):
+		output = dict()
+		for sample in Sample.select().where(Sample.gage == id).order_by(Sample.timestamp.desc()).limit(1):
+			output['timestamp'] = str(sample.timestamp)
+		return output
+
 
 
 
@@ -204,6 +212,7 @@ api.add_resource(GageListAPI, '/0.1/gage/')
 api.add_resource(GageAPI, '/0.1/gage/<int:id>/')
 api.add_resource(SampleAPI, '/0.1/gage/<int:id>/sample')
 api.add_resource(RecentLevelAPI, '/0.1/gage/<int:id>/recent/')
+api.add_resource(RecentSampleAPI, '/0.1/gage/<int:id>/sample/recent')
 
 
 
