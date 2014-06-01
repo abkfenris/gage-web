@@ -81,6 +81,9 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 	levelUnit = CharField(choices=(('cm', 'Centimeters'),('in', 'Inches'),('ft', 'Feet'), ('m', 'Meters')))
 	access = BooleanField(default=False)
 	description = TextField(null=True)
+	frequency = IntegerField(default=15)
+	url = CharField(default=15)
+	change = BooleanField(default=False)
 	
 class GageAdmin(ModelAdmin):
 	columns = ('name','location')
@@ -184,6 +187,14 @@ class SampleAPI(restful.Resource):
 		output['Timestamp'] = new_sample.timestamp
 		output['Battery'] = new_sample.battery
 		output['server_sample_id'] = new_sample.id
+		if Gage.get(Gage.id == id).access == True:
+			output['Access'] = 'True'
+			print 'Access == True'
+		if Gage.get(Gage.id == id).change == True:
+			output['Change'] = True
+			output['Frequency'] = Gage.get(Gage.id == id).frequency
+			output['URL'] = Gage.get(Gage.id == id).url
+			print 'Change == True'
 		
 		return output, 201
 
@@ -195,6 +206,12 @@ class RecentLevelAPI(restful.Resource):
 			output['Level'] = sample.level
 			output['Unit'] = Gage.get(Gage.id == id).levelUnit
 			# output['Battery'] = sample.battery
+			if Gage.get(Gage.id == id).access == True:
+				output['Access'] = 'True'
+				print 'Access = True'
+			if Gage.get(Gage.id == id).change == True:
+				output['Frequency'] = Gage.get(Gage.id == id).frequency
+				output['URL'] = Gage.get(Gage.id == id).url
 		return output
 
 class RecentSampleAPI(restful.Resource):
