@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% set active_page = "index" %}
+
+{% block title %}Gages{% endblock %}
+
+{% block body_attribs %}
+style="padding-top: 50px"
+{% endblock %}
+
+
+
+{% block content %}
+  	<div class="jumbotron" style="background-image: url({{ url_for('static', filename='img/header.jpg' ) }}); background-size: 100%;">
+  		<div class="container">
+  			<h1>Flo.ws</h1>
+  		</div>
+  	</div>
+  	
+  	<div class="container">
+  		<div class="row">
+	  		<div class="col-md-8" role="main">
+		  		
+	  			 <h3>I should probably put something on this page</h3>
+	  			 <p>But you probably just want to check out the gages, so you aren't staying long here anyways</p>
+
+	  		</div>
+	  		<div class="col-md-4">
+		  		Gages
+	  			 <div class="list-group">
+	  			 	{% for gage in Gage.select() %}
+	  			 	<a href="{{ url_for('gagepage', id=gage.id ) }}" class="list-group-item">
+	  			 		{{ gage.name }}
+		  			 	<span class="badge alert-info">{{ recent_level(gage.id) }} <span class="glyphicon glyphicon-arrow-up"></span></span>
+	  			 	</a>
+	  			 {% endfor %}
+	  			 </div>
+	  			
+	  		</div>
+	  	</div>
+  	</div>
+{% endblock %}

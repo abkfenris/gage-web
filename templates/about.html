@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% set active_page = "about" %}
+
+{% block title %}Gages{% endblock %}
+
+{% block body_attribs %}
+style="padding-top: 50px"
+{% endblock %}
+
+{% block content %}
+  	<div class="jumbotron" style="background-image: url({{ url_for('static', filename='img/header.jpg' ) }}); background-size: 100%;">
+  		<div class="container">
+  			<h1>About</h1>
+  		</div>
+  	</div>
+  	
+  	<div class="container">
+  		<div class="row">
+	  		<div class="col-md-8" role="main">
+		  		<h3>What's going on here?</h3>
+		  		<p>This is the human facing side of an open river level gaging system.</p>
+		  		<h3>Why is my local river not on here?</h3>
+		  		<p>Well, you need to build a gage! We haven't exactly finished the gage design and programming, but we are getting closer. Currently we just have a limited beta going on. Right now, it looks like it will cost about 400 for a gage plus data and mounting hardware, but everything is subject to change as I keep breaking them.</p>
+		  		<h3>Want to know more?</h3>
+		  		<p>The source code for both the gages and the website are both on Github. Instructions for building a gage will be coming to the Github repository.</p>
+		  		<ul>
+		  			<li><a href="https://github.com/abkfenris/gage-beaglebone">Gage source</a></li>
+		  			<li><a href="https://github.com/abkfenris/gage-web">Website source</a></li>
+		  		</ul>
+		  		
+	  			 
+
+	  		</div>
+	  		<div class="col-md-4">
+		  		Gages
+	  			 <div class="list-group">
+	  			 	{% for gage in Gage.select() %}
+	  			 	<a href="{{ url_for('gagepage', id=gage.id ) }}" class="list-group-item">
+	  			 		{{ gage.name }}
+		  			 	<span class="badge alert-info">{{ recent_level(gage.id) }} <span class="glyphicon glyphicon-arrow-up"></span></span>
+	  			 	</a>
+	  			 {% endfor %}
+	  			 </div>
+	  			
+	  		</div>
+	  	</div>
+  	</div>
+{% endblock %}

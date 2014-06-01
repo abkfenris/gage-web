@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% set active_page = "gages" %}
+
+{% block title %}Gages{% endblock %}
+
+{% block body_attribs %}
+style="padding-top: 50px"
+{% endblock %}
+
+{% block content %}
+  	<div class="jumbotron" style="background-image: url({{ url_for('static', filename='img/header.jpg' ) }}); background-size: 100%;">
+  		<div class="container">
+  			<h1>Gages</h1>
+  		</div>
+  	</div>
+  	
+  	<div class="container">
+  		<div class="row">
+	  		<div class="col-md-8" role="main">
+		  		Gages
+	  			 <div class="list-group">
+	  			 	{% for gage in Gage.select() %}
+	  			 	<a href="{{ url_for('gagepage', id=gage.id ) }}" class="list-group-item">
+	  			 		{{ gage.name }}
+		  			 	<span class="badge alert-info">{{ recent_level(gage.id) }} <span class="glyphicon glyphicon-arrow-up"></span></span>
+	  			 	</a>
+	  			 {% endfor %}
+	  			 </div>
+	  			 
+
+	  		</div>
+	  		<div class="col-md-4">
+
+	  			The colors indicate how fluid we think the run is.
+	  			<ul class="list-group">
+	  				<li class="list-group-item">
+	  					Not much water in the run
+	  					<span class="badge alert-warning">Too Low</span>
+	  				</li>
+	  				<li class="list-group-item">
+	  					ELF to Scrapy
+	  					<span class="badge alert-success">Low</span>
+	  				</li>
+	  				<li class="list-group-item">
+	  					Medium to High
+	  					<span class="badge alert-info">Medium</span>
+	  				</li>
+	  				<li class="list-group-item">
+	  					Call Substantial Media House
+	  					<span class="badge alert-danger">Too High</span>
+	  				</li>
+	  			</ul>
+	  			
+	  			The arrows indicate the trend of the flow over the last hour or so
+	  			<ul class="list-group">
+	  				<li class="list-group-item">
+	  					Flow is decreasing <span class="glyphicon glyphicon-arrow-down" style="float:right">
+	  				</li>
+	  				<li class="list-group-item">
+	  					Flow is roughly steady <span class="glyphicon glyphicon-arrow-right" style="float:right">
+	  				</li>
+	  				<li class="list-group-item">
+	  					Flow is increasing <span class="glyphicon glyphicon-arrow-up" style="float:right">
+	  				</li>
+	  			</ul>
+	  		</div>
+	  	</div>
+  	</div>
+{% endblock %}

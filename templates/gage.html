@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% set active_page = "gage" %}
+
+{% block title %}{{ gage.name }}{% endblock %}
+
+{% block body_attribs %}
+style="padding-top: 50px"
+{% endblock %}
+
+{% block content %}
+  	<div class="jumbotron">
+  		<div class="container">
+  			<h1>{{ gage.name }}</h1>
+  			<p>{{ gage.shortDescription }}</p>
+  		</div>
+  	</div>
+  	
+  	<div class="container">
+  		<div class="row">
+	  		<div class="col-md-9" role="main">
+	  			<!--  Nav tabs -->
+	  			<ul class="nav nav-tabs">
+	  				<li class="active"><a href="#flow" data-toggle="tab">Flow <span class="badge alert-info">{{ recent_level(gage.id) }}</span></span></a></li>
+	  				<li><a href="#info" data-toggle="tab">Gage Info</a></li>
+	  				<li><a href="#battery" data-toggle="tab">Battery</a></li>
+	  				<li><a href="#runs" data-toggle="tab">Runs</a></li>
+	  				<li><a href="#weather" data-toggle="tab">Weather</a></li>
+	  			</ul>
+	  			
+	  			<!-- Tab contents -->
+	  			<div class="tab-content">
+	  				<div class="tab-pane active" id="flow">
+	  					<img src="{{ url_for('gagelevelplot', id=id ) }}">
+	  				</div>
+	  				<div class="tab-pane" id="info">
+	  					<div class="container">
+		  					{{ gage.description }}
+	  					</div>
+	  				</div>
+	  				<div class="tab-pane" id="battery">
+		  				<img src="{{ url_for('gagebatteryplot', id=id ) }}">
+	  				</div>
+	  				<div class="tab-pane" id="runs">
+	  					{{ gage.runs }}
+	  				</div>
+	  				<div class="tab-pane" id="weather">
+	  					<iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat={{ gage.latitude }}&lon={{ gage.longitude }}&name={{ gage.name }}"> </iframe>
+	  					Other weather resources:
+	  					<div class="list-group">
+	  						<a href="http://forecast.weather.gov/MapClick.php?lat={{ gage.latitude }}&lon={{ gage.longitude }}&site=all&smap=1" class="list-group-item">
+	  						NOAA - NWS - Weather.gov
+	  						</a>
+	  						<a href="http://www.wunderground.com/weather-forecast/zmw:{{ gage.localTown }}.1.99999" class="list-group-item">Weather Underground</a>
+	  						<a href="http://www.weather.com/weather/today/{{ gage.localTown }}:4:US" class="list-group-item">Weather.com</a>
+	  					</div>
+	  					
+	  				</div>
+	  			</div>
+	  		</div>
+	  		<div class="col-md-3">
+	  			Gages
+	  			 <div class="list-group">
+	  			 	{% for gage in Gage.select().where(Gage.id != id) %}
+	  			 	<a href="{{ url_for('gagepage', id=gage.id ) }}" class="list-group-item">
+	  			 		{{ gage.name }}
+		  			 	<span class="badge alert-info">{{ recent_level(gage.id) }} <span class="glyphicon glyphicon-arrow-up"></span></span>
+	  			 	</a>
+	  			 {% endfor %}
+	  			 </div>
+	  		</div>
+	  	</div>
+  	</div>
+{% endblock %}

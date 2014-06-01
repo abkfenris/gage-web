@@ -21,10 +21,11 @@ elevationUnits
 
 '''
 # import flask and extensions
-from flask import Flask, make_response, send_file, request, Response
+from flask import Flask, make_response, send_file, request, Response, render_template
 from flask.ext import restful
 from flask.ext.restful import reqparse, fields
 from flask.ext.httpauth import HTTPBasicAuth
+from flask.ext.bootstrap import Bootstrap
 
 # import peewee and extensions
 from peewee import *
@@ -63,6 +64,8 @@ app.config.from_object(__name__)
 # start building the rest api
 api = restful.Api(app)
 
+bootstrap = Bootstrap(app)
+
 # instantiate the db wrapper
 db = Database(app)
 
@@ -81,9 +84,23 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 	levelUnit = CharField(choices=(('cm', 'Centimeters'),('in', 'Inches'),('ft', 'Feet'), ('m', 'Meters')))
 	access = BooleanField(default=False)
 	description = TextField(null=True)
-	frequency = IntegerField(default=15)
-	url = CharField(default=15)
-	change = BooleanField(default=False)
+	shortDescription = TextField()
+	correlation = CharField(null=True)
+	useCorrelation = BooleanField(default=False)
+	jumbotronImage = CharField(null=True)
+	displayName = CharField(null=True)
+	region = CharField()
+	runs = TextField(null=True)
+	low = FloatField(null=True)
+	medium = FloatField(null=True)
+	high = FloatField(null=True)
+	huge = FloatField(null=True)
+	backendNotes = TextField(null=True)
+	title = CharField(null=True)
+	localTown = CharField()
+
+	
+	
 	
 class GageAdmin(ModelAdmin):
 	columns = ('name','location')
@@ -187,14 +204,6 @@ class SampleAPI(restful.Resource):
 		output['Timestamp'] = new_sample.timestamp
 		output['Battery'] = new_sample.battery
 		output['server_sample_id'] = new_sample.id
-		if Gage.get(Gage.id == id).access == True:
-			output['Access'] = 'True'
-			print 'Access == True'
-		if Gage.get(Gage.id == id).change == True:
-			output['Change'] = True
-			output['Frequency'] = Gage.get(Gage.id == id).frequency
-			output['URL'] = Gage.get(Gage.id == id).url
-			print 'Change == True'
 		
 		return output, 201
 
@@ -206,12 +215,6 @@ class RecentLevelAPI(restful.Resource):
 			output['Level'] = sample.level
 			output['Unit'] = Gage.get(Gage.id == id).levelUnit
 			# output['Battery'] = sample.battery
-			if Gage.get(Gage.id == id).access == True:
-				output['Access'] = 'True'
-				print 'Access = True'
-			if Gage.get(Gage.id == id).change == True:
-				output['Frequency'] = Gage.get(Gage.id == id).frequency
-				output['URL'] = Gage.get(Gage.id == id).url
 		return output
 
 class RecentSampleAPI(restful.Resource):
@@ -261,7 +264,7 @@ def plot():
 	response.headers['Content-Type'] = 'image/png'
 	return response
 
-@app.route('/gage/<int:id>/level/')
+
 @app.route('/gage/<int:id>/level.png')
 def gagelevelplot(id):
 	fig = Figure()
@@ -284,7 +287,7 @@ def gagelevelplot(id):
 	response.headers['Content-Type'] = 'image/png'
 	return response
 
-@app.route('/gage/<int:id>/battery/')
+
 @app.route('/gage/<int:id>/battery.png')
 def gagebatteryplot(id):
 	fig = Figure()
@@ -305,6 +308,41 @@ def gagebatteryplot(id):
 	response.headers['Content-Type'] = 'image/png'
 	return response		
 
+@app.context_processor
+def recent_level_processor():
+	def recent_level(id):
+		output = float()
+		for sample in Sample.select().where(Sample.gage == id).order_by(Sample.timestamp.desc()).limit(1):
+			output = "%.1f" % sample.level
+		return output
+	return dict(recent_level=recent_level)
+
+
+#@app.context_processor
+#def level_trent_processor():	
+#	def leveltrend(id):
+
+
+@app.route('/gage/<int:id>/')
+def gagepage(id):
+	gage = Gage.get(Gage.id == id)
+	return render_template('gage.html', gage=gage, id=id, Gage=Gage)
+
+@app.route('/gage/')
+def gagespage():
+	return render_template('gages.html', Gage=Gage)
+
+@app.route('/about/')
+def aboutpage():
+	return render_template('about.html', Gage=Gage)
+
+@app.route('/')
+def indexpage():
+	return render_template('index.html', Gage=Gage)
+
+@app.route('/map/')
+def mappage():
+	return render_template('map.html', Gage=Gage)
 
 
 
