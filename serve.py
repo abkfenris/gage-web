@@ -99,6 +99,7 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 	title = CharField(null=True)
 	localTown = CharField()
 	sensorRange = FloatField()
+	visible = BooleanField(default=True)
 
 	
 	
@@ -315,14 +316,14 @@ def recent_level_processor():
 	def recent_level(id):
 		output = float()
 		for sample in Sample.select().where(Sample.gage == id).order_by(Sample.timestamp.desc()).limit(1):
-			output = "%.1f" % sample.level # limit float string decimal points http://stackoverflow.com/questions/455612/python-limiting-floats-to-two-decimal-points
+			output = "%.2f" % (sample.level * .01) # limit float string decimal points http://stackoverflow.com/questions/455612/python-limiting-floats-to-two-decimal-points
 		return output
 	return dict(recent_level=recent_level)
 
 
 @app.context_processor
 def level_trend_processor():	
-	def leveltrend(id, samples):
+	def leveltrend(id, samples=4):
 		x = []
 		y = []
 		for sample in Sample.select().where(Sample.gage == id).order_by(Sample.timestamp.desc()).limit(samples):

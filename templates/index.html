@@ -2,7 +2,7 @@
 
 {% set active_page = "index" %}
 
-{% block title %}Gages{% endblock %}
+{% block title %}Flo.ws{% endblock %}
 
 {% block body_attribs %}
 style="padding-top: 50px"
@@ -32,11 +32,11 @@ style="padding-top: 50px"
 	  			 	<a href="{{ url_for('gagepage', id=gage.id ) }}" class="list-group-item">
 	  			 		{{ gage.name }}
 		  			 	<span class="badge alert-info">{{ recent_level(gage.id) }} 
-		  			 		{% if leveltrend(gage.id, 12) == 'rising' %}
+		  			 		{% if leveltrend(gage.id) == 'rising' %}
 		  			 			<span class="glyphicon glyphicon-arrow-up"></span>
-		  			 		{% elif leveltrend(gage.id, 12) == 'steady' %}
+		  			 		{% elif leveltrend(gage.id) == 'steady' %}
 		  			 			<span class="glyphicon glyphicon-arrow-right"></span>
-		  			 		{% elif leveltrend(gage.id, 12) == 'falling' %}
+		  			 		{% elif leveltrend(gage.id) == 'falling' %}
 		  			 			<span class="glyphicon glyphicon-arrow-down"></span>
 		  			 		{% else %}
 		  			 			

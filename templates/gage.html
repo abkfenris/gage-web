@@ -2,7 +2,7 @@
 
 {% set active_page = "gage" %}
 
-{% block title %}{{ gage.name }}{% endblock %}
+{% block title %}Flo.ws | {{ gage.name }}{% endblock %}
 
 {% block body_attribs %}
 style="padding-top: 50px"
@@ -22,11 +22,11 @@ style="padding-top: 50px"
 	  			<!--  Nav tabs -->
 	  			<ul class="nav nav-tabs">
 	  				<li class="active"><a href="#flow" data-toggle="tab">Flow <span class="badge alert-info">{{ recent_level(gage.id) }}
-		  			 		{% if leveltrend(gage.id, 12) == 'rising' %}
+		  			 		{% if leveltrend(gage.id) == 'rising' %}
 		  			 			<span class="glyphicon glyphicon-arrow-up"></span>
-		  			 		{% elif leveltrend(gage.id, 12) == 'steady' %}
+		  			 		{% elif leveltrend(gage.id) == 'steady' %}
 		  			 			<span class="glyphicon glyphicon-arrow-right"></span>
-		  			 		{% elif leveltrend(gage.id, 12) == 'falling' %}
+		  			 		{% elif leveltrend(gage.id) == 'falling' %}
 		  			 			<span class="glyphicon glyphicon-arrow-down"></span>
 		  			 		{% else %}
 		  			 			
@@ -76,11 +76,11 @@ style="padding-top: 50px"
 	  			 		{{ othergage.name }}
 		  			 	<span class="badge alert-info">
 		  			 	{{ recent_level(othergage.id) }} 
-		  			 		{% if leveltrend(othergage.id, 12) == 'rising' %}
+		  			 		{% if leveltrend(othergage.id) == 'rising' %}
 		  			 			<span class="glyphicon glyphicon-arrow-up"></span>
-		  			 		{% elif leveltrend(othergage.id, 12) == 'steady' %}
+		  			 		{% elif leveltrend(othergage.id) == 'steady' %}
 		  			 			<span class="glyphicon glyphicon-arrow-right"></span>
-		  			 		{% elif leveltrend(othergage.id, 12) == 'falling' %}
+		  			 		{% elif leveltrend(othergage.id) == 'falling' %}
 		  			 			<span class="glyphicon glyphicon-arrow-down"></span>
 		  			 		{% else %}
 		  			 			
