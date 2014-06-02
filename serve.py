@@ -26,6 +26,8 @@ from flask.ext import restful
 from flask.ext.restful import reqparse, fields
 from flask.ext.httpauth import HTTPBasicAuth
 from flask.ext.bootstrap import Bootstrap
+from markdown import markdown
+from micawber import parse_html, bootstrap_basic # requires BeautifulSoup to be installed first
 
 # import peewee and extensions
 from peewee import *
@@ -51,6 +53,7 @@ import numpy
 
 
 
+
 # configure our database
 DATABASE = {
 	'name': 'serve.db',
@@ -65,6 +68,8 @@ app.config.from_object(__name__)
 api = restful.Api(app)
 
 bootstrap = Bootstrap(app)
+
+oembed = bootstrap_basic()
 
 # instantiate the db wrapper
 db = Database(app)
@@ -102,11 +107,19 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 	visible = BooleanField(default=True)
 	
 	def description_html(self):
-		html = self.description
+		html = parse_html(
+			markdown(self.description), 
+			oembed, 
+			maxwidth=690,
+			urlize_all=True)
 		return Markup(html)
 	
 	def runs_html(self):
-		html = self.runs
+		html = parse_html(
+			markdown(self.runs), 
+			oembed, 
+			maxwidth=690,
+			urlize_all=True)
 		return Markup(html)
 	
 	
