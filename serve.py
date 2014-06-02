@@ -21,7 +21,7 @@ elevationUnits
 
 '''
 # import flask and extensions
-from flask import Flask, make_response, send_file, request, Response, render_template
+from flask import Flask, make_response, send_file, request, Response, render_template, Markup
 from flask.ext import restful
 from flask.ext.restful import reqparse, fields
 from flask.ext.httpauth import HTTPBasicAuth
@@ -100,7 +100,14 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 	localTown = CharField()
 	sensorRange = FloatField()
 	visible = BooleanField(default=True)
-
+	
+	def description_html(self):
+		html = self.description
+		return Markup(html)
+	
+	def runs_html(self):
+		html = self.runs
+		return Markup(html)
 	
 	
 	

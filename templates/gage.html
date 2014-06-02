@@ -45,14 +45,16 @@ style="padding-top: 50px"
 	  				</div>
 	  				<div class="tab-pane" id="info">
 	  					<div class="container">
-		  					{{ gage.description }}
+		  					{{ gage.description_html() }}
 	  					</div>
 	  				</div>
 	  				<div class="tab-pane" id="battery">
 		  				<img src="{{ url_for('gagebatteryplot', id=id ) }}">
 	  				</div>
 	  				<div class="tab-pane" id="runs">
-	  					{{ gage.runs }}
+	  					<div>
+		  					{{ gage.runs_html() }}
+	  					</div>
 	  				</div>
 	  				<div class="tab-pane" id="weather">
 	  					<iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat={{ gage.latitude }}&lon={{ gage.longitude }}&name={{ gage.name }}"> </iframe>
