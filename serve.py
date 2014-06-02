@@ -40,14 +40,14 @@ import random
 import StringIO
 import datetime
 
+
 # import matplotlib and extensions
 import matplotlib
 matplotlib.use('Agg')
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 from matplotlib.dates import DateFormatter, datestr2num
-# from matplotlib import pyplot
-# import numpy
+import numpy
 
 
 
@@ -98,6 +98,7 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 	backendNotes = TextField(null=True)
 	title = CharField(null=True)
 	localTown = CharField()
+	sensorRange = FloatField()
 
 	
 	
@@ -197,7 +198,8 @@ class SampleAPI(restful.Resource):
 		gage = Gage.get(Gage.id == id)
 		auth = request.authorization
 		args = sample_parser.parse_args()
-		new_sample = Sample.create(gage=gage, timestamp=args['timestamp'], level=args['level'], battery=args['battery'])
+		templevel = gage.sensorRange - args['level']
+		new_sample = Sample.create(gage=gage, timestamp=args['timestamp'], level=templevel, battery=args['battery'])
 		output = dict()
 		output['Gage_id'] = Gage.get(Gage.id == id).name
 		output['Level'] = new_sample.level
@@ -274,12 +276,12 @@ def gagelevelplot(id):
 	y = [] # need to figure out how to reverse axis
 	for sample in Sample.select().where(Sample.gage == id).order_by(Sample.timestamp.desc()):
 		x.append(sample.timestamp)
-		y.append(sample.level)
+		y.append(sample.level/100)
 	ax.plot(x, y, '-')
 	fig.autofmt_xdate()
-	ax.invert_yaxis() # remember we are looking at depth BELOW bridge
+	# ax.invert_yaxis() # remember we are looking at depth BELOW bridge
 	ax.xaxis.set_major_formatter(DateFormatter('%Y-%m-%d %H:%M'))
-	fig.suptitle('%s level in cm below gage' % Gage.get(Gage.id == id).name)
+	fig.suptitle('%s level in m below gage' % Gage.get(Gage.id == id).name)
 	canvas = FigureCanvas(fig)
 	png_output = StringIO.StringIO()
 	canvas.print_png(png_output)
@@ -313,14 +315,29 @@ def recent_level_processor():
 	def recent_level(id):
 		output = float()
 		for sample in Sample.select().where(Sample.gage == id).order_by(Sample.timestamp.desc()).limit(1):
-			output = "%.1f" % sample.level
+			output = "%.1f" % sample.level # limit float string decimal points http://stackoverflow.com/questions/455612/python-limiting-floats-to-two-decimal-points
 		return output
 	return dict(recent_level=recent_level)
 
 
-#@app.context_processor
-#def level_trent_processor():	
-#	def leveltrend(id):
+@app.context_processor
+def level_trend_processor():	
+	def leveltrend(id, samples):
+		x = []
+		y = []
+		for sample in Sample.select().where(Sample.gage == id).order_by(Sample.timestamp.desc()).limit(samples):
+			x.append(sample.id)
+			y.append(sample.level)
+		if len(x) == 0:
+			return 'no data'
+		slope, intercept = numpy.polyfit(x, y, 1)
+		if slope >= .2:
+			return 'rising'
+		elif .2 > slope > -.2:
+			return 'steady'
+		else:
+			return 'falling'
+	return dict(leveltrend=leveltrend)
 
 
 @app.route('/gage/<int:id>/')

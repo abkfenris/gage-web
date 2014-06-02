@@ -15,13 +15,16 @@
 			  	</button>
 			  	<ul class="nav navbar-nav">
 			  		<li{% if "index" == active_page %} class="active"{% endif %}>
-				  		<a class="navbar-brand active" href="{{ url_for('indexpage' ) }}">Flo.ws Base</a>
+				  		<a class="navbar-brand active" href="{{ url_for('indexpage' ) }}">Flo.ws</a>
 			  		</li>
 			  	</ul>
 		  	</div>
 		  	
 		  	<div class="navbar-collapse collapse">
 		  		<ul class="nav navbar-nav">
+		  			{#
+		  				highlighting the active menu items with http://jinja.pocoo.org/docs/tricks/#highlighting-active-menu-items 
+		  			#}
 		  			<li{% if "gages" == active_page %} class="active"{% endif %}>
 		  				<a href="{{ url_for('gagespage' ) }}">Gages</a>
 		  			</li>
