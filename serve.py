@@ -106,7 +106,7 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 	sensorRange = FloatField()
 	visible = BooleanField(default=True)
 	
-	def description_html(self):
+	def description_html(self): # from http://charlesleifer.com/blog/saturday-morning-hack-a-little-note-taking-app-with-flask/
 		html = parse_html(
 			markdown(self.description), 
 			oembed, 
@@ -295,13 +295,16 @@ def plot():
 def gagelevelplot(id, days=7, start=None, end=None):
 	if start == None and end == None:
 		date_begin = datetime.datetime.utcnow() - datetime.timedelta(days=days)
+		date_pad = date_begin - datetime.timedelta(days=1)
 		date_end = datetime.datetime.utcnow()
 		print 'Days ' , days
+		print 'timedelta' , datetime.timedelta(days=days)
 		print 'Plot Begins ' , date_begin
 		print 'Plot Ends ' , date_end
 		print 'Plot Thickens'
 	else:
 		date_begin = datetime.datetime.strptime(str(start), '%Y%m%d')
+		date_pad = date_begin - datetime.timedelta(days=1)
 		date_end = datetime.datetime.strptime(str(end), '%Y%m%d')
 		print 'Start ' , start
 		print 'End', end
@@ -313,13 +316,14 @@ def gagelevelplot(id, days=7, start=None, end=None):
 	az = fig.add_subplot(1, 1, 1)
 	x = []
 	y = [] # need to figure out how to reverse axis
-	for sample in Sample.select().where(Sample.gage == id).order_by(Sample.timestamp.desc()):
+	for sample in Sample.select().where((Sample.gage == id) & (Sample.timestamp.between(date_pad, date_end)) ).order_by(Sample.timestamp.desc()):
 		x.append(sample.timestamp)
 		y.append(sample.level/100)
 	ax.plot(x, y, '-')
 	fig.autofmt_xdate()
 	# ax.invert_yaxis() # remember we are looking at depth BELOW bridge
 	ax.xaxis.set_major_formatter(DateFormatter('%Y-%m-%d %H:%M'))
+	ax.set_xlim(date_begin, date_end)
 	fig.suptitle('%s level in m below gage' % Gage.get(Gage.id == id).name)
 	canvas = FigureCanvas(fig)
 	png_output = StringIO.StringIO()
