@@ -136,6 +136,7 @@ class Sample(db.Model):
 class SampleAdmin(ModelAdmin):
 	columns = ('gage', 'timestamp', 'level', 'battery')
 	foreign_key_lookups = {'gage': 'name'}
+	filter_fields = ('gage', 'timestamp', 'level', 'battery', 'gage_name')
 
 
 
@@ -289,7 +290,24 @@ def plot():
 
 
 @app.route('/gage/<int:id>/level.png')
-def gagelevelplot(id):
+@app.route('/gage/<int:id>/d<int:days>/level.png')
+@app.route('/gage/<int:id>/<int:start>..<int:end>/level.png')
+def gagelevelplot(id, days=7, start=None, end=None):
+	if start == None and end == None:
+		date_begin = datetime.datetime.utcnow() - datetime.timedelta(days=days)
+		date_end = datetime.datetime.utcnow()
+		print 'Days ' , days
+		print 'Plot Begins ' , date_begin
+		print 'Plot Ends ' , date_end
+		print 'Plot Thickens'
+	else:
+		date_begin = datetime.datetime.strptime(str(start), '%Y%m%d')
+		date_end = datetime.datetime.strptime(str(end), '%Y%m%d')
+		print 'Start ' , start
+		print 'End', end
+		print 'Plot Begins ' , date_begin
+		print 'Plot Ends ', date_end
+		print 'Plot Thickens'
 	fig = Figure()
 	ax = fig.add_subplot(1, 1, 1)
 	az = fig.add_subplot(1, 1, 1)
