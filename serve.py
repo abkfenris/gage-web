@@ -122,6 +122,61 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 			urlize_all=True)
 		return Markup(html)
 	
+	def recent_level(self):
+		output = float()
+		for sample in Sample.select().where(Sample.gage == self.id).order_by(Sample.timestamp.desc()).limit(1):
+			output = "%.2f" % (sample.level * .01) # limit float string decimal points http://stackoverflow.com/questions/455612/python-limiting-floats-to-two-decimal-points
+		return output
+	
+	def level_trend(self, samples=4):
+		x = []
+		y = []
+		for sample in Sample.select().where(Sample.gage == self.id).order_by(Sample.timestamp.desc()).limit(samples):
+			x.append(sample.id)
+			y.append(sample.level)
+		if len(x) == 0:
+			return 'no data'
+		else:
+			slope, intercept = numpy.polyfit(x, y, 1)
+			if slope >= .1:
+				return 'rising'
+			elif .2 > slope > -.2:
+				return 'steady'
+			else:
+				return 'falling'
+	
+	def level_badge(self, samples=4):
+		recent = float()
+		for sample in Sample.select().where(Sample.gage == self.id).order_by(Sample.timestamp.desc()).limit(1):
+			recent = "%.2f" % (sample.level * .01) # limit float string decimal points http://stackoverflow.com/questions/455612/python-limiting-floats-to-two-decimal-points
+		x = []
+		y = []
+		for sample in Sample.select().where(Sample.gage == self.id).order_by(Sample.timestamp.desc()).limit(samples):
+			x.append(sample.id)
+			y.append(sample.level)
+		if len(x) == 0:
+			trend = 'no data'
+		else:
+			slope, intercept = numpy.polyfit(x, y, 1)
+			if slope >= .1:
+				trend = 'rising'
+			elif .2 > slope > -.2:
+				trend = 'steady'
+			else:
+				trend = 'falling'
+		html = '<span class="badge">'
+		html += str(recent)
+		if trend == 'rising':
+			html += '<span class="glyphicon glyphicon-arrow-up"></span>'
+		elif trend == 'steady':
+			html += '<span class="glyphicon glyphicon-arrow-right"></span>'
+		elif trend == 'falling':
+			html += '<span class="glyphicon glyphicon-arrow-down"></span>'
+		else:
+			pass
+		html += '</span>'
+		return Markup(html)
+	
 	
 	
 class GageAdmin(ModelAdmin):

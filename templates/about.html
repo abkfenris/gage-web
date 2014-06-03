@@ -61,17 +61,7 @@ style="padding-top: 50px"
 	  				{% for gage in Gage.select() %}
 	  				<a href="{{ url_for('gagepage', id=gage.id ) }}" class="list-group-item">
 	  					{{ gage.name }}
-	  					<span class="badge alert-info">
-		  					{{ recent_level(gage.id) }} 
-		  					{% if leveltrend(gage.id) == 'rising' %}
-		  						<span class="glyphicon glyphicon-arrow-up"></span>
-		  					{% elif leveltrend(gage.id) == 'steady' %}
-		  						<span class="glyphicon glyphicon-arrow-right"></span>
-		  					{% elif leveltrend(gage.id) == 'falling' %}
-		  						<span class="glyphicon glyphicon-arrow-down"></span>
-		  					{% else %}
-		  						
-		  					{% endif %} 
+	  					{{ gage.level_badge() }}
 	  			 	</a>
 	  			 {% endfor %}
 	  			 </div>

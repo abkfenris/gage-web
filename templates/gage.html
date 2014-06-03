@@ -21,17 +21,7 @@ style="padding-top: 50px"
 	  		<div class="col-md-9" role="main">
 	  			<!--  Nav tabs -->
 	  			<ul class="nav nav-tabs">
-	  				<li class="active"><a href="#flow" data-toggle="tab">Flow <span class="badge alert-info">{{ recent_level(gage.id) }}
-		  			 		{% if leveltrend(gage.id) == 'rising' %}
-		  			 			<span class="glyphicon glyphicon-arrow-up"></span>
-		  			 		{% elif leveltrend(gage.id) == 'steady' %}
-		  			 			<span class="glyphicon glyphicon-arrow-right"></span>
-		  			 		{% elif leveltrend(gage.id) == 'falling' %}
-		  			 			<span class="glyphicon glyphicon-arrow-down"></span>
-		  			 		{% else %}
-		  			 			
-		  			 		{% endif %} 
-	  				</span></span></a></li>
+	  				<li class="active"><a href="#flow" data-toggle="tab">Flow {{ gage.level_badge() }}</a></li>
 	  				<li><a href="#info" data-toggle="tab">Gage Info</a></li>
 	  				<li><a href="#battery" data-toggle="tab">Battery</a></li>
 	  				<li><a href="#runs" data-toggle="tab">Runs</a></li>
@@ -76,18 +66,7 @@ style="padding-top: 50px"
 	  			 	{% for othergage in Gage.select().where(Gage.id != id) %}
 	  			 	<a href="{{ url_for('gagepage', id=othergage.id ) }}" class="list-group-item">
 	  			 		{{ othergage.name }}
-		  			 	<span class="badge alert-info">
-		  			 	{{ recent_level(othergage.id) }} 
-		  			 		{% if leveltrend(othergage.id) == 'rising' %}
-		  			 			<span class="glyphicon glyphicon-arrow-up"></span>
-		  			 		{% elif leveltrend(othergage.id) == 'steady' %}
-		  			 			<span class="glyphicon glyphicon-arrow-right"></span>
-		  			 		{% elif leveltrend(othergage.id) == 'falling' %}
-		  			 			<span class="glyphicon glyphicon-arrow-down"></span>
-		  			 		{% else %}
-		  			 			
-		  			 		{% endif %} 
-		  			 	</span></span>
+		  			 	{{ othergage.level_badge() }}
 	  			 	</a>
 	  			 {% endfor %}
 	  			 </div>
