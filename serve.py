@@ -334,17 +334,38 @@ def gagelevelplot(id, days=7, start=None, end=None):
 
 
 @app.route('/gage/<int:id>/battery.png')
-def gagebatteryplot(id):
+@app.route('/gage/<int:id>/d<int:days>/battery.png')
+@app.route('/gage/<int:id>/<int:start>..<int:end>/battery.png')
+def gagebatteryplot(id, days=7, start=None, end=None):
+	if start == None and end == None:
+		date_begin = datetime.datetime.utcnow() - datetime.timedelta(days=days)
+		date_pad = date_begin - datetime.timedelta(days=1)
+		date_end = datetime.datetime.utcnow()
+		print 'Days ' , days
+		print 'timedelta' , datetime.timedelta(days=days)
+		print 'Plot Begins ' , date_begin
+		print 'Plot Ends ' , date_end
+		print 'Plot Thickens'
+	else:
+		date_begin = datetime.datetime.strptime(str(start), '%Y%m%d')
+		date_pad = date_begin - datetime.timedelta(days=1)
+		date_end = datetime.datetime.strptime(str(end), '%Y%m%d')
+		print 'Start ' , start
+		print 'End', end
+		print 'Plot Begins ' , date_begin
+		print 'Plot Ends ', date_end
+		print 'Plot Thickens'
 	fig = Figure()
 	ax = fig.add_subplot(1, 1, 1)
 	x = []
 	y = []
-	for sample in Sample.select().where(Sample.gage == id).order_by(Sample.timestamp.desc()):
+	for sample in Sample.select().where((Sample.gage == id) & (Sample.timestamp.between(date_pad, date_end))).order_by(Sample.timestamp.desc()):
 		x.append(sample.timestamp)
 		y.append(sample.battery)
 	ax.plot(x, y, '-')
 	fig.autofmt_xdate()
 	ax.xaxis.set_major_formatter(DateFormatter('%Y-%m-%d %H:%M'))
+	ax.set_xlim(date_begin, date_end)
 	fig.suptitle('%s battery potential in Volts' % Gage.get(Gage.id == id).name)
 	canvas = FigureCanvas(fig)
 	png_output = StringIO.StringIO()
