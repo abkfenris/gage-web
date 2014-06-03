@@ -105,6 +105,7 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 	localTown = CharField()
 	sensorRange = FloatField()
 	visible = BooleanField(default=True)
+	useLevels = BooleanField(default=False)
 	
 	def description_html(self): # from http://charlesleifer.com/blog/saturday-morning-hack-a-little-note-taking-app-with-flask/
 		html = parse_html(
@@ -146,9 +147,15 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 				return 'falling'
 	
 	def level_badge(self, samples=4):
+	
 		recent = float()
+		recent_raw = float()
 		for sample in Sample.select().where(Sample.gage == self.id).order_by(Sample.timestamp.desc()).limit(1):
 			recent = "%.2f" % (sample.level * .01) # limit float string decimal points http://stackoverflow.com/questions/455612/python-limiting-floats-to-two-decimal-points
+			recent_raw = sample.level
+			print recent
+			print recent_raw
+			
 		x = []
 		y = []
 		for sample in Sample.select().where(Sample.gage == self.id).order_by(Sample.timestamp.desc()).limit(samples):
@@ -158,13 +165,31 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 			trend = 'no data'
 		else:
 			slope, intercept = numpy.polyfit(x, y, 1)
-			if slope >= .1:
+			if slope >= .2:
 				trend = 'rising'
 			elif .2 > slope > -.2:
 				trend = 'steady'
 			else:
 				trend = 'falling'
-		html = '<span class="badge">'
+				
+		# make the badge, if useLevels is true for the gage color code it
+		html = ''
+		if self.useLevels == True:
+			if recent_raw >= self.huge:
+				html = '<span class="badge alert-danger">'
+			elif self.huge > recent_raw >= self.high:
+				html = '<span class="badge alert-info">'
+			elif self.high > recent_raw >= self.medium:
+				html = '<span class="badge alert-success">'
+			elif self.medium > recent_raw >= self.low:
+				html = '<span class="badge alert-warning">'
+			else:
+				html = '<span class="badge">'
+		else:
+			html = '<span class="label label-default" style="float:right">'
+		html += ''
+
+		# thrown an icon on the badge if it's changing
 		html += str(recent)
 		if trend == 'rising':
 			html += '<span class="glyphicon glyphicon-arrow-up"></span>'
