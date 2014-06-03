@@ -106,6 +106,8 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 	sensorRange = FloatField()
 	visible = BooleanField(default=True)
 	useLevels = BooleanField(default=False)
+	trendSlope = FloatField(default=.2)
+	trendSamples = FloatField(default=4)
 	
 	def description_html(self): # from http://charlesleifer.com/blog/saturday-morning-hack-a-little-note-taking-app-with-flask/
 		html = parse_html(
@@ -129,9 +131,17 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 			output = "%.2f" % (sample.level * .01) # limit float string decimal points http://stackoverflow.com/questions/455612/python-limiting-floats-to-two-decimal-points
 		return output
 	
-	def level_trend(self, samples=4):
+	def level_trend(self, samples=4, slope=.2):
 		x = []
 		y = []
+		if len(self.trendSlope) != 0:
+			calcSlope = self.trendSlope
+		else:
+			pass
+		if len(self.trendSamples) != 0:
+			samples = self.trendSamples
+		else:
+			pass
 		for sample in Sample.select().where(Sample.gage == self.id).order_by(Sample.timestamp.desc()).limit(samples):
 			x.append(sample.id)
 			y.append(sample.level)
@@ -139,25 +149,32 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 			return 'no data'
 		else:
 			slope, intercept = numpy.polyfit(x, y, 1)
-			if slope >= .1:
+			print slope
+			if slope >= .2:
 				return 'rising'
 			elif .2 > slope > -.2:
 				return 'steady'
 			else:
 				return 'falling'
 	
-	def level_badge(self, samples=4):
+	def level_badge(self, samples=4, slope=.2):
 	
 		recent = float()
 		recent_raw = float()
 		for sample in Sample.select().where(Sample.gage == self.id).order_by(Sample.timestamp.desc()).limit(1):
 			recent = "%.2f" % (sample.level * .01) # limit float string decimal points http://stackoverflow.com/questions/455612/python-limiting-floats-to-two-decimal-points
 			recent_raw = sample.level
-			print recent
-			print recent_raw
 			
 		x = []
 		y = []
+		if not self.trendSlope:
+			calcSlope = self.trendSlope
+		else:
+			pass
+		if not self.trendSamples:
+			samples = 2
+		else:
+			pass
 		for sample in Sample.select().where(Sample.gage == self.id).order_by(Sample.timestamp.desc()).limit(samples):
 			x.append(sample.id)
 			y.append(sample.level)
@@ -165,6 +182,7 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 			trend = 'no data'
 		else:
 			slope, intercept = numpy.polyfit(x, y, 1)
+			print slope
 			if slope >= .2:
 				trend = 'rising'
 			elif .2 > slope > -.2:
@@ -186,7 +204,7 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 			else:
 				html = '<span class="badge">'
 		else:
-			html = '<span class="label label-default" style="float:right">'
+			html = '<span class="label label-default" style="float:right; margin-left:6px">'
 		html += ''
 
 		# thrown an icon on the badge if it's changing
@@ -377,20 +395,20 @@ def gagelevelplot(id, days=7, start=None, end=None):
 		date_begin = datetime.datetime.utcnow() - datetime.timedelta(days=days)
 		date_pad = date_begin - datetime.timedelta(days=1)
 		date_end = datetime.datetime.utcnow()
-		print 'Days ' , days
-		print 'timedelta' , datetime.timedelta(days=days)
-		print 'Plot Begins ' , date_begin
-		print 'Plot Ends ' , date_end
-		print 'Plot Thickens'
+		#print 'Days ' , days
+		#print 'timedelta' , datetime.timedelta(days=days)
+		#print 'Plot Begins ' , date_begin
+		#print 'Plot Ends ' , date_end
+		#print 'Plot Thickens'
 	else:
 		date_begin = datetime.datetime.strptime(str(start), '%Y%m%d')
 		date_pad = date_begin - datetime.timedelta(days=1)
 		date_end = datetime.datetime.strptime(str(end), '%Y%m%d')
-		print 'Start ' , start
-		print 'End', end
-		print 'Plot Begins ' , date_begin
-		print 'Plot Ends ', date_end
-		print 'Plot Thickens'
+		#print 'Start ' , start
+		#print 'End', end
+		#print 'Plot Begins ' , date_begin
+		#print 'Plot Ends ', date_end
+		#print 'Plot Thickens'
 	fig = Figure()
 	ax = fig.add_subplot(1, 1, 1)
 	az = fig.add_subplot(1, 1, 1)
@@ -404,6 +422,13 @@ def gagelevelplot(id, days=7, start=None, end=None):
 	# ax.invert_yaxis() # remember we are looking at depth BELOW bridge
 	ax.xaxis.set_major_formatter(DateFormatter('%Y-%m-%d %H:%M'))
 	ax.set_xlim(date_begin, date_end)
+	if Gage.get(Gage.id == id).useLevels == True:
+		ax.axhline(y=Gage.get(Gage.id == id).huge/100, color='#a94442')
+		ax.axhline(y=Gage.get(Gage.id == id).high/100, color='#31708f')
+		ax.axhline(y=Gage.get(Gage.id == id).medium/100, color='#3c763d')
+		ax.axhline(y=Gage.get(Gage.id == id).low/100, color='#8a6d3b')
+	else:
+		pass
 	fig.suptitle('%s level in m below gage' % Gage.get(Gage.id == id).name)
 	canvas = FigureCanvas(fig)
 	png_output = StringIO.StringIO()
@@ -421,20 +446,20 @@ def gagebatteryplot(id, days=7, start=None, end=None):
 		date_begin = datetime.datetime.utcnow() - datetime.timedelta(days=days)
 		date_pad = date_begin - datetime.timedelta(days=1)
 		date_end = datetime.datetime.utcnow()
-		print 'Days ' , days
-		print 'timedelta' , datetime.timedelta(days=days)
-		print 'Plot Begins ' , date_begin
-		print 'Plot Ends ' , date_end
-		print 'Plot Thickens'
+		#print 'Days ' , days
+		#print 'timedelta' , datetime.timedelta(days=days)
+		#print 'Plot Begins ' , date_begin
+		#print 'Plot Ends ' , date_end
+		#print 'Plot Thickens'
 	else:
 		date_begin = datetime.datetime.strptime(str(start), '%Y%m%d')
 		date_pad = date_begin - datetime.timedelta(days=1)
 		date_end = datetime.datetime.strptime(str(end), '%Y%m%d')
-		print 'Start ' , start
-		print 'End', end
-		print 'Plot Begins ' , date_begin
-		print 'Plot Ends ', date_end
-		print 'Plot Thickens'
+		#print 'Start ' , start
+		#print 'End', end
+		#print 'Plot Begins ' , date_begin
+		#print 'Plot Ends ', date_end
+		#print 'Plot Thickens'
 	fig = Figure()
 	ax = fig.add_subplot(1, 1, 1)
 	x = []
