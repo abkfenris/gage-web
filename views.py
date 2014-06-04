@@ -7,7 +7,7 @@ import matplotlib
 matplotlib.use('Agg')
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
-from matplotlib.dates import DateFormatter, datestr2num
+from matplotlib.dates import DateFormatter, datestr2num, DayLocator
 
 from app import app
 from auth import auth
@@ -96,6 +96,9 @@ def gagelevelplot(id, days=7, start=None, end=None):
 		date_begin = datetime.datetime.strptime(str(start), '%Y%m%d')
 		date_pad = date_begin - datetime.timedelta(days=1)
 		date_end = datetime.datetime.strptime(str(end), '%Y%m%d')
+		date_range = date_end-date_begin
+		days = date_range.days
+		print days
 	fig = Figure()
 	ax = fig.add_subplot(1, 1, 1)
 	az = fig.add_subplot(1, 1, 1)
@@ -105,9 +108,12 @@ def gagelevelplot(id, days=7, start=None, end=None):
 		x.append(sample.timestamp)
 		y.append(sample.level/100)
 	ax.plot(x, y, '-')
-	fig.autofmt_xdate()
-	# ax.invert_yaxis() # remember we are looking at depth BELOW bridge
-	ax.xaxis.set_major_formatter(DateFormatter('%Y-%m-%d %H:%M'))
+	if days > 3:
+		ax.xaxis.set_major_locator(DayLocator())
+		ax.xaxis.set_major_formatter(DateFormatter('%b\n%d\n%Y'))
+	else:
+		fig.autofmt_xdate()
+		ax.xaxis.set_major_formatter(DateFormatter('%Y-%m-%d %H:%M'))
 	ax.set_xlim(date_begin, date_end)
 	if Gage.get(Gage.id == id).useLevels == True:
 		ax.axhline(y=Gage.get(Gage.id == id).huge/100, color='#a94442')

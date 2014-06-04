@@ -35,6 +35,14 @@ class Region(db.Model):
 	shortDescription = TextField(null=True)
 	initial = CharField()
 	
+	def description_html(self): # from http://charlesleifer.com/blog/saturday-morning-hack-a-little-note-taking-app-with-flask/
+		html = parse_html(
+			markdown(self.description), 
+			oembed, 
+			maxwidth=690,
+			urlize_all=True)
+		return Markup(html)
+	
 	def __unicode__(self):
 		return self.name # required to get the admin to actually show the name rather than the object as a foreign key
 	
