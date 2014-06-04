@@ -25,6 +25,9 @@
 		  			{#
 		  				highlighting the active menu items with http://jinja.pocoo.org/docs/tricks/#highlighting-active-menu-items 
 		  			#}
+		  			<li{% if "regions" == active_page %} class="active"{% endif %}>
+		  				<a href="{{ url_for('regionspage' ) }}">Regions</a>
+		  			</li>
 		  			<li{% if "gages" == active_page %} class="active"{% endif %}>
 		  				<a href="{{ url_for('gagespage' ) }}">Gages</a>
 		  			</li>

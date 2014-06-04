@@ -1,4 +1,5 @@
-from flask import render_template, request, Response, make_response
+from flask import render_template, Response, make_response
+from flask.ext.bootstrap import Bootstrap
 import datetime
 import random
 import StringIO
@@ -9,8 +10,53 @@ from matplotlib.figure import Figure
 from matplotlib.dates import DateFormatter, datestr2num
 
 from app import app
-# from auth import auth
-from models import User, Sample, Gage
+from auth import auth
+from models import User, Sample, Gage, Region
+
+bootstrap = Bootstrap(app)
+
+# Normal Pages
+
+@app.route('/')
+def indexpage():
+	return render_template('index.html', Gage=Gage)
+	
+@app.route('/about/')
+def aboutpage():
+	return render_template('about.html', Gage=Gage)
+
+@app.route('/gage/')
+def gagespage():
+	return render_template('gages.html', Gage=Gage, Region=Region)
+	
+@app.route('/gage/<int:id>/')
+def gagepage(id):
+	gage = Gage.get(Gage.id == id)
+	return render_template('gage.html', gage=gage, id=id, Gage=Gage)
+
+@app.route('/map/')
+def mappage():
+	return render_template('map.html', Gage=Gage)
+
+@app.route('/region/')
+def regionspage():
+	return render_template('regions.html', Region=Region, Gage=Gage)
+
+@app.route('/region/<initial>/')
+@app.route('/region/<int:id>/')
+def regionpage(id=None, initial=None):
+	if initial is not None:
+		region = Region.get(Region.initial == initial.upper())
+		print initial
+		print region.initial
+		print region.name
+	else:
+		region = Region.get(Region.id == id)
+	return render_template('region.html', region=region, Region=Region, Gage=Gage)
+
+
+
+# Plots
 
 # Draw plots https://gist.github.com/wilsaj/862153
 
@@ -38,22 +84,39 @@ def plot():
 	response.headers['Content-Type'] = 'image/png'
 	return response
 
-@app.route('/gage/<int:id>/level/')
 @app.route('/gage/<int:id>/level.png')
-def gagelevelplot(id):
+@app.route('/gage/<int:id>/d<int:days>/level.png')
+@app.route('/gage/<int:id>/<int:start>..<int:end>/level.png')
+def gagelevelplot(id, days=7, start=None, end=None):
+	if start == None and end == None:
+		date_begin = datetime.datetime.utcnow() - datetime.timedelta(days=days)
+		date_pad = date_begin - datetime.timedelta(days=1)
+		date_end = datetime.datetime.utcnow()
+	else:
+		date_begin = datetime.datetime.strptime(str(start), '%Y%m%d')
+		date_pad = date_begin - datetime.timedelta(days=1)
+		date_end = datetime.datetime.strptime(str(end), '%Y%m%d')
 	fig = Figure()
 	ax = fig.add_subplot(1, 1, 1)
 	az = fig.add_subplot(1, 1, 1)
 	x = []
 	y = [] # need to figure out how to reverse axis
-	for sample in Sample.select().where(Sample.gage == id).order_by(Sample.timestamp.desc()):
+	for sample in Sample.select().where((Sample.gage == id) & (Sample.timestamp.between(date_pad, date_end)) ).order_by(Sample.timestamp.desc()):
 		x.append(sample.timestamp)
-		y.append(sample.level)
+		y.append(sample.level/100)
 	ax.plot(x, y, '-')
 	fig.autofmt_xdate()
-	ax.invert_yaxis() # remember we are looking at depth BELOW bridge
+	# ax.invert_yaxis() # remember we are looking at depth BELOW bridge
 	ax.xaxis.set_major_formatter(DateFormatter('%Y-%m-%d %H:%M'))
-	fig.suptitle('%s level in cm below gage' % Gage.get(Gage.id == id).name)
+	ax.set_xlim(date_begin, date_end)
+	if Gage.get(Gage.id == id).useLevels == True:
+		ax.axhline(y=Gage.get(Gage.id == id).huge/100, color='#a94442')
+		ax.axhline(y=Gage.get(Gage.id == id).high/100, color='#31708f')
+		ax.axhline(y=Gage.get(Gage.id == id).medium/100, color='#3c763d')
+		ax.axhline(y=Gage.get(Gage.id == id).low/100, color='#8a6d3b')
+	else:
+		pass
+	fig.suptitle('%s river level in Meters' % Gage.get(Gage.id == id).name)
 	canvas = FigureCanvas(fig)
 	png_output = StringIO.StringIO()
 	canvas.print_png(png_output)
@@ -61,19 +124,30 @@ def gagelevelplot(id):
 	response.headers['Content-Type'] = 'image/png'
 	return response
 
-@app.route('/gage/<int:id>/battery/')
+
 @app.route('/gage/<int:id>/battery.png')
-def gagebatteryplot(id):
+@app.route('/gage/<int:id>/d<int:days>/battery.png')
+@app.route('/gage/<int:id>/<int:start>..<int:end>/battery.png')
+def gagebatteryplot(id, days=7, start=None, end=None):
+	if start == None and end == None:
+		date_begin = datetime.datetime.utcnow() - datetime.timedelta(days=days)
+		date_pad = date_begin - datetime.timedelta(days=1)
+		date_end = datetime.datetime.utcnow()
+	else:
+		date_begin = datetime.datetime.strptime(str(start), '%Y%m%d')
+		date_pad = date_begin - datetime.timedelta(days=1)
+		date_end = datetime.datetime.strptime(str(end), '%Y%m%d')
 	fig = Figure()
 	ax = fig.add_subplot(1, 1, 1)
 	x = []
 	y = []
-	for sample in Sample.select().where(Sample.gage == id).order_by(Sample.timestamp.desc()):
+	for sample in Sample.select().where((Sample.gage == id) & (Sample.timestamp.between(date_pad, date_end))).order_by(Sample.timestamp.desc()):
 		x.append(sample.timestamp)
 		y.append(sample.battery)
 	ax.plot(x, y, '-')
 	fig.autofmt_xdate()
 	ax.xaxis.set_major_formatter(DateFormatter('%Y-%m-%d %H:%M'))
+	ax.set_xlim(date_begin, date_end)
 	fig.suptitle('%s battery potential in Volts' % Gage.get(Gage.id == id).name)
 	canvas = FigureCanvas(fig)
 	png_output = StringIO.StringIO()

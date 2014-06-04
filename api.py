@@ -11,8 +11,11 @@ GET			http://[hostname]/[version]/gage/[gageID]/sample/recent		Most recent sampl
 
 """
 
+from flask import Response, request
 from flask.ext import restful
 from flask.ext.restful import reqparse, fields
+from functools import wraps
+#import datetime
 
 from app import app
 from auth import auth
