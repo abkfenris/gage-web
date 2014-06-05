@@ -59,7 +59,7 @@
 	  		<div class="col-md-3">
 	  			Gages
 	  			 <div class="list-group">
-	  			 	{% for id, distance in gage.other_gage_distance() %}
+	  			 	{% for id, distance in gage.other_gage_distance()[0:3] %}{# selecting only the two nearest gages to show right now #}
 	  			 	<a href="{{ url_for('gagepage', id=Gage.get(Gage.id == id).id ) }}" class="list-group-item">
 	  			 		{{ Gage.get(Gage.id == id).name }}
 		  			 	{{ Gage.get(Gage.id == id).level_badge() }}
