@@ -6,10 +6,12 @@ from peewee import *
 from app import db
 
 #import what the models need for functions
+from math import sin, cos, sqrt, atan2, radians
 from micawber import parse_html, bootstrap_basic #requires beautiful-soup to be installed first
 from markdown import markdown
 from flask import Markup
 from hashlib import md5
+import operator
 import numpy
 import random
 
@@ -196,6 +198,32 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 			pass
 		html += '</span>'
 		return Markup(html)
+		
+	def distance_from(self, id):
+		other = Gage.get(Gage.id == id)
+		
+		R = 6373.0
+		
+		lat1 = radians(self.latitude)
+		lon1 = radians(self.longitude)
+		lat2 = radians(other.latitude)
+		lon2 = radians(other.longitude)
+		
+		dlon = lon2 - lon1
+		dlat = lat2 - lat1
+		a = (sin(dlat/2))**2 + cos(lat1) * cos(lat2) * (sin(dlon/2))**2
+		c = 2 * atan2(sqrt(a), sqrt(1-a))
+		distance = R * c
+		
+		return distance
+	
+	def other_gage_distance(self):
+		output = dict()
+		for othergage in Gage.select().where(Gage.id != self.id):
+			output[othergage.id] = self.distance_from(othergage.id)
+		sorted_output = sorted(output.iteritems(), key=operator.itemgetter(1))
+		return sorted_output
+		
 
 class Sample(db.Model):
 	gage = ForeignKeyField(Gage, related_name='Samples')
