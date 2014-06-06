@@ -75,6 +75,14 @@ def requires_auth(f):
         return f(*args, **kwargs)
     return decorated
 
+def test_timestamp(timestamp, gage_id):
+	try:
+		sample = Sample.get(Sample.timestamp == timestamp, Sample.gage == gage_id)
+	except Sample.DoesNotExist:
+		sample = False
+	return sample
+
+
 class SampleAPI(restful.Resource):
 	def get(self, id):
 		return {'Rest API': 'SampleAPI', 'Gage': Gage.get(Gage.id == id).name}
@@ -84,11 +92,16 @@ class SampleAPI(restful.Resource):
 		gage = Gage.get(Gage.id == id)
 		auth = request.authorization
 		args = sample_parser.parse_args()
-		new_sample = Sample.create(gage=gage, timestamp=args['timestamp'], level=args['level'], battery=args['battery'])
+		timestamp = args['timestamp']
+		existing_sample = test_timestamp(timestamp, gage)
 		output = dict()
+		if existing_sample == False:
+			new_sample = Sample.create(gage=gage, timestamp=args['timestamp'], level=args['level'], battery=args['battery'])
+			output['Timestamp'] = new_sample.timestamp
+		else:
+			new_sample = existing_sample
 		output['Gage_id'] = Gage.get(Gage.id == id).name
 		output['Level'] = new_sample.level
-		output['Timestamp'] = new_sample.timestamp
 		output['Battery'] = new_sample.battery
 		output['server_sample_id'] = new_sample.id
 		
