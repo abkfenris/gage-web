@@ -14,6 +14,7 @@ class DevelopmentConfig(Config):
 		'name': 'main.db',
 		'engine': 'peewee.SqliteDatabase'
 	}
+	SERVER_NAME = 'flows.ngrok.com'
 	
 	
 class TestingConfig(Config):
@@ -28,6 +29,7 @@ class ProductionConfig(Config):
 		'name': os.environ.get('DATABASE_PATH') or 'data.db',
 		'engine': 'peewee.SqliteDatabase'
 	}
+	SERVER_NAME = 'flows.alexkerney.com'
 
 config = {
 	'development': DevelopmentConfig,

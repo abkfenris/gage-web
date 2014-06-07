@@ -1,4 +1,4 @@
-from flask import render_template, Response, make_response
+from flask import render_template, Response, make_response, url_for
 from flask.ext.bootstrap import Bootstrap
 import datetime
 import random
@@ -51,7 +51,13 @@ def gagekml():
 	for gage in Gage.select():
 		output += '\n<Placemark>'
 		output += '\n<name>' + gage.name + '</name>'
-		output += '\n<description>' + gage.shortDescription + '</description>'
+		output += '\n<description>'
+		output += '\n<![CDATA['
+		output += '\n<p>' + gage.shortDescription + '</p>'
+		output += '\n<a href="' + url_for('gagepage', id=gage.id, _external=True ) + '">' + gage.name + '</a>'
+		output += '\n<img src="' + url_for('gagelevelplot', id=gage.id, _external=True ) + '" width=300>'
+		output += '\n]]>'
+		output += '\n</description>'
 		output += '\n<Point>'
 		output += '\n<coordinates>' + str(gage.longitude) + ',' + str(gage.latitude) + ',0</coordinates>'
 		output += '\n</Point>'
