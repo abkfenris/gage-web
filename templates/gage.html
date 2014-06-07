@@ -4,6 +4,7 @@
 
 {% block title %}Flo.ws | {{ gage.name }}{% endblock %}
 
+
 {% block content %}
   	<div class="jumbotron">
   		<div class="container">
@@ -23,11 +24,10 @@
 	  				<li><a href="#runs" data-toggle="tab">Runs</a></li>
 	  				<li><a href="#weather" data-toggle="tab">Weather</a></li>
 	  			</ul>
-	  			
 	  			<!-- Tab contents -->
 	  			<div class="tab-content">
 	  				<div class="tab-pane active" id="flow">
-	  					<img src="{{ url_for('gagelevelplot', id=id ) }}">
+	  					<img src="{{ url_for('gagelevelplot', id=id ) }}" class="img-responsive">
 	  				</div>
 	  				<div class="tab-pane" id="info">
 	  					<div class="container">
@@ -35,7 +35,7 @@
 	  					</div>
 	  				</div>
 	  				<div class="tab-pane" id="battery">
-		  				<img src="{{ url_for('gagebatteryplot', id=id ) }}">
+		  				<img src="{{ url_for('gagebatteryplot', id=id ) }}" class="img-responsive">
 	  				</div>
 	  				<div class="tab-pane" id="runs">
 	  					<div>
