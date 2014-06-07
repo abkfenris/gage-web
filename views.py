@@ -34,14 +34,34 @@ def gagepage(id):
 	gage = Gage.get(Gage.id == id)
 	return render_template('gage.html', gage=gage, id=id, Gage=Gage)
 
-@app.route('/gage/csv/')
+@app.route('/gage/gages.csv')
 def gagecsv():
 	output = 'id, name, shortDescription, latitude, longitude'
 	for gage in Gage.select():
 		output += '\n' + str(gage.id) + ', ' + gage.name + ', ' + gage.shortDescription + ', ' + str(gage.latitude) + ', ' + str(gage.longitude)
 	response = make_response(output)
+	response.headers['Content-Type'] = 'text/csv'
+	return response
+
+@app.route('/gage/gages.kml')
+def gagekml():
+	output = '<?xml version="1.0" encoding="UTF-8"?>'
+	output += '\n<kml xmlns="http://www.opengis.net/kml/2.2">'
+	output += '\n<Document>'
+	for gage in Gage.select():
+		output += '\n<Placemark>'
+		output += '\n<name>' + gage.name + '</name>'
+		output += '\n<description>' + gage.shortDescription + '</description>'
+		output += '\n<Point>'
+		output += '\n<coordinates>' + str(gage.longitude) + ',' + str(gage.latitude) + ',0</coordinates>'
+		output += '\n</Point>'
+		output += '\n</Placemark>'
+	output += '\n</Document>'
+	output += '\n</kml>'
+	response = make_response(output)
 	response.headers['Content-Type'] = 'text/xml'
 	return response
+
 
 
 @app.route('/map/')
