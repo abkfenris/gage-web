@@ -15,9 +15,10 @@
   		<div class="row">
 	  		<div class="col-md-8" role="main">
 		  		
-	  			 <h3>There will be a map here</h3>
-	  			 <p>Pete has limited the guest network speed enough that playing with Google Maps is painful.</p>
-
+	  			 <iframe src="{{ url_for('static', filename='html/google-map.html' ) }}" width="616" height="616" marginwidth="0" marginheight="0" scrolling="no" frameborder="0">
+	  			 	<a href="{{ url_for('static', filename='html/google-map.html' ) }}">View the map here.</a>
+	  			 </iframe>
+	  			 
 	  		</div>
 	  		<div class="col-md-4">
 		  		Gages

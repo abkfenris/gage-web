@@ -55,7 +55,7 @@ def gagekml():
 		output += '\n<![CDATA['
 		output += '\n<p>' + gage.shortDescription + '</p>'
 		output += '\n<a href="' + url_for('gagepage', id=gage.id, _external=True ) + '">' + gage.name + '</a>'
-		output += '\n<img src="' + url_for('gagelevelplot', id=gage.id, _external=True ) + '" width=300>'
+		output += '\n<img src="' + url_for('gagelevelplot', id=gage.id, _external=True ) + '" width=300 class="img-responsive">'
 		output += '\n]]>'
 		output += '\n</description>'
 		output += '\n<Point>'
