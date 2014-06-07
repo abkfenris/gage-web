@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% set active_page = "index" %}
+
+{% block title %}Flows 500{% endblock %}
+
+{% block content %}
+  	<div class="jumbotron" style="background-image: url({{ url_for('static', filename='img/404.jpg' ) }}); background-size: 100%;">
+  		<div class="container">
+  			<h1>Five Hundred</h1>
+  			<h2>Bad Beta</h2>
+  		</div>
+  	</div>
+  	
+  	<div class="container">
+  		<div class="row">
+	  		<div class="col-md-8" role="main">
+		  		<img src="{{ url_for('static', filename='img/404-2.jpg' ) }}" class="img-responsive xs-hidden">
+	  			<h3>We screwed up.</h3>
+	  			
+	  			<p>Try the top menu, or checking out one of the gages on the right.</p>
+
+	  		</div>
+	  		<div class="col-md-4">
+		  		Gages
+	  			 <div class="list-group">
+	  			 	{% for gage in Gage.select() %}
+	  			 	<a href="{{ url_for('gagepage', id=gage.id ) }}" class="list-group-item">
+	  			 		{{ gage.name }}
+		  			 	{{ gage.level_badge() }}
+	  			 	</a>
+	  			 {% endfor %}
+	  			 </div>
+	  			
+	  		</div>
+	  	</div>
+  	</div>
+{% endblock %}

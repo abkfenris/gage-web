@@ -68,8 +68,6 @@ def gagekml():
 	response.headers['Content-Type'] = 'text/xml'
 	return response
 
-
-
 @app.route('/map/')
 def mappage():
 	return render_template('map.html', Gage=Gage)
@@ -89,6 +87,14 @@ def regionpage(id=None, initial=None):
 	else:
 		region = Region.get(Region.id == id)
 	return render_template('region.html', region=region, Region=Region, Gage=Gage)
+	
+@app.errorhandler(404)
+def page_not_found(e):
+	return render_template('404.html', Gage=Gage), 404
+
+@app.errorhandler(500)
+def internal_server_error(e):
+	return render_template('500.html', Gage=Gage), 500
 
 
 
