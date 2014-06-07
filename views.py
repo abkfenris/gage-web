@@ -34,6 +34,16 @@ def gagepage(id):
 	gage = Gage.get(Gage.id == id)
 	return render_template('gage.html', gage=gage, id=id, Gage=Gage)
 
+@app.route('/gage/csv/')
+def gagecsv():
+	output = 'id, name, shortDescription, latitude, longitude'
+	for gage in Gage.select():
+		output += '\n' + str(gage.id) + ', ' + gage.name + ', ' + gage.shortDescription + ', ' + str(gage.latitude) + ', ' + str(gage.longitude)
+	response = make_response(output)
+	response.headers['Content-Type'] = 'text/xml'
+	return response
+
+
 @app.route('/map/')
 def mappage():
 	return render_template('map.html', Gage=Gage)
