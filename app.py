@@ -1,5 +1,9 @@
 #!/usr/bin/python
 
+"""
+App builder. Can be imported and used to start the site
+"""
+
 from flask import Flask
 
 from flask_peewee.db import Database

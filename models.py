@@ -1,3 +1,7 @@
+"""
+Our models. Gages are part of a Region, and Samples need a Gage.
+"""
+
 import datetime
 
 from flask_peewee.auth import BaseUser
@@ -21,6 +25,9 @@ oembed = bootstrap_basic()
 
 #build a user class, largely for 
 class User(db.Model, BaseUser):
+	"""
+	User model
+	"""
 	username = CharField()
 	password = CharField()
 	email = CharField()
@@ -38,6 +45,9 @@ class Region(db.Model):
 	initial = CharField()
 	
 	def description_html(self): # from http://charlesleifer.com/blog/saturday-morning-hack-a-little-note-taking-app-with-flask/
+		"""
+		Return html from markdown description
+		"""
 		html = parse_html(
 			markdown(self.description), 
 			oembed, 
@@ -50,6 +60,9 @@ class Region(db.Model):
 	
 
 class Gage(db.Model): # TODO: add other fields that would be useful to generate config files
+	"""
+	Gage model, takes a lot of arguments as the page configuration is part of the table.
+	"""
 	name = CharField()
 	visible = BooleanField(default=True)
 	displayName = CharField(null=True)
@@ -89,6 +102,9 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 
 	
 	def description_html(self): # from http://charlesleifer.com/blog/saturday-morning-hack-a-little-note-taking-app-with-flask/
+		"""
+		Return html from markdown description
+		"""
 		html = parse_html(
 			markdown(self.description), 
 			oembed, 
@@ -97,6 +113,9 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 		return Markup(html)
 	
 	def runs_html(self):
+		"""
+		Return html from markdown runs
+		"""
 		html = parse_html(
 			markdown(self.runs), 
 			oembed, 
@@ -105,6 +124,9 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 		return Markup(html)
 	
 	def recent_level(self):
+		"""
+		Return a string describing recent level change
+		"""
 		output = float()
 		for sample in Sample.select().where(Sample.gage == self.id).order_by(Sample.timestamp.desc()).limit(1):
 			output = "%.2f" % (sample.level * .01) # limit float string decimal points http://stackoverflow.com/questions/455612/python-limiting-floats-to-two-decimal-points
@@ -137,7 +159,9 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 				return 'falling'
 	
 	def level_badge(self, samples=4, slope=.2):
-	
+		"""
+		Returns HTML badge and icon showing current level, change, and color codes if a gage's range is defined.
+		"""
 		recent = float()
 		recent_raw = float()
 		for sample in Sample.select().where(Sample.gage == self.id).order_by(Sample.timestamp.desc()).limit(1):
@@ -200,6 +224,9 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 		return Markup(html)
 		
 	def distance_from(self, id):
+		"""
+		Returns how far away a specified gage is from the current gage
+		"""
 		other = Gage.get(Gage.id == id)
 		
 		R = 6373.0
@@ -218,6 +245,9 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 		return distance
 	
 	def other_gage_distance(self):
+		"""
+		Returns a list of gages by distance they are from the current gage.
+		"""
 		output = dict()
 		for othergage in Gage.select().where(Gage.id != self.id):
 			output[othergage.id] = self.distance_from(othergage.id)
@@ -226,6 +256,9 @@ class Gage(db.Model): # TODO: add other fields that would be useful to generate 
 		
 
 class Sample(db.Model):
+	"""
+	Sample model. Should largely only be created by automatic uploads
+	"""
 	gage = ForeignKeyField(Gage, related_name='Samples')
 	timestamp = DateTimeField()
 	level = FloatField()

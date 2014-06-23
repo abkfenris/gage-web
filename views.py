@@ -19,23 +19,38 @@ bootstrap = Bootstrap(app)
 
 @app.route('/')
 def indexpage():
+	"""
+	Index page
+	"""
 	return render_template('index.html', Gage=Gage)
 	
 @app.route('/about/')
 def aboutpage():
+	"""
+	About this site.
+	"""
 	return render_template('about.html', Gage=Gage)
 
 @app.route('/gage/')
 def gagespage():
+	"""
+	List of gages grouped by regions.
+	"""
 	return render_template('gages.html', Gage=Gage, Region=Region)
 	
 @app.route('/gage/<int:id>/')
 def gagepage(id):
+	"""
+	Individual gage page.
+	"""
 	gage = Gage.get(Gage.id == id)
 	return render_template('gage.html', gage=gage, id=id, Gage=Gage)
 
 @app.route('/gage/gages.csv')
 def gagecsv():
+	"""
+	.csv of all gages with shortDescription, latitude, and longitude. Largely for mapping
+	"""
 	output = 'id, name, shortDescription, latitude, longitude'
 	for gage in Gage.select():
 		output += '\n' + str(gage.id) + ', ' + gage.name + ', ' + gage.shortDescription + ', ' + str(gage.latitude) + ', ' + str(gage.longitude)
@@ -45,6 +60,9 @@ def gagecsv():
 
 @app.route('/gage/gages.kml')
 def gagekml():
+	"""
+	.kml of gages with url, level graph and shortDescription for mapping
+	"""
 	output = '<?xml version="1.0" encoding="UTF-8"?>'
 	output += '\n<kml xmlns="http://www.opengis.net/kml/2.2">'
 	output += '\n<Document>'
@@ -70,15 +88,24 @@ def gagekml():
 
 @app.route('/map/')
 def mappage():
+	"""
+	Sometimes it's nicer to visually locate a gage, aka on a map.
+	"""
 	return render_template('map.html', Gage=Gage)
 
 @app.route('/region/')
 def regionspage():
+	"""
+	Once things get hopping view all gages by region.
+	"""
 	return render_template('regions.html', Region=Region, Gage=Gage)
 
 @app.route('/region/<initial>/')
 @app.route('/region/<int:id>/')
 def regionpage(id=None, initial=None):
+	"""
+	View gages in a specific region, either by initials or region ID
+	"""
 	if initial is not None:
 		region = Region.get(Region.initial == initial.upper())
 		print initial
@@ -90,12 +117,17 @@ def regionpage(id=None, initial=None):
 	
 @app.errorhandler(404)
 def page_not_found(e):
+	"""
+	404 error page, did you mean to go here?
+	"""
 	return render_template('404.html', Gage=Gage), 404
 
 @app.errorhandler(500)
 def internal_server_error(e):
+	"""
+	500 error page, we broke it, we should probably figure out how to fix it.
+	"""
 	return render_template('500.html', Gage=Gage), 500
-
 
 
 # Plots
@@ -106,6 +138,9 @@ def internal_server_error(e):
 @app.route('/testplot/') 
 @app.route('/testplot.png')
 def plot():
+	"""
+	Draw a generic plot to test that matplotlib actually works
+	"""
 	fig = Figure()
 	ax = fig.add_subplot(1, 1, 1)
 	x=[]
@@ -130,6 +165,9 @@ def plot():
 @app.route('/gage/<int:id>/d<int:days>/level.png')
 @app.route('/gage/<int:id>/<int:start>..<int:end>/level.png')
 def gagelevelplot(id, days=7, start=None, end=None):
+	"""
+	Draw a plot for the gage.id level. If no d# or start/end days are specified draw a 7 day period
+	"""
 	if start == None and end == None:
 		date_begin = datetime.datetime.utcnow() - datetime.timedelta(days=days)
 		date_pad = date_begin - datetime.timedelta(days=1)
@@ -177,6 +215,9 @@ def gagelevelplot(id, days=7, start=None, end=None):
 @app.route('/gage/<int:id>/d<int:days>/battery.png')
 @app.route('/gage/<int:id>/<int:start>..<int:end>/battery.png')
 def gagebatteryplot(id, days=7, start=None, end=None):
+	"""
+	Draw a plot for the gage.id battery life. If no d# or start/end days are specified draw a 7 day period
+	"""
 	if start == None and end == None:
 		date_begin = datetime.datetime.utcnow() - datetime.timedelta(days=days)
 		date_pad = date_begin - datetime.timedelta(days=1)

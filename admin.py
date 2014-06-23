@@ -1,3 +1,7 @@
+"""
+Admin interface, sets up the admin views and sorting
+"""
+
 from flask_peewee.admin import Admin, ModelAdmin
 
 from app import app, db
