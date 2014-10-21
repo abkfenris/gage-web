@@ -1,4 +1,4 @@
-from app import db
+from . import db
 from geoalchemy2 import Geometry
 from sqlalchemy.dialects.postgresql import JSON
 
@@ -27,7 +27,7 @@ class User(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
-    password = 
+    password_hash = db.Column(db.String(128))
     email = db.Column(db.String(120), unique=True)
     
     def __init__(self, username, email):

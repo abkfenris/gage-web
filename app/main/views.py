@@ -9,36 +9,37 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 from matplotlib.dates import DateFormatter, datestr2num, DayLocator
 
-from app import app
+from . import main
+from .. import db
 from auth import auth
-from models import User, Sample, Gage, Region
+from ..models import User, Region, River, Section, Gage, Sensor, Sample
 
 bootstrap = Bootstrap(app)
 
 # Normal Pages
 
-@app.route('/')
+@main.route('/')
 def indexpage():
 	"""
 	Index page
 	"""
 	return render_template('index.html', Gage=Gage)
 	
-@app.route('/about/')
+@main.route('/about/')
 def aboutpage():
 	"""
 	About this site.
 	"""
 	return render_template('about.html', Gage=Gage)
 
-@app.route('/gage/')
+@main.route('/gage/')
 def gagespage():
 	"""
 	List of gages grouped by regions.
 	"""
 	return render_template('gages.html', Gage=Gage, Region=Region)
 	
-@app.route('/gage/<int:id>/')
+@main.route('/gage/<int:id>/')
 def gagepage(id):
 	"""
 	Individual gage page.
@@ -46,7 +47,7 @@ def gagepage(id):
 	gage = Gage.get(Gage.id == id)
 	return render_template('gage.html', gage=gage, id=id, Gage=Gage)
 
-@app.route('/gage/gages.csv')
+@main.route('/gage/gages.csv')
 def gagecsv():
 	"""
 	.csv of all gages with shortDescription, latitude, and longitude. Largely for mapping
@@ -58,7 +59,7 @@ def gagecsv():
 	response.headers['Content-Type'] = 'text/csv'
 	return response
 
-@app.route('/gage/gages.kml')
+@main.route('/gage/gages.kml')
 def gagekml():
 	"""
 	.kml of gages with url, level graph and shortDescription for mapping
@@ -86,22 +87,22 @@ def gagekml():
 	response.headers['Content-Type'] = 'text/xml'
 	return response
 
-@app.route('/map/')
+@main.route('/map/')
 def mappage():
 	"""
 	Sometimes it's nicer to visually locate a gage, aka on a map.
 	"""
 	return render_template('map.html', Gage=Gage)
 
-@app.route('/region/')
+@main.route('/region/')
 def regionspage():
 	"""
 	Once things get hopping view all gages by region.
 	"""
 	return render_template('regions.html', Region=Region, Gage=Gage)
 
-@app.route('/region/<initial>/')
-@app.route('/region/<int:id>/')
+@main.route('/region/<initial>/')
+@main.route('/region/<int:id>/')
 def regionpage(id=None, initial=None):
 	"""
 	View gages in a specific region, either by initials or region ID
@@ -114,20 +115,6 @@ def regionpage(id=None, initial=None):
 	else:
 		region = Region.get(Region.id == id)
 	return render_template('region.html', region=region, Region=Region, Gage=Gage)
-	
-@app.errorhandler(404)
-def page_not_found(e):
-	"""
-	404 error page, did you mean to go here?
-	"""
-	return render_template('404.html', Gage=Gage), 404
-
-@app.errorhandler(500)
-def internal_server_error(e):
-	"""
-	500 error page, we broke it, we should probably figure out how to fix it.
-	"""
-	return render_template('500.html', Gage=Gage), 500
 
 
 # Plots
