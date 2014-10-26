@@ -3,7 +3,7 @@ from datetime import datetime
 
 main = Blueprint('main', __name__)
 
-from . import views #, errors
+from . import views, errors
 
 #@main.route('/')
 #@main.route('/index')

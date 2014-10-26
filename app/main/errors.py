@@ -1,5 +1,6 @@
 from flask import render_template, request, jsonify
 from . import main
+from ..models import Gage
 
 @main.app_errorhandler(403)
 def forbidden(e):
@@ -17,7 +18,7 @@ def page_not_found(e):
 		response = jsonify({'error': 'not found'})
 		response.status_code = 404
 		return response
-	return render_template('404.html'), 404
+	return render_template('404.html', Gage=Gage), 404
 
 @main.app_errorhandler(500)
 def internal_server_error(e):
