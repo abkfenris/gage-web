@@ -16,7 +16,7 @@
 	  		<div class="col-md-8" role="main">	  			
   				<div class="list-group">
   				{% for gage in Gage.query.all() %}
-  					<a href="{{ url_for('.gagepage', id=gage.id ) }}" class="list-group-item">
+  					<a href="{{ url_for('.gagepage', slug=gage.slug ) }}" class="list-group-item">
   						{{ gage.name }} - 
   						{{ gage.location }}
   					</a>

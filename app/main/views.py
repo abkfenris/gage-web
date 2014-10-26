@@ -39,12 +39,15 @@ def gagespage():
 	return render_template('gages.html', Gage=Gage)
 
 @main.route('/gage/<int:id>/')
-@main.route('/gage/<int:id>')
-def gagepage(id):
+@main.route('/gage/<slug>/')
+def gagepage(id=None, slug=None):
 	"""
 	Individual gage page
 	"""
-	gage = Gage.query.get_or_404(id)
+	if slug is None:
+		gage = Gage.query.get_or_404(id)
+	else:
+		gage = Gage.query.filter_by(slug=slug).first_or_404()
 	return render_template('gage.html', Gage=Gage, gage=gage)
 
 @main.route('/region/')
