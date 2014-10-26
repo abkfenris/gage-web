@@ -56,3 +56,12 @@ def regionspage():
 	List all regions
 	"""
 	return render_template('regions.html', Gage=Gage, Region=Region)
+
+@main.route('/region/<int:id>/')
+@main.route('/region/<int:id>')
+def regionpage(id):
+	"""
+	Individual region page
+	"""
+	region = Region.query.get(id)
+	return render_template('region.html', Gage=Gage, Region=Region, region=region)
