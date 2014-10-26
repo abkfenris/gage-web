@@ -37,7 +37,7 @@ def aboutpage():
 @main.route('/gage/')
 def gagespage():
 	"""
-	List of gages grouped by regions.
+	List of gages currently not grouped by regions, or anything else for that matter.
 	"""
 	return render_template('gages.html', Gage=Gage)
 
@@ -49,3 +49,10 @@ def gagepage(id):
 	"""
 	gage = Gage.query.get(id)
 	return render_template('gage.html', Gage=Gage, gage=gage)
+
+@main.route('/region/')
+def regionspage():
+	"""
+	List all regions
+	"""
+	return render_template('regions.html', Gage=Gage, Region=Region)

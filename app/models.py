@@ -131,11 +131,11 @@ class Gage(db.Model):
     short_description = db.Column(db.Text)
     
     def latlon(self):
-	    """
-	    Returns a shapely point
-	    gage.latlon().y for latitude
-	    gage.latlon().x for longitude
-	    """
+		"""
+		Returns a shapely point
+		gage.latlon().y for latitude
+		gage.latlon().x for longitude
+		"""
 		latlon_point = to_shape(self.point)
 		return latlon_point
 	

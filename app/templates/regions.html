@@ -14,13 +14,13 @@
   	<div class="container">
   		<div class="row">
 	  		<div class="col-md-8" role="main">
-	  			{% for region in Region.select() %}
-	  				<a href="{{ url_for('regionpage', id=region.id ) }}"><h3>{{ region.name }}</h3></a>
+	  			{% for region in Region.query.all() %}
+	  				<a href="{#{{ url_for('.regionpage', id=region.id ) }}#}"><h3>{{ region.name }}</h3></a>
 	  				<p>{{ region.description }}</p>
 	  			{% endfor %}
 	  			
 	  			 <h3>Want more gages here?</h3>
-	  			 <p>Once we've left our real Alpha phase of development and testing, we will be definitely looking for other people to deploy gages in other regions. If you want to send data we'll be more than happy to display it. Check out the <a href="{{ url_for('aboutpage' ) }}">About page</a> if you're interest in what goes into a gage and how you can help.</p>
+	  			 <p>Once we've left our real Alpha phase of development and testing, we will be definitely looking for other people to deploy gages in other regions. If you want to send data we'll be more than happy to display it. Check out the <a href="{{ url_for('.aboutpage' ) }}">About page</a> if you're interest in what goes into a gage and how you can help.</p>
 
 	  		</div>
 	  		<div class="col-md-4">
