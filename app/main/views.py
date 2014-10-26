@@ -1,5 +1,4 @@
 from flask import render_template, Response, make_response, url_for, current_app
-#from flask.ext.bootstrap import Bootstrap
 #import datetime
 #import random
 #import StringIO
@@ -14,8 +13,6 @@ from .. import db
 #from auth import auth
 #from ..models import User, Region, River, Section, Gage, Sensor, Sample
 from ..models import Gage, Region, Section
-
-#bootstrap = Bootstrap()
 
 # Normal Pages
 
