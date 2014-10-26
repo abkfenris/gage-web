@@ -8,6 +8,11 @@ sections_regions = db.Table('sections_regions',
     db.Column('region', db.Integer, db.ForeignKey('regions.id'))
 )
 
+gages_regions = db.Table('gages_regions',
+	db.Column('gage', db.Integer, db.ForeignKey('gages.id')),
+	db.Column('region', db.Integer, db.ForeignKey('regions.id'))
+)
+
 correllations = db.Table('correlations',
     db.Column('section', db.Integer, db.ForeignKey('sections.id')),
     db.Column('sensor', db.Integer, db.ForeignKey('sensors.id')),
@@ -129,6 +134,9 @@ class Gage(db.Model):
     visible = db.Column(db.Boolean)
     description = db.Column(db.Text)
     short_description = db.Column(db.Text)
+    
+    regions = db.relationship('Region', secondary=gages_regions,
+                              backref=db.backref('gages', lazy='dynamic'))
     
     def latlon(self):
 		"""
