@@ -21,7 +21,7 @@ class DevelopmentConfig(Config):
 		'name': 'main.db',
 		'engine': 'peewee.SqliteDatabase'
 	}
-	SERVER_NAME = 'flows.ngrok.com'
+	#SERVER_NAME = 'flows.ngrok.com'
 	
 	
 class TestingConfig(Config):
