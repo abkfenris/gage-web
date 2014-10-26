@@ -27,7 +27,6 @@ class User(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
-    password_hash = db.Column(db.String(128))
     email = db.Column(db.String(120), unique=True)
     
     def __init__(self, username, email):
@@ -61,7 +60,7 @@ class River(db.Model):
     header_image = db.Column(db.String(80))
     
     parent_id = db.Column(db.Integer, db.ForeignKey('rivers.id'))
-    parent = db.relationship('Parent', remote_side=id, backref='tributary')
+    parent = db.relationship('River', remote_side=id, backref='tributary')
     
     def __init__(self, name, slug, description, 
                  short_description, header_image, parent):
@@ -115,7 +114,7 @@ class Gage(db.Model):
     river = db.relationship('River', backref='gages')
     
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user = db.relationship('Owner', backref='gages')
+    user = db.relationship('User', backref='gages')
     
     visible = db.Column(db.Boolean)
     zipcode = db.Column(db.String)
@@ -126,6 +125,7 @@ class Gage(db.Model):
     backend_notes = db.Column(db.Text)
     started = db.Column(db.DateTime)
     ended = db.Column(db.DateTime)
+    visible = db.Column(db.Boolean)
     description = db.Column(db.Text)
     short_description = db.Column(db.Text)
     
@@ -162,8 +162,6 @@ class Sample(db.Model):
     
     sensor_id = db.Column(db.Integer, db.ForeignKey('sensors.id'))
     sensor = db.relationship('Sensor', backref=db.backref('samples'))
-    
-    level = db.Column(db.Float)
     
     datetime = db.Column(db.DateTime)
     

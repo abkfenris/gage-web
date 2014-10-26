@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 import os
 from flask import url_for, Flask
-from app import create_app, db
-from app.models import User, Region, River, Section, Gage, Sensor, Sample
+from app import create_app
+#from app.models import User, Region, River, Section, Gage, Sensor, Sample
 from flask.ext.script import Manager, Shell
-from flask.ext.migrate import Migrate, MigrateCommand
+import config
+#from flask.ext.migrate import Migrate, MigrateCommand
 
 #app = Flask(__name__)
-app = create_app(os.getenv('GAGE_CONFIG') or 'default')
+app = create_app(config.Config)
 manager = Manager(app)
 #migrate = Migrate(app, db)
 
