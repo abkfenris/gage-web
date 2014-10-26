@@ -8,6 +8,11 @@ class Config:
 	dropbox_app_token = os.environ.get('DROPBOX_APP_TOKEN')
 	SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/gage_web'
 	SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+	
+	@staticmethod
+	def init_app(app):
+		pass
+	
 
 
 class DevelopmentConfig(Config):

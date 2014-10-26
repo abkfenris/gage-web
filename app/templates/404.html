@@ -23,6 +23,7 @@
 	  		</div>
 	  		<div class="col-md-4">
 		  		Gages
+		  		{#
 	  			 <div class="list-group">
 	  			 	{% for gage in Gage.select() %}
 	  			 	<a href="{{ url_for('gagepage', id=gage.id ) }}" class="list-group-item">
@@ -30,8 +31,9 @@
 		  			 	{{ gage.level_badge() }}
 	  			 	</a>
 	  			 {% endfor %}
+	  			 
 	  			 </div>
-	  			
+	  			#}
 	  		</div>
 	  	</div>
   	</div>
