@@ -39,5 +39,13 @@ def gagespage():
 	"""
 	List of gages grouped by regions.
 	"""
-	return render_template('gages.html', Gage=Gage, Region=Region)
-	
+	return render_template('gages.html', Gage=Gage)
+
+@main.route('/gage/<int:id>/')
+@main.route('/gage/<int:id>')
+def gagepage(id):
+	"""
+	Individual gage page
+	"""
+	gage = Gage.query.get(id)
+	return render_template('gage.html', Gage=Gage, gage=gage)

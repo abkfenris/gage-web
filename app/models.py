@@ -1,5 +1,6 @@
 from . import db
 from geoalchemy2 import Geometry
+from geoalchemy2.shape import to_shape
 from sqlalchemy.dialects.postgresql import JSON
 
 sections_regions = db.Table('sections_regions',
@@ -128,6 +129,17 @@ class Gage(db.Model):
     visible = db.Column(db.Boolean)
     description = db.Column(db.Text)
     short_description = db.Column(db.Text)
+    
+    def latlon(self):
+	    """
+	    Returns a shapely point
+	    gage.latlon().y for latitude
+	    gage.latlon().x for longitude
+	    """
+		latlon_point = to_shape(self.point)
+		return latlon_point
+	
+
     
     def __repr__(self):
         return '<Gage %r>' % self.name
