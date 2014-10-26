@@ -13,7 +13,7 @@ from . import main
 from .. import db
 #from auth import auth
 #from ..models import User, Region, River, Section, Gage, Sensor, Sample
-from ..models import Gage
+from ..models import Gage, Region
 
 #bootstrap = Bootstrap()
 
@@ -34,10 +34,10 @@ def aboutpage():
 	"""
 	return render_template('about.html', Gage=Gage)
 
-#@main.route('/gage/')
-#def gagespage():
-#	"""
-#	List of gages grouped by regions.
-#	"""
-#	return render_template('gages.html', Gage=Gage, Region=Region)
+@main.route('/gage/')
+def gagespage():
+	"""
+	List of gages grouped by regions.
+	"""
+	return render_template('gages.html', Gage=Gage, Region=Region)
 	

@@ -8,7 +8,7 @@ import config
 #from flask.ext.migrate import Migrate, MigrateCommand
 
 #app = Flask(__name__)
-app = create_app(config['default'])
+app = create_app(config.Config)
 manager = Manager(app)
 #migrate = Migrate(app, db)
 
