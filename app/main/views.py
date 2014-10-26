@@ -55,10 +55,17 @@ def regionspage():
 	return render_template('regions.html', Gage=Gage, Region=Region)
 
 @main.route('/region/<int:id>/')
-@main.route('/region/<int:id>')
-def regionpage(id):
+@main.route('/region/<slug>/')
+def regionpage(id=None, slug=None):
 	"""
 	Individual region page
 	"""
-	region = Region.query.get_or_404(id)
-	return render_template('region.html', Gage=Gage, Region=Region, region=region, Section=Section)
+	if slug is None:
+		region = Region.query.get_or_404(id)
+	else:
+		region = Region.query.filter_by(slug=slug).first_or_404()
+	return render_template('region.html', 
+							Gage=Gage, 
+							Region=Region, 
+							region=region, 
+							Section=Section)

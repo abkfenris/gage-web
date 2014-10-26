@@ -15,7 +15,7 @@
   		<div class="row">
 	  		<div class="col-md-8" role="main">
 	  			{% for region in Region.query.all() %}
-	  				<a href="{{ url_for('.regionpage', id=region.id ) }}"><h3>{{ region.name }}</h3></a>
+	  				<a href="{{ url_for('.regionpage', slug=region.slug ) }}"><h3>{{ region.name }}</h3></a>
 	  				<p>{{ region.description }}</p>
 	  			{% endfor %}
 	  			
