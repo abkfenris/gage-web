@@ -25,4 +25,7 @@ def create_app(config_name):
 	from admin import admin as admin_blueprint
 	app.register_blueprint(admin_blueprint, url_prefix='/admin')
 	
+	from api_1_0 import api as api_1_0_blueprint
+	app.register_blueprint(api_1_0_blueprint, url_prefix='/api/1.0')
+	
 	return app

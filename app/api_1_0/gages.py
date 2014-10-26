@@ -11,47 +11,66 @@ POST	/api/1.0/gage/[Gage.id]			Creates new samples
 """
 
 from flask import jsonify, request, g, abort, url_for, current_app
-from flask.ext import restful
+#from flask.ext import restful
 from .. import db
 from ..models import Gage
-from . import apiblueprint
-from .errors import forbidden
+from . import api
+#from .errors import forbidden
+#
+#api = restful.Api(apiblueprint)
+#
+#class GageList(restful.Resource):
+#	"""
+#	Lists all gages with basic info about each
+#	"""
+#	def get(self):
+#		output = dict()
+#		for gage in Gage.select():
+#			output[gage.id] = {'name': gage.name,
+#								'slug': gage.slug,
+#								'location': gage.location}
+#		return output
+#
+#class GageAPI(restful.Resource):
+#	"""
+#	GET: More description about each gage, including sensors
+#	{name, slug, location, url(api), html(humans), sensors:{Sensor.id:{Sensor.stype, latest sample, latest sample time}}}
+#	
+#	POST: Update samples
+#		recieve: {'id': Gage.id, samples: {}
+#	"""
+#	def get(self, id=None):
+#		if id == None:
+#			return {'error': 'no gage id'}
+#		output = Gage.get(Gage.id == id)
+#		return {'name': output.name,
+#				'slug': output.slug,
+#				'location': output.location}
+#	
+#	def post(self, id=None):
+#		if id == None:
+#			return {'error': 'no gage id'}
+#		gage = Gage.get(Gage.id == id)
 
-api = restful.Api(apiblueprint)
+@api.route('/gages/')
+def get_gages():
+	page = request.args.get('page', 1, type=int)
+	pagination = Gage.query.paginate(page, per_page=current_app.config['API_GAGES_PER_PAGE'], error_out=False)
+	gages = pagination.items
+	prev = None
+	if pagination.has_prev:
+		prev = url_for('.get_gages', page=page-1)
+	next = None
+	if pagination.has_next:
+		next = url_for('.get_gages', page=page+1)
+	return jsonify({
+		'gages': [gage.to_json() for gage in gages],
+		'prev': prev,
+		'next': next,
+		'count': pagination.total
+	})
 
-class GageList(restful.Resource):
-	"""
-	Lists all gages with basic info about each
-	"""
-	def get(self):
-		output = dict()
-		for gage in Gage.select():
-			output[gage.id] = {'name': gage.name,
-								'slug': gage.slug,
-								'location': gage.location}
-		return output
-
-class GageAPI(restful.Resource):
-	"""
-	GET: More description about each gage, including sensors
-	{name, slug, location, url(api), html(humans), sensors:{Sensor.id:{Sensor.stype, latest sample, latest sample time}}}
-	
-	POST: Update samples
-		recieve: {'id': Gage.id, samples: {}
-	"""
-	def get(self, id=None):
-		if id == None:
-			return {'error': 'no gage id'}
-		output = Gage.get(Gage.id == id)
-		return {'name': output.name,
-				'slug': output.slug,
-				'location': output.location}
-	
-	def post(self, id=None):
-		if id == None:
-			return {'error': 'no gage id'}
-		gage = Gage.get(Gage.id == id)
-		
-
-
-
+@api.route('/gages/<int:id>')
+def get_gage(id):
+	gage = Gage.query.get_or_404(id)
+	return jsonify(gage.to_long_json())
