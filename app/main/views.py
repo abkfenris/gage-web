@@ -13,7 +13,7 @@ from . import main
 from .. import db
 #from auth import auth
 #from ..models import User, Region, River, Section, Gage, Sensor, Sample
-from ..models import Gage, Region
+from ..models import Gage, Region, Section
 
 #bootstrap = Bootstrap()
 
@@ -47,7 +47,7 @@ def gagepage(id):
 	"""
 	Individual gage page
 	"""
-	gage = Gage.query.get(id)
+	gage = Gage.query.get_or_404(id)
 	return render_template('gage.html', Gage=Gage, gage=gage)
 
 @main.route('/region/')
@@ -63,5 +63,5 @@ def regionpage(id):
 	"""
 	Individual region page
 	"""
-	region = Region.query.get(id)
-	return render_template('region.html', Gage=Gage, Region=Region, region=region)
+	region = Region.query.get_or_404(id)
+	return render_template('region.html', Gage=Gage, Region=Region, region=region, Section=Section)
