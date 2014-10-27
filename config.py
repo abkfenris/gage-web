@@ -9,6 +9,7 @@ class Config:
 	SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/gage_web'
 	SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 	DEBUG = True
+	API_GAGES_PER_PAGE = 2
 	
 	@staticmethod
 	def init_app(app):

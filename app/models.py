@@ -37,11 +37,11 @@ class User(db.Model):
 	email = db.Column(db.String(120), unique=True)
 	
 	def __init__(self, username, email):
-	    self.username = username
-	    self.email = email
+		self.username = username
+		self.email = email
 	
 	def __repr__(self):
-	    return '<User %r>' % self.username
+		return '<User %r>' % self.username
         
 class Region(db.Model):
 	__tablename__ = 'regions'
@@ -53,8 +53,29 @@ class Region(db.Model):
 	short_description = db.Column(db.Text)
 	header_image = db.Column(db.String(80))
 	
+	def to_json(self):
+		json_region = {
+			'id' : self.id,
+			'name' : self.name,
+			'url' : url_for('api.get_region', id=self.id, _external=True),
+			'html': url_for('main.regionpage', slug=self.slug, _external=True)
+		}
+		return json_region
+	
+	def to_long_json(self):
+		json_region = {
+			'id' : self.id,
+			'name' : self.name,
+			'description' : self.description,
+			'sections': [section.to_json() for section in self.sections],
+			'gages': [gage.to_json() for gage in self.gages],
+			'url': url_for('api.get_region', id=self.id, _external=True),
+			'html': url_for('main.regionpage', slug=self.slug, _external=True)
+		}
+		return json_region
+	
 	def __repr__(self):
-	    return '<Region %r>' % self.name
+		return '<Region %r>' % self.name
 
 class River(db.Model):
 	__tablename__ = 'rivers'
@@ -70,13 +91,33 @@ class River(db.Model):
 	parent = db.relationship('River', remote_side=id, backref='tributary')
 	
 	def __init__(self, name, slug, description, 
-	             short_description, header_image, parent):
-	    self.name = name
-	    self.slug = slug
-	    self.description = description
-	    self.short_description = short_description
-	    self.header_image = header_image
-	    self.parent = parent
+				short_description, header_image, parent):
+		self.name = name
+		self.slug = slug
+		self.description = description
+		self.short_description = short_description
+		self.header_image = header_image
+		self.parent = parent
+	
+	def to_json(self):
+		json_river = {
+			'id': self.id,
+			'name': self.name,
+			'url': url_for('api.get_river', id=self.id, _external=True),
+		}
+		return json_river
+	
+	def to_long_json(self):
+		json_river = {
+			'id': self.id,
+			'name': self.name,
+			'url': url_for('api.get_river', id=self.id, _external=True),
+			'sections': [section.to_json() for section in self.sections],
+			'downstream': self.parent.to_json(),
+			'tributaries': [river.to_json() for river in self.tributary],
+			'gages': [gage.to_json() for gage in self.gages]
+		}
+		return json_river
 	
 	def __repr__(self):
 	    return '<River %r>' % self.name
@@ -104,6 +145,46 @@ class Section(db.Model):
 	
 	regions = db.relationship('Region', secondary=sections_regions,
 	                          backref=db.backref('sections', lazy='dynamic'))
+	
+	def inlatlon(self):
+		"""
+		Returns a shapely point for put-in.
+		section.inlatlon().y for latitude
+		section.inlatlon().y for longitude
+		"""
+		latlon_point = to_shape(self.putin)
+		return latlon_point
+	
+	def outlatlon(self):
+		"""
+		Returns a shapely point for take-out.
+		section.outlatlon().y for latitude
+		section.outlatlon().x for longitude
+		"""
+		latlon_point = to_shape(self.takeout)
+		return latlon_point
+	
+	def to_json(self):
+		json_section = {
+			'id' : self.id,
+			'name' : self.name,
+			'url': url_for('api.get_section', id=self.id, _external=True)
+		}
+		return json_section
+	
+	def to_long_json(self):
+		json_section = {
+			'id': self.id,
+			'name': self.name,
+			'url': url_for('api.get_section', id=self.id, _external=True),
+			'regions': [region.to_json() for region in self.regions],
+			'description': self.description,
+			'access': self.access,
+			'location': self.location,
+			'latitude': self.inlatlon().y,
+			'longitude': self.inlatlon().x,
+		}
+		return json_section
 	
 	def __repr__(self):
 	    return '<Section %r>' % self.name
@@ -153,7 +234,7 @@ class Gage(db.Model):
 			'id': self.id,
 			'name': self.name,
 			'location': self.location,
-			'url' : url_for('api.get_gage', id=self.id)
+			'url' : url_for('api.get_gage', id=self.id, _external=True)
 		}
 		return json_post
 	
@@ -162,8 +243,8 @@ class Gage(db.Model):
 			'id': self.id,
 			'name': self.name,
 			'location': self.location,
-			'url' : url_for('api.get_gage', id=self.id),
-			'html': url_for('main.gagepage', slug=self.slug),
+			'url' : url_for('api.get_gage', id=self.id, _external=True),
+			'html': url_for('main.gagepage', slug=self.slug, _external=True),
 			'sensors': [sensor.to_json() for sensor in self.sensors]
 		}
 		return json_post
@@ -196,7 +277,7 @@ class Sensor(db.Model):
 		json_post = {
 			'id' : self.id,
 			'type': self.stype,
-			'url' : url_for('api.get_sensor', id=self.id)
+			'url' : url_for('api.get_sensor', id=self.id, _external=True)
 		}
 		return json_post
 	
@@ -209,13 +290,23 @@ class Sensor(db.Model):
 			'maximum': self.maximum,
 			'started': self.started,
 			'ended': self.ended,
-			'url': url_for('api.get_sensor', id=self.id),
-			'gage': self.gage.to_json()
+			'url': url_for('api.get_sensor', id=self.id, _external=True),
+			'gage': self.gage.to_json(),
+			'samples': [sample.value for sample in self.samples]
 		}
 		return json_post
 	
+	def to_sample_json(self):
+		json_sensor = {
+			'id' : self.id,
+			'type' : self.stype,
+			'gage': self.gage.to_json(),
+			'url': url_for('api.get_sensor', id=self.id, _external=True)
+		}
+		return json_sensor
+	
 	def __repr__(self):
-	    return '<Sensor %r>' % self.id
+		return '<Sensor %r>' % self.id
 
 class Sample(db.Model):
 	__tablename__ = 'samples'
@@ -226,6 +317,17 @@ class Sample(db.Model):
 	sensor = db.relationship('Sensor', backref=db.backref('samples'))
 	
 	datetime = db.Column(db.DateTime)
+	value = db.Column(db.Float)
+	
+	def to_json(self):
+		json_sample = {
+			'id': self.id,
+			'sensor': self.sensor.to_sample_json(),
+			'value': self.value,
+			'datetime': self.datetime,
+			'url': url_for('api.get_sample', id=self.id, _external=True)
+		}
+		return json_sample
 	
 	def __repr__(self):
-	    return '<Sample %r>' % self.id
+		return '<Sample %r>' % self.id

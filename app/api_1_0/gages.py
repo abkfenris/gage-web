@@ -16,41 +16,6 @@ from .. import db
 from ..models import Gage
 from . import api
 #from .errors import forbidden
-#
-#api = restful.Api(apiblueprint)
-#
-#class GageList(restful.Resource):
-#	"""
-#	Lists all gages with basic info about each
-#	"""
-#	def get(self):
-#		output = dict()
-#		for gage in Gage.select():
-#			output[gage.id] = {'name': gage.name,
-#								'slug': gage.slug,
-#								'location': gage.location}
-#		return output
-#
-#class GageAPI(restful.Resource):
-#	"""
-#	GET: More description about each gage, including sensors
-#	{name, slug, location, url(api), html(humans), sensors:{Sensor.id:{Sensor.stype, latest sample, latest sample time}}}
-#	
-#	POST: Update samples
-#		recieve: {'id': Gage.id, samples: {}
-#	"""
-#	def get(self, id=None):
-#		if id == None:
-#			return {'error': 'no gage id'}
-#		output = Gage.get(Gage.id == id)
-#		return {'name': output.name,
-#				'slug': output.slug,
-#				'location': output.location}
-#	
-#	def post(self, id=None):
-#		if id == None:
-#			return {'error': 'no gage id'}
-#		gage = Gage.get(Gage.id == id)
 
 @api.route('/gages/')
 def get_gages():
