@@ -18,11 +18,11 @@
 	  		<div class="col-md-9" role="main">
 	  			<!--  Nav tabs -->
 	  			<ul class="nav nav-tabs">
-	  				{#<li class="active"><a href="#flow" data-toggle="tab">Flow {{ gage.level_badge() }}</a></li>#}
 	  				<li class="active"><a href="#info" data-toggle="tab">Gage Info</a></li>
-	  				{#<li><a href="#battery" data-toggle="tab">Battery</a></li>#}
-	  				{#<li><a href="#runs" data-toggle="tab">Runs</a></li>#}
 	  				<li><a href="#weather" data-toggle="tab">Weather</a></li>
+	  				{% for sensor in gage.sensors.all() %}
+	  					<li><a href="#{{ sensor.stype }}" data-toggle="tab">{{ sensor.stype }} - {{ sensor.recent() }}</a></li>
+	  				{% endfor %}
 	  			</ul>
 	  			<!-- Tab contents -->
 	  			<div class="tab-content">
@@ -35,11 +35,20 @@
 	  				<div class="tab-pane active" id="info">
 	  					<div class="container">
 		  					{{ gage.description }}
-		  					{{ gage.latlon().x }}
+		  					<ul>
+		  						<li>Location: {{ gage.location }}</li>
+		  						<li>Latitude: {{ gage.latlon().y }}</li>
+		  						<li>Longitude: {{ gage.latlon().x }}</li>
 	  					</div>
 	  				</div>
+	  				{% for sensor in gage.sensors.all() %}
+	  					<div class="tab-pane" id="{{ sensor.stype }}">
+		  					{{ sensor.stype }} - {{ sensor.recent() }}
+	  					</div>
+	  				{% endfor %}
 	  				
 	  				{#
+
 	  				<div class="tab-pane" id="battery">
 		  				<img src="{{ url_for('gagebatteryplot', id=id ) }}" class="img-responsive">
 	  				</div>
