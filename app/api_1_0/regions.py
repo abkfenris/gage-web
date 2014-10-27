@@ -15,7 +15,7 @@ def get_regions():
 	if pagination.has_next:
 		next = url_for('.get_regions', page=page+1)
 	return jsonify({
-		'sensors': [region.to_json() for region in regions],
+		'regions': [region.to_json() for region in regions],
 		'prev': prev,
 		'next': next,
 		'count': pagination.total

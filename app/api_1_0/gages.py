@@ -39,3 +39,12 @@ def get_gages():
 def get_gage(id):
 	gage = Gage.query.get_or_404(id)
 	return jsonify(gage.to_long_json())
+
+@api.route('/gages/<int:id>/sample', methods=['POST'])
+def gage_new_samples(id):
+	gage = Gage.query.get_or_404(id)
+	req_json = request.get_json(force=True)
+	print req_json['samples']
+	for sample in req_json['samples']:
+		print gage.new_sample(stype=sample['type'].capitalize(), value=sample['value'], sdatetime=sample['datetime'])
+	return jsonify(request.json)

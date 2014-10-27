@@ -58,7 +58,7 @@ class Region(db.Model):
 			'id' : self.id,
 			'name' : self.name,
 			'url' : url_for('api.get_region', id=self.id, _external=True),
-			'html': url_for('main.regionpage', slug=self.slug, _external=True)
+			'html': url_for('main.regionpage', slug=self.slug, _external=True),
 		}
 		return json_region
 	
@@ -234,7 +234,9 @@ class Gage(db.Model):
 			'id': self.id,
 			'name': self.name,
 			'location': self.location,
-			'url' : url_for('api.get_gage', id=self.id, _external=True)
+			'url' : url_for('api.get_gage', 
+							id=self.id, 
+							_external=True)
 		}
 		return json_post
 	
@@ -243,12 +245,29 @@ class Gage(db.Model):
 			'id': self.id,
 			'name': self.name,
 			'location': self.location,
-			'url' : url_for('api.get_gage', id=self.id, _external=True),
-			'html': url_for('main.gagepage', slug=self.slug, _external=True),
-			'sensors': [sensor.to_json() for sensor in self.sensors]
+			'url' : url_for('api.get_gage', 
+							id=self.id, 
+							_external=True),
+			'html': url_for('main.gagepage', 
+							slug=self.slug, 
+							_external=True),
+			'sensors': [sensor.to_gage_json() for sensor in self.sensors],
+			'regions': [region.to_json() for region in self.regions]
 		}
 		return json_post
 	
+	def new_sample(self, stype, value, sdatetime):
+		sensor = Sensor.query.filter_by(gage_id=self.id).filter_by(stype=stype).first()
+		if sensor == None:
+			sensor = Sensor(gage_id=self.id,
+							stype=stype,
+							local=True)
+			db.session.add(sensor)
+			db.session.commit()
+		sample = Sample(sensor_id=sensor.id, value=value, datetime=sdatetime )
+		db.session.add(sample)
+		db.session.commit()
+		return sensor.id, sensor.stype
 	
 	def __repr__(self):
 		return '<Gage %r>' % self.name
@@ -282,6 +301,7 @@ class Sensor(db.Model):
 		return json_post
 	
 	def to_long_json(self):
+		sample = Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
 		json_post = {
 			'id' : self.id,
 			'type': self.stype,
@@ -292,7 +312,17 @@ class Sensor(db.Model):
 			'ended': self.ended,
 			'url': url_for('api.get_sensor', id=self.id, _external=True),
 			'gage': self.gage.to_json(),
-			'samples': [sample.value for sample in self.samples]
+			'recent_sample': sample.to_sensor_json()
+		}
+		return json_post
+	
+	def to_gage_json(self):
+		sample = Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
+		json_post = {
+			'id' : self.id,
+			'type': self.stype,
+			'url': url_for('api.get_sensor', id=self.id, _external=True),
+			'recent_sample': sample.to_sensor_json()
 		}
 		return json_post
 	
@@ -323,6 +353,15 @@ class Sample(db.Model):
 		json_sample = {
 			'id': self.id,
 			'sensor': self.sensor.to_sample_json(),
+			'value': self.value,
+			'datetime': self.datetime,
+			'url': url_for('api.get_sample', id=self.id, _external=True)
+		}
+		return json_sample
+	
+	def to_sensor_json(self):
+		json_sample = {
+			'id': self.id,
 			'value': self.value,
 			'datetime': self.datetime,
 			'url': url_for('api.get_sample', id=self.id, _external=True)
