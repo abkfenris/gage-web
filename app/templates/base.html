@@ -15,7 +15,7 @@
 			  	</button>
 			  	<ul class="nav navbar-nav">
 			  		<li>
-				  		<a class="navbar-brand active" href="{{ url_for('.indexpage') }}">Flo.ws</a>
+				  		<a class="navbar-brand active" href="{{ url_for('main.indexpage') }}">Flo.ws</a>
 			  		</li>
 			  	</ul>
 		  	</div>
@@ -26,16 +26,16 @@
 		  				highlighting the active menu items with http://jinja.pocoo.org/docs/tricks/#highlighting-active-menu-items 
 		  			#}
 		  			<li>
-		  				<a href="{{ url_for('.regionspage' ) }}">Regions</a>
+		  				<a href="{{ url_for('main.regionspage' ) }}">Regions</a>
 		  			</li>
 		  			<li>
-		  				<a href="{{ url_for('.gagespage' ) }}">Gages</a>
+		  				<a href="{{ url_for('main.gagespage' ) }}">Gages</a>
 		  			</li>
 		  			<li>
 		  				<a href="">Map</a>
 		  			</li>
 		  			<li>
-		  				<a href="{{ url_for('.aboutpage' ) }}">About</a>
+		  				<a href="{{ url_for('main.aboutpage' ) }}">About</a>
 		  			</li>
 		  		</ul>
 		  		{#

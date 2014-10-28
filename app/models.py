@@ -298,7 +298,10 @@ class Sensor(db.Model):
 	
 	def recent(self):
 		sample = Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
-		return sample.value
+		if sample is not None:
+			return sample.value
+		else:
+			pass
 	
 	def to_json(self):
 		json_post = {

@@ -46,5 +46,5 @@ def gage_new_samples(id):
 	req_json = request.get_json(force=True)
 	print req_json['samples']
 	for sample in req_json['samples']:
-		print gage.new_sample(stype=sample['type'].capitalize(), value=sample['value'], sdatetime=sample['datetime'])
+		print gage.new_sample(stype=sample['type'].lower(), value=sample['value'], sdatetime=sample['datetime'])
 	return jsonify(request.json)
