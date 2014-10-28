@@ -1,18 +1,8 @@
 from flask import render_template, Response, make_response, url_for, current_app
-#import datetime
-#import random
-#import StringIO
-#import matplotlib
-#matplotlib.use('Agg')
-#from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-#from matplotlib.figure import Figure
-#from matplotlib.dates import DateFormatter, datestr2num, DayLocator
 
 from . import main
 from .. import db
-#from auth import auth
-#from ..models import User, Region, River, Section, Gage, Sensor, Sample
-from ..models import Gage, Region, Section
+from ..models import Gage, Region, Section, River
 
 # Normal Pages
 
@@ -31,6 +21,7 @@ def aboutpage():
 	"""
 	return render_template('about.html', Gage=Gage)
 
+@main.route('/gages/')
 @main.route('/gage/')
 def gagespage():
 	"""
@@ -50,6 +41,7 @@ def gagepage(id=None, slug=None):
 		gage = Gage.query.filter_by(slug=slug).first_or_404()
 	return render_template('gage.html', Gage=Gage, gage=gage)
 
+@main.route('/regions/')
 @main.route('/region/')
 def regionspage():
 	"""
@@ -71,8 +63,10 @@ def regionpage(id=None, slug=None):
 							Gage=Gage, 
 							Region=Region, 
 							region=region, 
-							Section=Section)
+							Section=Section,
+							River=River)
 
+@main.route('/sections/')
 @main.route('/section/')
 def sectionspage():
 	"""
@@ -83,8 +77,35 @@ def sectionspage():
 @main.route('/section/<int:id>/')
 @main.route('/section/<slug>')
 def sectionpage(id=None, slug=None):
+	"""
+	Individual section page
+	"""
 	if slug is None:
 		section = Section.query.get_or_404(id)
 	else:
 		section = Section.query.filter_by(slug=slug).first_or_404()
 	return render_template('section.html', Gage=Gage, Section=Section, section=section)
+
+@main.route('/rivers/')
+@main.route('/river/')
+def riverspage():
+	"""
+	List all rivers
+	"""
+	return render_template('rivers.html', Gage=Gage, River=River, Section=Section)
+
+@main.route('/river/<int:id>/')
+@main.route('/river/<slug>/')
+def riverpage(id=None, slug=None):
+	"""
+	Individual section page
+	"""
+	if slug is None:
+		river = River.query.get_or_404(id)
+	else:
+		river = River.query.filter_by(slug=slug).first_or_404()
+	return render_template('river.html', 
+							Gage=Gage, 
+							River=River, 
+							Section=Section, 
+							river=river)

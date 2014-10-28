@@ -14,6 +14,11 @@ gages_regions = db.Table('gages_regions',
 	db.Column('region', db.Integer, db.ForeignKey('regions.id'))
 )
 
+rivers_regions = db.Table('rivers_regions',
+	db.Column('river', db.Integer, db.ForeignKey('rivers.id')),
+	db.Column('region', db.Integer, db.ForeignKey('regions.id'))
+)
+
 correllations = db.Table('correlations',
 	db.Column('section', db.Integer, db.ForeignKey('sections.id')),
 	db.Column('sensor', db.Integer, db.ForeignKey('sensors.id')),
@@ -89,6 +94,9 @@ class River(db.Model):
 	
 	parent_id = db.Column(db.Integer, db.ForeignKey('rivers.id'))
 	parent = db.relationship('River', remote_side=id, backref='tributary')
+	
+	regions = db.relationship('Region', secondary=rivers_regions,
+	                          backref=db.backref('rivers', lazy='dynamic'))
 	
 	def __init__(self, name, slug, description, 
 				short_description, header_image, parent):
