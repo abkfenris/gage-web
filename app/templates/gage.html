@@ -26,12 +26,6 @@
 	  			</ul>
 	  			<!-- Tab contents -->
 	  			<div class="tab-content">
-		  			{#
-	  				<div class="tab-pane active" id="flow">
-	  					<img src="{{ url_for('gagelevelplot', id=id ) }}" class="img-responsive">
-	  				</div>
-	  				#}
-	  				
 	  				<div class="tab-pane active" id="info">
 	  					<div class="container">
 		  					{{ gage.description }}
@@ -43,24 +37,9 @@
 	  				</div>
 	  				{% for sensor in gage.sensors.all() %}
 	  					<div class="tab-pane" id="{{ sensor.stype }}">
-		  					{{ sensor.stype }} - {{ sensor.recent() }}
 		  					<img src="{{ url_for('.gagesensorplot', id=gage.id, stype=sensor.stype ) }}" class="img-responsive">
 	  					</div>
 	  				{% endfor %}
-	  				
-	  				{#
-
-	  				<div class="tab-pane" id="battery">
-		  				<img src="{{ url_for('gagebatteryplot', id=id ) }}" class="img-responsive">
-	  				</div>
-	  				#}
-	  				{#
-	  				<div class="tab-pane" id="runs">
-	  					<div>
-		  					{{ gage.runs_html() }}
-	  					</div>
-	  				</div>
-	  				#}
 	  				
 	  				<div class="tab-pane" id="weather">
 	  					<iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat={{ gage.latlon().y }}&lon={{ gage.latlon().x }}&name={{ gage.name }}"> </iframe>

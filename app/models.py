@@ -152,7 +152,10 @@ class Section(db.Model):
 		section.inlatlon().y for latitude
 		section.inlatlon().y for longitude
 		"""
-		latlon_point = to_shape(self.putin)
+		try:
+			latlon_point = to_shape(self.putin)
+		except AssertionError:
+			return None
 		return latlon_point
 	
 	def outlatlon(self):
@@ -161,7 +164,10 @@ class Section(db.Model):
 		section.outlatlon().y for latitude
 		section.outlatlon().x for longitude
 		"""
-		latlon_point = to_shape(self.takeout)
+		try:
+			latlon_point = to_shape(self.takeout)
+		except AssertionError:
+			return None
 		return latlon_point
 	
 	def to_json(self):

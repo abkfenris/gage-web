@@ -72,3 +72,19 @@ def regionpage(id=None, slug=None):
 							Region=Region, 
 							region=region, 
 							Section=Section)
+
+@main.route('/section/')
+def sectionspage():
+	"""
+	List all sections
+	"""
+	return render_template('sections.html', Gage=Gage, Section=Section)
+
+@main.route('/section/<int:id>/')
+@main.route('/section/<slug>')
+def sectionpage(id=None, slug=None):
+	if slug is None:
+		section = Section.query.get_or_404(id)
+	else:
+		section = Section.query.filter_by(slug=slug).first_or_404()
+	return render_template('section.html', Gage=Gage, Section=Section, section=section)
