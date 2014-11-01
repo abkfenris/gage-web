@@ -1,28 +1,32 @@
 {% extends "base.html" %}
 
-{% set active_page = "regions" %}
+{% set active_page = "sections" %}
 
-{% block title %}Flows Regions{% endblock %}
+{% block title %}Flows Sections{% endblock %}
 
 {% block content %}
   	<div class="jumbotron" style="background-image: url({{ url_for('static', filename='img/header.jpg' ) }}); background-size: 100%;">
   		<div class="container">
-  			<h1>Regions</h1>
+  			<h1>Sections</h1>
   		</div>
   	</div>
   	
   	<div class="container">
   		<div class="row">
-	  		<div class="col-md-8" role="main">
-	  			{% for region in Region.select() %}
-	  				<a href="{{ url_for('regionpage', id=region.id ) }}"><h3>{{ region.name }}</h3></a>
-	  				<p>{{ region.description }}</p>
-	  			{% endfor %}
-	  			
-	  			 <h3>Want more gages here?</h3>
-	  			 <p>Once we've left our real Alpha phase of development and testing, we will be definitely looking for other people to deploy gages in other regions. If you want to send data we'll be more than happy to display it. Check out the <a href="{{ url_for('aboutpage' ) }}">About page</a> if you're interest in what goes into a gage and how you can help.</p>
+	  		<div class="col-md-8" role="main">	  			
+  				<div class="list-group">
+  				{% for section in Section.query.all() %}
+  					<a href="{{ url_for('.sectionpage', slug=section.slug ) }}" class="list-group-item">
+  						{{ section.name }} - 
+  						{{ section.location }}
+  					</a>
+  				{% endfor %}
+  				</div>	  			
+	  			 <h3>Want more sections here?</h3>
+	  			 <p>Once we've left our real Alpha phase of development and testing, we will be definitely looking for other people to deploy gages in other regions. If you want to send data we'll be more than happy to display it. Check out the <a href="{{ url_for('.aboutpage' ) }}">About page</a> if you're interest in what goes into a gage and how you can help.</p>
 
 	  		</div>
+	  		
 	  		<div class="col-md-4">
 
 	  			The colors indicate how fluid we think the run is.

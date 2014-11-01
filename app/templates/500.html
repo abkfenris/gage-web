@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 
-{% set active_page = "index" %}
-
 {% block title %}Flows 500{% endblock %}
 
 {% block content %}
@@ -22,17 +20,15 @@
 
 	  		</div>
 	  		<div class="col-md-4">
-		  		Gages
-	  			 <div class="list-group">
-	  			 	{% for gage in Gage.select() %}
-	  			 	<a href="{{ url_for('gagepage', id=gage.id ) }}" class="list-group-item">
-	  			 		{{ gage.name }}
-		  			 	{{ gage.level_badge() }}
+		  		<h4>Gages</h4>
+	  			<div class="list-group">
+	  				{% for gage in Gage.query.all() %}
+	  				<a href="{{ url_for('main.gagepage', slug=gage.slug ) }}" class="list-group-item">
+	  					{{ gage.name }}
 	  			 	</a>
 	  			 {% endfor %}
 	  			 </div>
 	  			
 	  		</div>
-	  	</div>
   	</div>
 {% endblock %}

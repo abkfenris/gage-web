@@ -1,3 +1,7 @@
+"""
+Use Dropbox to backup the database every six hours, or import to backup a specific file on demand
+"""
+
 import os
 import posixpath
 import time
@@ -7,6 +11,9 @@ from config import DevelopmentConfig
 from app import db
 
 def backup(filename):
+	"""
+	Backs up a specified file
+	"""
 	token = DevelopmentConfig.dropbox_app_token
 	client = DropboxClient(token)
 	f = open(filename, 'rb')

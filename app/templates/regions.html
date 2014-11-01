@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% set active_page = "regions" %}
+
+{% block title %}Flows Regions{% endblock %}
+
+{% block content %}
+  	<div class="jumbotron" style="background-image: url({{ url_for('static', filename='img/header.jpg' ) }}); background-size: 100%;">
+  		<div class="container">
+  			<h1>Regions</h1>
+  		</div>
+  	</div>
+  	
+  	<div class="container">
+  		<div class="row">
+	  		<div class="col-md-8" role="main">
+	  			{% for region in Region.query.all() %}
+	  				<a href="{{ url_for('.regionpage', slug=region.slug ) }}"><h3>{{ region.name }}</h3></a>
+	  				<p>{{ region.description }}</p>
+	  			{% endfor %}
+	  			
+	  			 <h3>Want more gages here?</h3>
+	  			 <p>Once we've left our real Alpha phase of development and testing, we will be definitely looking for other people to deploy gages in other regions. If you want to send data we'll be more than happy to display it. Check out the <a href="{{ url_for('.aboutpage' ) }}">About page</a> if you're interest in what goes into a gage and how you can help.</p>
+
+	  		</div>
+	  		<div class="col-md-4">
+
+	  			The colors indicate how fluid we think the run is.
+	  			<ul class="list-group">
+	  				<li class="list-group-item">
+	  					Levels unknown
+	  					<span class="label label-default" style="float:right">Unknown</span>
+	  				</li>
+	  				<li class="list-group-item">
+	  					There's not much water
+	  					<span class="badge">Too Low</span>
+	  				<li class="list-group-item">
+	  					ELF to Scrapy
+	  					<span class="badge alert-warning">Low</span>
+	  				</li>
+	  				<li class="list-group-item">
+	  					Medium
+	  					<span class="badge alert-success">Medium</span>
+	  				</li>
+	  				<li class="list-group-item">
+	  					High
+	  					<span class="badge alert-info">High</span>
+	  				</li>
+	  				<li class="list-group-item">
+	  					Call Substantial Media House
+	  					<span class="badge alert-danger">Too High</span>
+	  				</li>
+	  			</ul>
+	  			
+	  			The arrows indicate the trend of the flow over the last hour or so
+	  			<ul class="list-group">
+	  				<li class="list-group-item">
+	  					Flow is decreasing <span class="glyphicon glyphicon-arrow-down" style="float:right">
+	  				</li>
+	  				<li class="list-group-item">
+	  					Flow is roughly steady <span class="glyphicon glyphicon-arrow-right" style="float:right">
+	  				</li>
+	  				<li class="list-group-item">
+	  					Flow is increasing <span class="glyphicon glyphicon-arrow-up" style="float:right">
+	  				</li>
+	  			</ul>
+	  		</div>
+	  	</div>
+  	</div>
+{% endblock %}

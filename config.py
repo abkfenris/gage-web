@@ -6,6 +6,15 @@ class Config:
 	dropbox_app_key = os.environ.get('DROPBOX_APP_KEY')
 	dropbox_app_secret = os.environ.get('DROPBOX_APP_SECRET')
 	dropbox_app_token = os.environ.get('DROPBOX_APP_TOKEN')
+	SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/gage_web'
+	SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+	DEBUG = True
+	API_GAGES_PER_PAGE = 2
+	
+	@staticmethod
+	def init_app(app):
+		pass
+	
 
 
 class DevelopmentConfig(Config):
@@ -14,7 +23,7 @@ class DevelopmentConfig(Config):
 		'name': 'main.db',
 		'engine': 'peewee.SqliteDatabase'
 	}
-	SERVER_NAME = 'flows.ngrok.com'
+	#SERVER_NAME = 'flows.ngrok.com'
 	
 	
 class TestingConfig(Config):
@@ -23,6 +32,16 @@ class TestingConfig(Config):
 		'name': 'main.db',
 		'engine': 'peewee.SqliteDatabase'
 	}
+
+class DockerLocalConfig(Config):
+	DEBUG = True
+	DATABASE = {
+		'name': 'db',
+		'engine': 'peewee.PostgresqlDatabase',
+		'user': 'postgres'
+	}
+	SERVER_NAME = "localhost"
+
 
 class ProductionConfig(Config):
 	DATABASE = {

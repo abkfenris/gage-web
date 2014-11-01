@@ -14,8 +14,8 @@
 			  		<span class="icon-bar"></span>
 			  	</button>
 			  	<ul class="nav navbar-nav">
-			  		<li{% if "index" == active_page %} class="active"{% endif %}>
-				  		<a class="navbar-brand active" href="{{ url_for('indexpage' ) }}">Flo.ws</a>
+			  		<li>
+				  		<a class="navbar-brand active" href="{{ url_for('main.indexpage') }}">Flo.ws</a>
 			  		</li>
 			  	</ul>
 		  	</div>
@@ -25,17 +25,23 @@
 		  			{#
 		  				highlighting the active menu items with http://jinja.pocoo.org/docs/tricks/#highlighting-active-menu-items 
 		  			#}
-		  			<li{% if "regions" == active_page %} class="active"{% endif %}>
-		  				<a href="{{ url_for('regionspage' ) }}">Regions</a>
+		  			<li>
+		  				<a href="{{ url_for('main.regionspage' ) }}">Regions</a>
 		  			</li>
-		  			<li{% if "gages" == active_page %} class="active"{% endif %}>
-		  				<a href="{{ url_for('gagespage' ) }}">Gages</a>
+		  			<li>
+		  				<a href="{{ url_for('main.riverspage' ) }}">Rivers</a>
 		  			</li>
-		  			<li{% if "map" == active_page %} class="active"{% endif %}>
-		  				<a href="{{ url_for('mappage' ) }}">Map</a>
+		  			<li>
+		  				<a href="{{ url_for('main.sectionspage' ) }}">Sections</a>
 		  			</li>
-		  			<li{% if "about" == active_page %} class="active"{% endif %}>
-		  				<a href="{{ url_for('aboutpage' ) }}">About</a>
+		  			<li>
+		  				<a href="{{ url_for('main.gagespage' ) }}">Gages</a>
+		  			</li>
+		  			<li>
+		  				<a href="">Map</a>
+		  			</li>
+		  			<li>
+		  				<a href="{{ url_for('main.aboutpage' ) }}">About</a>
 		  			</li>
 		  		</ul>
 		  		{#
@@ -55,7 +61,3 @@
   		</div>
   	</div>
 {% endblock %}
- 
- 
- 
- 

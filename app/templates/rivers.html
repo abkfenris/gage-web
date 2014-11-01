@@ -1,34 +1,38 @@
 {% extends "base.html" %}
 
-{% block title %}Flows {{ region.name }}{% endblock %}
+{% set active_page = "rivers" %}
+
+{% block title %}Flows Rivers{% endblock %}
 
 {% block content %}
   	<div class="jumbotron" style="background-image: url({{ url_for('static', filename='img/header.jpg' ) }}); background-size: 100%;">
   		<div class="container">
-  			<h1>{{ region.name }}</h1>
-  			<p>{{ region.shortDescription }}</p>
+  			<h1>Rivers</h1>
   		</div>
   	</div>
   	
   	<div class="container">
   		<div class="row">
-	  		<div class="col-md-8" role="main">
-	  			<p>{{ region.description_html() }}</p>
-	  			
-	  			<h3>{{ region.name }} Gages:</h3>
-	  			<div class="list-group">
-	  				{% for gage in Gage.select().join(Region).where(Region.id == region.id) %}
-	  					<a href="{{ url_for('gagepage', id=gage.id ) }}" class="list-group-item">
-	  						{{ gage.name }}
-	  						{{ gage.level_badge() }}
-	  					</a>
-	  				{% endfor %}
-	  			</div>
-	  			
-	  			 <h3>Want more gages here?</h3>
-	  			 <p>Once we've left our real Alpha phase of development and testing, we will be definitely looking for other people to deploy gages in other regions. If you want to send data we'll be more than happy to display it. Check out the <a href="{{ url_for('aboutpage' ) }}">About page</a> if you're interest in what goes into a gage and how you can help.</p>
+	  		<div class="col-md-8" role="main">	  			
+  				<div>
+  				{% for river in River.query.all() %}
+  					<a href="{{ url_for('.riverpage', slug=river.slug ) }}">
+  						<h3>{{ river.name }}</h3>
+  					</a>
+  					<p>{{ river.description }}</p>
+  					<div class="list-group">
+	  					{% for section in river.sections %}
+	  					<a href="{{ url_for('.sectionpage', slug=section.slug ) }}" class="list-group-item">{{ section.name }}</a>
+	  					{% endfor %}
+  					</div>
+  					
+  				{% endfor %}
+  				</div>	  			
+	  			 <h3>Want more sections here?</h3>
+	  			 <p>Once we've left our real Alpha phase of development and testing, we will be definitely looking for other people to deploy gages in other regions. If you want to send data we'll be more than happy to display it. Check out the <a href="{{ url_for('.aboutpage' ) }}">About page</a> if you're interest in what goes into a gage and how you can help.</p>
 
 	  		</div>
+	  		
 	  		<div class="col-md-4">
 
 	  			The colors indicate how fluid we think the run is.
