@@ -18,7 +18,7 @@ from ..models import Gage, Sensor, Sample
 
 
 @main.route('/gage/<int:id>/<stype>.png')
-def gagesensorplot(id, stype, days=7, start=None, end=None):
+def gagesensorplot(id, stype, days=7, start=None, end=None, minimum=None, low=None, medium=None, high=None, huge=None):
 	"""**/gage/<id>/<sensor type>.png**
 	
 	Draw a plot for the requested gage's sensor
@@ -56,6 +56,19 @@ def gagesensorplot(id, stype, days=7, start=None, end=None):
 	#print x
 	#print y
 	ax.plot(x, y, '-')
+	if min is not None:
+	# Color the plot with correlation levels
+		ax.axhline(minimum, color="#888888")
+	if low is not None:
+		ax.axhline(low, color="#8a6d3b")
+	if medium is not None:
+		ax.axhline(medium, color="#3c763d")
+	if high is not None:
+		ax.axhline(high, color="#31708f")
+	if huge is not None:
+		ax.axhline(huge, color="#a94442")
+	
+	# Figure out what we want to use as our sensor title
 	if sensor.title is None:
 		if sensor.name is None:
 			fig.suptitle('%s %s' % (gage.name, sensor.stype))
