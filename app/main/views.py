@@ -1,3 +1,7 @@
+"""
+The main public routes to view the site
+"""
+
 from flask import render_template, Response, make_response, url_for, current_app
 
 from . import main
@@ -8,7 +12,8 @@ from ..models import Gage, Region, Section, River
 
 @main.route('/')
 def indexpage():
-	"""
+	"""**/**
+	
 	Index page
 	"""
 	return render_template('index.html', Gage=Gage)
@@ -16,7 +21,8 @@ def indexpage():
 	
 @main.route('/about/')
 def aboutpage():
-	"""
+	"""**/about/**
+	
 	About this site.
 	"""
 	return render_template('about.html', Gage=Gage)
@@ -24,7 +30,8 @@ def aboutpage():
 @main.route('/gages/')
 @main.route('/gage/')
 def gagespage():
-	"""
+	"""**/gages/**
+	
 	List of gages currently not grouped by regions, or anything else for that matter.
 	"""
 	return render_template('gages.html', Gage=Gage)
@@ -32,7 +39,8 @@ def gagespage():
 @main.route('/gage/<int:id>/')
 @main.route('/gage/<slug>/')
 def gagepage(id=None, slug=None):
-	"""
+	"""**/gage/<slug>/**
+	
 	Individual gage page
 	"""
 	if slug is None:
@@ -44,7 +52,8 @@ def gagepage(id=None, slug=None):
 @main.route('/regions/')
 @main.route('/region/')
 def regionspage():
-	"""
+	"""**/regions/**
+	
 	List all regions
 	"""
 	return render_template('regions.html', Gage=Gage, Region=Region)
@@ -52,7 +61,8 @@ def regionspage():
 @main.route('/region/<int:id>/')
 @main.route('/region/<slug>/')
 def regionpage(id=None, slug=None):
-	"""
+	"""**/region/<slug>/**
+	
 	Individual region page
 	"""
 	if slug is None:
@@ -69,7 +79,8 @@ def regionpage(id=None, slug=None):
 @main.route('/sections/')
 @main.route('/section/')
 def sectionspage():
-	"""
+	"""**/sections/**
+	
 	List all sections
 	"""
 	return render_template('sections.html', Gage=Gage, Section=Section)
@@ -77,7 +88,8 @@ def sectionspage():
 @main.route('/section/<int:id>/')
 @main.route('/section/<slug>')
 def sectionpage(id=None, slug=None):
-	"""
+	"""**/section/<slug>/**
+	
 	Individual section page
 	"""
 	if slug is None:
@@ -89,7 +101,8 @@ def sectionpage(id=None, slug=None):
 @main.route('/rivers/')
 @main.route('/river/')
 def riverspage():
-	"""
+	"""**/rivers/**
+	
 	List all rivers
 	"""
 	return render_template('rivers.html', Gage=Gage, River=River, Section=Section)
@@ -97,8 +110,9 @@ def riverspage():
 @main.route('/river/<int:id>/')
 @main.route('/river/<slug>/')
 def riverpage(id=None, slug=None):
-	"""
-	Individual section page
+	"""**/river/<slug>/**
+	
+	Individual river page
 	"""
 	if slug is None:
 		river = River.query.get_or_404(id)

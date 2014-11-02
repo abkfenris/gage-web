@@ -6,10 +6,7 @@ class Config:
 	dropbox_app_key = os.environ.get('DROPBOX_APP_KEY')
 	dropbox_app_secret = os.environ.get('DROPBOX_APP_SECRET')
 	dropbox_app_token = os.environ.get('DROPBOX_APP_TOKEN')
-	SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/gage_web'
 	SQLALCHEMY_COMMIT_ON_TEARDOWN = True
-	DEBUG = True
-	API_GAGES_PER_PAGE = 2
 	
 	@staticmethod
 	def init_app(app):
@@ -19,6 +16,8 @@ class Config:
 
 class DevelopmentConfig(Config):
 	DEBUG = True
+	API_GAGES_PER_PAGE = 2
+	SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/gage_web'
 	DATABASE = {
 		'name': 'main.db',
 		'engine': 'peewee.SqliteDatabase'
@@ -28,6 +27,8 @@ class DevelopmentConfig(Config):
 	
 class TestingConfig(Config):
 	TESTING = True
+	API_GAGES_PER_PAGE = 2
+	SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/gage_web_testing'
 	DATABASE = {
 		'name': 'main.db',
 		'engine': 'peewee.SqliteDatabase'

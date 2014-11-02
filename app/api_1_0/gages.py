@@ -1,12 +1,12 @@
 """
 gages api imports api, app, db, auth, and models
 
-REST methods
-Method	URI								Action
-GET		/api/1.0/gage					Retrieve list of gages
-GET		/api/1.0/gage/[Gage.id]			Retrieve Gage Details
-GET		/api/1.0/gage/[Gage.id]/recent	Retrieve most recent samples
-POST	/api/1.0/gage/[Gage.id]			Creates new samples
+Endpoints:
+----------
+
+- **/api/1.0/gages/** - **GET** List all gages
+- **/api/1.0/gages/<id>** - **GET** Detailed information about gage number *id*
+- **/api/1.0/gages/<id>/sample** - **POST** new sample data for gage *id*
 
 """
 
@@ -19,6 +19,9 @@ from . import api
 
 @api.route('/gages/')
 def get_gages():
+	"""
+	List all gages
+	"""
 	page = request.args.get('page', 1, type=int)
 	pagination = Gage.query.paginate(page, per_page=current_app.config['API_GAGES_PER_PAGE'], error_out=False)
 	gages = pagination.items
@@ -37,11 +40,17 @@ def get_gages():
 
 @api.route('/gages/<int:id>')
 def get_gage(id):
+	"""
+	Detailed information about gage *id*
+	"""
 	gage = Gage.query.get_or_404(id)
 	return jsonify(gage.to_long_json())
 
 @api.route('/gages/<int:id>/sample', methods=['POST'])
 def gage_new_samples(id):
+	"""
+	Submit new samples to gage *id*
+	"""
 	gage = Gage.query.get_or_404(id)
 	req_json = request.get_json(force=True)
 	print req_json['samples']
