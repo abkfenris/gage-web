@@ -5,5 +5,5 @@ Gage-Web Reference
 	:maxdepth: 2
 	
 	app
-	app.main
+	config
 	manage

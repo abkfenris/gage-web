@@ -63,7 +63,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">Gage-Web Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../reference/app.html">app package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../reference/app.main.html">app.main package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/config.html">config module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../reference/manage.html">manage module</a></li>
 </ul>
 </li>
@@ -104,6 +104,10 @@
           <div role="main">
             
   <h1>Source code for app.main.views</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The main public routes to view the site</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">make_response</span><span class="p">,</span> <span class="n">url_for</span><span class="p">,</span> <span class="n">current_app</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">main</span>
@@ -114,7 +118,8 @@
 
 <span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="indexpage"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.views.indexpage">[docs]</a><span class="k">def</span> <span class="nf">indexpage</span><span class="p">():</span>
-	<span class="sd">&quot;&quot;&quot;</span>
+	<span class="sd">&quot;&quot;&quot;**/**</span>
+<span class="sd">	</span>
 <span class="sd">	Index page</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">Gage</span><span class="o">=</span><span class="n">Gage</span><span class="p">)</span>
@@ -122,7 +127,8 @@
 	</div>
 <span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/about/&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="aboutpage"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.views.aboutpage">[docs]</a><span class="k">def</span> <span class="nf">aboutpage</span><span class="p">():</span>
-	<span class="sd">&quot;&quot;&quot;</span>
+	<span class="sd">&quot;&quot;&quot;**/about/**</span>
+<span class="sd">	</span>
 <span class="sd">	About this site.</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">&#39;about.html&#39;</span><span class="p">,</span> <span class="n">Gage</span><span class="o">=</span><span class="n">Gage</span><span class="p">)</span>
@@ -130,7 +136,8 @@
 <span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/gages/&#39;</span><span class="p">)</span>
 <span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/gage/&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="gagespage"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.views.gagespage">[docs]</a><span class="k">def</span> <span class="nf">gagespage</span><span class="p">():</span>
-	<span class="sd">&quot;&quot;&quot;</span>
+	<span class="sd">&quot;&quot;&quot;**/gages/**</span>
+<span class="sd">	</span>
 <span class="sd">	List of gages currently not grouped by regions, or anything else for that matter.</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">&#39;gages.html&#39;</span><span class="p">,</span> <span class="n">Gage</span><span class="o">=</span><span class="n">Gage</span><span class="p">)</span>
@@ -138,7 +145,8 @@
 <span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/gage/&lt;int:id&gt;/&#39;</span><span class="p">)</span>
 <span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/gage/&lt;slug&gt;/&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="gagepage"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.views.gagepage">[docs]</a><span class="k">def</span> <span class="nf">gagepage</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">slug</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-	<span class="sd">&quot;&quot;&quot;</span>
+	<span class="sd">&quot;&quot;&quot;**/gage/&lt;slug&gt;/**</span>
+<span class="sd">	</span>
 <span class="sd">	Individual gage page</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="k">if</span> <span class="n">slug</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
@@ -150,7 +158,8 @@
 <span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/regions/&#39;</span><span class="p">)</span>
 <span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/region/&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="regionspage"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.views.regionspage">[docs]</a><span class="k">def</span> <span class="nf">regionspage</span><span class="p">():</span>
-	<span class="sd">&quot;&quot;&quot;</span>
+	<span class="sd">&quot;&quot;&quot;**/regions/**</span>
+<span class="sd">	</span>
 <span class="sd">	List all regions</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">&#39;regions.html&#39;</span><span class="p">,</span> <span class="n">Gage</span><span class="o">=</span><span class="n">Gage</span><span class="p">,</span> <span class="n">Region</span><span class="o">=</span><span class="n">Region</span><span class="p">)</span>
@@ -158,7 +167,8 @@
 <span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/region/&lt;int:id&gt;/&#39;</span><span class="p">)</span>
 <span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/region/&lt;slug&gt;/&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="regionpage"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.views.regionpage">[docs]</a><span class="k">def</span> <span class="nf">regionpage</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">slug</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-	<span class="sd">&quot;&quot;&quot;</span>
+	<span class="sd">&quot;&quot;&quot;**/region/&lt;slug&gt;/**</span>
+<span class="sd">	</span>
 <span class="sd">	Individual region page</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="k">if</span> <span class="n">slug</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
@@ -175,7 +185,8 @@
 <span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/sections/&#39;</span><span class="p">)</span>
 <span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/section/&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="sectionspage"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.views.sectionspage">[docs]</a><span class="k">def</span> <span class="nf">sectionspage</span><span class="p">():</span>
-	<span class="sd">&quot;&quot;&quot;</span>
+	<span class="sd">&quot;&quot;&quot;**/sections/**</span>
+<span class="sd">	</span>
 <span class="sd">	List all sections</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">&#39;sections.html&#39;</span><span class="p">,</span> <span class="n">Gage</span><span class="o">=</span><span class="n">Gage</span><span class="p">,</span> <span class="n">Section</span><span class="o">=</span><span class="n">Section</span><span class="p">)</span>
@@ -183,7 +194,8 @@
 <span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/section/&lt;int:id&gt;/&#39;</span><span class="p">)</span>
 <span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/section/&lt;slug&gt;&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="sectionpage"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.views.sectionpage">[docs]</a><span class="k">def</span> <span class="nf">sectionpage</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">slug</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-	<span class="sd">&quot;&quot;&quot;</span>
+	<span class="sd">&quot;&quot;&quot;**/section/&lt;slug&gt;/**</span>
+<span class="sd">	</span>
 <span class="sd">	Individual section page</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="k">if</span> <span class="n">slug</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
@@ -195,7 +207,8 @@
 <span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/rivers/&#39;</span><span class="p">)</span>
 <span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/river/&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="riverspage"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.views.riverspage">[docs]</a><span class="k">def</span> <span class="nf">riverspage</span><span class="p">():</span>
-	<span class="sd">&quot;&quot;&quot;</span>
+	<span class="sd">&quot;&quot;&quot;**/rivers/**</span>
+<span class="sd">	</span>
 <span class="sd">	List all rivers</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">&#39;rivers.html&#39;</span><span class="p">,</span> <span class="n">Gage</span><span class="o">=</span><span class="n">Gage</span><span class="p">,</span> <span class="n">River</span><span class="o">=</span><span class="n">River</span><span class="p">,</span> <span class="n">Section</span><span class="o">=</span><span class="n">Section</span><span class="p">)</span>
@@ -203,8 +216,9 @@
 <span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/river/&lt;int:id&gt;/&#39;</span><span class="p">)</span>
 <span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/river/&lt;slug&gt;/&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="riverpage"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.views.riverpage">[docs]</a><span class="k">def</span> <span class="nf">riverpage</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">slug</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-	<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">	Individual section page</span>
+	<span class="sd">&quot;&quot;&quot;**/river/&lt;slug&gt;/**</span>
+<span class="sd">	</span>
+<span class="sd">	Individual river page</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="k">if</span> <span class="n">slug</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
 		<span class="n">river</span> <span class="o">=</span> <span class="n">River</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get_or_404</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>

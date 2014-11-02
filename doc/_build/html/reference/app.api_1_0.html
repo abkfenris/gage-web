@@ -65,7 +65,7 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Gage-Web Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="app.html">app package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="app.main.html">app.main package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">config module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manage.html">manage module</a></li>
 </ul>
 </li>
@@ -109,6 +109,56 @@
             
   <div class="section" id="app-api-1-0-package">
 <h1>app.api_1_0 package<a class="headerlink" href="#app-api-1-0-package" title="Permalink to this headline">¶</a></h1>
+<p>Version 1.0 of the API for gages to connect and for others to be able to retrieve data</p>
+<div class="section" id="endpoints">
+<h2>Endpoints:<a class="headerlink" href="#endpoints" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><strong>/api/1.0/ - **GET</strong> List basic routes</p>
+</li>
+<li><p class="first"><strong>/api/1.0/gages/</strong> - <strong>GET</strong> List all gages</p>
+</li>
+<li><p class="first"><strong>/api/1.0/gages/&lt;id&gt;/</strong> - <strong>GET</strong> Detailed information about gage number <em>id</em></p>
+</li>
+<li><dl class="first docutils">
+<dt><strong>/api/1.0/gages/&lt;id&gt;/sample</strong> - <strong>POST</strong> new sample data for gage <em>id</em></dt>
+<dd><ul class="first last simple">
+<li>authenticated by individual gage secret key</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first"><strong>/api/1.0/sensors/ - **GET</strong> List all sensors</p>
+</li>
+<li><p class="first"><strong>/api/1.0/sensors/&lt;id&gt; - **GET</strong> Detailed information about sensor</p>
+</li>
+<li><p class="first"><strong>/api/1.0/sensors/&lt;id&gt;/samples - **GET</strong> Samples from sensor <em>id</em></p>
+</li>
+<li><p class="first"><strong>/api/1.0/samples/ - **GET</strong> List all samples</p>
+</li>
+<li><p class="first"><strong>/api/1.0/samples/&lt;id&gt; - **GET</strong> Detailed information about sample <em>id</em></p>
+</li>
+<li><p class="first"><strong>/api/1.0/regions/</strong> - <strong>GET</strong> List all regions</p>
+</li>
+<li><p class="first"><strong>/api/1.0/regions/&lt;id&gt;</strong> - <strong>GET</strong> Detailed information about region <em>id</em></p>
+</li>
+<li><p class="first"><strong>/api/1.0/rivers/ - **GET</strong> List all rivers</p>
+</li>
+<li><p class="first"><strong>/api/1.0/rivers/&lt;id&gt;</strong> - <strong>GET</strong> Detained information about river <em>id</em></p>
+</li>
+<li><p class="first"><strong>/api/1.0/sections/</strong> - <strong>GET</strong> List all sections</p>
+</li>
+<li><p class="first"><strong>/api/1.0/sections/&lt;id&gt;</strong> - <strong>GET</strong> Detailed information about section <em>id</em></p>
+</li>
+</ul>
+</div>
+<div class="section" id="module-app.api_1_0">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-app.api_1_0" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="app.api_1_0.indexpage">
+<tt class="descclassname">app.api_1_0.</tt><tt class="descname">indexpage</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/api_1_0.html#indexpage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.indexpage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
@@ -207,14 +257,6 @@ POST    /api/1.0/gage/[Gage.id]                 Creates new samples</p>
 <dl class="function">
 <dt id="app.api_1_0.sensors.get_sensors">
 <tt class="descclassname">app.api_1_0.sensors.</tt><tt class="descname">get_sensors</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/sensors.html#get_sensors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.sensors.get_sensors" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</div>
-<div class="section" id="module-app.api_1_0">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-app.api_1_0" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="app.api_1_0.indexpage">
-<tt class="descclassname">app.api_1_0.</tt><tt class="descname">indexpage</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/api_1_0.html#indexpage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.indexpage" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>

@@ -28,7 +28,10 @@
   
 
   
-    <link rel="top" title="Gage-Web 0.1 documentation" href="../index.html"/> 
+    <link rel="top" title="Gage-Web 0.1 documentation" href="../index.html"/>
+        <link rel="up" title="app package" href="app.html"/>
+        <link rel="next" title="config module" href="config.html"/>
+        <link rel="prev" title="app.api_1_0 package" href="app.api_1_0.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -55,12 +58,17 @@
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
         
-            <ul>
+            <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../api.html">Gage-Web API Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#api">API</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Gage-Web Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Gage-Web Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="app.html">app package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage.html">manage module</a></li>
+</ul>
+</li>
 </ul>
 
         
@@ -84,6 +92,10 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
+          <li><a href="index.html">Gage-Web Reference</a> &raquo;</li>
+      
+          <li><a href="app.html">app package</a> &raquo;</li>
+      
     <li>app.main package</li>
       <li class="wy-breadcrumbs-aside">
         
@@ -97,107 +109,132 @@
             
   <div class="section" id="app-main-package">
 <h1>app.main package<a class="headerlink" href="#app-main-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-app.main.errors">
-<span id="app-main-errors-module"></span><h2>app.main.errors module<a class="headerlink" href="#module-app.main.errors" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="app.main.errors.forbidden">
-<tt class="descclassname">app.main.errors.</tt><tt class="descname">forbidden</tt><big>(</big><em>e</em><big>)</big><a class="reference internal" href="../_modules/app/main/errors.html#forbidden"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.main.errors.forbidden" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="app.main.errors.internal_server_error">
-<tt class="descclassname">app.main.errors.</tt><tt class="descname">internal_server_error</tt><big>(</big><em>e</em><big>)</big><a class="reference internal" href="../_modules/app/main/errors.html#internal_server_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.main.errors.internal_server_error" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="app.main.errors.page_not_found">
-<tt class="descclassname">app.main.errors.</tt><tt class="descname">page_not_found</tt><big>(</big><em>e</em><big>)</big><a class="reference internal" href="../_modules/app/main/errors.html#page_not_found"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.main.errors.page_not_found" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</div>
-<div class="section" id="module-app.main.plot">
-<span id="app-main-plot-module"></span><h2>app.main.plot module<a class="headerlink" href="#module-app.main.plot" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="app.main.plot.gagesensorplot">
-<tt class="descclassname">app.main.plot.</tt><tt class="descname">gagesensorplot</tt><big>(</big><em>id</em>, <em>stype</em>, <em>days=7</em>, <em>start=None</em>, <em>end=None</em><big>)</big><a class="reference internal" href="../_modules/app/main/plot.html#gagesensorplot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.main.plot.gagesensorplot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Draw a plot for the requested gage&#8217;s sensor</p>
-</dd></dl>
-
+<div class="section" id="module-app.main">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-app.main" title="Permalink to this headline">¶</a></h2>
+<p>Main public interface to the website.</p>
 </div>
 <div class="section" id="module-app.main.views">
 <span id="app-main-views-module"></span><h2>app.main.views module<a class="headerlink" href="#module-app.main.views" title="Permalink to this headline">¶</a></h2>
+<p>The main public routes to view the site</p>
 <dl class="function">
 <dt id="app.main.views.aboutpage">
 <tt class="descclassname">app.main.views.</tt><tt class="descname">aboutpage</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/main/views.html#aboutpage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.main.views.aboutpage" title="Permalink to this definition">¶</a></dt>
-<dd><p>About this site.</p>
+<dd><p><strong>/about/</strong></p>
+<p>About this site.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="app.main.views.gagepage">
 <tt class="descclassname">app.main.views.</tt><tt class="descname">gagepage</tt><big>(</big><em>id=None</em>, <em>slug=None</em><big>)</big><a class="reference internal" href="../_modules/app/main/views.html#gagepage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.main.views.gagepage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Individual gage page</p>
+<dd><p><strong>/gage/&lt;slug&gt;/</strong></p>
+<p>Individual gage page</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="app.main.views.gagespage">
 <tt class="descclassname">app.main.views.</tt><tt class="descname">gagespage</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/main/views.html#gagespage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.main.views.gagespage" title="Permalink to this definition">¶</a></dt>
-<dd><p>List of gages currently not grouped by regions, or anything else for that matter.</p>
+<dd><p><strong>/gages/</strong></p>
+<p>List of gages currently not grouped by regions, or anything else for that matter.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="app.main.views.indexpage">
 <tt class="descclassname">app.main.views.</tt><tt class="descname">indexpage</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/main/views.html#indexpage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.main.views.indexpage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Index page</p>
+<dd><p><strong>/</strong></p>
+<p>Index page</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="app.main.views.regionpage">
 <tt class="descclassname">app.main.views.</tt><tt class="descname">regionpage</tt><big>(</big><em>id=None</em>, <em>slug=None</em><big>)</big><a class="reference internal" href="../_modules/app/main/views.html#regionpage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.main.views.regionpage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Individual region page</p>
+<dd><p><strong>/region/&lt;slug&gt;/</strong></p>
+<p>Individual region page</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="app.main.views.regionspage">
 <tt class="descclassname">app.main.views.</tt><tt class="descname">regionspage</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/main/views.html#regionspage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.main.views.regionspage" title="Permalink to this definition">¶</a></dt>
-<dd><p>List all regions</p>
+<dd><p><strong>/regions/</strong></p>
+<p>List all regions</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="app.main.views.riverpage">
 <tt class="descclassname">app.main.views.</tt><tt class="descname">riverpage</tt><big>(</big><em>id=None</em>, <em>slug=None</em><big>)</big><a class="reference internal" href="../_modules/app/main/views.html#riverpage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.main.views.riverpage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Individual section page</p>
+<dd><p><strong>/river/&lt;slug&gt;/</strong></p>
+<p>Individual river page</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="app.main.views.riverspage">
 <tt class="descclassname">app.main.views.</tt><tt class="descname">riverspage</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/main/views.html#riverspage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.main.views.riverspage" title="Permalink to this definition">¶</a></dt>
-<dd><p>List all rivers</p>
+<dd><p><strong>/rivers/</strong></p>
+<p>List all rivers</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="app.main.views.sectionpage">
 <tt class="descclassname">app.main.views.</tt><tt class="descname">sectionpage</tt><big>(</big><em>id=None</em>, <em>slug=None</em><big>)</big><a class="reference internal" href="../_modules/app/main/views.html#sectionpage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.main.views.sectionpage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Individual section page</p>
+<dd><p><strong>/section/&lt;slug&gt;/</strong></p>
+<p>Individual section page</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="app.main.views.sectionspage">
 <tt class="descclassname">app.main.views.</tt><tt class="descname">sectionspage</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/main/views.html#sectionspage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.main.views.sectionspage" title="Permalink to this definition">¶</a></dt>
-<dd><p>List all sections</p>
+<dd><p><strong>/sections/</strong></p>
+<p>List all sections</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-app.main">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-app.main" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-app.main.plot">
+<span id="app-main-plot-module"></span><h2>app.main.plot module<a class="headerlink" href="#module-app.main.plot" title="Permalink to this headline">¶</a></h2>
+<p>Ways that a plot of a selected sensor can be displayed</p>
+<dl class="function">
+<dt id="app.main.plot.gagesensorplot">
+<tt class="descclassname">app.main.plot.</tt><tt class="descname">gagesensorplot</tt><big>(</big><em>id</em>, <em>stype</em>, <em>days=7</em>, <em>start=None</em>, <em>end=None</em><big>)</big><a class="reference internal" href="../_modules/app/main/plot.html#gagesensorplot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.main.plot.gagesensorplot" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>/gage/&lt;id&gt;/&lt;sensor type&gt;.png</strong></p>
+<p>Draw a plot for the requested gage&#8217;s sensor</p>
+<p>Defaults to drawing the previous several days, but can draw a different number or previous days, or by explicitly selecting a YYYYMMDD start and end date can plot a custom range</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-app.main.errors">
+<span id="app-main-errors-module"></span><h2>app.main.errors module<a class="headerlink" href="#module-app.main.errors" title="Permalink to this headline">¶</a></h2>
+<p>When things go wrong sitewide they are handled by the app_errorhandlers</p>
+<dl class="function">
+<dt id="app.main.errors.forbidden">
+<tt class="descclassname">app.main.errors.</tt><tt class="descname">forbidden</tt><big>(</big><em>e</em><big>)</big><a class="reference internal" href="../_modules/app/main/errors.html#forbidden"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.main.errors.forbidden" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle 403 Forbidden errors in html and json</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="app.main.errors.internal_server_error">
+<tt class="descclassname">app.main.errors.</tt><tt class="descname">internal_server_error</tt><big>(</big><em>e</em><big>)</big><a class="reference internal" href="../_modules/app/main/errors.html#internal_server_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.main.errors.internal_server_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle 500 Internal Server errors in html and json</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="app.main.errors.page_not_found">
+<tt class="descclassname">app.main.errors.</tt><tt class="descname">page_not_found</tt><big>(</big><em>e</em><big>)</big><a class="reference internal" href="../_modules/app/main/errors.html#page_not_found"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.main.errors.page_not_found" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle 404 Page Not Found errors in html and json</p>
+</dd></dl>
+
 </div>
 </div>
 
 
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="config.html" class="btn btn-neutral float-right" title="config module"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="app.api_1_0.html" class="btn btn-neutral" title="app.api_1_0 package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

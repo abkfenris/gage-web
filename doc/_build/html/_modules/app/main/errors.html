@@ -63,7 +63,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">Gage-Web Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../reference/app.html">app package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../reference/app.main.html">app.main package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/config.html">config module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../reference/manage.html">manage module</a></li>
 </ul>
 </li>
@@ -104,12 +104,18 @@
           <div role="main">
             
   <h1>Source code for app.main.errors</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">When things go wrong sitewide they are handled by the app_errorhandlers</span>
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">jsonify</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">main</span>
 <span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">Gage</span>
 
 <span class="nd">@main.app_errorhandler</span><span class="p">(</span><span class="mi">403</span><span class="p">)</span>
 <div class="viewcode-block" id="forbidden"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.errors.forbidden">[docs]</a><span class="k">def</span> <span class="nf">forbidden</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Handle 403 Forbidden errors in html and json</span>
+<span class="sd">	&quot;&quot;&quot;</span>
 	<span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">accept_mimetypes</span><span class="o">.</span><span class="n">accept_json</span> <span class="ow">and</span> \
 			<span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">accept_mimetypes</span><span class="o">.</span><span class="n">accept_html</span><span class="p">:</span>
 		<span class="n">response</span> <span class="o">=</span> <span class="n">jsonify</span><span class="p">({</span><span class="s">&#39;error&#39;</span><span class="p">:</span> <span class="s">&#39;forbidden&#39;</span><span class="p">})</span>
@@ -119,6 +125,9 @@
 </div>
 <span class="nd">@main.app_errorhandler</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
 <div class="viewcode-block" id="page_not_found"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.errors.page_not_found">[docs]</a><span class="k">def</span> <span class="nf">page_not_found</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Handle 404 Page Not Found errors in html and json</span>
+<span class="sd">	&quot;&quot;&quot;</span>
 	<span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">accept_mimetypes</span><span class="o">.</span><span class="n">accept_json</span> <span class="ow">and</span> \
 			<span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">accept_mimetypes</span><span class="o">.</span><span class="n">accept_html</span><span class="p">:</span>
 		<span class="n">response</span> <span class="o">=</span> <span class="n">jsonify</span><span class="p">({</span><span class="s">&#39;error&#39;</span><span class="p">:</span> <span class="s">&#39;not found&#39;</span><span class="p">})</span>
@@ -128,6 +137,9 @@
 </div>
 <span class="nd">@main.app_errorhandler</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
 <div class="viewcode-block" id="internal_server_error"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.errors.internal_server_error">[docs]</a><span class="k">def</span> <span class="nf">internal_server_error</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Handle 500 Internal Server errors in html and json</span>
+<span class="sd">	&quot;&quot;&quot;</span>
 	<span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">accept_mimetypes</span><span class="o">.</span><span class="n">accept_json</span> <span class="ow">and</span> \
 			<span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">accept_mimetypes</span><span class="o">.</span><span class="n">accept_html</span><span class="p">:</span>
 		<span class="n">response</span> <span class="o">=</span> <span class="n">jsonify</span><span class="p">({</span><span class="s">&#39;error&#39;</span><span class="p">:</span> <span class="s">&#39;internal server error&#39;</span><span class="p">})</span>

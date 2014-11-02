@@ -63,7 +63,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">Gage-Web Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../reference/app.html">app package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../reference/app.main.html">app.main package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/config.html">config module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../reference/manage.html">manage module</a></li>
 </ul>
 </li>
@@ -104,6 +104,10 @@
           <div role="main">
             
   <h1>Source code for app.main.plot</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Ways that a plot of a selected sensor can be displayed</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">make_response</span><span class="p">,</span> <span class="n">url_for</span><span class="p">,</span> <span class="n">current_app</span><span class="p">,</span> <span class="n">jsonify</span>
 <span class="kn">import</span> <span class="nn">datetime</span>
 <span class="kn">import</span> <span class="nn">StringIO</span>
@@ -121,8 +125,11 @@
 
 <span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/gage/&lt;int:id&gt;/&lt;stype&gt;.png&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="gagesensorplot"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.plot.gagesensorplot">[docs]</a><span class="k">def</span> <span class="nf">gagesensorplot</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">stype</span><span class="p">,</span> <span class="n">days</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-	<span class="sd">&quot;&quot;&quot;</span>
+	<span class="sd">&quot;&quot;&quot;**/gage/&lt;id&gt;/&lt;sensor type&gt;.png**</span>
+<span class="sd">	</span>
 <span class="sd">	Draw a plot for the requested gage&#39;s sensor</span>
+<span class="sd">	</span>
+<span class="sd">	Defaults to drawing the previous several days, but can draw a different number or previous days, or by explicitly selecting a YYYYMMDD start and end date can plot a custom range</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="n">gage</span> <span class="o">=</span> <span class="n">Gage</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get_or_404</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
 	<span class="c">#print gage.name,</span>

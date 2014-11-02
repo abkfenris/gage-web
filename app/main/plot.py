@@ -1,3 +1,7 @@
+"""
+Ways that a plot of a selected sensor can be displayed
+"""
+
 from flask import render_template, Response, make_response, url_for, current_app, jsonify
 import datetime
 import StringIO
@@ -15,8 +19,11 @@ from ..models import Gage, Sensor, Sample
 
 @main.route('/gage/<int:id>/<stype>.png')
 def gagesensorplot(id, stype, days=7, start=None, end=None):
-	"""
+	"""**/gage/<id>/<sensor type>.png**
+	
 	Draw a plot for the requested gage's sensor
+	
+	Defaults to drawing the previous several days, but can draw a different number or previous days, or by explicitly selecting a YYYYMMDD start and end date can plot a custom range
 	"""
 	gage = Gage.query.get_or_404(id)
 	#print gage.name,

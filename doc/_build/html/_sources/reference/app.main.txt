@@ -1,13 +1,24 @@
 app.main package
 ================
 
-Submodules
-----------
+Module contents
+---------------
 
-app.main.errors module
-----------------------
+.. automodule:: app.main
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
-.. automodule:: app.main.errors
+
+
+
+
+
+
+app.main.views module
+---------------------
+
+.. automodule:: app.main.views
     :members:
     :undoc-members:
     :show-inheritance:
@@ -20,19 +31,17 @@ app.main.plot module
     :undoc-members:
     :show-inheritance:
 
-app.main.views module
----------------------
+app.main.errors module
+----------------------
 
-.. automodule:: app.main.views
+.. automodule:: app.main.errors
     :members:
     :undoc-members:
     :show-inheritance:
 
 
-Module contents
----------------
 
-.. automodule:: app.main
-    :members:
-    :undoc-members:
-    :show-inheritance:
+
+
+
+
