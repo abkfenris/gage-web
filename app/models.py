@@ -22,12 +22,12 @@ rivers_regions = db.Table('rivers_regions',
 	db.Column('region', db.Integer, db.ForeignKey('regions.id'))
 )
 
-class Correllation(db.Model):
+class Correlation(db.Model):
 	"""
 	Connects sections to sensors with extra data about values and how fast they should change.
 	"""
 	# Needed to be an http://docs.sqlalchemy.org/en/rel_0_9/orm/relationships.html#association-object
-	__tablename__ = 'correllations'
+	__tablename__ = 'correlations'
 	section_id = db.Column(db.Integer, db.ForeignKey('sections.id'), primary_key=True)
 	section = db.relationship('Section', backref='correlations')
 	
