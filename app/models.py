@@ -22,20 +22,26 @@ rivers_regions = db.Table('rivers_regions',
 	db.Column('region', db.Integer, db.ForeignKey('regions.id'))
 )
 
-correllations = db.Table('correlations',
-	db.Column('section', db.Integer, db.ForeignKey('sections.id')),
-	db.Column('sensor', db.Integer, db.ForeignKey('sensors.id')),
-	db.Column('minimum', db.Float),
-	db.Column('low', db.Float),
-	db.Column('medium', db.Float),
-	db.Column('high', db.Float),
-	db.Column('huge', db.Float),
-	db.Column('trend_slope', db.Float),
-	db.Column('trend_samples', db.Integer),
-	db.Column('description', db.Text),
-	db.Column('backend_notes', db.Text),
-	db.Column('owner', db.Integer, db.ForeignKey('users.id'))
-)
+class Correllation(db.Model):
+	"""
+	Connects sections to sensors with extra data about values and how fast they should change.
+	"""
+	__tablename__ = 'correllations'
+	section_id = db.Column(db.Integer, db.ForeignKey('sections.id'), primary_key=True)
+	section = db.relationship('Section', backref='correlations')
+	
+	sensor_id = db.Column(db.Integer, db.ForeignKey('sensors.id'), primary_key=True)
+	sensor = db.relationship('Sensor', backref='correlations')
+	
+	minimum = db.Column(db.Float)
+	low = db.Column(db.Float)
+	medium = db.Column(db.Float)
+	high = db.Column(db.Float)
+	huge = db.Column(db.Float)
+	trend_slope = db.Column(db.Float)
+	trend_samples = db.Column(db.Integer)
+	description = db.Column(db.Text)
+	backend_notes = db.Column(db.Text)
 
 class User(db.Model):
 	__tablename__ = 'users'
@@ -155,7 +161,7 @@ class Section(db.Model):
 	river_id = db.Column(db.Integer, db.ForeignKey('rivers.id'))
 	river = db.relationship('River', backref='sections')
 	
-	sensors = db.relationship('Sensor', secondary=correllations, backref=db.backref('sections', lazy='dynamic'))
+	#sensors = db.relationship('Sensor', secondary=correllations, backref=db.backref('sections', lazy='dynamic'))
 	
 	description = db.Column(db.Text)
 	short_description = db.Column(db.Text)

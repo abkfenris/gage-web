@@ -56,7 +56,8 @@ def gagesensorplot(id, stype, days=7, start=None, end=None, minimum=None, low=No
 	#print x
 	#print y
 	ax.plot(x, y, '-')
-	if min is not None:
+	if minimum is not None:
+	
 	# Color the plot with correlation levels
 		ax.axhline(minimum, color="#888888")
 	if low is not None:
