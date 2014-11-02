@@ -25,6 +25,24 @@ rivers_regions = db.Table('rivers_regions',
 class Correlation(db.Model):
 	"""
 	Connects sections to sensors with extra data about values and how fast they should change.
+	
+	Arguments:
+		section_id (int): ``Section``.id for the ``Section`` that this correlation is for
+		section: gives a ``Section`` object from the section_id
+		sensor_id (int): ``Sensor``.id for the ``Sensor`` that is correlation is for
+		sensor: gives a ``Sensor`` object from the sensor_id
+		minimum (float): The minimum level according to the Sensor that can float a boat
+		low (float): A normal sane low level. Below this is ELF territory.
+		medium (float): The low end of a medium level.
+		high (float): The top of a medium level, and starting to get padded out.
+		huge (float): The difference between high and scary.
+		trend_slope (float): How fast should the sensor be changing in order for us to be interested?
+		trend_samples (int): How many samples should it be changing over for us to be interested?
+		description (text): At some point in the future will probably display \
+							the description on the section page with the correlation. \
+							Can contain HTML or Markdown within reason.
+		backend_notes (text): Admin/Gage Manager information about the gage
+		
 	"""
 	# Needed to be an http://docs.sqlalchemy.org/en/rel_0_9/orm/relationships.html#association-object
 	__tablename__ = 'correlations'
@@ -45,6 +63,15 @@ class Correlation(db.Model):
 	backend_notes = db.Column(db.Text)
 
 class User(db.Model):
+	"""
+	User model
+	
+	Arguments:
+		id (int): Primary User Key
+		username (str): Unique username as chosen by the user
+		email (str): User's email address
+		password_hash (str): Users hashed password
+	"""
 	__tablename__ = 'users'
 	
 	id = db.Column(db.Integer, primary_key=True)
@@ -58,9 +85,18 @@ class User(db.Model):
 	
 	@password.setter
 	def password(self, password):
+		"""
+		Takes user generated password and uses werkzeug.security to create a hash and stores it.
+		"""
 		self.password_hash = generate_password_hash(password)
 	
 	def verify_password(self, password):
+		"""
+		Verify's user's password against stored werkzeug.security hash.
+		
+		Arguments:
+			password (str): password to check against stored hash
+		"""
 		return check_password_hash(self.password_hash, password)
 	
 	# def __init__(self, username, email):
@@ -71,6 +107,20 @@ class User(db.Model):
 		return '<User %r>' % self.username
         
 class Region(db.Model):
+	"""
+	Regions where Rivers, Sections, and Gages exist
+	
+	Arguments:
+		id (int): Primary Region Key
+		name (str): Nice name
+		slug (str): slug for url formatting
+		description (text): Long description that can contain HTML or Markdown within reason.
+		short_description (text): Short description, for showing on other pages.
+		header_image (str): Header image to override default.
+		rivers: List of ``River`` objects for Region.
+		sections: List of ``Section`` objects for Region.
+		gages: List of ``Gage`` objects for Region.
+	"""
 	__tablename__ = 'regions'
 	
 	id = db.Column(db.Integer, primary_key=True)
@@ -81,6 +131,9 @@ class Region(db.Model):
 	header_image = db.Column(db.String(80))
 	
 	def to_json(self):
+		"""
+		Create a JSON object from region. Used where multiple regions may be displayed simultaneously.
+		"""
 		json_region = {
 			'id' : self.id,
 			'name' : self.name,
@@ -90,6 +143,9 @@ class Region(db.Model):
 		return json_region
 	
 	def to_long_json(self):
+		"""
+		Create a JSON object from region. Used when only one region is to be displayed.
+		"""
 		json_region = {
 			'id' : self.id,
 			'name' : self.name,
@@ -105,6 +161,23 @@ class Region(db.Model):
 		return '<Region %r>' % self.name
 
 class River(db.Model):
+	"""
+	River model. Rivers are rivers as we know them, \
+	they have a parent that they flow downstream into and have tributaries that flow into them.
+	
+	Arguments:
+		id (int): Primary River id
+		name (string): Nice River name
+		slug (string): slug for url formatting
+		description (text): Long description that can contain HTML or Markdown within reason.
+		short_description (text): Short description for showing on other pages.
+		header_image (string): Header image to override default
+		parent_id (int): River.id for the river that this one flows into
+		parent: ``River`` object from parent_id
+		tributary: List of ``River`` objects for any River that has this one in it's parent_id.
+		regions: List of ``Region`` objects for River
+		sections: List of ``Section`` objects for River
+	"""
 	__tablename__ = 'rivers'
 	
 	id = db.Column(db.Integer, primary_key=True)
@@ -120,16 +193,19 @@ class River(db.Model):
 	regions = db.relationship('Region', secondary=rivers_regions,
 	                          backref=db.backref('rivers', lazy='dynamic'))
 	
-	def __init__(self, name, slug, description, 
-				short_description, header_image, parent):
-		self.name = name
-		self.slug = slug
-		self.description = description
-		self.short_description = short_description
-		self.header_image = header_image
-		self.parent = parent
+	#def __init__(self, name, slug, description, 
+	#			short_description, header_image, parent):
+	#	self.name = name
+	#	self.slug = slug
+	#	self.description = description
+	#	self.short_description = short_description
+	#	self.header_image = header_image
+	#	self.parent = parent
 	
 	def to_json(self):
+		"""
+		Creates a JSON Object from River. Used where multiple rivers may be listed at once.
+		"""
 		json_river = {
 			'id': self.id,
 			'name': self.name,
@@ -138,6 +214,9 @@ class River(db.Model):
 		return json_river
 	
 	def to_long_json(self):
+		"""
+		Creates a JSON Object from River. Used where a single river is being displayed.
+		"""
 		json_river = {
 			'id': self.id,
 			'name': self.name,
@@ -153,6 +232,29 @@ class River(db.Model):
 	    return '<River %r>' % self.name
 
 class Section(db.Model):
+	"""
+	River section that is commonly paddled and possibly has a correlation developed for it.
+	
+	Arguments:
+		id (int): Primary key for Section
+		name (string): Nice name for section
+		slug (string): slug used for url
+		river_id: Foreign River.id that this section is a segment of. \
+					If a section spans multiple rivers, use the river that the gage is on.
+		river: ``River`` object
+		description (text): Long description for Section that can contain HTML or Markdown within reason.
+		short_description (text): Short description for section for showing on other pages.
+		access (string): Access restrictions or issues
+		location (string): Where is it?
+		putin (Point): PostGIS Point object for putin
+		takeout (Point): PostGIS Point object for takeout
+		path (Linestring): PostGIS Linestring object for river
+		in_elevation (int): Elevation of the putin
+		out_elevation (int): Elevation of the takeout
+		header_image (string): Header image to override default
+		correlations: List of ``Correlation`` objects that connect this Section to Sensors. \
+						Can do ``section.correlations[#].sensor`` and access the sensor attributes.
+	"""
 	__tablename__ = 'sections'
 	
 	id = db.Column(db.Integer, primary_key=True)
@@ -161,8 +263,6 @@ class Section(db.Model):
 	
 	river_id = db.Column(db.Integer, db.ForeignKey('rivers.id'))
 	river = db.relationship('River', backref='sections')
-	
-	#sensors = db.relationship('Sensor', secondary=correllations, backref=db.backref('sections', lazy='dynamic'))
 	
 	description = db.Column(db.Text)
 	short_description = db.Column(db.Text)
@@ -203,6 +303,9 @@ class Section(db.Model):
 		return latlon_point
 	
 	def to_json(self):
+		"""
+		Creates a JSON Object from Section. Used where multiple sections may be listed at once.
+		"""
 		json_section = {
 			'id' : self.id,
 			'name' : self.name,
@@ -211,6 +314,9 @@ class Section(db.Model):
 		return json_section
 	
 	def to_long_json(self):
+		"""
+		Creates a JSON Object from Section. Used where a single section is displayed.
+		"""
 		json_section = {
 			'id': self.id,
 			'name': self.name,
@@ -228,6 +334,32 @@ class Section(db.Model):
 	    return '<Section %r>' % self.name
         
 class Gage(db.Model):
+	"""
+	A Gage is a collection of Sensors at a single location.
+	
+	Arguments:
+		id (int): Primary key for Gage
+		name (string): Nice name for gage
+		slug (string): slug used in url
+		point (Point): PostGIS Point object
+		river_id (int): Foreign key of ``River``.id that the Gage is on.
+		river: ``River`` object
+		user_id (int): Foreign key of ``User``.id that 'owns' the Gage.
+		user: ``User`` object that `owns` the gage.
+		visible (boolean): Allows a gage to not be seen on the front end
+		zipcode (string): Zip code used to get the weather.
+		local_town (string): Local town name, primarily used for getting the weather
+		location (string): Descriptive location, often used when Gage is displayed on other pages
+		elevation (int): The elevation of the Gage
+		elevationUnits (string): Feet or Meters?
+		backend_notes (text): Backend info for the Gage for admins.
+		started (datetime): When samples started to be collected at this gage
+		ended (datetime): If sampling at this gage has stopped, when?
+		description (text): Long description for Gage that can contain HTML or Markdown within reason.
+		short_description (text): Short description for showing on other pages.
+		regions: List of ``Region`` objects that this Gage is in.
+		sensors: List of ``Sensor`` objects that are part of this Gage.
+	"""
 	__tablename__ = 'gages'
 	
 	id = db.Column(db.Integer, primary_key=True)
@@ -251,7 +383,6 @@ class Gage(db.Model):
 	backend_notes = db.Column(db.Text)
 	started = db.Column(db.DateTime)
 	ended = db.Column(db.DateTime)
-	visible = db.Column(db.Boolean)
 	description = db.Column(db.Text)
 	short_description = db.Column(db.Text)
 	
@@ -268,6 +399,9 @@ class Gage(db.Model):
 		return latlon_point
 	
 	def to_json(self):
+		"""
+		Creates a JSON Object from Gage. Used where multiple gages may be listed at once.
+		"""
 		json_post = {
 			'id': self.id,
 			'name': self.name,
@@ -279,6 +413,9 @@ class Gage(db.Model):
 		return json_post
 	
 	def to_long_json(self):
+		"""
+		Cretes a JSON Object from Gage. Used where a single gage is displayed.
+		"""
 		json_post = {
 			'id': self.id,
 			'name': self.name,
@@ -295,6 +432,15 @@ class Gage(db.Model):
 		return json_post
 	
 	def new_sample(self, stype, value, sdatetime):
+		"""
+		Process a new sample for the gage, and finds the right ``Sensor`` that the ``Sample`` should be connected to. \
+		If no ``Sensor`` exists for the type of sample, then a new one is created.
+		
+		Arguments:
+			stype (str): Sensor type
+			value (float): Sample value
+			sdatetime (datetime): Sample ``datetime`` object
+		"""
 		sensor = Sensor.query.filter_by(gage_id=self.id).filter_by(stype=stype).first()
 		if sensor == None:
 			sensor = Sensor(gage_id=self.id,

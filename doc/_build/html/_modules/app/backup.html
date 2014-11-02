@@ -130,9 +130,10 @@
 
 </div>
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
-	<span class="n">backup_file</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">database_name</span>
+	<span class="c"># backup_file = db.database_name</span>
 	<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-		<span class="n">backup</span><span class="p">(</span><span class="n">backup_file</span><span class="p">)</span>
+		<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;pg_dump -Ft gage_web &gt; gage_web.tar&quot;</span><span class="p">)</span>
+		<span class="n">backup</span><span class="p">(</span><span class="s">&#39;gage_web.tar&#39;</span><span class="p">)</span>
 		<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">21600</span><span class="p">)</span> <span class="c"># backup every 6 hours</span>
 </pre></div>
 

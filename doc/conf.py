@@ -38,6 +38,7 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.viewcode',
     'sphinxcontrib.autohttp.flask',
+    'sphinxcontrib.napoleon', #http://sphinxcontrib-napoleon.readthedocs.org/en/latest/
 ]
 
 # Add any paths that contain templates here, relative to this directory.

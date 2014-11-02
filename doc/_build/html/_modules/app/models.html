@@ -109,6 +109,9 @@
 <span class="kn">from</span> <span class="nn">geoalchemy2.shape</span> <span class="kn">import</span> <span class="n">to_shape</span>
 <span class="kn">from</span> <span class="nn">sqlalchemy.dialects.postgresql</span> <span class="kn">import</span> <span class="n">JSON</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">url_for</span>
+<span class="kn">from</span> <span class="nn">werkzeug.security</span> <span class="kn">import</span> <span class="n">generate_password_hash</span><span class="p">,</span> <span class="n">check_password_hash</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">remote</span> <span class="kn">import</span> <span class="n">usgs</span>
 
 <span class="n">sections_regions</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s">&#39;sections_regions&#39;</span><span class="p">,</span>
 	<span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;section&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;sections.id&#39;</span><span class="p">)),</span>
@@ -125,36 +128,105 @@
 	<span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;region&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;regions.id&#39;</span><span class="p">))</span>
 <span class="p">)</span>
 
-<span class="n">correllations</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s">&#39;correlations&#39;</span><span class="p">,</span>
-	<span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;section&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;sections.id&#39;</span><span class="p">)),</span>
-	<span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;sensor&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;sensors.id&#39;</span><span class="p">)),</span>
-	<span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;minimum&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">),</span>
-	<span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;low&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">),</span>
-	<span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;medium&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">),</span>
-	<span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;high&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">),</span>
-	<span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;huge&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">),</span>
-	<span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;trend_slope&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">),</span>
-	<span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;trend_samples&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">),</span>
-	<span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;description&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">),</span>
-	<span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;backend_notes&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">),</span>
-	<span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s">&#39;owner&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;users.id&#39;</span><span class="p">))</span>
-<span class="p">)</span>
-
+<div class="viewcode-block" id="Correlation"><a class="viewcode-back" href="../../reference/app.html#app.models.Correlation">[docs]</a><span class="k">class</span> <span class="nc">Correlation</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Connects sections to sensors with extra data about values and how fast they should change.</span>
+<span class="sd">	</span>
+<span class="sd">	Arguments:</span>
+<span class="sd">		section_id (int): ``Section``.id for the ``Section`` that this correlation is for</span>
+<span class="sd">		section: gives a ``Section`` object from the section_id</span>
+<span class="sd">		sensor_id (int): ``Sensor``.id for the ``Sensor`` that is correlation is for</span>
+<span class="sd">		sensor: gives a ``Sensor`` object from the sensor_id</span>
+<span class="sd">		minimum (float): The minimum level according to the Sensor that can float a boat</span>
+<span class="sd">		low (float): A normal sane low level. Below this is ELF territory.</span>
+<span class="sd">		medium (float): The low end of a medium level.</span>
+<span class="sd">		high (float): The top of a medium level, and starting to get padded out.</span>
+<span class="sd">		huge (float): The difference between high and scary.</span>
+<span class="sd">		trend_slope (float): How fast should the sensor be changing in order for us to be interested?</span>
+<span class="sd">		trend_samples (int): How many samples should it be changing over for us to be interested?</span>
+<span class="sd">		description (text): At some point in the future will probably display \</span>
+<span class="sd">							the description on the section page with the correlation. \</span>
+<span class="sd">							Can contain HTML or Markdown within reason.</span>
+<span class="sd">		backend_notes (text): Admin/Gage Manager information about the gage</span>
+<span class="sd">		</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="c"># Needed to be an http://docs.sqlalchemy.org/en/rel_0_9/orm/relationships.html#association-object</span>
+	<span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;correlations&#39;</span>
+	<span class="n">section_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;sections.id&#39;</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+	<span class="n">section</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s">&#39;Section&#39;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s">&#39;correlations&#39;</span><span class="p">)</span>
+	
+	<span class="n">sensor_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;sensors.id&#39;</span><span class="p">),</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+	<span class="n">sensor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s">&#39;Sensor&#39;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s">&#39;correlations&#39;</span><span class="p">)</span>
+	
+	<span class="n">minimum</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
+	<span class="n">low</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
+	<span class="n">medium</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
+	<span class="n">high</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
+	<span class="n">huge</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
+	<span class="n">trend_slope</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
+	<span class="n">trend_samples</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
+	<span class="n">description</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
+	<span class="n">backend_notes</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
+</div>
 <div class="viewcode-block" id="User"><a class="viewcode-back" href="../../reference/app.html#app.models.User">[docs]</a><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	User model</span>
+<span class="sd">	</span>
+<span class="sd">	Arguments:</span>
+<span class="sd">		id (int): Primary User Key</span>
+<span class="sd">		username (str): Unique username as chosen by the user</span>
+<span class="sd">		email (str): User&#39;s email address</span>
+<span class="sd">		password_hash (str): Users hashed password</span>
+<span class="sd">	&quot;&quot;&quot;</span>
 	<span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;users&#39;</span>
 	
 	<span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 	<span class="n">username</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">80</span><span class="p">),</span> <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 	<span class="n">email</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">120</span><span class="p">),</span> <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+	<span class="n">password_hash</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span>
 	
-	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">username</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">password</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&#39;password is not a readable atribute&#39;</span><span class="p">)</span>
 	
+	<span class="nd">@password.setter</span>
+	<span class="k">def</span> <span class="nf">password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Takes user generated password and uses werkzeug.security to create a hash and stores it.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">password_hash</span> <span class="o">=</span> <span class="n">generate_password_hash</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
+	
+<div class="viewcode-block" id="User.verify_password"><a class="viewcode-back" href="../../reference/app.html#app.models.User.verify_password">[docs]</a>	<span class="k">def</span> <span class="nf">verify_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Verify&#39;s user&#39;s password against stored werkzeug.security hash.</span>
+<span class="sd">		</span>
+<span class="sd">		Arguments:</span>
+<span class="sd">			password (str): password to check against stored hash</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="n">check_password_hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">password_hash</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+	
+	<span class="c"># def __init__(self, username, email):</span>
+	<span class="c"># 	self.username = username</span>
+	<span class="c"># 	self.email = email</span>
+	</div>
 	<span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="k">return</span> <span class="s">&#39;&lt;User </span><span class="si">%r</span><span class="s">&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">username</span>
         </div>
 <div class="viewcode-block" id="Region"><a class="viewcode-back" href="../../reference/app.html#app.models.Region">[docs]</a><span class="k">class</span> <span class="nc">Region</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Regions where Rivers, Sections, and Gages exist</span>
+<span class="sd">	</span>
+<span class="sd">	Arguments:</span>
+<span class="sd">		id (int): Primary Region Key</span>
+<span class="sd">		name (str): Nice name</span>
+<span class="sd">		slug (str): slug for url formatting</span>
+<span class="sd">		description (text): Long description that can contain HTML or Markdown within reason.</span>
+<span class="sd">		short_description (text): Short description, for showing on other pages.</span>
+<span class="sd">		header_image (str): Header image to override default.</span>
+<span class="sd">		rivers: List of ``River`` objects for Region.</span>
+<span class="sd">		sections: List of ``Section`` objects for Region.</span>
+<span class="sd">		gages: List of ``Gage`` objects for Region.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
 	<span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;regions&#39;</span>
 	
 	<span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -165,6 +237,9 @@
 	<span class="n">header_image</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">80</span><span class="p">))</span>
 	
 <div class="viewcode-block" id="Region.to_json"><a class="viewcode-back" href="../../reference/app.html#app.models.Region.to_json">[docs]</a>	<span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Create a JSON object from region. Used where multiple regions may be displayed simultaneously.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
 		<span class="n">json_region</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s">&#39;id&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
 			<span class="s">&#39;name&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
@@ -174,6 +249,9 @@
 		<span class="k">return</span> <span class="n">json_region</span>
 	</div>
 <div class="viewcode-block" id="Region.to_long_json"><a class="viewcode-back" href="../../reference/app.html#app.models.Region.to_long_json">[docs]</a>	<span class="k">def</span> <span class="nf">to_long_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Create a JSON object from region. Used when only one region is to be displayed.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
 		<span class="n">json_region</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s">&#39;id&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
 			<span class="s">&#39;name&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
@@ -189,6 +267,23 @@
 		<span class="k">return</span> <span class="s">&#39;&lt;Region </span><span class="si">%r</span><span class="s">&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
 </div>
 <div class="viewcode-block" id="River"><a class="viewcode-back" href="../../reference/app.html#app.models.River">[docs]</a><span class="k">class</span> <span class="nc">River</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	River model. Rivers are rivers as we know them, \</span>
+<span class="sd">	they have a parent that they flow downstream into and have tributaries that flow into them.</span>
+<span class="sd">	</span>
+<span class="sd">	Arguments:</span>
+<span class="sd">		id (int): Primary River id</span>
+<span class="sd">		name (string): Nice River name</span>
+<span class="sd">		slug (string): slug for url formatting</span>
+<span class="sd">		description (text): Long description that can contain HTML or Markdown within reason.</span>
+<span class="sd">		short_description (text): Short description for showing on other pages.</span>
+<span class="sd">		header_image (string): Header image to override default</span>
+<span class="sd">		parent_id (int): River.id for the river that this one flows into</span>
+<span class="sd">		parent: ``River`` object from parent_id</span>
+<span class="sd">		tributary: List of ``River`` objects for any River that has this one in it&#39;s parent_id.</span>
+<span class="sd">		regions: List of ``Region`` objects for River</span>
+<span class="sd">		sections: List of ``Section`` objects for River</span>
+<span class="sd">	&quot;&quot;&quot;</span>
 	<span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;rivers&#39;</span>
 	
 	<span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -204,16 +299,19 @@
 	<span class="n">regions</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s">&#39;Region&#39;</span><span class="p">,</span> <span class="n">secondary</span><span class="o">=</span><span class="n">rivers_regions</span><span class="p">,</span>
 	                          <span class="n">backref</span><span class="o">=</span><span class="n">db</span><span class="o">.</span><span class="n">backref</span><span class="p">(</span><span class="s">&#39;rivers&#39;</span><span class="p">,</span> <span class="n">lazy</span><span class="o">=</span><span class="s">&#39;dynamic&#39;</span><span class="p">))</span>
 	
-	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">slug</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> 
-				<span class="n">short_description</span><span class="p">,</span> <span class="n">header_image</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">slug</span> <span class="o">=</span> <span class="n">slug</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">short_description</span> <span class="o">=</span> <span class="n">short_description</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">header_image</span> <span class="o">=</span> <span class="n">header_image</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
+	<span class="c">#def __init__(self, name, slug, description, </span>
+	<span class="c">#			short_description, header_image, parent):</span>
+	<span class="c">#	self.name = name</span>
+	<span class="c">#	self.slug = slug</span>
+	<span class="c">#	self.description = description</span>
+	<span class="c">#	self.short_description = short_description</span>
+	<span class="c">#	self.header_image = header_image</span>
+	<span class="c">#	self.parent = parent</span>
 	
 <div class="viewcode-block" id="River.to_json"><a class="viewcode-back" href="../../reference/app.html#app.models.River.to_json">[docs]</a>	<span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Creates a JSON Object from River. Used where multiple rivers may be listed at once.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
 		<span class="n">json_river</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
 			<span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
@@ -222,6 +320,9 @@
 		<span class="k">return</span> <span class="n">json_river</span>
 	</div>
 <div class="viewcode-block" id="River.to_long_json"><a class="viewcode-back" href="../../reference/app.html#app.models.River.to_long_json">[docs]</a>	<span class="k">def</span> <span class="nf">to_long_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Creates a JSON Object from River. Used where a single river is being displayed.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
 		<span class="n">json_river</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
 			<span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
@@ -237,6 +338,29 @@
 	    <span class="k">return</span> <span class="s">&#39;&lt;River </span><span class="si">%r</span><span class="s">&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
 </div>
 <div class="viewcode-block" id="Section"><a class="viewcode-back" href="../../reference/app.html#app.models.Section">[docs]</a><span class="k">class</span> <span class="nc">Section</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	River section that is commonly paddled and possibly has a correlation developed for it.</span>
+<span class="sd">	</span>
+<span class="sd">	Arguments:</span>
+<span class="sd">		id (int): Primary key for Section</span>
+<span class="sd">		name (string): Nice name for section</span>
+<span class="sd">		slug (string): slug used for url</span>
+<span class="sd">		river_id: Foreign River.id that this section is a segment of. \</span>
+<span class="sd">					If a section spans multiple rivers, use the river that the gage is on.</span>
+<span class="sd">		river: ``River`` object</span>
+<span class="sd">		description (text): Long description for Section that can contain HTML or Markdown within reason.</span>
+<span class="sd">		short_description (text): Short description for section for showing on other pages.</span>
+<span class="sd">		access (string): Access restrictions or issues</span>
+<span class="sd">		location (string): Where is it?</span>
+<span class="sd">		putin (Point): PostGIS Point object for putin</span>
+<span class="sd">		takeout (Point): PostGIS Point object for takeout</span>
+<span class="sd">		path (Linestring): PostGIS Linestring object for river</span>
+<span class="sd">		in_elevation (int): Elevation of the putin</span>
+<span class="sd">		out_elevation (int): Elevation of the takeout</span>
+<span class="sd">		header_image (string): Header image to override default</span>
+<span class="sd">		correlations: List of ``Correlation`` objects that connect this Section to Sensors. \</span>
+<span class="sd">						Can do ``section.correlations[#].sensor`` and access the sensor attributes.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
 	<span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;sections&#39;</span>
 	
 	<span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -285,6 +409,9 @@
 		<span class="k">return</span> <span class="n">latlon_point</span>
 	</div>
 <div class="viewcode-block" id="Section.to_json"><a class="viewcode-back" href="../../reference/app.html#app.models.Section.to_json">[docs]</a>	<span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Creates a JSON Object from Section. Used where multiple sections may be listed at once.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
 		<span class="n">json_section</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s">&#39;id&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
 			<span class="s">&#39;name&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
@@ -293,6 +420,9 @@
 		<span class="k">return</span> <span class="n">json_section</span>
 	</div>
 <div class="viewcode-block" id="Section.to_long_json"><a class="viewcode-back" href="../../reference/app.html#app.models.Section.to_long_json">[docs]</a>	<span class="k">def</span> <span class="nf">to_long_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Creates a JSON Object from Section. Used where a single section is displayed.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
 		<span class="n">json_section</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
 			<span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
@@ -310,6 +440,31 @@
 	    <span class="k">return</span> <span class="s">&#39;&lt;Section </span><span class="si">%r</span><span class="s">&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
         </div>
 <div class="viewcode-block" id="Gage"><a class="viewcode-back" href="../../reference/app.html#app.models.Gage">[docs]</a><span class="k">class</span> <span class="nc">Gage</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	A Gage is a collection of Sensors at a single location.</span>
+<span class="sd">	</span>
+<span class="sd">	Arguments:</span>
+<span class="sd">		id (int): Primary key for Gage</span>
+<span class="sd">		name (string): Nice name for gage</span>
+<span class="sd">		slug (string): slug used in url</span>
+<span class="sd">		point (Point): PostGIS Point object</span>
+<span class="sd">		river_id (int): Foreign key of ``River``.id that the Gage is on.</span>
+<span class="sd">		river: ``River`` object</span>
+<span class="sd">		user_id (int): Foreign key of ``User``.id that &#39;owns&#39; the Gage.</span>
+<span class="sd">		user: ``User`` object that `owns` the gage.</span>
+<span class="sd">		visible (boolean): Allows a gage to not be seen on the front end</span>
+<span class="sd">		zipcode (string): Zip code used to get the weather.</span>
+<span class="sd">		local_town (string): Local town name, primarily used for getting the weather</span>
+<span class="sd">		location (string): Descriptive location, often used when Gage is displayed on other pages</span>
+<span class="sd">		elevation (int): The elevation of the Gage</span>
+<span class="sd">		elevationUnits (string): Feet or Meters?</span>
+<span class="sd">		backend_notes (text): Backend info for the Gage for admins.</span>
+<span class="sd">		started (datetime): When samples started to be collected at this gage</span>
+<span class="sd">		ended (datetime): If sampling at this gage has stopped, when?</span>
+<span class="sd">		description (text): Long description for Gage that can contain HTML or Markdown within reason.</span>
+<span class="sd">		short_description (text): Short description for showing on other pages.</span>
+<span class="sd">		regions: List of ``Region`` objects that this Gage is in.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
 	<span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;gages&#39;</span>
 	
 	<span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -333,7 +488,6 @@
 	<span class="n">backend_notes</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
 	<span class="n">started</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">DateTime</span><span class="p">)</span>
 	<span class="n">ended</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">DateTime</span><span class="p">)</span>
-	<span class="n">visible</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">)</span>
 	<span class="n">description</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
 	<span class="n">short_description</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
 	
@@ -350,6 +504,9 @@
 		<span class="k">return</span> <span class="n">latlon_point</span>
 	</div>
 <div class="viewcode-block" id="Gage.to_json"><a class="viewcode-back" href="../../reference/app.html#app.models.Gage.to_json">[docs]</a>	<span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Creates a JSON Object from Gage. Used where multiple gages may be listed at once.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
 		<span class="n">json_post</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
 			<span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
@@ -361,6 +518,9 @@
 		<span class="k">return</span> <span class="n">json_post</span>
 	</div>
 <div class="viewcode-block" id="Gage.to_long_json"><a class="viewcode-back" href="../../reference/app.html#app.models.Gage.to_long_json">[docs]</a>	<span class="k">def</span> <span class="nf">to_long_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Cretes a JSON Object from Gage. Used where a single gage is displayed.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
 		<span class="n">json_post</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
 			<span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
@@ -377,6 +537,15 @@
 		<span class="k">return</span> <span class="n">json_post</span>
 	</div>
 <div class="viewcode-block" id="Gage.new_sample"><a class="viewcode-back" href="../../reference/app.html#app.models.Gage.new_sample">[docs]</a>	<span class="k">def</span> <span class="nf">new_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stype</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">sdatetime</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Process a new sample for the gage, and finds the right ``Sensor`` that the ``Sample`` should be connected to. \</span>
+<span class="sd">		If no ``Sensor`` exists for the type of sample, then a new one is created.</span>
+<span class="sd">		</span>
+<span class="sd">		Arguments:</span>
+<span class="sd">			stype (str): Sensor type</span>
+<span class="sd">			value (float): Sample value</span>
+<span class="sd">			sdatetime (datetime): Sample ``datetime`` object</span>
+<span class="sd">		&quot;&quot;&quot;</span>
 		<span class="n">sensor</span> <span class="o">=</span> <span class="n">Sensor</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">gage_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">stype</span><span class="o">=</span><span class="n">stype</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
 		<span class="k">if</span> <span class="n">sensor</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
 			<span class="n">sensor</span> <span class="o">=</span> <span class="n">Sensor</span><span class="p">(</span><span class="n">gage_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
@@ -392,7 +561,7 @@
 	<span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="k">return</span> <span class="s">&#39;&lt;Gage </span><span class="si">%r</span><span class="s">&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
 </div>
-<div class="viewcode-block" id="Sensor"><a class="viewcode-back" href="../../reference/app.html#app.models.Sensor">[docs]</a><span class="k">class</span> <span class="nc">Sensor</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Sensor</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
 	<span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;sensors&#39;</span>
 	
 	<span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -407,7 +576,13 @@
 	<span class="n">prefix</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 	<span class="n">suffix</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 	<span class="n">local</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">)</span>
+	<span class="n">remote_type</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
 	<span class="n">remote_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
+	<span class="n">remote_parameter</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
+	<span class="n">last</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">DateTime</span><span class="p">)</span>
+	<span class="n">title</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
+	<span class="n">xlabel</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
+	<span class="n">ylabel</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
 	<span class="n">info</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">JSON</span><span class="p">)</span>
 	<span class="n">description</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
 	<span class="n">backend_notes</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
@@ -416,22 +591,27 @@
 	<span class="n">started</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">DateTime</span><span class="p">)</span>
 	<span class="n">ended</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">DateTime</span><span class="p">)</span>
 	
-<div class="viewcode-block" id="Sensor.recent"><a class="viewcode-back" href="../../reference/app.html#app.models.Sensor.recent">[docs]</a>	<span class="k">def</span> <span class="nf">recent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	<span class="k">def</span> <span class="nf">recent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="n">sample</span> <span class="o">=</span> <span class="n">Sample</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">sensor_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sample</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
 		<span class="k">if</span> <span class="n">sample</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
 			<span class="k">return</span> <span class="n">sample</span><span class="o">.</span><span class="n">value</span>
+		<span class="k">elif</span> <span class="n">sample</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">local</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote_parameter</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+				<span class="n">usgs</span><span class="o">.</span><span class="n">get_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote_id</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="s">&#39;P7D&#39;</span><span class="p">)</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="n">usgs</span><span class="o">.</span><span class="n">get_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote_id</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="s">&#39;P7D&#39;</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">remote_parameter</span><span class="p">)</span>
 		<span class="k">else</span><span class="p">:</span>
 			<span class="k">pass</span>
-	</div>
-<div class="viewcode-block" id="Sensor.to_json"><a class="viewcode-back" href="../../reference/app.html#app.models.Sensor.to_json">[docs]</a>	<span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	
+	<span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="n">json_post</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s">&#39;id&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
 			<span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">stype</span><span class="p">,</span>
 			<span class="s">&#39;url&#39;</span> <span class="p">:</span> <span class="n">url_for</span><span class="p">(</span><span class="s">&#39;api.get_sensor&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">_external</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 		<span class="p">}</span>
 		<span class="k">return</span> <span class="n">json_post</span>
-	</div>
-<div class="viewcode-block" id="Sensor.to_long_json"><a class="viewcode-back" href="../../reference/app.html#app.models.Sensor.to_long_json">[docs]</a>	<span class="k">def</span> <span class="nf">to_long_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	
+	<span class="k">def</span> <span class="nf">to_long_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="n">sample</span> <span class="o">=</span> <span class="n">Sample</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">sensor_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sample</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
 		<span class="n">json_post</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s">&#39;id&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
@@ -446,8 +626,8 @@
 			<span class="s">&#39;recent_sample&#39;</span><span class="p">:</span> <span class="n">sample</span><span class="o">.</span><span class="n">to_sensor_json</span><span class="p">()</span>
 		<span class="p">}</span>
 		<span class="k">return</span> <span class="n">json_post</span>
-	</div>
-<div class="viewcode-block" id="Sensor.to_gage_json"><a class="viewcode-back" href="../../reference/app.html#app.models.Sensor.to_gage_json">[docs]</a>	<span class="k">def</span> <span class="nf">to_gage_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	
+	<span class="k">def</span> <span class="nf">to_gage_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="n">sample</span> <span class="o">=</span> <span class="n">Sample</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">sensor_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sample</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
 		<span class="n">json_post</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s">&#39;id&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
@@ -456,8 +636,8 @@
 			<span class="s">&#39;recent_sample&#39;</span><span class="p">:</span> <span class="n">sample</span><span class="o">.</span><span class="n">to_sensor_json</span><span class="p">()</span>
 		<span class="p">}</span>
 		<span class="k">return</span> <span class="n">json_post</span>
-	</div>
-<div class="viewcode-block" id="Sensor.to_sample_json"><a class="viewcode-back" href="../../reference/app.html#app.models.Sensor.to_sample_json">[docs]</a>	<span class="k">def</span> <span class="nf">to_sample_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	
+	<span class="k">def</span> <span class="nf">to_sample_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="n">json_sensor</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s">&#39;id&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
 			<span class="s">&#39;type&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">stype</span><span class="p">,</span>
@@ -465,11 +645,11 @@
 			<span class="s">&#39;url&#39;</span><span class="p">:</span> <span class="n">url_for</span><span class="p">(</span><span class="s">&#39;api.get_sensor&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">_external</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 		<span class="p">}</span>
 		<span class="k">return</span> <span class="n">json_sensor</span>
-	</div>
+	
 	<span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="k">return</span> <span class="s">&#39;&lt;Sensor </span><span class="si">%r</span><span class="s">&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span>
-</div>
-<div class="viewcode-block" id="Sample"><a class="viewcode-back" href="../../reference/app.html#app.models.Sample">[docs]</a><span class="k">class</span> <span class="nc">Sample</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+<span class="k">class</span> <span class="nc">Sample</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
 	<span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;samples&#39;</span>
 	
 	<span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -480,7 +660,7 @@
 	<span class="n">datetime</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">DateTime</span><span class="p">)</span>
 	<span class="n">value</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
 	
-<div class="viewcode-block" id="Sample.to_json"><a class="viewcode-back" href="../../reference/app.html#app.models.Sample.to_json">[docs]</a>	<span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	<span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="n">json_sample</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
 			<span class="s">&#39;sensor&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">to_sample_json</span><span class="p">(),</span>
@@ -489,8 +669,8 @@
 			<span class="s">&#39;url&#39;</span><span class="p">:</span> <span class="n">url_for</span><span class="p">(</span><span class="s">&#39;api.get_sample&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">_external</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 		<span class="p">}</span>
 		<span class="k">return</span> <span class="n">json_sample</span>
-	</div>
-<div class="viewcode-block" id="Sample.to_sensor_json"><a class="viewcode-back" href="../../reference/app.html#app.models.Sample.to_sensor_json">[docs]</a>	<span class="k">def</span> <span class="nf">to_sensor_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	
+	<span class="k">def</span> <span class="nf">to_sensor_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="n">json_sample</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
 			<span class="s">&#39;value&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
@@ -498,9 +678,9 @@
 			<span class="s">&#39;url&#39;</span><span class="p">:</span> <span class="n">url_for</span><span class="p">(</span><span class="s">&#39;api.get_sample&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">_external</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 		<span class="p">}</span>
 		<span class="k">return</span> <span class="n">json_sample</span>
-	</div>
+	
 	<span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-		<span class="k">return</span> <span class="s">&#39;&lt;Sample </span><span class="si">%r</span><span class="s">&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span></div>
+		<span class="k">return</span> <span class="s">&#39;&lt;Sample </span><span class="si">%r</span><span class="s">&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span>
 </pre></div>
 
           </div>

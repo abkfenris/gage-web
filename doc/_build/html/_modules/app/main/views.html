@@ -112,7 +112,7 @@
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">main</span>
 <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">db</span>
-<span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">Gage</span><span class="p">,</span> <span class="n">Region</span><span class="p">,</span> <span class="n">Section</span><span class="p">,</span> <span class="n">River</span>
+<span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">Gage</span><span class="p">,</span> <span class="n">Region</span><span class="p">,</span> <span class="n">Section</span><span class="p">,</span> <span class="n">River</span><span class="p">,</span> <span class="n">Sensor</span>
 
 <span class="c"># Normal Pages</span>
 
@@ -202,7 +202,7 @@
 		<span class="n">section</span> <span class="o">=</span> <span class="n">Section</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get_or_404</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
 	<span class="k">else</span><span class="p">:</span>
 		<span class="n">section</span> <span class="o">=</span> <span class="n">Section</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">slug</span><span class="o">=</span><span class="n">slug</span><span class="p">)</span><span class="o">.</span><span class="n">first_or_404</span><span class="p">()</span>
-	<span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">&#39;section.html&#39;</span><span class="p">,</span> <span class="n">Gage</span><span class="o">=</span><span class="n">Gage</span><span class="p">,</span> <span class="n">Section</span><span class="o">=</span><span class="n">Section</span><span class="p">,</span> <span class="n">section</span><span class="o">=</span><span class="n">section</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">&#39;section.html&#39;</span><span class="p">,</span> <span class="n">Gage</span><span class="o">=</span><span class="n">Gage</span><span class="p">,</span> <span class="n">Section</span><span class="o">=</span><span class="n">Section</span><span class="p">,</span> <span class="n">section</span><span class="o">=</span><span class="n">section</span><span class="p">,</span> <span class="n">Sensor</span><span class="o">=</span><span class="n">Sensor</span><span class="p">)</span>
 </div>
 <span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/rivers/&#39;</span><span class="p">)</span>
 <span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/river/&#39;</span><span class="p">)</span>

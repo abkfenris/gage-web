@@ -104,6 +104,12 @@
   <h1>Source code for manage</h1><div class="highlight"><pre>
 <span class="c">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="n">COV</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;FLASK_COVERAGE&#39;</span><span class="p">):</span>
+	<span class="kn">import</span> <span class="nn">coverage</span>
+	<span class="n">COV</span> <span class="o">=</span> <span class="n">coverage</span><span class="o">.</span><span class="n">coverage</span><span class="p">(</span><span class="n">branch</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="s">&#39;app/*&#39;</span><span class="p">)</span>
+	<span class="n">COV</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">url_for</span><span class="p">,</span> <span class="n">Flask</span>
 <span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">create_app</span><span class="p">,</span> <span class="n">db</span>
 <span class="kn">from</span> <span class="nn">app.models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">Region</span><span class="p">,</span> <span class="n">River</span><span class="p">,</span> <span class="n">Section</span><span class="p">,</span> <span class="n">Gage</span><span class="p">,</span> <span class="n">Sensor</span><span class="p">,</span> <span class="n">Sample</span>
@@ -147,6 +153,45 @@
 	
 	<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">output</span><span class="p">):</span>
 		<span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</div>
+<span class="nd">@manager.command</span>
+<div class="viewcode-block" id="test"><a class="viewcode-back" href="../reference/manage.html#manage.test">[docs]</a><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">coverage</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Run the unit tests.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">if</span> <span class="n">coverage</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;FLASK_COVERAGE&#39;</span><span class="p">):</span>
+		<span class="kn">import</span> <span class="nn">sys</span>
+		<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;FLASK_COVERAGE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;1&#39;</span>
+		<span class="n">os</span><span class="o">.</span><span class="n">execvp</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">]</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+
+	<span class="kn">import</span> <span class="nn">unittest</span>
+	<span class="n">tests</span> <span class="o">=</span> <span class="n">unittest</span><span class="o">.</span><span class="n">TestLoader</span><span class="p">()</span><span class="o">.</span><span class="n">discover</span><span class="p">(</span><span class="s">&#39;tests&#39;</span><span class="p">)</span>
+	<span class="n">unittest</span><span class="o">.</span><span class="n">TextTestRunner</span><span class="p">(</span><span class="n">verbosity</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tests</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">COV</span><span class="p">:</span>
+		<span class="n">COV</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+		<span class="n">COV</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+		<span class="k">print</span><span class="p">(</span><span class="s">&#39;Coverage Summary:&#39;</span><span class="p">)</span>
+		<span class="n">COV</span><span class="o">.</span><span class="n">report</span><span class="p">()</span>
+		<span class="n">basedir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
+		<span class="n">covdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">basedir</span><span class="p">,</span> <span class="s">&#39;tmp/coverage&#39;</span><span class="p">)</span>
+		<span class="n">COV</span><span class="o">.</span><span class="n">html_report</span><span class="p">(</span><span class="n">directory</span><span class="o">=</span><span class="n">covdir</span><span class="p">)</span>
+		<span class="k">print</span><span class="p">(</span><span class="s">&#39;HTML version: file://</span><span class="si">%s</span><span class="s">/index.html&#39;</span> <span class="o">%</span> <span class="n">covdir</span><span class="p">)</span>
+		<span class="n">COV</span><span class="o">.</span><span class="n">erase</span><span class="p">()</span>
+</div>
+<span class="nd">@manager.command</span>
+<div class="viewcode-block" id="backup"><a class="viewcode-back" href="../reference/manage.html#manage.backup">[docs]</a><span class="k">def</span> <span class="nf">backup</span><span class="p">():</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Backup database to Dropbox</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="kn">import</span> <span class="nn">datetime</span>
+	<span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">backup</span> <span class="k">as</span> <span class="n">backup_db</span>
+	<span class="n">filename</span> <span class="o">=</span> <span class="s">&#39;gage_web-&#39;</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%Y%m</span><span class="si">%d</span><span class="s">-%H%M&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;.tar&#39;</span>
+	<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;pg_dump -Ft gage_web &gt; &quot;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+	<span class="k">print</span> <span class="s">&#39;Uploading&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="s">&#39;to Dropbox&#39;</span>
+	<span class="k">print</span> <span class="n">backup_db</span><span class="o">.</span><span class="n">backup</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+	<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;rm &quot;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+
+
 </div>
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">manager</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>

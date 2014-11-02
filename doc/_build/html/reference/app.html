@@ -185,39 +185,70 @@
 <div class="section" id="module-app.models">
 <span id="app-models-module"></span><h2>app.models module<a class="headerlink" href="#module-app.models" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
+<dt id="app.models.Correlation">
+<em class="property">class </em><tt class="descclassname">app.models.</tt><tt class="descname">Correlation</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/app/models.html#Correlation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Correlation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>Connects sections to sensors with extra data about values and how fast they should change.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>section_id</strong> (<em>int</em>) &#8211; <tt class="docutils literal"><span class="pre">Section</span></tt>.id for the <tt class="docutils literal"><span class="pre">Section</span></tt> that this correlation is for</li>
+<li><strong>section</strong> &#8211; gives a <tt class="docutils literal"><span class="pre">Section</span></tt> object from the section_id</li>
+<li><strong>sensor_id</strong> (<em>int</em>) &#8211; <tt class="docutils literal"><span class="pre">Sensor</span></tt>.id for the <tt class="docutils literal"><span class="pre">Sensor</span></tt> that is correlation is for</li>
+<li><strong>sensor</strong> &#8211; gives a <tt class="docutils literal"><span class="pre">Sensor</span></tt> object from the sensor_id</li>
+<li><strong>minimum</strong> (<em>float</em>) &#8211; The minimum level according to the Sensor that can float a boat</li>
+<li><strong>low</strong> (<em>float</em>) &#8211; A normal sane low level. Below this is ELF territory.</li>
+<li><strong>medium</strong> (<em>float</em>) &#8211; The low end of a medium level.</li>
+<li><strong>high</strong> (<em>float</em>) &#8211; The top of a medium level, and starting to get padded out.</li>
+<li><strong>huge</strong> (<em>float</em>) &#8211; The difference between high and scary.</li>
+<li><strong>trend_slope</strong> (<em>float</em>) &#8211; How fast should the sensor be changing in order for us to be interested?</li>
+<li><strong>trend_samples</strong> (<em>int</em>) &#8211; How many samples should it be changing over for us to be interested?</li>
+<li><strong>description</strong> (<em>text</em>) &#8211; At some point in the future will probably display                                                   the description on the section page with the correlation.                                                       Can contain HTML or Markdown within reason.</li>
+<li><strong>backend_notes</strong> (<em>text</em>) &#8211; Admin/Gage Manager information about the gage</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
 <dt id="app.models.Gage">
 <em class="property">class </em><tt class="descclassname">app.models.</tt><tt class="descname">Gage</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/app/models.html#Gage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Gage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
-<dl class="attribute">
-<dt id="app.models.Gage.backend_notes">
-<tt class="descname">backend_notes</tt><a class="headerlink" href="#app.models.Gage.backend_notes" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Gage.description">
-<tt class="descname">description</tt><a class="headerlink" href="#app.models.Gage.description" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Gage.elevation">
-<tt class="descname">elevation</tt><a class="headerlink" href="#app.models.Gage.elevation" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Gage.elevationUnits">
-<tt class="descname">elevationUnits</tt><a class="headerlink" href="#app.models.Gage.elevationUnits" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Gage.ended">
-<tt class="descname">ended</tt><a class="headerlink" href="#app.models.Gage.ended" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Gage.id">
-<tt class="descname">id</tt><a class="headerlink" href="#app.models.Gage.id" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<p>A Gage is a collection of Sensors at a single location.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>int</em>) &#8211; Primary key for Gage</li>
+<li><strong>name</strong> (<em>string</em>) &#8211; Nice name for gage</li>
+<li><strong>slug</strong> (<em>string</em>) &#8211; slug used in url</li>
+<li><strong>point</strong> (<em>Point</em>) &#8211; PostGIS Point object</li>
+<li><strong>river_id</strong> (<em>int</em>) &#8211; Foreign key of <tt class="docutils literal"><span class="pre">River</span></tt>.id that the Gage is on.</li>
+<li><strong>river</strong> &#8211; <tt class="docutils literal"><span class="pre">River</span></tt> object</li>
+<li><strong>user_id</strong> (<em>int</em>) &#8211; Foreign key of <tt class="docutils literal"><span class="pre">User</span></tt>.id that &#8216;owns&#8217; the Gage.</li>
+<li><strong>user</strong> &#8211; <tt class="docutils literal"><span class="pre">User</span></tt> object that <cite>owns</cite> the gage.</li>
+<li><strong>visible</strong> (<em>boolean</em>) &#8211; Allows a gage to not be seen on the front end</li>
+<li><strong>zipcode</strong> (<em>string</em>) &#8211; Zip code used to get the weather.</li>
+<li><strong>local_town</strong> (<em>string</em>) &#8211; Local town name, primarily used for getting the weather</li>
+<li><strong>location</strong> (<em>string</em>) &#8211; Descriptive location, often used when Gage is displayed on other pages</li>
+<li><strong>elevation</strong> (<em>int</em>) &#8211; The elevation of the Gage</li>
+<li><strong>elevationUnits</strong> (<em>string</em>) &#8211; Feet or Meters?</li>
+<li><strong>backend_notes</strong> (<em>text</em>) &#8211; Backend info for the Gage for admins.</li>
+<li><strong>started</strong> (<em>datetime</em>) &#8211; When samples started to be collected at this gage</li>
+<li><strong>ended</strong> (<em>datetime</em>) &#8211; If sampling at this gage has stopped, when?</li>
+<li><strong>description</strong> (<em>text</em>) &#8211; Long description for Gage that can contain HTML or Markdown within reason.</li>
+<li><strong>short_description</strong> (<em>text</em>) &#8211; Short description for showing on other pages.</li>
+<li><strong>regions</strong> &#8211; List of <tt class="docutils literal"><span class="pre">Region</span></tt> objects that this Gage is in.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="app.models.Gage.latlon">
 <tt class="descname">latlon</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Gage.latlon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Gage.latlon" title="Permalink to this definition">¶</a></dt>
@@ -226,90 +257,36 @@ gage.latlon().y for latitude
 gage.latlon().x for longitude</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="app.models.Gage.local_town">
-<tt class="descname">local_town</tt><a class="headerlink" href="#app.models.Gage.local_town" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Gage.location">
-<tt class="descname">location</tt><a class="headerlink" href="#app.models.Gage.location" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Gage.name">
-<tt class="descname">name</tt><a class="headerlink" href="#app.models.Gage.name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 <dl class="method">
 <dt id="app.models.Gage.new_sample">
 <tt class="descname">new_sample</tt><big>(</big><em>stype</em>, <em>value</em>, <em>sdatetime</em><big>)</big><a class="reference internal" href="../_modules/app/models.html#Gage.new_sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Gage.new_sample" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Gage.point">
-<tt class="descname">point</tt><a class="headerlink" href="#app.models.Gage.point" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Gage.regions">
-<tt class="descname">regions</tt><a class="headerlink" href="#app.models.Gage.regions" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Gage.river">
-<tt class="descname">river</tt><a class="headerlink" href="#app.models.Gage.river" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Gage.river_id">
-<tt class="descname">river_id</tt><a class="headerlink" href="#app.models.Gage.river_id" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Gage.short_description">
-<tt class="descname">short_description</tt><a class="headerlink" href="#app.models.Gage.short_description" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Gage.slug">
-<tt class="descname">slug</tt><a class="headerlink" href="#app.models.Gage.slug" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Gage.started">
-<tt class="descname">started</tt><a class="headerlink" href="#app.models.Gage.started" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Process a new sample for the gage, and finds the right <tt class="docutils literal"><span class="pre">Sensor</span></tt> that the <tt class="docutils literal"><span class="pre">Sample</span></tt> should be connected to.           If no <tt class="docutils literal"><span class="pre">Sensor</span></tt> exists for the type of sample, then a new one is created.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>stype</strong> (<em>str</em>) &#8211; Sensor type</li>
+<li><strong>value</strong> (<em>float</em>) &#8211; Sample value</li>
+<li><strong>sdatetime</strong> (<em>datetime</em>) &#8211; Sample <tt class="docutils literal"><span class="pre">datetime</span></tt> object</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="app.models.Gage.to_json">
 <tt class="descname">to_json</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Gage.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Gage.to_json" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Creates a JSON Object from Gage. Used where multiple gages may be listed at once.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="app.models.Gage.to_long_json">
 <tt class="descname">to_long_json</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Gage.to_long_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Gage.to_long_json" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Gage.user">
-<tt class="descname">user</tt><a class="headerlink" href="#app.models.Gage.user" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Gage.user_id">
-<tt class="descname">user_id</tt><a class="headerlink" href="#app.models.Gage.user_id" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Gage.visible">
-<tt class="descname">visible</tt><a class="headerlink" href="#app.models.Gage.visible" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Gage.zipcode">
-<tt class="descname">zipcode</tt><a class="headerlink" href="#app.models.Gage.zipcode" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Cretes a JSON Object from Gage. Used where a single gage is displayed.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -317,147 +294,77 @@ gage.latlon().x for longitude</p>
 <dt id="app.models.Region">
 <em class="property">class </em><tt class="descclassname">app.models.</tt><tt class="descname">Region</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/app/models.html#Region"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Region" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
-<dl class="attribute">
-<dt id="app.models.Region.description">
-<tt class="descname">description</tt><a class="headerlink" href="#app.models.Region.description" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Region.header_image">
-<tt class="descname">header_image</tt><a class="headerlink" href="#app.models.Region.header_image" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Region.id">
-<tt class="descname">id</tt><a class="headerlink" href="#app.models.Region.id" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Region.name">
-<tt class="descname">name</tt><a class="headerlink" href="#app.models.Region.name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Region.short_description">
-<tt class="descname">short_description</tt><a class="headerlink" href="#app.models.Region.short_description" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Region.slug">
-<tt class="descname">slug</tt><a class="headerlink" href="#app.models.Region.slug" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<p>Regions where Rivers, Sections, and Gages exist</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>int</em>) &#8211; Primary Region Key</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; Nice name</li>
+<li><strong>slug</strong> (<em>str</em>) &#8211; slug for url formatting</li>
+<li><strong>description</strong> (<em>text</em>) &#8211; Long description that can contain HTML or Markdown within reason.</li>
+<li><strong>short_description</strong> (<em>text</em>) &#8211; Short description, for showing on other pages.</li>
+<li><strong>header_image</strong> (<em>str</em>) &#8211; Header image to override default.</li>
+<li><strong>rivers</strong> &#8211; List of <tt class="docutils literal"><span class="pre">River</span></tt> objects for Region.</li>
+<li><strong>sections</strong> &#8211; List of <tt class="docutils literal"><span class="pre">Section</span></tt> objects for Region.</li>
+<li><strong>gages</strong> &#8211; List of <tt class="docutils literal"><span class="pre">Gage</span></tt> objects for Region.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="app.models.Region.to_json">
 <tt class="descname">to_json</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Region.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Region.to_json" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Create a JSON object from region. Used where multiple regions may be displayed simultaneously.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="app.models.Region.to_long_json">
 <tt class="descname">to_long_json</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Region.to_long_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Region.to_long_json" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Create a JSON object from region. Used when only one region is to be displayed.</p>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="app.models.River">
-<em class="property">class </em><tt class="descclassname">app.models.</tt><tt class="descname">River</tt><big>(</big><em>name</em>, <em>slug</em>, <em>description</em>, <em>short_description</em>, <em>header_image</em>, <em>parent</em><big>)</big><a class="reference internal" href="../_modules/app/models.html#River"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.River" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">app.models.</tt><tt class="descname">River</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/app/models.html#River"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.River" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
-<dl class="attribute">
-<dt id="app.models.River.description">
-<tt class="descname">description</tt><a class="headerlink" href="#app.models.River.description" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.River.header_image">
-<tt class="descname">header_image</tt><a class="headerlink" href="#app.models.River.header_image" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.River.id">
-<tt class="descname">id</tt><a class="headerlink" href="#app.models.River.id" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.River.name">
-<tt class="descname">name</tt><a class="headerlink" href="#app.models.River.name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.River.parent">
-<tt class="descname">parent</tt><a class="headerlink" href="#app.models.River.parent" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.River.parent_id">
-<tt class="descname">parent_id</tt><a class="headerlink" href="#app.models.River.parent_id" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.River.regions">
-<tt class="descname">regions</tt><a class="headerlink" href="#app.models.River.regions" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.River.short_description">
-<tt class="descname">short_description</tt><a class="headerlink" href="#app.models.River.short_description" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.River.slug">
-<tt class="descname">slug</tt><a class="headerlink" href="#app.models.River.slug" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<p>River model. Rivers are rivers as we know them,         they have a parent that they flow downstream into and have tributaries that flow into them.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>int</em>) &#8211; Primary River id</li>
+<li><strong>name</strong> (<em>string</em>) &#8211; Nice River name</li>
+<li><strong>slug</strong> (<em>string</em>) &#8211; slug for url formatting</li>
+<li><strong>description</strong> (<em>text</em>) &#8211; Long description that can contain HTML or Markdown within reason.</li>
+<li><strong>short_description</strong> (<em>text</em>) &#8211; Short description for showing on other pages.</li>
+<li><strong>header_image</strong> (<em>string</em>) &#8211; Header image to override default</li>
+<li><strong>parent_id</strong> (<em>int</em>) &#8211; River.id for the river that this one flows into</li>
+<li><strong>parent</strong> &#8211; <tt class="docutils literal"><span class="pre">River</span></tt> object from parent_id</li>
+<li><strong>tributary</strong> &#8211; List of <tt class="docutils literal"><span class="pre">River</span></tt> objects for any River that has this one in it&#8217;s parent_id.</li>
+<li><strong>regions</strong> &#8211; List of <tt class="docutils literal"><span class="pre">Region</span></tt> objects for River</li>
+<li><strong>sections</strong> &#8211; List of <tt class="docutils literal"><span class="pre">Section</span></tt> objects for River</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="app.models.River.to_json">
 <tt class="descname">to_json</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#River.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.River.to_json" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Creates a JSON Object from River. Used where multiple rivers may be listed at once.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="app.models.River.to_long_json">
 <tt class="descname">to_long_json</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#River.to_long_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.River.to_long_json" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<dd><p>Creates a JSON Object from River. Used where a single river is being displayed.</p>
 </dd></dl>
-
-<dl class="class">
-<dt id="app.models.Sample">
-<em class="property">class </em><tt class="descclassname">app.models.</tt><tt class="descname">Sample</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/app/models.html#Sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sample" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
-<dl class="attribute">
-<dt id="app.models.Sample.datetime">
-<tt class="descname">datetime</tt><a class="headerlink" href="#app.models.Sample.datetime" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Sample.id">
-<tt class="descname">id</tt><a class="headerlink" href="#app.models.Sample.id" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Sample.sensor">
-<tt class="descname">sensor</tt><a class="headerlink" href="#app.models.Sample.sensor" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Sample.sensor_id">
-<tt class="descname">sensor_id</tt><a class="headerlink" href="#app.models.Sample.sensor_id" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="app.models.Sample.to_json">
-<tt class="descname">to_json</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Sample.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sample.to_json" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="app.models.Sample.to_sensor_json">
-<tt class="descname">to_sensor_json</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Sample.to_sensor_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sample.to_sensor_json" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Sample.value">
-<tt class="descname">value</tt><a class="headerlink" href="#app.models.Sample.value" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 </dd></dl>
 
@@ -465,31 +372,33 @@ gage.latlon().x for longitude</p>
 <dt id="app.models.Section">
 <em class="property">class </em><tt class="descclassname">app.models.</tt><tt class="descname">Section</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/app/models.html#Section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Section" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
-<dl class="attribute">
-<dt id="app.models.Section.access">
-<tt class="descname">access</tt><a class="headerlink" href="#app.models.Section.access" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Section.description">
-<tt class="descname">description</tt><a class="headerlink" href="#app.models.Section.description" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Section.header_image">
-<tt class="descname">header_image</tt><a class="headerlink" href="#app.models.Section.header_image" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Section.id">
-<tt class="descname">id</tt><a class="headerlink" href="#app.models.Section.id" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Section.in_elevation">
-<tt class="descname">in_elevation</tt><a class="headerlink" href="#app.models.Section.in_elevation" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<p>River section that is commonly paddled and possibly has a correlation developed for it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>int</em>) &#8211; Primary key for Section</li>
+<li><strong>name</strong> (<em>string</em>) &#8211; Nice name for section</li>
+<li><strong>slug</strong> (<em>string</em>) &#8211; slug used for url</li>
+<li><strong>river_id</strong> &#8211; Foreign River.id that this section is a segment of.                                   If a section spans multiple rivers, use the river that the gage is on.</li>
+<li><strong>river</strong> &#8211; <tt class="docutils literal"><span class="pre">River</span></tt> object</li>
+<li><strong>description</strong> (<em>text</em>) &#8211; Long description for Section that can contain HTML or Markdown within reason.</li>
+<li><strong>short_description</strong> (<em>text</em>) &#8211; Short description for section for showing on other pages.</li>
+<li><strong>access</strong> (<em>string</em>) &#8211; Access restrictions or issues</li>
+<li><strong>location</strong> (<em>string</em>) &#8211; Where is it?</li>
+<li><strong>putin</strong> (<em>Point</em>) &#8211; PostGIS Point object for putin</li>
+<li><strong>takeout</strong> (<em>Point</em>) &#8211; PostGIS Point object for takeout</li>
+<li><strong>path</strong> (<em>Linestring</em>) &#8211; PostGIS Linestring object for river</li>
+<li><strong>in_elevation</strong> (<em>int</em>) &#8211; Elevation of the putin</li>
+<li><strong>out_elevation</strong> (<em>int</em>) &#8211; Elevation of the takeout</li>
+<li><strong>header_image</strong> (<em>string</em>) &#8211; Header image to override default</li>
+<li><strong>correlations</strong> &#8211; List of <tt class="docutils literal"><span class="pre">Correlation</span></tt> objects that connect this Section to Sensors.                                             Can do <tt class="docutils literal"><span class="pre">section.correlations[#].sensor</span></tt> and access the sensor attributes.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="app.models.Section.inlatlon">
 <tt class="descname">inlatlon</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Section.inlatlon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Section.inlatlon" title="Permalink to this definition">¶</a></dt>
@@ -497,21 +406,6 @@ gage.latlon().x for longitude</p>
 section.inlatlon().y for latitude
 section.inlatlon().y for longitude</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Section.location">
-<tt class="descname">location</tt><a class="headerlink" href="#app.models.Section.location" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Section.name">
-<tt class="descname">name</tt><a class="headerlink" href="#app.models.Section.name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Section.out_elevation">
-<tt class="descname">out_elevation</tt><a class="headerlink" href="#app.models.Section.out_elevation" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="method">
 <dt id="app.models.Section.outlatlon">
@@ -521,192 +415,52 @@ section.outlatlon().y for latitude
 section.outlatlon().x for longitude</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="app.models.Section.path">
-<tt class="descname">path</tt><a class="headerlink" href="#app.models.Section.path" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Section.putin">
-<tt class="descname">putin</tt><a class="headerlink" href="#app.models.Section.putin" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Section.regions">
-<tt class="descname">regions</tt><a class="headerlink" href="#app.models.Section.regions" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Section.river">
-<tt class="descname">river</tt><a class="headerlink" href="#app.models.Section.river" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Section.river_id">
-<tt class="descname">river_id</tt><a class="headerlink" href="#app.models.Section.river_id" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Section.short_description">
-<tt class="descname">short_description</tt><a class="headerlink" href="#app.models.Section.short_description" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Section.slug">
-<tt class="descname">slug</tt><a class="headerlink" href="#app.models.Section.slug" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Section.takeout">
-<tt class="descname">takeout</tt><a class="headerlink" href="#app.models.Section.takeout" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 <dl class="method">
 <dt id="app.models.Section.to_json">
 <tt class="descname">to_json</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Section.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Section.to_json" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Creates a JSON Object from Section. Used where multiple sections may be listed at once.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="app.models.Section.to_long_json">
 <tt class="descname">to_long_json</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Section.to_long_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Section.to_long_json" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<dd><p>Creates a JSON Object from Section. Used where a single section is displayed.</p>
 </dd></dl>
-
-<dl class="class">
-<dt id="app.models.Sensor">
-<em class="property">class </em><tt class="descclassname">app.models.</tt><tt class="descname">Sensor</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/app/models.html#Sensor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sensor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
-<dl class="attribute">
-<dt id="app.models.Sensor.backend_notes">
-<tt class="descname">backend_notes</tt><a class="headerlink" href="#app.models.Sensor.backend_notes" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Sensor.description">
-<tt class="descname">description</tt><a class="headerlink" href="#app.models.Sensor.description" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Sensor.ended">
-<tt class="descname">ended</tt><a class="headerlink" href="#app.models.Sensor.ended" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Sensor.gage">
-<tt class="descname">gage</tt><a class="headerlink" href="#app.models.Sensor.gage" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Sensor.gage_id">
-<tt class="descname">gage_id</tt><a class="headerlink" href="#app.models.Sensor.gage_id" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Sensor.id">
-<tt class="descname">id</tt><a class="headerlink" href="#app.models.Sensor.id" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Sensor.info">
-<tt class="descname">info</tt><a class="headerlink" href="#app.models.Sensor.info" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Sensor.local">
-<tt class="descname">local</tt><a class="headerlink" href="#app.models.Sensor.local" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Sensor.maximum">
-<tt class="descname">maximum</tt><a class="headerlink" href="#app.models.Sensor.maximum" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Sensor.minimum">
-<tt class="descname">minimum</tt><a class="headerlink" href="#app.models.Sensor.minimum" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Sensor.name">
-<tt class="descname">name</tt><a class="headerlink" href="#app.models.Sensor.name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Sensor.prefix">
-<tt class="descname">prefix</tt><a class="headerlink" href="#app.models.Sensor.prefix" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="app.models.Sensor.recent">
-<tt class="descname">recent</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Sensor.recent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sensor.recent" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Sensor.remote_id">
-<tt class="descname">remote_id</tt><a class="headerlink" href="#app.models.Sensor.remote_id" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Sensor.slug">
-<tt class="descname">slug</tt><a class="headerlink" href="#app.models.Sensor.slug" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Sensor.started">
-<tt class="descname">started</tt><a class="headerlink" href="#app.models.Sensor.started" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Sensor.stype">
-<tt class="descname">stype</tt><a class="headerlink" href="#app.models.Sensor.stype" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.Sensor.suffix">
-<tt class="descname">suffix</tt><a class="headerlink" href="#app.models.Sensor.suffix" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="app.models.Sensor.to_gage_json">
-<tt class="descname">to_gage_json</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Sensor.to_gage_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sensor.to_gage_json" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="app.models.Sensor.to_json">
-<tt class="descname">to_json</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Sensor.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sensor.to_json" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="app.models.Sensor.to_long_json">
-<tt class="descname">to_long_json</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Sensor.to_long_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sensor.to_long_json" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="app.models.Sensor.to_sample_json">
-<tt class="descname">to_sample_json</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Sensor.to_sample_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sensor.to_sample_json" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="app.models.User">
-<em class="property">class </em><tt class="descclassname">app.models.</tt><tt class="descname">User</tt><big>(</big><em>username</em>, <em>email</em><big>)</big><a class="reference internal" href="../_modules/app/models.html#User"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.User" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">app.models.</tt><tt class="descname">User</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/app/models.html#User"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.User" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
-<dl class="attribute">
-<dt id="app.models.User.email">
-<tt class="descname">email</tt><a class="headerlink" href="#app.models.User.email" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.User.id">
-<tt class="descname">id</tt><a class="headerlink" href="#app.models.User.id" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.models.User.username">
-<tt class="descname">username</tt><a class="headerlink" href="#app.models.User.username" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<p>User model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>int</em>) &#8211; Primary User Key</li>
+<li><strong>username</strong> (<em>str</em>) &#8211; Unique username as chosen by the user</li>
+<li><strong>email</strong> (<em>str</em>) &#8211; User&#8217;s email address</li>
+<li><strong>password_hash</strong> (<em>str</em>) &#8211; Users hashed password</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="app.models.User.verify_password">
+<tt class="descname">verify_password</tt><big>(</big><em>password</em><big>)</big><a class="reference internal" href="../_modules/app/models.html#User.verify_password"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.User.verify_password" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verify&#8217;s user&#8217;s password against stored werkzeug.security hash.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>password</strong> (<em>str</em>) &#8211; password to check against stored hash</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
