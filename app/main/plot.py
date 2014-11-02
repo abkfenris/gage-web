@@ -57,7 +57,10 @@ def gagesensorplot(id, stype, days=7, start=None, end=None):
 	#print y
 	ax.plot(x, y, '-')
 	if sensor.title is None:
-		fig.suptitle('%s %s' % (gage.name, sensor.stype))
+		if sensor.name is None:
+			fig.suptitle('%s %s' % (gage.name, sensor.stype))
+		else:
+			fig.suptitle('%s %s' % (gage.name, sensor.name))
 	else:
 		fig.suptitle(sensor.title)
 	canvas = FigureCanvas(fig)

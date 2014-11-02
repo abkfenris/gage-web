@@ -21,7 +21,11 @@
 	  				<li class="active"><a href="#info" data-toggle="tab">Gage Info</a></li>
 	  				<li><a href="#weather" data-toggle="tab">Weather</a></li>
 	  				{% for sensor in gage.sensors.all() %}
+	  					{% if sensor.name is none() %}
 	  					<li><a href="#{{ sensor.stype }}" data-toggle="tab">{{ sensor.stype }} - {{ sensor.recent() }}</a></li>
+	  					{% else %}
+	  					<li><a href="#{{ sensor.stype }}" data-toggle="tab">{{ sensor.name }} - {{ sensor.recent() }}</a></li>
+	  					{% endif %}
 	  				{% endfor %}
 	  			</ul>
 	  			<!-- Tab contents -->
