@@ -4,8 +4,8 @@ Gage-Web API Documentation
 API
 --------------------------
 
-.. autoflask:: manage:app
+.. autoflask:: app:create_app('default')
 	:endpoints:
 	:undoc-endpoints:
 	:undoc-static:
-	:undoc-blueprints: 
+	:undoc-blueprints: main, admin, bootstrap
