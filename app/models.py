@@ -457,6 +457,35 @@ class Gage(db.Model):
 		return '<Gage %r>' % self.name
 
 class Sensor(db.Model):
+	"""
+	A single sensor value for a Gage
+	
+	Arguments:
+		id (int): Primary key for Sensor
+		gage_id (int): Foreign ``Gage``.id for the Gage that this Sensor is a part of
+		gage: ``Gage`` object for associated Gage
+		stype (str): Type of sensor as reported by sending station (gage).
+		name (str): Nice display name for sensor
+		slug (str): slug for url
+		prefix (str): Prefix for value display
+		suffix (str): Suffix for value display
+		local (boolean): True if the station(gage) sends this sensor's data to the server.
+		remote_type (str): Type of remote sensor. Currently only ``'usgs'`` is valid.
+		remote_id (int): String element that should be used to query remote sensor.
+		remote_parameter (str): Parameter that is required to query remote sensor.
+		last (datetime): Last time data was received or retrieved.
+		title (str): Title to display on plots.
+		xlabel (str): x-axis label to display on plots.
+		ylabel (str): y-axis label to display on plots.
+		info (JSON): JSON with more detail about sensor for possible future use.
+		description (text): Long description of sensor that can contain HTML or Markdown within reason.
+		backend_notes (text): Backend info for admins.
+		minimum (float): Lowest measurement of sensor. Used for plot formatting.
+		maximum (float): Highest measurement of sensor. Used for plot formatting.
+		started (datetime): Datetime that sample collection started.
+		ended (datetime): Datetime that sample collection ended.
+		samples: List of ``Sample`` objects from Sensor.
+	"""
 	__tablename__ = 'sensors'
 	
 	id = db.Column(db.Integer, primary_key=True)
@@ -487,6 +516,9 @@ class Sensor(db.Model):
 	ended = db.Column(db.DateTime)
 	
 	def recent(self):
+		"""
+		Return recent sample value.
+		"""
 		sample = Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
 		if sample is not None:
 			return sample.value
@@ -499,6 +531,9 @@ class Sensor(db.Model):
 			pass
 	
 	def to_json(self):
+		"""
+		Creates a JSON object from sensor. Used where multiple sensors may be displayed at once.
+		"""
 		json_post = {
 			'id' : self.id,
 			'type': self.stype,
@@ -507,6 +542,9 @@ class Sensor(db.Model):
 		return json_post
 	
 	def to_long_json(self):
+		"""
+		Creates a JSON object from sensor. Used where a single sensor will be displayed.
+		"""
 		sample = Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
 		json_post = {
 			'id' : self.id,
@@ -523,6 +561,9 @@ class Sensor(db.Model):
 		return json_post
 	
 	def to_gage_json(self):
+		"""
+		Creates a JSON object from sensor. Displayed with gage JSON and includes most recent sample.
+		"""
 		sample = Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
 		json_post = {
 			'id' : self.id,
@@ -533,6 +574,9 @@ class Sensor(db.Model):
 		return json_post
 	
 	def to_sample_json(self):
+		"""
+		Creates a JSON object from sensor. Displayed with sample JSON and includes gage information.
+		"""
 		json_sensor = {
 			'id' : self.id,
 			'type' : self.stype,
@@ -545,6 +589,16 @@ class Sensor(db.Model):
 		return '<Sensor %r>' % self.id
 
 class Sample(db.Model):
+	"""
+	Sample model
+	
+	Arguments:
+		id (int): Primary Sample key
+		sensor_id (int): Foreign ``Sensor``.id key
+		sensor: ``Sensor`` object related to this sample
+		datetime (datetime): ``datetime`` object of this sample
+		value (float): Value of sample
+	"""
 	__tablename__ = 'samples'
 	
 	id = db.Column(db.Integer, primary_key=True)
@@ -556,6 +610,9 @@ class Sample(db.Model):
 	value = db.Column(db.Float)
 	
 	def to_json(self):
+		"""
+		Creates a JSON object from Sample. Used where multiple samples will be displayed at once.
+		"""
 		json_sample = {
 			'id': self.id,
 			'sensor': self.sensor.to_sample_json(),
@@ -566,6 +623,9 @@ class Sample(db.Model):
 		return json_sample
 	
 	def to_sensor_json(self):
+		"""
+		Creates a JSON object from Sample for used with Sensor JSON.
+		"""
 		json_sample = {
 			'id': self.id,
 			'value': self.value,

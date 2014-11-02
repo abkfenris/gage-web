@@ -464,6 +464,7 @@
 <span class="sd">		description (text): Long description for Gage that can contain HTML or Markdown within reason.</span>
 <span class="sd">		short_description (text): Short description for showing on other pages.</span>
 <span class="sd">		regions: List of ``Region`` objects that this Gage is in.</span>
+<span class="sd">		sensors: List of ``Sensor`` objects that are part of this Gage.</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;gages&#39;</span>
 	
@@ -561,7 +562,36 @@
 	<span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="k">return</span> <span class="s">&#39;&lt;Gage </span><span class="si">%r</span><span class="s">&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
 </div>
-<span class="k">class</span> <span class="nc">Sensor</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<div class="viewcode-block" id="Sensor"><a class="viewcode-back" href="../../reference/app.html#app.models.Sensor">[docs]</a><span class="k">class</span> <span class="nc">Sensor</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	A single sensor value for a Gage</span>
+<span class="sd">	</span>
+<span class="sd">	Arguments:</span>
+<span class="sd">		id (int): Primary key for Sensor</span>
+<span class="sd">		gage_id (int): Foreign ``Gage``.id for the Gage that this Sensor is a part of</span>
+<span class="sd">		gage: ``Gage`` object for associated Gage</span>
+<span class="sd">		stype (str): Type of sensor as reported by sending station (gage).</span>
+<span class="sd">		name (str): Nice display name for sensor</span>
+<span class="sd">		slug (str): slug for url</span>
+<span class="sd">		prefix (str): Prefix for value display</span>
+<span class="sd">		suffix (str): Suffix for value display</span>
+<span class="sd">		local (boolean): True if the station(gage) sends this sensor&#39;s data to the server.</span>
+<span class="sd">		remote_type (str): Type of remote sensor. Currently only ``&#39;usgs&#39;`` is valid.</span>
+<span class="sd">		remote_id (int): String element that should be used to query remote sensor.</span>
+<span class="sd">		remote_parameter (str): Parameter that is required to query remote sensor.</span>
+<span class="sd">		last (datetime): Last time data was received or retrieved.</span>
+<span class="sd">		title (str): Title to display on plots.</span>
+<span class="sd">		xlabel (str): x-axis label to display on plots.</span>
+<span class="sd">		ylabel (str): y-axis label to display on plots.</span>
+<span class="sd">		info (JSON): JSON with more detail about sensor for possible future use.</span>
+<span class="sd">		description (text): Long description of sensor that can contain HTML or Markdown within reason.</span>
+<span class="sd">		backend_notes (text): Backend info for admins.</span>
+<span class="sd">		minimum (float): Lowest measurement of sensor. Used for plot formatting.</span>
+<span class="sd">		maximum (float): Highest measurement of sensor. Used for plot formatting.</span>
+<span class="sd">		started (datetime): Datetime that sample collection started.</span>
+<span class="sd">		ended (datetime): Datetime that sample collection ended.</span>
+<span class="sd">		samples: List of ``Sample`` objects from Sensor.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
 	<span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;sensors&#39;</span>
 	
 	<span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -591,7 +621,10 @@
 	<span class="n">started</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">DateTime</span><span class="p">)</span>
 	<span class="n">ended</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">DateTime</span><span class="p">)</span>
 	
-	<span class="k">def</span> <span class="nf">recent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Sensor.recent"><a class="viewcode-back" href="../../reference/app.html#app.models.Sensor.recent">[docs]</a>	<span class="k">def</span> <span class="nf">recent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Return recent sample value.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
 		<span class="n">sample</span> <span class="o">=</span> <span class="n">Sample</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">sensor_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sample</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
 		<span class="k">if</span> <span class="n">sample</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
 			<span class="k">return</span> <span class="n">sample</span><span class="o">.</span><span class="n">value</span>
@@ -602,16 +635,22 @@
 				<span class="n">usgs</span><span class="o">.</span><span class="n">get_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote_id</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="s">&#39;P7D&#39;</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">remote_parameter</span><span class="p">)</span>
 		<span class="k">else</span><span class="p">:</span>
 			<span class="k">pass</span>
-	
-	<span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	</div>
+<div class="viewcode-block" id="Sensor.to_json"><a class="viewcode-back" href="../../reference/app.html#app.models.Sensor.to_json">[docs]</a>	<span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Creates a JSON object from sensor. Used where multiple sensors may be displayed at once.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
 		<span class="n">json_post</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s">&#39;id&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
 			<span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">stype</span><span class="p">,</span>
 			<span class="s">&#39;url&#39;</span> <span class="p">:</span> <span class="n">url_for</span><span class="p">(</span><span class="s">&#39;api.get_sensor&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">_external</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 		<span class="p">}</span>
 		<span class="k">return</span> <span class="n">json_post</span>
-	
-	<span class="k">def</span> <span class="nf">to_long_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	</div>
+<div class="viewcode-block" id="Sensor.to_long_json"><a class="viewcode-back" href="../../reference/app.html#app.models.Sensor.to_long_json">[docs]</a>	<span class="k">def</span> <span class="nf">to_long_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Creates a JSON object from sensor. Used where a single sensor will be displayed.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
 		<span class="n">sample</span> <span class="o">=</span> <span class="n">Sample</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">sensor_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sample</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
 		<span class="n">json_post</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s">&#39;id&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
@@ -626,8 +665,11 @@
 			<span class="s">&#39;recent_sample&#39;</span><span class="p">:</span> <span class="n">sample</span><span class="o">.</span><span class="n">to_sensor_json</span><span class="p">()</span>
 		<span class="p">}</span>
 		<span class="k">return</span> <span class="n">json_post</span>
-	
-	<span class="k">def</span> <span class="nf">to_gage_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	</div>
+<div class="viewcode-block" id="Sensor.to_gage_json"><a class="viewcode-back" href="../../reference/app.html#app.models.Sensor.to_gage_json">[docs]</a>	<span class="k">def</span> <span class="nf">to_gage_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Creates a JSON object from sensor. Displayed with gage JSON and includes most recent sample.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
 		<span class="n">sample</span> <span class="o">=</span> <span class="n">Sample</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">sensor_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sample</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
 		<span class="n">json_post</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s">&#39;id&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
@@ -636,8 +678,11 @@
 			<span class="s">&#39;recent_sample&#39;</span><span class="p">:</span> <span class="n">sample</span><span class="o">.</span><span class="n">to_sensor_json</span><span class="p">()</span>
 		<span class="p">}</span>
 		<span class="k">return</span> <span class="n">json_post</span>
-	
-	<span class="k">def</span> <span class="nf">to_sample_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	</div>
+<div class="viewcode-block" id="Sensor.to_sample_json"><a class="viewcode-back" href="../../reference/app.html#app.models.Sensor.to_sample_json">[docs]</a>	<span class="k">def</span> <span class="nf">to_sample_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Creates a JSON object from sensor. Displayed with sample JSON and includes gage information.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
 		<span class="n">json_sensor</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s">&#39;id&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
 			<span class="s">&#39;type&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">stype</span><span class="p">,</span>
@@ -645,11 +690,21 @@
 			<span class="s">&#39;url&#39;</span><span class="p">:</span> <span class="n">url_for</span><span class="p">(</span><span class="s">&#39;api.get_sensor&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">_external</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 		<span class="p">}</span>
 		<span class="k">return</span> <span class="n">json_sensor</span>
-	
+	</div>
 	<span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="k">return</span> <span class="s">&#39;&lt;Sensor </span><span class="si">%r</span><span class="s">&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span>
-
-<span class="k">class</span> <span class="nc">Sample</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+</div>
+<div class="viewcode-block" id="Sample"><a class="viewcode-back" href="../../reference/app.html#app.models.Sample">[docs]</a><span class="k">class</span> <span class="nc">Sample</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Sample model</span>
+<span class="sd">	</span>
+<span class="sd">	Arguments:</span>
+<span class="sd">		id (int): Primary Sample key</span>
+<span class="sd">		sensor_id (int): Foreign ``Sensor``.id key</span>
+<span class="sd">		sensor: ``Sensor`` object related to this sample</span>
+<span class="sd">		datetime (datetime): ``datetime`` object of this sample</span>
+<span class="sd">		value (float): Value of sample</span>
+<span class="sd">	&quot;&quot;&quot;</span>
 	<span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;samples&#39;</span>
 	
 	<span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -660,7 +715,10 @@
 	<span class="n">datetime</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">DateTime</span><span class="p">)</span>
 	<span class="n">value</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
 	
-	<span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Sample.to_json"><a class="viewcode-back" href="../../reference/app.html#app.models.Sample.to_json">[docs]</a>	<span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Creates a JSON object from Sample. Used where multiple samples will be displayed at once.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
 		<span class="n">json_sample</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
 			<span class="s">&#39;sensor&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">to_sample_json</span><span class="p">(),</span>
@@ -669,8 +727,11 @@
 			<span class="s">&#39;url&#39;</span><span class="p">:</span> <span class="n">url_for</span><span class="p">(</span><span class="s">&#39;api.get_sample&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">_external</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 		<span class="p">}</span>
 		<span class="k">return</span> <span class="n">json_sample</span>
-	
-	<span class="k">def</span> <span class="nf">to_sensor_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+	</div>
+<div class="viewcode-block" id="Sample.to_sensor_json"><a class="viewcode-back" href="../../reference/app.html#app.models.Sample.to_sensor_json">[docs]</a>	<span class="k">def</span> <span class="nf">to_sensor_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Creates a JSON object from Sample for used with Sensor JSON.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
 		<span class="n">json_sample</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
 			<span class="s">&#39;value&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
@@ -678,9 +739,9 @@
 			<span class="s">&#39;url&#39;</span><span class="p">:</span> <span class="n">url_for</span><span class="p">(</span><span class="s">&#39;api.get_sample&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">_external</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 		<span class="p">}</span>
 		<span class="k">return</span> <span class="n">json_sample</span>
-	
+	</div>
 	<span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-		<span class="k">return</span> <span class="s">&#39;&lt;Sample </span><span class="si">%r</span><span class="s">&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span>
+		<span class="k">return</span> <span class="s">&#39;&lt;Sample </span><span class="si">%r</span><span class="s">&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span></div>
 </pre></div>
 
           </div>

@@ -244,6 +244,7 @@
 <li><strong>description</strong> (<em>text</em>) &#8211; Long description for Gage that can contain HTML or Markdown within reason.</li>
 <li><strong>short_description</strong> (<em>text</em>) &#8211; Short description for showing on other pages.</li>
 <li><strong>regions</strong> &#8211; List of <tt class="docutils literal"><span class="pre">Region</span></tt> objects that this Gage is in.</li>
+<li><strong>sensors</strong> &#8211; List of <tt class="docutils literal"><span class="pre">Sensor</span></tt> objects that are part of this Gage.</li>
 </ul>
 </td>
 </tr>
@@ -369,6 +370,40 @@ gage.latlon().x for longitude</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="app.models.Sample">
+<em class="property">class </em><tt class="descclassname">app.models.</tt><tt class="descname">Sample</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/app/models.html#Sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>Sample model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>int</em>) &#8211; Primary Sample key</li>
+<li><strong>sensor_id</strong> (<em>int</em>) &#8211; Foreign <tt class="docutils literal"><span class="pre">Sensor</span></tt>.id key</li>
+<li><strong>sensor</strong> &#8211; <tt class="docutils literal"><span class="pre">Sensor</span></tt> object related to this sample</li>
+<li><strong>datetime</strong> (<em>datetime</em>) &#8211; <tt class="docutils literal"><span class="pre">datetime</span></tt> object of this sample</li>
+<li><strong>value</strong> (<em>float</em>) &#8211; Value of sample</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="app.models.Sample.to_json">
+<tt class="descname">to_json</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Sample.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sample.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a JSON object from Sample. Used where multiple samples will be displayed at once.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.models.Sample.to_sensor_json">
+<tt class="descname">to_sensor_json</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Sample.to_sensor_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sample.to_sensor_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a JSON object from Sample for used with Sensor JSON.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="app.models.Section">
 <em class="property">class </em><tt class="descclassname">app.models.</tt><tt class="descname">Section</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/app/models.html#Section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Section" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
@@ -425,6 +460,77 @@ section.outlatlon().x for longitude</p>
 <dt id="app.models.Section.to_long_json">
 <tt class="descname">to_long_json</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Section.to_long_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Section.to_long_json" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a JSON Object from Section. Used where a single section is displayed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="app.models.Sensor">
+<em class="property">class </em><tt class="descclassname">app.models.</tt><tt class="descname">Sensor</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/app/models.html#Sensor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sensor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>A single sensor value for a Gage</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>int</em>) &#8211; Primary key for Sensor</li>
+<li><strong>gage_id</strong> (<em>int</em>) &#8211; Foreign <tt class="docutils literal"><span class="pre">Gage</span></tt>.id for the Gage that this Sensor is a part of</li>
+<li><strong>gage</strong> &#8211; <tt class="docutils literal"><span class="pre">Gage</span></tt> object for associated Gage</li>
+<li><strong>stype</strong> (<em>str</em>) &#8211; Type of sensor as reported by sending station (gage).</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; Nice display name for sensor</li>
+<li><strong>slug</strong> (<em>str</em>) &#8211; slug for url</li>
+<li><strong>prefix</strong> (<em>str</em>) &#8211; Prefix for value display</li>
+<li><strong>suffix</strong> (<em>str</em>) &#8211; Suffix for value display</li>
+<li><strong>local</strong> (<em>boolean</em>) &#8211; True if the station(gage) sends this sensor&#8217;s data to the server.</li>
+<li><strong>remote_type</strong> (<em>str</em>) &#8211; Type of remote sensor. Currently only <tt class="docutils literal"><span class="pre">'usgs'</span></tt> is valid.</li>
+<li><strong>remote_id</strong> (<em>int</em>) &#8211; String element that should be used to query remote sensor.</li>
+<li><strong>remote_parameter</strong> (<em>str</em>) &#8211; Parameter that is required to query remote sensor.</li>
+<li><strong>last</strong> (<em>datetime</em>) &#8211; Last time data was received or retrieved.</li>
+<li><strong>title</strong> (<em>str</em>) &#8211; Title to display on plots.</li>
+<li><strong>xlabel</strong> (<em>str</em>) &#8211; x-axis label to display on plots.</li>
+<li><strong>ylabel</strong> (<em>str</em>) &#8211; y-axis label to display on plots.</li>
+<li><strong>info</strong> (<em>JSON</em>) &#8211; JSON with more detail about sensor for possible future use.</li>
+<li><strong>description</strong> (<em>text</em>) &#8211; Long description of sensor that can contain HTML or Markdown within reason.</li>
+<li><strong>backend_notes</strong> (<em>text</em>) &#8211; Backend info for admins.</li>
+<li><strong>minimum</strong> (<em>float</em>) &#8211; Lowest measurement of sensor. Used for plot formatting.</li>
+<li><strong>maximum</strong> (<em>float</em>) &#8211; Highest measurement of sensor. Used for plot formatting.</li>
+<li><strong>started</strong> (<em>datetime</em>) &#8211; Datetime that sample collection started.</li>
+<li><strong>ended</strong> (<em>datetime</em>) &#8211; Datetime that sample collection ended.</li>
+<li><strong>samples</strong> &#8211; List of <tt class="docutils literal"><span class="pre">Sample</span></tt> objects from Sensor.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="app.models.Sensor.recent">
+<tt class="descname">recent</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Sensor.recent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sensor.recent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return recent sample value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.models.Sensor.to_gage_json">
+<tt class="descname">to_gage_json</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Sensor.to_gage_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sensor.to_gage_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a JSON object from sensor. Displayed with gage JSON and includes most recent sample.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.models.Sensor.to_json">
+<tt class="descname">to_json</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Sensor.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sensor.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a JSON object from sensor. Used where multiple sensors may be displayed at once.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.models.Sensor.to_long_json">
+<tt class="descname">to_long_json</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Sensor.to_long_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sensor.to_long_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a JSON object from sensor. Used where a single sensor will be displayed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.models.Sensor.to_sample_json">
+<tt class="descname">to_sample_json</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/models.html#Sensor.to_sample_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sensor.to_sample_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a JSON object from sensor. Displayed with sample JSON and includes gage information.</p>
 </dd></dl>
 
 </dd></dl>
