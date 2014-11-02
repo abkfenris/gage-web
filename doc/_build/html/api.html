@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Gage-Web API Documentation &mdash; Gage-Web 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Gage-Web 0.1 documentation" href="index.html" />
+    <link rel="prev" title="Welcome to Gage-Web’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="http-routingtable.html" title="HTTP Routing Table"
+             >routing table</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Gage-Web’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Gage-Web 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="gage-web-api-documentation">
+<h1>Gage-Web API Documentation<a class="headerlink" href="#gage-web-api-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="get">
+<dt id="get--sections-">
+<tt class="descname">GET </tt><tt class="descname">/sections/</tt><a class="headerlink" href="#get--sections-" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all sections</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--regions-">
+<tt class="descname">GET </tt><tt class="descname">/regions/</tt><a class="headerlink" href="#get--regions-" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all regions</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--section-">
+<tt class="descname">GET </tt><tt class="descname">/section/</tt><a class="headerlink" href="#get--section-" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all sections</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--region-">
+<tt class="descname">GET </tt><tt class="descname">/region/</tt><a class="headerlink" href="#get--region-" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all regions</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--rivers-">
+<tt class="descname">GET </tt><tt class="descname">/rivers/</tt><a class="headerlink" href="#get--rivers-" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all rivers</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--about-">
+<tt class="descname">GET </tt><tt class="descname">/about/</tt><a class="headerlink" href="#get--about-" title="Permalink to this definition">¶</a></dt>
+<dd><p>About this site.</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--gages-">
+<tt class="descname">GET </tt><tt class="descname">/gages/</tt><a class="headerlink" href="#get--gages-" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of gages currently not grouped by regions, or anything else for that matter.</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--river-">
+<tt class="descname">GET </tt><tt class="descname">/river/</tt><a class="headerlink" href="#get--river-" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all rivers</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--gage-">
+<tt class="descname">GET </tt><tt class="descname">/gage/</tt><a class="headerlink" href="#get--gage-" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of gages currently not grouped by regions, or anything else for that matter.</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--">
+<tt class="descname">GET </tt><tt class="descname">/</tt><a class="headerlink" href="#get--" title="Permalink to this definition">¶</a></dt>
+<dd><p>Index page</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--gage-(int-id)-(stype).png">
+<tt class="descname">GET </tt><tt class="descname">/gage/</tt><big>(</big><em class="property">int: </em><em>id</em><big>)</big><tt class="descname">/</tt><big>(</big><em>stype</em><big>)</big><tt class="descname">.png</tt><a class="headerlink" href="#get--gage-(int-id)-(stype).png" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw a plot for the requested gage&#8217;s sensor</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--static-bootstrap-(path-filename)">
+<tt class="descname">GET </tt><tt class="descname">/static/bootstrap/</tt><big>(</big><em class="property">path: </em><em>filename</em><big>)</big><a class="headerlink" href="#get--static-bootstrap-(path-filename)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function used internally to send static files from the static
+folder to the browser.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.5.</span></p>
+</div>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--section-(int-id)-">
+<tt class="descname">GET </tt><tt class="descname">/section/</tt><big>(</big><em class="property">int: </em><em>id</em><big>)</big><tt class="descname">/</tt><a class="headerlink" href="#get--section-(int-id)-" title="Permalink to this definition">¶</a></dt>
+<dd><p>Individual section page</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--section-(slug)">
+<tt class="descname">GET </tt><tt class="descname">/section/</tt><big>(</big><em>slug</em><big>)</big><a class="headerlink" href="#get--section-(slug)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Individual section page</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--region-(int-id)-">
+<tt class="descname">GET </tt><tt class="descname">/region/</tt><big>(</big><em class="property">int: </em><em>id</em><big>)</big><tt class="descname">/</tt><a class="headerlink" href="#get--region-(int-id)-" title="Permalink to this definition">¶</a></dt>
+<dd><p>Individual region page</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--region-(slug)-">
+<tt class="descname">GET </tt><tt class="descname">/region/</tt><big>(</big><em>slug</em><big>)</big><tt class="descname">/</tt><a class="headerlink" href="#get--region-(slug)-" title="Permalink to this definition">¶</a></dt>
+<dd><p>Individual region page</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--static-(path-filename)">
+<tt class="descname">GET </tt><tt class="descname">/static/</tt><big>(</big><em class="property">path: </em><em>filename</em><big>)</big><a class="headerlink" href="#get--static-(path-filename)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function used internally to send static files from the static
+folder to the browser.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.5.</span></p>
+</div>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--river-(int-id)-">
+<tt class="descname">GET </tt><tt class="descname">/river/</tt><big>(</big><em class="property">int: </em><em>id</em><big>)</big><tt class="descname">/</tt><a class="headerlink" href="#get--river-(int-id)-" title="Permalink to this definition">¶</a></dt>
+<dd><p>Individual section page</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--river-(slug)-">
+<tt class="descname">GET </tt><tt class="descname">/river/</tt><big>(</big><em>slug</em><big>)</big><tt class="descname">/</tt><a class="headerlink" href="#get--river-(slug)-" title="Permalink to this definition">¶</a></dt>
+<dd><p>Individual section page</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--gage-(int-id)-">
+<tt class="descname">GET </tt><tt class="descname">/gage/</tt><big>(</big><em class="property">int: </em><em>id</em><big>)</big><tt class="descname">/</tt><a class="headerlink" href="#get--gage-(int-id)-" title="Permalink to this definition">¶</a></dt>
+<dd><p>Individual gage page</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--gage-(slug)-">
+<tt class="descname">GET </tt><tt class="descname">/gage/</tt><big>(</big><em>slug</em><big>)</big><tt class="descname">/</tt><a class="headerlink" href="#get--gage-(slug)-" title="Permalink to this definition">¶</a></dt>
+<dd><p>Individual gage page</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Gage-Web API Documentation</a><ul>
+<li><a class="reference internal" href="#api">API</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to Gage-Web&#8217;s documentation!</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/api.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="http-routingtable.html" title="HTTP Routing Table"
+             >routing table</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Gage-Web’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">Gage-Web 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Alex Kerney.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
