@@ -19,12 +19,14 @@ def backup(filename):
 	f = open(filename, 'rb')
 	dropbox_filename = '/' + filename
 	response = client.put_file(dropbox_filename, f, overwrite=True)
+	print "uploaded", response
 	return "uploaded:", response
 	
 
 
 if __name__ == '__main__':
-	backup_file = db.database_name
+	# backup_file = db.database_name
 	while True:
-		backup(backup_file)
+		os.system("pg_dump -Ft gage_web > gage_web.tar")
+		backup('gage_web.tar')
 		time.sleep(21600) # backup every 6 hours
