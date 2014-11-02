@@ -155,6 +155,8 @@ class Section(db.Model):
 	river_id = db.Column(db.Integer, db.ForeignKey('rivers.id'))
 	river = db.relationship('River', backref='sections')
 	
+	sensors = db.relationship('Sensor', secondary=correllations, backref=db.backref('sections', lazy='dynamic'))
+	
 	description = db.Column(db.Text)
 	short_description = db.Column(db.Text)
 	access = db.Column(db.String)

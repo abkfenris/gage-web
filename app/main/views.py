@@ -6,7 +6,7 @@ from flask import render_template, Response, make_response, url_for, current_app
 
 from . import main
 from .. import db
-from ..models import Gage, Region, Section, River
+from ..models import Gage, Region, Section, River, Sensor
 
 # Normal Pages
 
@@ -96,7 +96,7 @@ def sectionpage(id=None, slug=None):
 		section = Section.query.get_or_404(id)
 	else:
 		section = Section.query.filter_by(slug=slug).first_or_404()
-	return render_template('section.html', Gage=Gage, Section=Section, section=section)
+	return render_template('section.html', Gage=Gage, Section=Section, section=section, Sensor=Sensor)
 
 @main.route('/rivers/')
 @main.route('/river/')

@@ -20,6 +20,13 @@
 	  			<ul class="nav nav-tabs">
 	  				<li class="active"><a href="#info" data-toggle="tab">Section Info</a></li>
 	  				<li><a href="#weather" data-toggle="tab">Weather</a></li>
+	  				{% for sensor in section.sensors %}
+	  					{% if sensor.name is none() %}
+	  						<li><a href="#{{ sensor.stype }}" data-toggle="tab">{{ sensor.stype }} - {{ sensor.recent() }}</a></li>
+	  					{% else %}
+	  						<li><a href="#{{ sensor.stype }}" data-toggle="tab">{{ sensor.name }} - {{ sensor.recent() }}</a></li>
+	  					{% endif %}
+	  				{% endfor %}
 	  			</ul>
 	  			<!-- Tab contents -->
 	  			<div class="tab-content">
@@ -46,6 +53,12 @@
 	  					</div>
 	  					
 	  				</div>
+	  				
+	  				{% for sensor in section.sensors %}
+	  				<div class="tab-pane" id="{{ sensor.stype}}">
+		  				<img src="{{ url_for('.gagesensorplot', id=sensor.gage_id, stype=sensor.stype ) }}" class="img-responsive">
+	  				</div>
+	  				{% endfor %}
 	  				
 	  			</div>
 	  		</div>
