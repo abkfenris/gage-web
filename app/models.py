@@ -4,6 +4,8 @@ from geoalchemy2.shape import to_shape
 from sqlalchemy.dialects.postgresql import JSON
 from flask import url_for
 from werkzeug.security import generate_password_hash, check_password_hash
+import datetime
+from remote import usgs
 
 sections_regions = db.Table('sections_regions',
 	db.Column('section', db.Integer, db.ForeignKey('sections.id')),
@@ -333,6 +335,11 @@ class Sensor(db.Model):
 		sample = Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
 		if sample is not None:
 			return sample.value
+		elif sample is None and self.local is False:
+			if self.remote_parameter is None:
+				usgs.get_samples(self, self.remote_id, period='P7D')
+			else:
+				usgs.get_samples(self, self.remote_id, period='P7D', parameter=self.remote_parameter)
 		else:
 			pass
 	
