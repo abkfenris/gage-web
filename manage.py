@@ -74,6 +74,19 @@ def test(coverage=False):
 		print('HTML version: file://%s/index.html' % covdir)
 		COV.erase()
 
+@manager.command
+def backup():
+	"""
+	Backup database to Dropbox
+	"""
+	import datetime
+	from app import backup as backup_db
+	filename = 'gage_web-' + datetime.datetime.now().strftime('%Y%m%d-%H%M') + '.tar'
+	os.system("pg_dump -Ft gage_web > " + filename)
+	print 'Uploading', filename, 'to Dropbox'
+	print backup_db.backup(filename)
+	os.system("rm " + filename)
+
 
 
 if __name__ == '__main__':

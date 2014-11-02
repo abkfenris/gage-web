@@ -26,6 +26,7 @@ class Correllation(db.Model):
 	"""
 	Connects sections to sensors with extra data about values and how fast they should change.
 	"""
+	# Needed to be an http://docs.sqlalchemy.org/en/rel_0_9/orm/relationships.html#association-object
 	__tablename__ = 'correllations'
 	section_id = db.Column(db.Integer, db.ForeignKey('sections.id'), primary_key=True)
 	section = db.relationship('Section', backref='correlations')
