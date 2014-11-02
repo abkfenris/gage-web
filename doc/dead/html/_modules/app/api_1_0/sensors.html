@@ -1,0 +1,209 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>app.api_1_0.sensors &mdash; Gage-Web 0.1 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Gage-Web 0.1 documentation" href="../../../index.html"/>
+        <link rel="up" title="app.api_1_0" href="../api_1_0.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../../../index.html" class="fa fa-home"> Gage-Web</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">Gage-Web API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">Gage-Web Reference</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">Gage-Web</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+          <li><a href="../../app.html">app</a> &raquo;</li>
+      
+          <li><a href="../api_1_0.html">app.api_1_0</a> &raquo;</li>
+      
+    <li>app.api_1_0.sensors</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <h1>Source code for app.api_1_0.sensors</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">abort</span><span class="p">,</span> <span class="n">url_for</span><span class="p">,</span> <span class="n">current_app</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">db</span>
+<span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">Gage</span><span class="p">,</span> <span class="n">Sensor</span><span class="p">,</span> <span class="n">Sample</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">api</span>
+
+<span class="nd">@api.route</span><span class="p">(</span><span class="s">&#39;/sensors/&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="get_sensors"><a class="viewcode-back" href="../../../reference/app.api_1_0.html#app.api_1_0.sensors.get_sensors">[docs]</a><span class="k">def</span> <span class="nf">get_sensors</span><span class="p">():</span>
+	<span class="n">page</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;page&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+	<span class="n">pagination</span> <span class="o">=</span> <span class="n">Sensor</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">per_page</span><span class="o">=</span><span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&#39;API_GAGES_PER_PAGE&#39;</span><span class="p">],</span> <span class="n">error_out</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+	<span class="n">sensors</span> <span class="o">=</span> <span class="n">pagination</span><span class="o">.</span><span class="n">items</span>
+	<span class="n">prev</span> <span class="o">=</span> <span class="bp">None</span>
+	<span class="k">if</span> <span class="n">pagination</span><span class="o">.</span><span class="n">has_prev</span><span class="p">:</span>
+		<span class="n">prev</span> <span class="o">=</span> <span class="n">url_for</span><span class="p">(</span><span class="s">&#39;.get_sensors&#39;</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+	<span class="nb">next</span> <span class="o">=</span> <span class="bp">None</span>
+	<span class="k">if</span> <span class="n">pagination</span><span class="o">.</span><span class="n">has_next</span><span class="p">:</span>
+		<span class="nb">next</span> <span class="o">=</span> <span class="n">url_for</span><span class="p">(</span><span class="s">&#39;.get_sensors&#39;</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+		<span class="s">&#39;sensors&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">sensor</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span> <span class="k">for</span> <span class="n">sensor</span> <span class="ow">in</span> <span class="n">sensors</span><span class="p">],</span>
+		<span class="s">&#39;prev&#39;</span><span class="p">:</span> <span class="n">prev</span><span class="p">,</span>
+		<span class="s">&#39;next&#39;</span><span class="p">:</span> <span class="nb">next</span><span class="p">,</span>
+		<span class="s">&#39;count&#39;</span><span class="p">:</span> <span class="n">pagination</span><span class="o">.</span><span class="n">total</span>
+	<span class="p">})</span>
+</div>
+<span class="nd">@api.route</span><span class="p">(</span><span class="s">&#39;/sensors/&lt;int:id&gt;&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="get_sensor"><a class="viewcode-back" href="../../../reference/app.api_1_0.html#app.api_1_0.sensors.get_sensor">[docs]</a><span class="k">def</span> <span class="nf">get_sensor</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
+	<span class="n">sensor</span> <span class="o">=</span> <span class="n">Sensor</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get_or_404</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">sensor</span><span class="o">.</span><span class="n">to_long_json</span><span class="p">())</span>
+</div>
+<span class="nd">@api.route</span><span class="p">(</span><span class="s">&#39;/sensors/&lt;int:id&gt;/samples&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="get_sensor_samples"><a class="viewcode-back" href="../../../reference/app.api_1_0.html#app.api_1_0.sensors.get_sensor_samples">[docs]</a><span class="k">def</span> <span class="nf">get_sensor_samples</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
+	<span class="n">sensor</span> <span class="o">=</span> <span class="n">Sensor</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get_or_404</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+	<span class="n">page</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;page&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+	<span class="n">pagination</span> <span class="o">=</span> <span class="n">Sample</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">sensor_id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">per_page</span><span class="o">=</span><span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&#39;API_GAGES_PER_PAGE&#39;</span><span class="p">],</span> <span class="n">error_out</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+	<span class="n">samples</span> <span class="o">=</span> <span class="n">pagination</span><span class="o">.</span><span class="n">items</span>
+	<span class="n">prev</span> <span class="o">=</span> <span class="bp">None</span>
+	<span class="c">#if pagination.has_prev:</span>
+	<span class="c">#	prev = url_for(&#39;.get_sensor_samples&#39;, page=page-1)</span>
+	<span class="nb">next</span> <span class="o">=</span> <span class="bp">None</span>
+	<span class="c">#if pagination.has_next:</span>
+	<span class="c">#	next = url_for(&#39;.get_sensor_samples&#39;, page=page+1)</span>
+	<span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+		<span class="s">&#39;sensor&#39;</span><span class="p">:</span> <span class="n">sensor</span><span class="o">.</span><span class="n">to_json</span><span class="p">(),</span>
+		<span class="s">&#39;samples&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">sample</span><span class="o">.</span><span class="n">to_sensor_json</span><span class="p">()</span> <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">samples</span><span class="p">],</span>
+		<span class="s">&#39;prev&#39;</span><span class="p">:</span> <span class="n">prev</span><span class="p">,</span>
+		<span class="s">&#39;next&#39;</span><span class="p">:</span> <span class="nb">next</span><span class="p">,</span>
+		<span class="s">&#39;count&#39;</span><span class="p">:</span> <span class="n">pagination</span><span class="o">.</span><span class="n">total</span><span class="p">,</span>
+	<span class="p">})</span></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Alex Kerney.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

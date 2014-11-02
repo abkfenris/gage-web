@@ -1,0 +1,268 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>app.api_1_0 package &mdash; Gage-Web 0.1 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Gage-Web 0.1 documentation" href="../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> Gage-Web</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">Gage-Web API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Gage-Web Reference</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Gage-Web</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>app.api_1_0 package</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/reference/app.api_1_0.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="app-api-1-0-package">
+<h1>app.api_1_0 package<a class="headerlink" href="#app-api-1-0-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="app-api-1-0-errors-module">
+<h2>app.api_1_0.errors module<a class="headerlink" href="#app-api-1-0-errors-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-app.api_1_0.gages">
+<span id="app-api-1-0-gages-module"></span><h2>app.api_1_0.gages module<a class="headerlink" href="#module-app.api_1_0.gages" title="Permalink to this headline">¶</a></h2>
+<p>gages api imports api, app, db, auth, and models</p>
+<p>REST methods
+Method  URI                                                             Action
+GET             /api/1.0/gage                                   Retrieve list of gages
+GET             /api/1.0/gage/[Gage.id]                 Retrieve Gage Details
+GET             /api/1.0/gage/[Gage.id]/recent  Retrieve most recent samples
+POST    /api/1.0/gage/[Gage.id]                 Creates new samples</p>
+<dl class="function">
+<dt id="app.api_1_0.gages.gage_new_samples">
+<tt class="descclassname">app.api_1_0.gages.</tt><tt class="descname">gage_new_samples</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/gages.html#gage_new_samples"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.gages.gage_new_samples" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.api_1_0.gages.get_gage">
+<tt class="descclassname">app.api_1_0.gages.</tt><tt class="descname">get_gage</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/gages.html#get_gage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.gages.get_gage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.api_1_0.gages.get_gages">
+<tt class="descclassname">app.api_1_0.gages.</tt><tt class="descname">get_gages</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/gages.html#get_gages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.gages.get_gages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-app.api_1_0.regions">
+<span id="app-api-1-0-regions-module"></span><h2>app.api_1_0.regions module<a class="headerlink" href="#module-app.api_1_0.regions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="app.api_1_0.regions.get_region">
+<tt class="descclassname">app.api_1_0.regions.</tt><tt class="descname">get_region</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/regions.html#get_region"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.regions.get_region" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.api_1_0.regions.get_regions">
+<tt class="descclassname">app.api_1_0.regions.</tt><tt class="descname">get_regions</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/regions.html#get_regions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.regions.get_regions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-app.api_1_0.rivers">
+<span id="app-api-1-0-rivers-module"></span><h2>app.api_1_0.rivers module<a class="headerlink" href="#module-app.api_1_0.rivers" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="app.api_1_0.rivers.get_river">
+<tt class="descclassname">app.api_1_0.rivers.</tt><tt class="descname">get_river</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/rivers.html#get_river"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.rivers.get_river" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.api_1_0.rivers.get_rivers">
+<tt class="descclassname">app.api_1_0.rivers.</tt><tt class="descname">get_rivers</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/rivers.html#get_rivers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.rivers.get_rivers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-app.api_1_0.samples">
+<span id="app-api-1-0-samples-module"></span><h2>app.api_1_0.samples module<a class="headerlink" href="#module-app.api_1_0.samples" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="app.api_1_0.samples.get_sample">
+<tt class="descclassname">app.api_1_0.samples.</tt><tt class="descname">get_sample</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/samples.html#get_sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.samples.get_sample" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.api_1_0.samples.get_samples">
+<tt class="descclassname">app.api_1_0.samples.</tt><tt class="descname">get_samples</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/samples.html#get_samples"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.samples.get_samples" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-app.api_1_0.sections">
+<span id="app-api-1-0-sections-module"></span><h2>app.api_1_0.sections module<a class="headerlink" href="#module-app.api_1_0.sections" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="app.api_1_0.sections.get_section">
+<tt class="descclassname">app.api_1_0.sections.</tt><tt class="descname">get_section</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/sections.html#get_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.sections.get_section" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.api_1_0.sections.get_sections">
+<tt class="descclassname">app.api_1_0.sections.</tt><tt class="descname">get_sections</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/sections.html#get_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.sections.get_sections" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-app.api_1_0.sensors">
+<span id="app-api-1-0-sensors-module"></span><h2>app.api_1_0.sensors module<a class="headerlink" href="#module-app.api_1_0.sensors" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="app.api_1_0.sensors.get_sensor">
+<tt class="descclassname">app.api_1_0.sensors.</tt><tt class="descname">get_sensor</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/sensors.html#get_sensor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.sensors.get_sensor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.api_1_0.sensors.get_sensor_samples">
+<tt class="descclassname">app.api_1_0.sensors.</tt><tt class="descname">get_sensor_samples</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/sensors.html#get_sensor_samples"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.sensors.get_sensor_samples" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.api_1_0.sensors.get_sensors">
+<tt class="descclassname">app.api_1_0.sensors.</tt><tt class="descname">get_sensors</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/sensors.html#get_sensors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.sensors.get_sensors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-app.api_1_0">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-app.api_1_0" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="app.api_1_0.indexpage">
+<tt class="descclassname">app.api_1_0.</tt><tt class="descname">indexpage</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/api_1_0.html#indexpage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.indexpage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Alex Kerney.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

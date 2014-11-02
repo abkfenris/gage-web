@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>config &mdash; Gage-Web 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Gage-Web 0.1 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../http-routingtable.html" title="HTTP Routing Table"
+             >routing table</a> |</li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Gage-Web 0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for config</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">basedir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
+
+<div class="viewcode-block" id="Config"><a class="viewcode-back" href="../config.html#config.Config">[docs]</a><span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+	<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;SECRET_KEY&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="s">&#39;o4d?2EXxt9.62Qj;ghXm[{#voUmF#$7ExY8T^V8BRC8si8faA$&#39;</span>
+	<span class="n">dropbox_app_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;DROPBOX_APP_KEY&#39;</span><span class="p">)</span>
+	<span class="n">dropbox_app_secret</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;DROPBOX_APP_SECRET&#39;</span><span class="p">)</span>
+	<span class="n">dropbox_app_token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;DROPBOX_APP_TOKEN&#39;</span><span class="p">)</span>
+	<span class="n">SQLALCHEMY_DATABASE_URI</span> <span class="o">=</span> <span class="s">&#39;postgresql://localhost/gage_web&#39;</span>
+	<span class="n">SQLALCHEMY_COMMIT_ON_TEARDOWN</span> <span class="o">=</span> <span class="bp">True</span>
+	<span class="n">DEBUG</span> <span class="o">=</span> <span class="bp">True</span>
+	<span class="n">API_GAGES_PER_PAGE</span> <span class="o">=</span> <span class="mi">2</span>
+	
+	<span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Config.init_app"><a class="viewcode-back" href="../config.html#config.Config.init_app">[docs]</a>	<span class="k">def</span> <span class="nf">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+		<span class="k">pass</span>
+	
+
+</div></div>
+<div class="viewcode-block" id="DevelopmentConfig"><a class="viewcode-back" href="../config.html#config.DevelopmentConfig">[docs]</a><span class="k">class</span> <span class="nc">DevelopmentConfig</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+	<span class="n">DEBUG</span> <span class="o">=</span> <span class="bp">True</span>
+	<span class="n">DATABASE</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;main.db&#39;</span><span class="p">,</span>
+		<span class="s">&#39;engine&#39;</span><span class="p">:</span> <span class="s">&#39;peewee.SqliteDatabase&#39;</span>
+	<span class="p">}</span>
+	<span class="c">#SERVER_NAME = &#39;flows.ngrok.com&#39;</span>
+	
+	</div>
+<div class="viewcode-block" id="TestingConfig"><a class="viewcode-back" href="../config.html#config.TestingConfig">[docs]</a><span class="k">class</span> <span class="nc">TestingConfig</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+	<span class="n">TESTING</span> <span class="o">=</span> <span class="bp">True</span>
+	<span class="n">DATABASE</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;main.db&#39;</span><span class="p">,</span>
+		<span class="s">&#39;engine&#39;</span><span class="p">:</span> <span class="s">&#39;peewee.SqliteDatabase&#39;</span>
+	<span class="p">}</span>
+</div>
+<div class="viewcode-block" id="DockerLocalConfig"><a class="viewcode-back" href="../config.html#config.DockerLocalConfig">[docs]</a><span class="k">class</span> <span class="nc">DockerLocalConfig</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+	<span class="n">DEBUG</span> <span class="o">=</span> <span class="bp">True</span>
+	<span class="n">DATABASE</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;db&#39;</span><span class="p">,</span>
+		<span class="s">&#39;engine&#39;</span><span class="p">:</span> <span class="s">&#39;peewee.PostgresqlDatabase&#39;</span><span class="p">,</span>
+		<span class="s">&#39;user&#39;</span><span class="p">:</span> <span class="s">&#39;postgres&#39;</span>
+	<span class="p">}</span>
+	<span class="n">SERVER_NAME</span> <span class="o">=</span> <span class="s">&quot;localhost&quot;</span>
+
+</div>
+<div class="viewcode-block" id="ProductionConfig"><a class="viewcode-back" href="../config.html#config.ProductionConfig">[docs]</a><span class="k">class</span> <span class="nc">ProductionConfig</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+	<span class="n">DATABASE</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;DATABASE_PATH&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="s">&#39;data.db&#39;</span><span class="p">,</span>
+		<span class="s">&#39;engine&#39;</span><span class="p">:</span> <span class="s">&#39;peewee.SqliteDatabase&#39;</span>
+	<span class="p">}</span>
+	<span class="n">SERVER_NAME</span> <span class="o">=</span> <span class="s">&#39;flows.alexkerney.com&#39;</span>
+</div>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="s">&#39;development&#39;</span><span class="p">:</span> <span class="n">DevelopmentConfig</span><span class="p">,</span>
+	<span class="s">&#39;testing&#39;</span><span class="p">:</span> <span class="n">TestingConfig</span><span class="p">,</span>
+	<span class="s">&#39;production&#39;</span><span class="p">:</span> <span class="n">ProductionConfig</span><span class="p">,</span>
+	
+	<span class="s">&#39;default&#39;</span><span class="p">:</span> <span class="n">DevelopmentConfig</span>
+<span class="p">}</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../http-routingtable.html" title="HTTP Routing Table"
+             >routing table</a> |</li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Gage-Web 0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Alex Kerney.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
