@@ -109,15 +109,17 @@
             
   <div class="section" id="app-api-1-0-package">
 <h1>app.api_1_0 package<a class="headerlink" href="#app-api-1-0-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-app.api_1_0">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-app.api_1_0" title="Permalink to this headline">¶</a></h2>
 <p>Version 1.0 of the API for gages to connect and for others to be able to retrieve data</p>
 <div class="section" id="endpoints">
-<h2>Endpoints:<a class="headerlink" href="#endpoints" title="Permalink to this headline">¶</a></h2>
+<h3>Endpoints:<a class="headerlink" href="#endpoints" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p class="first"><strong>/api/1.0/ - **GET</strong> List basic routes</p>
 </li>
 <li><p class="first"><strong>/api/1.0/gages/</strong> - <strong>GET</strong> List all gages</p>
 </li>
-<li><p class="first"><strong>/api/1.0/gages/&lt;id&gt;/</strong> - <strong>GET</strong> Detailed information about gage number <em>id</em></p>
+<li><p class="first"><strong>/api/1.0/gages/&lt;id&gt;</strong> - <strong>GET</strong> Detailed information about gage number <em>id</em></p>
 </li>
 <li><dl class="first docutils">
 <dt><strong>/api/1.0/gages/&lt;id&gt;/sample</strong> - <strong>POST</strong> new sample data for gage <em>id</em></dt>
@@ -150,14 +152,14 @@
 <li><p class="first"><strong>/api/1.0/sections/&lt;id&gt;</strong> - <strong>GET</strong> Detailed information about section <em>id</em></p>
 </li>
 </ul>
-</div>
-<div class="section" id="module-app.api_1_0">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-app.api_1_0" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="app.api_1_0.indexpage">
 <tt class="descclassname">app.api_1_0.</tt><tt class="descname">indexpage</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/api_1_0.html#indexpage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.indexpage" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p><strong>GET /api/1.0/</strong></p>
+<p>List of basic routes</p>
+</dd></dl>
 
+</div>
 </div>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
@@ -168,27 +170,35 @@
 <div class="section" id="module-app.api_1_0.gages">
 <span id="app-api-1-0-gages-module"></span><h2>app.api_1_0.gages module<a class="headerlink" href="#module-app.api_1_0.gages" title="Permalink to this headline">¶</a></h2>
 <p>gages api imports api, app, db, auth, and models</p>
-<p>REST methods
-Method  URI                                                             Action
-GET             /api/1.0/gage                                   Retrieve list of gages
-GET             /api/1.0/gage/[Gage.id]                 Retrieve Gage Details
-GET             /api/1.0/gage/[Gage.id]/recent  Retrieve most recent samples
-POST    /api/1.0/gage/[Gage.id]                 Creates new samples</p>
+<div class="section" id="id1">
+<h3>Endpoints:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>/api/1.0/gages/</strong> - <strong>GET</strong> List all gages</li>
+<li><strong>/api/1.0/gages/&lt;id&gt;</strong> - <strong>GET</strong> Detailed information about gage number <em>id</em></li>
+<li><strong>/api/1.0/gages/&lt;id&gt;/sample</strong> - <strong>POST</strong> new sample data for gage <em>id</em></li>
+</ul>
 <dl class="function">
 <dt id="app.api_1_0.gages.gage_new_samples">
 <tt class="descclassname">app.api_1_0.gages.</tt><tt class="descname">gage_new_samples</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/gages.html#gage_new_samples"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.gages.gage_new_samples" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p><strong>POST /api/1.0/gages/&lt;id&gt;/samples</strong></p>
+<p>Submit new samples to gage <em>id</em></p>
+</dd></dl>
 
 <dl class="function">
 <dt id="app.api_1_0.gages.get_gage">
 <tt class="descclassname">app.api_1_0.gages.</tt><tt class="descname">get_gage</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/gages.html#get_gage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.gages.get_gage" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p><strong>GET /api/1.0/gages/&lt;id&gt;</strong></p>
+<p>Detailed information about gage <em>id</em></p>
+</dd></dl>
 
 <dl class="function">
 <dt id="app.api_1_0.gages.get_gages">
 <tt class="descclassname">app.api_1_0.gages.</tt><tt class="descname">get_gages</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/gages.html#get_gages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.gages.get_gages" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p><strong>GET /api/1.0/gages/</strong></p>
+<p>List all gages</p>
+</dd></dl>
 
+</div>
 </div>
 <div class="section" id="module-app.api_1_0.regions">
 <span id="app-api-1-0-regions-module"></span><h2>app.api_1_0.regions module<a class="headerlink" href="#module-app.api_1_0.regions" title="Permalink to this headline">¶</a></h2>

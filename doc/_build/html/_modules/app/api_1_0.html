@@ -104,6 +104,29 @@
           <div role="main">
             
   <h1>Source code for app.api_1_0</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Version 1.0 of the API for gages to connect and for others to be able to retrieve data</span>
+
+<span class="sd">Endpoints:</span>
+<span class="sd">----------</span>
+<span class="sd">- **/api/1.0/ - **GET** List basic routes</span>
+<span class="sd">- **/api/1.0/gages/** - **GET** List all gages</span>
+<span class="sd">- **/api/1.0/gages/&lt;id&gt;** - **GET** Detailed information about gage number *id*</span>
+<span class="sd">- **/api/1.0/gages/&lt;id&gt;/sample** - **POST** new sample data for gage *id*</span>
+<span class="sd">	- authenticated by individual gage secret key</span>
+<span class="sd">- **/api/1.0/sensors/ - **GET** List all sensors</span>
+<span class="sd">- **/api/1.0/sensors/&lt;id&gt; - **GET** Detailed information about sensor</span>
+<span class="sd">- **/api/1.0/sensors/&lt;id&gt;/samples - **GET** Samples from sensor *id*</span>
+<span class="sd">- **/api/1.0/samples/ - **GET** List all samples</span>
+<span class="sd">- **/api/1.0/samples/&lt;id&gt; - **GET** Detailed information about sample *id*</span>
+<span class="sd">- **/api/1.0/regions/** - **GET** List all regions</span>
+<span class="sd">- **/api/1.0/regions/&lt;id&gt;** - **GET** Detailed information about region *id*</span>
+<span class="sd">- **/api/1.0/rivers/ - **GET** List all rivers</span>
+<span class="sd">- **/api/1.0/rivers/&lt;id&gt;** - **GET** Detained information about river *id*</span>
+<span class="sd">- **/api/1.0/sections/** - **GET** List all sections</span>
+<span class="sd">- **/api/1.0/sections/&lt;id&gt;** - **GET** Detailed information about section *id*</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Blueprint</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">url_for</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s">&#39;api&#39;</span><span class="p">,</span> <span class="n">__name__</span><span class="p">)</span>
@@ -114,6 +137,10 @@
 
 <span class="nd">@api.route</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="indexpage"><a class="viewcode-back" href="../../reference/app.api_1_0.html#app.api_1_0.indexpage">[docs]</a><span class="k">def</span> <span class="nf">indexpage</span><span class="p">():</span>
+	<span class="sd">&quot;&quot;&quot;**GET /api/1.0/**</span>
+<span class="sd">	</span>
+<span class="sd">	List of basic routes</span>
+<span class="sd">	&quot;&quot;&quot;</span>
 	<span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
 		<span class="s">&#39;gages&#39;</span><span class="p">:</span> <span class="n">url_for</span><span class="p">(</span><span class="s">&#39;api.get_gages&#39;</span><span class="p">,</span> <span class="n">_external</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
 		<span class="s">&#39;sensors&#39;</span><span class="p">:</span> <span class="n">url_for</span><span class="p">(</span><span class="s">&#39;api.get_sensors&#39;</span><span class="p">,</span> <span class="n">_external</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
