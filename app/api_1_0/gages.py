@@ -19,8 +19,7 @@ from . import api
 
 @api.route('/gages/')
 def get_gages():
-	"""**GET /api/1.0/gages/**
-	
+	"""
 	List all gages
 	"""
 	page = request.args.get('page', 1, type=int)
@@ -41,8 +40,7 @@ def get_gages():
 
 @api.route('/gages/<int:id>')
 def get_gage(id):
-	"""**GET /api/1.0/gages/<id>**
-	
+	"""
 	Detailed information about gage *id*
 	"""
 	gage = Gage.query.get_or_404(id)
@@ -50,8 +48,7 @@ def get_gage(id):
 
 @api.route('/gages/<int:id>/sample', methods=['POST'])
 def gage_new_samples(id):
-	"""**POST /api/1.0/gages/<id>/samples**
-	
+	"""
 	Submit new samples to gage *id*
 	"""
 	gage = Gage.query.get_or_404(id)

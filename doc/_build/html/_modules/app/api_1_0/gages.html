@@ -127,8 +127,7 @@
 
 <span class="nd">@api.route</span><span class="p">(</span><span class="s">&#39;/gages/&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="get_gages"><a class="viewcode-back" href="../../../reference/app.api_1_0.html#app.api_1_0.gages.get_gages">[docs]</a><span class="k">def</span> <span class="nf">get_gages</span><span class="p">():</span>
-	<span class="sd">&quot;&quot;&quot;**GET /api/1.0/gages/**</span>
-<span class="sd">	</span>
+	<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">	List all gages</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="n">page</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;page&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
@@ -149,8 +148,7 @@
 </div>
 <span class="nd">@api.route</span><span class="p">(</span><span class="s">&#39;/gages/&lt;int:id&gt;&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="get_gage"><a class="viewcode-back" href="../../../reference/app.api_1_0.html#app.api_1_0.gages.get_gage">[docs]</a><span class="k">def</span> <span class="nf">get_gage</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
-	<span class="sd">&quot;&quot;&quot;**GET /api/1.0/gages/&lt;id&gt;**</span>
-<span class="sd">	</span>
+	<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">	Detailed information about gage *id*</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="n">gage</span> <span class="o">=</span> <span class="n">Gage</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get_or_404</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
@@ -158,8 +156,7 @@
 </div>
 <span class="nd">@api.route</span><span class="p">(</span><span class="s">&#39;/gages/&lt;int:id&gt;/sample&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;POST&#39;</span><span class="p">])</span>
 <div class="viewcode-block" id="gage_new_samples"><a class="viewcode-back" href="../../../reference/app.api_1_0.html#app.api_1_0.gages.gage_new_samples">[docs]</a><span class="k">def</span> <span class="nf">gage_new_samples</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
-	<span class="sd">&quot;&quot;&quot;**POST /api/1.0/gages/&lt;id&gt;/samples**</span>
-<span class="sd">	</span>
+	<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">	Submit new samples to gage *id*</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="n">gage</span> <span class="o">=</span> <span class="n">Gage</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get_or_404</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>

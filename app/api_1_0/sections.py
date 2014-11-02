@@ -1,3 +1,10 @@
+"""
+Endpoints:
+----------
+
+- **/api/1.0/sections/** - **GET** List all sections
+- **/api/1.0/sections/<id>** - **GET** Detailed information about section *id*
+"""
 from flask import jsonify, request, g, abort, url_for, current_app
 from .. import db
 from ..models import Section

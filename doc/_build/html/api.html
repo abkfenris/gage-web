@@ -107,31 +107,82 @@
 <div class="section" id="api">
 <h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
 <dl class="get">
+<dt id="get--api-1.0-sensors-">
+<tt class="descname">GET </tt><tt class="descname">/api/1.0/sensors/</tt><a class="headerlink" href="#get--api-1.0-sensors-" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all sensors</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--api-1.0-samples-">
+<tt class="descname">GET </tt><tt class="descname">/api/1.0/samples/</tt><a class="headerlink" href="#get--api-1.0-samples-" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all samples</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--api-1.0-regions-">
+<tt class="descname">GET </tt><tt class="descname">/api/1.0/regions/</tt><a class="headerlink" href="#get--api-1.0-regions-" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all regions</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--api-1.0-rivers-">
+<tt class="descname">GET </tt><tt class="descname">/api/1.0/rivers/</tt><a class="headerlink" href="#get--api-1.0-rivers-" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all rivers</p>
+</dd></dl>
+
+<dl class="get">
 <dt id="get--api-1.0-gages-">
 <tt class="descname">GET </tt><tt class="descname">/api/1.0/gages/</tt><a class="headerlink" href="#get--api-1.0-gages-" title="Permalink to this definition">¶</a></dt>
-<dd><p><strong>GET /api/1.0/gages/</strong></p>
-<p>List all gages</p>
+<dd><p>List all gages</p>
 </dd></dl>
 
 <dl class="get">
 <dt id="get--api-1.0-">
 <tt class="descname">GET </tt><tt class="descname">/api/1.0/</tt><a class="headerlink" href="#get--api-1.0-" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>GET /api/1.0/</strong></p>
-<p>List of basic routes</p>
+<p>List of basic api routes</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--api-1.0-sensors-(int-id)-samples">
+<tt class="descname">GET </tt><tt class="descname">/api/1.0/sensors/</tt><big>(</big><em class="property">int: </em><em>id</em><big>)</big><tt class="descname">/samples</tt><a class="headerlink" href="#get--api-1.0-sensors-(int-id)-samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>List samples for sensor <em>id</em></p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--api-1.0-gages-(int-id)-sample">
 <tt class="descname">POST </tt><tt class="descname">/api/1.0/gages/</tt><big>(</big><em class="property">int: </em><em>id</em><big>)</big><tt class="descname">/sample</tt><a class="headerlink" href="#post--api-1.0-gages-(int-id)-sample" title="Permalink to this definition">¶</a></dt>
-<dd><p><strong>POST /api/1.0/gages/&lt;id&gt;/samples</strong></p>
-<p>Submit new samples to gage <em>id</em></p>
+<dd><p>Submit new samples to gage <em>id</em></p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--api-1.0-sensors-(int-id)">
+<tt class="descname">GET </tt><tt class="descname">/api/1.0/sensors/</tt><big>(</big><em class="property">int: </em><em>id</em><big>)</big><a class="headerlink" href="#get--api-1.0-sensors-(int-id)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detailed information about sensor <em>id</em></p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--api-1.0-samples-(int-id)">
+<tt class="descname">GET </tt><tt class="descname">/api/1.0/samples/</tt><big>(</big><em class="property">int: </em><em>id</em><big>)</big><a class="headerlink" href="#get--api-1.0-samples-(int-id)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detailed information about sample <em>id</em></p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--api-1.0-regions-(int-id)">
+<tt class="descname">GET </tt><tt class="descname">/api/1.0/regions/</tt><big>(</big><em class="property">int: </em><em>id</em><big>)</big><a class="headerlink" href="#get--api-1.0-regions-(int-id)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detailed information about region <em>id</em></p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--api-1.0-rivers-(int-id)">
+<tt class="descname">GET </tt><tt class="descname">/api/1.0/rivers/</tt><big>(</big><em class="property">int: </em><em>id</em><big>)</big><a class="headerlink" href="#get--api-1.0-rivers-(int-id)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detailed information about river <em>id</em></p>
 </dd></dl>
 
 <dl class="get">
 <dt id="get--api-1.0-gages-(int-id)">
 <tt class="descname">GET </tt><tt class="descname">/api/1.0/gages/</tt><big>(</big><em class="property">int: </em><em>id</em><big>)</big><a class="headerlink" href="#get--api-1.0-gages-(int-id)" title="Permalink to this definition">¶</a></dt>
-<dd><p><strong>GET /api/1.0/gages/&lt;id&gt;</strong></p>
-<p>Detailed information about gage <em>id</em></p>
+<dd><p>Detailed information about gage <em>id</em></p>
 </dd></dl>
 
 </div>

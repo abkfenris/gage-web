@@ -33,7 +33,7 @@ from . import gages, sensors, samples, rivers, sections, regions
 def indexpage():
 	"""**GET /api/1.0/**
 	
-	List of basic routes
+	List of basic api routes
 	"""
 	return jsonify({
 		'gages': url_for('api.get_gages', _external=True),

@@ -1,3 +1,11 @@
+"""
+Endpoints:
+----------
+
+- **/api/1.0/regions/** - **GET** List all regions
+- **/api/1.0/regions/<id>** - **GET** Detailed information about region *id*
+"""
+
 from flask import jsonify, request, g, abort, url_for, current_app
 from .. import db
 from ..models import Region
@@ -5,6 +13,9 @@ from . import api
 
 @api.route('/regions/')
 def get_regions():
+	"""
+	List all regions
+	"""
 	page = request.args.get('page', 1, type=int)
 	pagination = Region.query.paginate(page, per_page=current_app.config['API_GAGES_PER_PAGE'], error_out=False)
 	regions = pagination.items
@@ -23,5 +34,8 @@ def get_regions():
 
 @api.route('/regions/<int:id>')
 def get_region(id):
+	"""
+	Detailed information about region *id*
+	"""
 	region = Region.query.get_or_404(id)
 	return jsonify(region.to_long_json())

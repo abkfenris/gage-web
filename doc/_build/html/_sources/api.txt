@@ -8,4 +8,4 @@ API
 	:endpoints:
 	:undoc-endpoints:
 	:undoc-static:
-	:undoc-blueprints: main, admin, bootstrap
+	:undoc-blueprints: admin, main, bootstrap
