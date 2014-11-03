@@ -246,9 +246,9 @@ class Section(db.Model):
 		short_description (text): Short description for section for showing on other pages.
 		access (string): Access restrictions or issues
 		location (string): Where is it?
-		putin (Point): PostGIS Point object for putin
-		takeout (Point): PostGIS Point object for takeout
-		path (Linestring): PostGIS Linestring object for river
+		putin (Point): PostGIS Point object for putin. Accepts WKT.
+		takeout (Point): PostGIS Point object for takeout. Accepts WKT.
+		path (Linestring): PostGIS Linestring object for river. Accepts WKT.
 		in_elevation (int): Elevation of the putin
 		out_elevation (int): Elevation of the takeout
 		header_image (string): Header image to override default
@@ -341,7 +341,7 @@ class Gage(db.Model):
 		id (int): Primary key for Gage
 		name (string): Nice name for gage
 		slug (string): slug used in url
-		point (Point): PostGIS Point object
+		point (Point): PostGIS Point object. Accepts WKT.
 		river_id (int): Foreign key of ``River``.id that the Gage is on.
 		river: ``River`` object
 		user_id (int): Foreign key of ``User``.id that 'owns' the Gage.
