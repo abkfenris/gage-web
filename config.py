@@ -27,7 +27,7 @@ class DevelopmentConfig(Config):
 	
 class TestingConfig(Config):
 	TESTING = True
-	API_GAGES_PER_PAGE = 2
+	API_GAGES_PER_PAGE = 1
 	SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/gage_web_testing'
 	DATABASE = {
 		'name': 'main.db',
