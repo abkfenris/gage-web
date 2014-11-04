@@ -515,20 +515,44 @@ class Sensor(db.Model):
 	started = db.Column(db.DateTime)
 	ended = db.Column(db.DateTime)
 	
+	def timediff(self, dateTime):
+		delta = datetime.datetime.now()-datetime.timedelta(minutes=30)
+		return self.stype, str(dateTime), str(datetime.datetime.now()), str(dateTime > delta), str(dateTime - datetime.datetime.now())
+	
 	def recent(self):
 		"""
 		Return recent sample value.
 		"""
+		delta = datetime.datetime.now()-datetime.timedelta(minutes=30)
 		sample = Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
-		if sample is not None:
-			return sample.value
-		elif sample is None and self.local is False:
+		if sample is not None and ( self.local is True or sample.datetime > delta ):
+			print self.timediff(sample.datetime), 'A'
+			return sample
+		elif sample is not None and self.local is False and sample.datetime < delta:
+			print self.timediff(sample.datetime), 'B'
 			if self.remote_parameter is None:
+				print self.timediff(sample.datetime), 'C'
+				usgs.get_samples(self, self.remote_id, startDT=sample.datetime, endDT=datetime.datetime.utcnow())
+			else:
+				print self.timediff(sample.datetime), 'D'
+				usgs.get_samples(self, self.remote_id, startDT=sample.datetime, endDT=datetime.datetime.utcnow(), parameter=self.remote_parameter)
+			print self.timediff(sample.datetime), 'E'
+			return Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
+		elif sample is None and self.local is False:
+			print self.timediff(sample.datetime), 'F'
+			if self.remote_parameter is None:
+				print self.timediff(sample.datetime), 'G'
 				usgs.get_samples(self, self.remote_id, period='P7D')
 			else:
+				print self.timediff(sample.datetime), 'H'
 				usgs.get_samples(self, self.remote_id, period='P7D', parameter=self.remote_parameter)
+			print self.timediff(sample.datetime), 'I'
+			return Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
 		else:
+			print self.timediff(sample.datetime), 'J'
 			pass
+    
+    
 	
 	def to_json(self):
 		"""

@@ -21,7 +21,7 @@
 	  				<li class="active"><a href="#info" data-toggle="tab">Section Info</a></li>
 	  				<li><a href="#weather" data-toggle="tab">Weather</a></li>
 	  				{% for correlation in section.correlations %}
-	  				<li><a href="#{{ correlation.sensor.stype }}" data-toggle="tab">{{ correlation.sensor.gage.name }} - {{ correlation.sensor.recent() }}</a></li>
+	  				<li><a href="#{{ correlation.sensor.stype }}" data-toggle="tab">{{ correlation.sensor.gage.name }} - {{ correlation.sensor.recent().value }}</a></li>
 	  				{% endfor %}
 	  			</ul>
 	  			<!-- Tab contents -->

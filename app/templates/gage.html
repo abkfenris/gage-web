@@ -22,9 +22,9 @@
 	  				<li><a href="#weather" data-toggle="tab">Weather</a></li>
 	  				{% for sensor in gage.sensors.all() %}
 	  					{% if sensor.name is none() %}
-	  					<li><a href="#{{ sensor.stype }}" data-toggle="tab">{{ sensor.stype }} - {{ sensor.recent() }}</a></li>
+	  					<li><a href="#{{ sensor.stype }}" data-toggle="tab">{{ sensor.stype }} - {{ sensor.recent().value }}</a></li>
 	  					{% else %}
-	  					<li><a href="#{{ sensor.stype }}" data-toggle="tab">{{ sensor.name }} - {{ sensor.recent() }}</a></li>
+	  					<li><a href="#{{ sensor.stype }}" data-toggle="tab">{{ sensor.name }} - {{ sensor.recent().value }}</a></li>
 	  					{% endif %}
 	  				{% endfor %}
 	  			</ul>
