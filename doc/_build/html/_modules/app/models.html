@@ -352,9 +352,9 @@
 <span class="sd">		short_description (text): Short description for section for showing on other pages.</span>
 <span class="sd">		access (string): Access restrictions or issues</span>
 <span class="sd">		location (string): Where is it?</span>
-<span class="sd">		putin (Point): PostGIS Point object for putin</span>
-<span class="sd">		takeout (Point): PostGIS Point object for takeout</span>
-<span class="sd">		path (Linestring): PostGIS Linestring object for river</span>
+<span class="sd">		putin (Point): PostGIS Point object for putin. Accepts WKT.</span>
+<span class="sd">		takeout (Point): PostGIS Point object for takeout. Accepts WKT.</span>
+<span class="sd">		path (Linestring): PostGIS Linestring object for river. Accepts WKT.</span>
 <span class="sd">		in_elevation (int): Elevation of the putin</span>
 <span class="sd">		out_elevation (int): Elevation of the takeout</span>
 <span class="sd">		header_image (string): Header image to override default</span>
@@ -447,7 +447,7 @@
 <span class="sd">		id (int): Primary key for Gage</span>
 <span class="sd">		name (string): Nice name for gage</span>
 <span class="sd">		slug (string): slug used in url</span>
-<span class="sd">		point (Point): PostGIS Point object</span>
+<span class="sd">		point (Point): PostGIS Point object. Accepts WKT.</span>
 <span class="sd">		river_id (int): Foreign key of ``River``.id that the Gage is on.</span>
 <span class="sd">		river: ``River`` object</span>
 <span class="sd">		user_id (int): Foreign key of ``User``.id that &#39;owns&#39; the Gage.</span>
@@ -462,6 +462,7 @@
 <span class="sd">		started (datetime): When samples started to be collected at this gage</span>
 <span class="sd">		ended (datetime): If sampling at this gage has stopped, when?</span>
 <span class="sd">		description (text): Long description for Gage that can contain HTML or Markdown within reason.</span>
+<span class="sd">		key (string): Secret key that samples are signed with</span>
 <span class="sd">		short_description (text): Short description for showing on other pages.</span>
 <span class="sd">		regions: List of ``Region`` objects that this Gage is in.</span>
 <span class="sd">		sensors: List of ``Sensor`` objects that are part of this Gage.</span>
@@ -491,6 +492,7 @@
 	<span class="n">ended</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">DateTime</span><span class="p">)</span>
 	<span class="n">description</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
 	<span class="n">short_description</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
+	<span class="n">key</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
 	
 	<span class="n">regions</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s">&#39;Region&#39;</span><span class="p">,</span> <span class="n">secondary</span><span class="o">=</span><span class="n">gages_regions</span><span class="p">,</span>
 								<span class="n">backref</span><span class="o">=</span><span class="n">db</span><span class="o">.</span><span class="n">backref</span><span class="p">(</span><span class="s">&#39;gages&#39;</span><span class="p">,</span> <span class="n">lazy</span><span class="o">=</span><span class="s">&#39;dynamic&#39;</span><span class="p">))</span>
@@ -557,7 +559,7 @@
 		<span class="n">sample</span> <span class="o">=</span> <span class="n">Sample</span><span class="p">(</span><span class="n">sensor_id</span><span class="o">=</span><span class="n">sensor</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="n">datetime</span><span class="o">=</span><span class="n">sdatetime</span> <span class="p">)</span>
 		<span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
 		<span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-		<span class="k">return</span> <span class="n">sensor</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">sensor</span><span class="o">.</span><span class="n">stype</span>
+		<span class="k">return</span> <span class="n">sample</span>
 	</div>
 	<span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="k">return</span> <span class="s">&#39;&lt;Gage </span><span class="si">%r</span><span class="s">&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
@@ -621,20 +623,45 @@
 	<span class="n">started</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">DateTime</span><span class="p">)</span>
 	<span class="n">ended</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">DateTime</span><span class="p">)</span>
 	
+	<span class="k">def</span> <span class="nf">timediff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dateTime</span><span class="p">):</span>
+		<span class="n">delta</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">-</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stype</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">dateTime</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()),</span> <span class="nb">str</span><span class="p">(</span><span class="n">dateTime</span> <span class="o">&gt;</span> <span class="n">delta</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">dateTime</span><span class="p">)</span>
+	
 <div class="viewcode-block" id="Sensor.recent"><a class="viewcode-back" href="../../reference/app.html#app.models.Sensor.recent">[docs]</a>	<span class="k">def</span> <span class="nf">recent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Return recent sample value.</span>
 <span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">delta</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">-</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+		<span class="k">print</span> <span class="n">delta</span>
 		<span class="n">sample</span> <span class="o">=</span> <span class="n">Sample</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">sensor_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sample</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
-		<span class="k">if</span> <span class="n">sample</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-			<span class="k">return</span> <span class="n">sample</span><span class="o">.</span><span class="n">value</span>
-		<span class="k">elif</span> <span class="n">sample</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">local</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">sample</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">local</span> <span class="ow">is</span> <span class="bp">True</span> <span class="ow">or</span> <span class="n">sample</span><span class="o">.</span><span class="n">datetime</span> <span class="o">&gt;</span> <span class="n">delta</span> <span class="p">):</span>
+			<span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">timediff</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">datetime</span><span class="p">),</span> <span class="s">&#39;A&#39;</span>
+			<span class="k">return</span> <span class="n">sample</span>
+		<span class="k">elif</span> <span class="n">sample</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">local</span> <span class="ow">is</span> <span class="bp">False</span> <span class="ow">and</span> <span class="n">sample</span><span class="o">.</span><span class="n">datetime</span> <span class="o">&lt;</span> <span class="n">delta</span><span class="p">:</span>
+			<span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">timediff</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">datetime</span><span class="p">),</span> <span class="s">&#39;B&#39;</span>
 			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote_parameter</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+				<span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">timediff</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">datetime</span><span class="p">),</span> <span class="s">&#39;C&#39;</span>
+				<span class="n">usgs</span><span class="o">.</span><span class="n">get_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote_id</span><span class="p">,</span> <span class="n">startDT</span><span class="o">=</span><span class="n">sample</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span> <span class="n">endDT</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">())</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">timediff</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">datetime</span><span class="p">),</span> <span class="s">&#39;D&#39;</span>
+				<span class="n">usgs</span><span class="o">.</span><span class="n">get_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote_id</span><span class="p">,</span> <span class="n">startDT</span><span class="o">=</span><span class="n">sample</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span> <span class="n">endDT</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span> <span class="n">parameter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">remote_parameter</span><span class="p">)</span>
+			<span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">timediff</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">datetime</span><span class="p">),</span> <span class="s">&#39;E&#39;</span>
+			<span class="k">return</span> <span class="n">Sample</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">sensor_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sample</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+		<span class="k">elif</span> <span class="n">sample</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">local</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+			<span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">timediff</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">datetime</span><span class="p">),</span> <span class="s">&#39;F&#39;</span>
+			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote_parameter</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+				<span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">timediff</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">datetime</span><span class="p">),</span> <span class="s">&#39;G&#39;</span>
 				<span class="n">usgs</span><span class="o">.</span><span class="n">get_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote_id</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="s">&#39;P7D&#39;</span><span class="p">)</span>
 			<span class="k">else</span><span class="p">:</span>
+				<span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">timediff</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">datetime</span><span class="p">),</span> <span class="s">&#39;H&#39;</span>
 				<span class="n">usgs</span><span class="o">.</span><span class="n">get_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote_id</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="s">&#39;P7D&#39;</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">remote_parameter</span><span class="p">)</span>
+			<span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">timediff</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">datetime</span><span class="p">),</span> <span class="s">&#39;I&#39;</span>
+			<span class="k">return</span> <span class="n">Sample</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">sensor_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sample</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
 		<span class="k">else</span><span class="p">:</span>
+			<span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">timediff</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">datetime</span><span class="p">),</span> <span class="s">&#39;J&#39;</span>
 			<span class="k">pass</span>
+    
+    
 	</div>
 <div class="viewcode-block" id="Sensor.to_json"><a class="viewcode-back" href="../../reference/app.html#app.models.Sensor.to_json">[docs]</a>	<span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>

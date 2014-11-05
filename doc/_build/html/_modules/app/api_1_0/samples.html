@@ -122,16 +122,57 @@
 <div class="viewcode-block" id="get_samples"><a class="viewcode-back" href="../../../reference/app.api_1_0.html#app.api_1_0.samples.get_samples">[docs]</a><span class="k">def</span> <span class="nf">get_samples</span><span class="p">():</span>
 	<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">	List all samples</span>
+<span class="sd">	</span>
+<span class="sd">	Example response: ::</span>
+<span class="sd">		</span>
+<span class="sd">		{ &quot;count&quot;: 10696,</span>
+<span class="sd">		  &quot;next&quot;: &quot;http://riverflo.ws/api/1.0/samples/?page=2&quot;,</span>
+<span class="sd">		  &quot;prev&quot;: null,</span>
+<span class="sd">		  &quot;samples&quot;: [</span>
+<span class="sd">		    { &quot;datetime&quot;: &quot;Thu, 05 Jun 2014 13:50:27 GMT&quot;,</span>
+<span class="sd">		      &quot;id&quot;: 52,</span>
+<span class="sd">		      &quot;sensor&quot;: {</span>
+<span class="sd">		        &quot;gage&quot;: {</span>
+<span class="sd">		          &quot;id&quot;: 2,</span>
+<span class="sd">		          &quot;location&quot;: &quot;Wild River near RT 2 in Gilead Maine&quot;,</span>
+<span class="sd">		          &quot;name&quot;: &quot;Wild River at Gilead&quot;,</span>
+<span class="sd">		          &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/gages/2&quot;</span>
+<span class="sd">		        },</span>
+<span class="sd">		        &quot;id&quot;: 5,</span>
+<span class="sd">		        &quot;type&quot;: &quot;level&quot;,</span>
+<span class="sd">		        &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/sensors/5&quot;</span>
+<span class="sd">		      },</span>
+<span class="sd">		      &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/samples/52&quot;,</span>
+<span class="sd">		      &quot;value&quot;: 24.0</span>
+<span class="sd">		    },</span>
+<span class="sd">		    { &quot;datetime&quot;: &quot;Thu, 05 Jun 2014 13:50:27 GMT&quot;,</span>
+<span class="sd">		      &quot;id&quot;: 53,</span>
+<span class="sd">		      &quot;sensor&quot;: {</span>
+<span class="sd">		        &quot;gage&quot;: {</span>
+<span class="sd">		          &quot;id&quot;: 2,</span>
+<span class="sd">		          &quot;location&quot;: &quot;Wild River near RT 2 in Gilead Maine&quot;,</span>
+<span class="sd">		          &quot;name&quot;: &quot;Wild River at Gilead&quot;,</span>
+<span class="sd">		          &quot;url&quot;: &quot;http://127.0.0.1:5000/api/1.0/gages/2&quot;</span>
+<span class="sd">		        },</span>
+<span class="sd">		        &quot;id&quot;: 8,</span>
+<span class="sd">		        &quot;type&quot;: &quot;volts&quot;,</span>
+<span class="sd">		        &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/sensors/8&quot;</span>
+<span class="sd">		      },</span>
+<span class="sd">		      &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/samples/53&quot;,</span>
+<span class="sd">		      &quot;value&quot;: 4.096</span>
+<span class="sd">		    }</span>
+<span class="sd">		  ]</span>
+<span class="sd">		}</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="n">page</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;page&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 	<span class="n">pagination</span> <span class="o">=</span> <span class="n">Sample</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">per_page</span><span class="o">=</span><span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&#39;API_GAGES_PER_PAGE&#39;</span><span class="p">],</span> <span class="n">error_out</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 	<span class="n">samples</span> <span class="o">=</span> <span class="n">pagination</span><span class="o">.</span><span class="n">items</span>
 	<span class="n">prev</span> <span class="o">=</span> <span class="bp">None</span>
 	<span class="k">if</span> <span class="n">pagination</span><span class="o">.</span><span class="n">has_prev</span><span class="p">:</span>
-		<span class="n">prev</span> <span class="o">=</span> <span class="n">url_for</span><span class="p">(</span><span class="s">&#39;.get_samples&#39;</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+		<span class="n">prev</span> <span class="o">=</span> <span class="n">url_for</span><span class="p">(</span><span class="s">&#39;.get_samples&#39;</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">_external</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 	<span class="nb">next</span> <span class="o">=</span> <span class="bp">None</span>
 	<span class="k">if</span> <span class="n">pagination</span><span class="o">.</span><span class="n">has_next</span><span class="p">:</span>
-		<span class="nb">next</span> <span class="o">=</span> <span class="n">url_for</span><span class="p">(</span><span class="s">&#39;.get_samples&#39;</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+		<span class="nb">next</span> <span class="o">=</span> <span class="n">url_for</span><span class="p">(</span><span class="s">&#39;.get_samples&#39;</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">_external</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 	<span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
 		<span class="s">&#39;samples&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">sample</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span> <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">samples</span><span class="p">],</span>
 		<span class="s">&#39;prev&#39;</span><span class="p">:</span> <span class="n">prev</span><span class="p">,</span>
@@ -140,9 +181,31 @@
 	<span class="p">})</span>
 </div>
 <span class="nd">@api.route</span><span class="p">(</span><span class="s">&#39;/samples/&lt;int:id&gt;&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="get_sample"><a class="viewcode-back" href="../../../reference/app.api_1_0.html#app.api_1_0.samples.get_sample">[docs]</a><span class="k">def</span> <span class="nf">get_sample</span><span class="p">():</span>
+<div class="viewcode-block" id="get_sample"><a class="viewcode-back" href="../../../reference/app.api_1_0.html#app.api_1_0.samples.get_sample">[docs]</a><span class="k">def</span> <span class="nf">get_sample</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
 	<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">	Detailed information about sample *id*</span>
+<span class="sd">	</span>
+<span class="sd">	Parameters:</span>
+<span class="sd">		id (int): Primary id key of sample</span>
+<span class="sd">	</span>
+<span class="sd">	Example response: ::</span>
+<span class="sd">	</span>
+<span class="sd">		{ &quot;datetime&quot;: &quot;Thu, 05 Jun 2014 13:50:27 GMT&quot;,</span>
+<span class="sd">		  &quot;id&quot;: 52,</span>
+<span class="sd">		  &quot;sensor&quot;: {</span>
+<span class="sd">		    &quot;gage&quot;: {</span>
+<span class="sd">		      &quot;id&quot;: 2,</span>
+<span class="sd">		      &quot;location&quot;: &quot;Wild River near RT 2 in Gilead Maine&quot;,</span>
+<span class="sd">		      &quot;name&quot;: &quot;Wild River at Gilead&quot;,</span>
+<span class="sd">		      &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/gages/2&quot;</span>
+<span class="sd">		    },</span>
+<span class="sd">		    &quot;id&quot;: 5,</span>
+<span class="sd">		    &quot;type&quot;: &quot;level&quot;,</span>
+<span class="sd">		    &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/sensors/5&quot;</span>
+<span class="sd">		  },</span>
+<span class="sd">		  &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/samples/52&quot;,</span>
+<span class="sd">		  &quot;value&quot;: 24.0</span>
+<span class="sd">		}</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="n">sample</span> <span class="o">=</span> <span class="n">Sample</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get_or_404</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
 	<span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">to_json</span><span class="p">())</span></div>

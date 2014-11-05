@@ -2,7 +2,7 @@
 Errors that can be referenced by other api routes
 """
 from flask import jsonify
-#from app.exceptions import ValidationError
+from app.exceptions import ValidationError
 from . import api
 
 def bad_request(message):
@@ -19,7 +19,7 @@ def unauthorized(message):
 
 def forbidden(message):
 	response = jsonify({'error': 'forbidden', 'message': message})
-	response.status_code = 401
+	response.status_code = 403
 	return response
 
 

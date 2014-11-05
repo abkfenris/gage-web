@@ -15,16 +15,33 @@ from . import api
 def get_sensors():
 	"""
 	List all sensors
+	
+	Example response: ::
+	
+		{ "count": 17,
+		  "next": "http://riverflo.ws/api/1.0/sensors/?page=2",
+		  "prev": null,
+		  "sensors": [
+		    { "id": 2,
+		      "type": "voltage",
+		      "url": "http://riverflo.ws/api/1.0/sensors/2"
+		    },
+		    { "id": 3,
+		      "type": "amps",
+		      "url": "http://riverflo.ws/api/1.0/sensors/3"
+		    }
+		  ]
+		}
 	"""
 	page = request.args.get('page', 1, type=int)
 	pagination = Sensor.query.paginate(page, per_page=current_app.config['API_GAGES_PER_PAGE'], error_out=False)
 	sensors = pagination.items
 	prev = None
 	if pagination.has_prev:
-		prev = url_for('.get_sensors', page=page-1)
+		prev = url_for('.get_sensors', page=page-1, _external=True)
 	next = None
 	if pagination.has_next:
-		next = url_for('.get_sensors', page=page+1)
+		next = url_for('.get_sensors', page=page+1, _external=True)
 	return jsonify({
 		'sensors': [sensor.to_json() for sensor in sensors],
 		'prev': prev,
@@ -36,6 +53,33 @@ def get_sensors():
 def get_sensor(id):
 	"""
 	Detailed information about sensor *id*
+	
+	Parameters:
+		id (int): Primary id key of sensor
+	
+	Example response: ::
+	
+		{ "description": null,
+		  "ended": null,
+		  "gage": {
+		    "id": 2,
+		    "location": "Wild River near RT 2 in Gilead Maine",
+		    "name": "Wild River at Gilead",
+		    "url": "http://riverflo.ws/api/1.0/gages/2"
+		  },
+		  "id": 5,
+		  "maximum": null,
+		  "minimum": null,
+		  "recent_sample": {
+		    "datetime": "Mon, 25 Aug 2014 13:11:35 GMT",
+		    "id": 1555,
+		    "url": "http://riverflo.ws/api/1.0/samples/1555",
+		    "value": 25.6666666666667
+		  },
+		  "started": null,
+		  "type": "level",
+		  "url": "http://riverflo.ws/api/1.0/sensors/5"
+		}
 	"""
 	sensor = Sensor.query.get_or_404(id)
 	return jsonify(sensor.to_long_json())
@@ -44,6 +88,33 @@ def get_sensor(id):
 def get_sensor_samples(id):
 	"""
 	List samples for sensor *id*
+	
+	Parameters:
+		id (int): Primary id key of sensor
+	
+	Example response: ::
+	
+		{ "count": 487,
+		  "next": null,
+		  "prev": null,
+		  "samples": [
+		    { "datetime": "Thu, 05 Jun 2014 13:50:27 GMT",
+		      "id": 52,
+		      "url": "http://riverflo.ws/api/1.0/samples/52",
+		      "value": 24.0
+		    },
+		    { "datetime": "Thu, 05 Jun 2014 13:50:42 GMT",
+		      "id": 55,
+		      "url": "http://riverflo.ws/api/1.0/samples/55",
+		      "value": 24.0
+		    }
+		  ],
+		  "sensor": {
+		    "id": 5,
+		    "type": "level",
+		    "url": "http://riverflo.ws/api/1.0/sensors/5"
+		  }
+		}
 	"""
 	sensor = Sensor.query.get_or_404(id)
 	page = request.args.get('page', 1, type=int)
