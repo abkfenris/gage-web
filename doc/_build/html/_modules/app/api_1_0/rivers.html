@@ -124,16 +124,33 @@
 <div class="viewcode-block" id="get_rivers"><a class="viewcode-back" href="../../../reference/app.api_1_0.html#app.api_1_0.rivers.get_rivers">[docs]</a><span class="k">def</span> <span class="nf">get_rivers</span><span class="p">():</span>
 	<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">	List all rivers</span>
+<span class="sd">	</span>
+<span class="sd">	Example response: ::</span>
+<span class="sd">	</span>
+<span class="sd">		{ &quot;count&quot;: 7,</span>
+<span class="sd">		  &quot;next&quot;: &quot;http://riverflo.ws/api/1.0/sensors/?page=2&quot;,</span>
+<span class="sd">		  &quot;prev&quot;: null,</span>
+<span class="sd">		  &quot;rivers&quot;: [</span>
+<span class="sd">		    { &quot;id&quot;: 1,</span>
+<span class="sd">		      &quot;name&quot;: &quot;Kennebec&quot;,</span>
+<span class="sd">		      &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/rivers/1&quot;</span>
+<span class="sd">		    },</span>
+<span class="sd">		    { &quot;id&quot;: 2,</span>
+<span class="sd">		      &quot;name&quot;: &quot;Androscoggin&quot;,</span>
+<span class="sd">		      &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/rivers/2&quot;</span>
+<span class="sd">		    }</span>
+<span class="sd">		  ]</span>
+<span class="sd">		}</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="n">page</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;page&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 	<span class="n">pagination</span> <span class="o">=</span> <span class="n">River</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">per_page</span><span class="o">=</span><span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&#39;API_GAGES_PER_PAGE&#39;</span><span class="p">],</span> <span class="n">error_out</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 	<span class="n">rivers</span> <span class="o">=</span> <span class="n">pagination</span><span class="o">.</span><span class="n">items</span>
 	<span class="n">prev</span> <span class="o">=</span> <span class="bp">None</span>
 	<span class="k">if</span> <span class="n">pagination</span><span class="o">.</span><span class="n">has_prev</span><span class="p">:</span>
-		<span class="n">prev</span> <span class="o">=</span> <span class="n">url_for</span><span class="p">(</span><span class="s">&#39;.get_sensors&#39;</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+		<span class="n">prev</span> <span class="o">=</span> <span class="n">url_for</span><span class="p">(</span><span class="s">&#39;.get_sensors&#39;</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">_external</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 	<span class="nb">next</span> <span class="o">=</span> <span class="bp">None</span>
 	<span class="k">if</span> <span class="n">pagination</span><span class="o">.</span><span class="n">has_next</span><span class="p">:</span>
-		<span class="nb">next</span> <span class="o">=</span> <span class="n">url_for</span><span class="p">(</span><span class="s">&#39;.get_sensors&#39;</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+		<span class="nb">next</span> <span class="o">=</span> <span class="n">url_for</span><span class="p">(</span><span class="s">&#39;.get_sensors&#39;</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">_external</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 	<span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
 		<span class="s">&#39;rivers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">river</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span> <span class="k">for</span> <span class="n">river</span> <span class="ow">in</span> <span class="n">rivers</span><span class="p">],</span>
 		<span class="s">&#39;prev&#39;</span><span class="p">:</span> <span class="n">prev</span><span class="p">,</span>
@@ -145,6 +162,52 @@
 <div class="viewcode-block" id="get_river"><a class="viewcode-back" href="../../../reference/app.api_1_0.html#app.api_1_0.rivers.get_river">[docs]</a><span class="k">def</span> <span class="nf">get_river</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
 	<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">	Detailed information about river *id*</span>
+<span class="sd">	</span>
+<span class="sd">	Parameters:</span>
+<span class="sd">		id (int): Primary id key for river</span>
+<span class="sd">	</span>
+<span class="sd">	Example response: ::</span>
+<span class="sd">	</span>
+<span class="sd">		{ &quot;downstream&quot;: {</span>
+<span class="sd">		    &quot;id&quot;: 1,</span>
+<span class="sd">		    &quot;name&quot;: &quot;Kennebec&quot;,</span>
+<span class="sd">		    &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/rivers/1&quot;</span>
+<span class="sd">		  },</span>
+<span class="sd">		  &quot;gages&quot;: [</span>
+<span class="sd">		    { &quot;id&quot;: 5,</span>
+<span class="sd">		      &quot;location&quot;: &quot;Androscoggin River downstream of I-95 in Auburn Maine&quot;,</span>
+<span class="sd">		      &quot;name&quot;: &quot;Androscoggin River at Auburn&quot;,</span>
+<span class="sd">		      &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/gages/5&quot;</span>
+<span class="sd">		    },</span>
+<span class="sd">		    { &quot;id&quot;: 4,</span>
+<span class="sd">		      &quot;location&quot;: &quot;Androscoggin River below lower power plant and 1000 ft upstream of the Swift River in Rumford Maine&quot;,</span>
+<span class="sd">		      &quot;name&quot;: &quot;Androscoggin River at Rumford&quot;,</span>
+<span class="sd">		      &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/gages/4&quot;</span>
+<span class="sd">		    }</span>
+<span class="sd">		  ],</span>
+<span class="sd">		  &quot;id&quot;: 2,</span>
+<span class="sd">		  &quot;name&quot;: &quot;Androscoggin&quot;,</span>
+<span class="sd">		  &quot;sections&quot;: [],</span>
+<span class="sd">		  &quot;tributaries&quot;: [</span>
+<span class="sd">		    { &quot;id&quot;: 3,</span>
+<span class="sd">		      &quot;name&quot;: &quot;Sunday River&quot;,</span>
+<span class="sd">		      &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/rivers/3&quot;</span>
+<span class="sd">		    },</span>
+<span class="sd">		    { &quot;id&quot;: 5,</span>
+<span class="sd">		      &quot;name&quot;: &quot;Wild River (Androscoggin)&quot;,</span>
+<span class="sd">		      &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/rivers/5&quot;</span>
+<span class="sd">		    },</span>
+<span class="sd">		    { &quot;id&quot;: 6,</span>
+<span class="sd">		      &quot;name&quot;: &quot;Peapody River&quot;,</span>
+<span class="sd">		      &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/rivers/6&quot;</span>
+<span class="sd">		    },</span>
+<span class="sd">		    { &quot;id&quot;: 7,</span>
+<span class="sd">		      &quot;name&quot;: &quot;Bear River (Androscoggin)&quot;,</span>
+<span class="sd">		      &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/rivers/7&quot;</span>
+<span class="sd">		    }</span>
+<span class="sd">		  ],</span>
+<span class="sd">		  &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/rivers/2&quot;</span>
+<span class="sd">		}</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="n">river</span> <span class="o">=</span> <span class="n">River</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get_or_404</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
 	<span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">river</span><span class="o">.</span><span class="n">to_long_json</span><span class="p">())</span></div>

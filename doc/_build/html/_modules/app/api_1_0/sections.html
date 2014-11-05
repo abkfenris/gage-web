@@ -120,6 +120,26 @@
 
 <span class="nd">@api.route</span><span class="p">(</span><span class="s">&#39;/sections/&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="get_sections"><a class="viewcode-back" href="../../../reference/app.api_1_0.html#app.api_1_0.sections.get_sections">[docs]</a><span class="k">def</span> <span class="nf">get_sections</span><span class="p">():</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	List all sections</span>
+<span class="sd">	</span>
+<span class="sd">	Example response: ::</span>
+
+<span class="sd">		{ &quot;count&quot;: 2,</span>
+<span class="sd">		  &quot;next&quot;: null,</span>
+<span class="sd">		  &quot;prev&quot;: null,</span>
+<span class="sd">		  &quot;sections&quot;: [</span>
+<span class="sd">		    { &quot;id&quot;: 2,</span>
+<span class="sd">		      &quot;name&quot;: &quot;Bear River&quot;,</span>
+<span class="sd">		      &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/sections/2&quot;</span>
+<span class="sd">		    },</span>
+<span class="sd">		    { &quot;id&quot;: 1,</span>
+<span class="sd">		      &quot;name&quot;: &quot;Bull Branch&quot;,</span>
+<span class="sd">		      &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/sections/1&quot;</span>
+<span class="sd">		    }</span>
+<span class="sd">		  ]</span>
+<span class="sd">		}</span>
+<span class="sd">	&quot;&quot;&quot;</span>
 	<span class="n">page</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;page&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 	<span class="n">pagination</span> <span class="o">=</span> <span class="n">Section</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">per_page</span><span class="o">=</span><span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&#39;API_GAGES_PER_PAGE&#39;</span><span class="p">],</span> <span class="n">error_out</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 	<span class="n">sections</span> <span class="o">=</span> <span class="n">pagination</span><span class="o">.</span><span class="n">items</span>
@@ -130,7 +150,7 @@
 	<span class="k">if</span> <span class="n">pagination</span><span class="o">.</span><span class="n">has_next</span><span class="p">:</span>
 		<span class="nb">next</span> <span class="o">=</span> <span class="n">url_for</span><span class="p">(</span><span class="s">&#39;.get_sections&#39;</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 	<span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
-		<span class="s">&#39;sensors&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">section</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span> <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">sections</span><span class="p">],</span>
+		<span class="s">&#39;sections&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">section</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span> <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">sections</span><span class="p">],</span>
 		<span class="s">&#39;prev&#39;</span><span class="p">:</span> <span class="n">prev</span><span class="p">,</span>
 		<span class="s">&#39;next&#39;</span><span class="p">:</span> <span class="nb">next</span><span class="p">,</span>
 		<span class="s">&#39;count&#39;</span><span class="p">:</span> <span class="n">pagination</span><span class="o">.</span><span class="n">total</span>
@@ -138,6 +158,41 @@
 </div>
 <span class="nd">@api.route</span><span class="p">(</span><span class="s">&#39;/sections/&lt;int:id&gt;&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="get_section"><a class="viewcode-back" href="../../../reference/app.api_1_0.html#app.api_1_0.sections.get_section">[docs]</a><span class="k">def</span> <span class="nf">get_section</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Detailed information about section *id*</span>
+<span class="sd">	</span>
+<span class="sd">	Parameters:</span>
+<span class="sd">		id (int): Primary key for section</span>
+<span class="sd">	</span>
+<span class="sd">	Example response: ::</span>
+
+<span class="sd">		{ &quot;access&quot;: null,</span>
+<span class="sd">		  &quot;description&quot;: &quot;Most commonly run from the where Goose Eye Brook joins Bull Branch on down to Twin Bridges, Bull Branch is a gem of Western Maine. It most commonly runs when the Wild River gage in Gilead goes over 4 ft.&quot;,</span>
+<span class="sd">		  &quot;id&quot;: 1,</span>
+<span class="sd">		  &quot;latitude&quot;: 44.517188630525425,</span>
+<span class="sd">		  &quot;location&quot;: &quot;Ketchum, ME&quot;,</span>
+<span class="sd">		  &quot;longitude&quot;: -70.93158602714539,</span>
+<span class="sd">		  &quot;name&quot;: &quot;Bull Branch&quot;,</span>
+<span class="sd">		  &quot;regions&quot;: [</span>
+<span class="sd">		    { &quot;html&quot;: &quot;http://riverflo.ws/region/mahoosucs/&quot;,</span>
+<span class="sd">		      &quot;id&quot;: 1,</span>
+<span class="sd">		      &quot;name&quot;: &quot;Mahoosuc Mountains&quot;,</span>
+<span class="sd">		      &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/regions/1&quot;</span>
+<span class="sd">		    },</span>
+<span class="sd">		    { &quot;html&quot;: &quot;http://127.0.0.1:5000/region/whites/&quot;,</span>
+<span class="sd">		      &quot;id&quot;: 2,</span>
+<span class="sd">		      &quot;name&quot;: &quot;White Mountains&quot;,</span>
+<span class="sd">		      &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/regions/2&quot;</span>
+<span class="sd">		    },</span>
+<span class="sd">		    { &quot;html&quot;: &quot;http://riverflo.ws/region/maine/&quot;,</span>
+<span class="sd">		      &quot;id&quot;: 4,</span>
+<span class="sd">		      &quot;name&quot;: &quot;Maine&quot;,</span>
+<span class="sd">		      &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/regions/4&quot;</span>
+<span class="sd">		    }</span>
+<span class="sd">		  ],</span>
+<span class="sd">		  &quot;url&quot;: &quot;http://riverflo.ws/api/1.0/sections/1&quot;</span>
+<span class="sd">		}</span>
+<span class="sd">	&quot;&quot;&quot;</span>
 	<span class="n">section</span> <span class="o">=</span> <span class="n">Section</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get_or_404</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
 	<span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">section</span><span class="o">.</span><span class="n">to_long_json</span><span class="p">())</span></div>
 </pre></div>

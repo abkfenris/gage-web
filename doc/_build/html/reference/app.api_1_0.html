@@ -202,6 +202,14 @@
 <dt id="app.api_1_0.gages.gage_new_samples">
 <tt class="descclassname">app.api_1_0.gages.</tt><tt class="descname">gage_new_samples</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/gages.html#gage_new_samples"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.gages.gage_new_samples" title="Permalink to this definition">¶</a></dt>
 <dd><p>Submit new samples to gage <em>id</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>id</strong> (<em>int</em>) &#8211; Primary id key number of a gage</td>
+</tr>
+</tbody>
+</table>
 <p>Samples are formatted in body of request as a JSON Web Signature using the <tt class="docutils literal"><span class="pre">Gage.key</span></tt></p>
 <p>Example sample submitter:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">itsdangerous</span> <span class="kn">import</span> <span class="n">JSONWebSignatureSerializer</span>
@@ -243,8 +251,8 @@
 </div>
 <p>If the key matches the stored key for the gage id in the url,   the server will iterate over the samples and add them to the database   creating new sensors for the gage if a new sample type is found.        Then the server will return JSON with a status code of 200.</p>
 <p>Example response:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;gage&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">u&#39;id&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-        <span class="s">&#39;location&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&#39;gage&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">u&#39;id&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s">&#39;location&#39;</span><span class="p">:</span> <span class="s">&#39;Androscoggin River downstream of I-95 in Auburn Maine&#39;</span><span class="p">,</span>
         <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;Androscoggin River at Auburn&#39;</span><span class="p">,</span>
         <span class="s">&#39;url&#39;</span><span class="p">:</span> <span class="s">&#39;http://riverflo.ws/api/1.0/gages/5&#39;</span><span class="p">},</span>
  <span class="s">&#39;result&#39;</span><span class="p">:</span> <span class="s">&#39;created&#39;</span><span class="p">,</span>
@@ -276,22 +284,28 @@
 <dt id="app.api_1_0.gages.get_gage">
 <tt class="descclassname">app.api_1_0.gages.</tt><tt class="descname">get_gage</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/gages.html#get_gage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.gages.get_gage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Detailed information about gage <em>id</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>id</strong> (<em>int</em>) &#8211; Primary id key of a gage</td>
+</tr>
+</tbody>
+</table>
 <p>Example response:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;html&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/gage/androscoggin-rumford/&quot;</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;html&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/gage/androscoggin-rumford/&quot;</span><span class="p">,</span>
   <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
   <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
   <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Androscoggin River at Rumford&quot;</span><span class="p">,</span>
   <span class="s">&quot;regions&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="s">&quot;html&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/region/maine/&quot;</span><span class="p">,</span>
+    <span class="p">{</span> <span class="s">&quot;html&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/region/maine/&quot;</span><span class="p">,</span>
       <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
       <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Maine&quot;</span><span class="p">,</span>
       <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/regions/4&quot;</span>
     <span class="p">}</span>
   <span class="p">],</span>
   <span class="s">&quot;sensors&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
       <span class="s">&quot;recent_sample&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s">&quot;datetime&quot;</span><span class="p">:</span> <span class="s">&quot;Mon, 03 Nov 2014 18:15:00 GMT&quot;</span><span class="p">,</span>
         <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5801</span><span class="p">,</span>
@@ -301,8 +315,7 @@
       <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;usgs-height&quot;</span><span class="p">,</span>
       <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/sensors/10&quot;</span>
     <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+    <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
       <span class="s">&quot;recent_sample&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s">&quot;datetime&quot;</span><span class="p">:</span> <span class="s">&quot;Mon, 03 Nov 2014 18:15:00 GMT&quot;</span><span class="p">,</span>
         <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5866</span><span class="p">,</span>
@@ -324,16 +337,14 @@
 <tt class="descclassname">app.api_1_0.gages.</tt><tt class="descname">get_gages</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/gages.html#get_gages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.gages.get_gages" title="Permalink to this definition">¶</a></dt>
 <dd><p>List all gages</p>
 <p>Example response:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;count&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;count&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
   <span class="s">&quot;gages&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
       <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="s">&quot;Wild River near RT 2 in Gilead Maine&quot;</span><span class="p">,</span>
       <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Wild River at Gilead&quot;</span><span class="p">,</span>
       <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/gages/2&quot;</span>
     <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
       <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="s">&quot;Bear River near RT 2 in Newry Maine&quot;</span><span class="p">,</span>
       <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Bear River at Newry&quot;</span><span class="p">,</span>
       <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/gages/3&quot;</span>
@@ -360,12 +371,70 @@
 <dt id="app.api_1_0.regions.get_region">
 <tt class="descclassname">app.api_1_0.regions.</tt><tt class="descname">get_region</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/regions.html#get_region"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.regions.get_region" title="Permalink to this definition">¶</a></dt>
 <dd><p>Detailed information about region <em>id</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>id</strong> (<em>int</em>) &#8211; Primary id key of region</td>
+</tr>
+</tbody>
+</table>
+<p>Example response:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;description&quot;</span><span class="p">:</span> <span class="s">&quot;The Mahoosuc Mountains are the Northern most section of the White Mountains and stretch between Bethel and Newry Maine and Gorham and Berlin New Hampshire.&quot;</span><span class="p">,</span>
+  <span class="s">&quot;gages&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="s">&quot;Bear River near RT 2 in Newry Maine&quot;</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Bear River at Newry&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/gages/3&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="s">&quot;Bull Branch at Twin Bridges in Ketchum Maine&quot;</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Bull Branch&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/gages/1&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s">&quot;html&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/region/mahoosucs/&quot;</span><span class="p">,</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Mahoosuc Mountains&quot;</span><span class="p">,</span>
+  <span class="s">&quot;sections&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Bear River&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/sections/2&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Bull Branch&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/sections/1&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/regions/1&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt id="app.api_1_0.regions.get_regions">
 <tt class="descclassname">app.api_1_0.regions.</tt><tt class="descname">get_regions</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/regions.html#get_regions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.regions.get_regions" title="Permalink to this definition">¶</a></dt>
 <dd><p>List all regions</p>
+<p>Example response:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;count&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="s">&quot;next&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/regions/?page=2&quot;</span><span class="p">,</span>
+  <span class="s">&quot;prev&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s">&quot;regions&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="s">&quot;html&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/region/mahoosucs/&quot;</span><span class="p">,</span>
+      <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Mahoosuc Mountains&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/regions/1&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span> <span class="s">&quot;html&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/region/whites/&quot;</span><span class="p">,</span>
+      <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;White Mountains&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/regions/2&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>
@@ -382,12 +451,80 @@
 <dt id="app.api_1_0.rivers.get_river">
 <tt class="descclassname">app.api_1_0.rivers.</tt><tt class="descname">get_river</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/rivers.html#get_river"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.rivers.get_river" title="Permalink to this definition">¶</a></dt>
 <dd><p>Detailed information about river <em>id</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>id</strong> (<em>int</em>) &#8211; Primary id key for river</td>
+</tr>
+</tbody>
+</table>
+<p>Example response:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;downstream&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Kennebec&quot;</span><span class="p">,</span>
+    <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/rivers/1&quot;</span>
+  <span class="p">},</span>
+  <span class="s">&quot;gages&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="s">&quot;Androscoggin River downstream of I-95 in Auburn Maine&quot;</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Androscoggin River at Auburn&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/gages/5&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="s">&quot;Androscoggin River below lower power plant and 1000 ft upstream of the Swift River in Rumford Maine&quot;</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Androscoggin River at Rumford&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/gages/4&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Androscoggin&quot;</span><span class="p">,</span>
+  <span class="s">&quot;sections&quot;</span><span class="p">:</span> <span class="p">[],</span>
+  <span class="s">&quot;tributaries&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Sunday River&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/rivers/3&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Wild River (Androscoggin)&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/rivers/5&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Peapody River&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/rivers/6&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Bear River (Androscoggin)&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/rivers/7&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/rivers/2&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt id="app.api_1_0.rivers.get_rivers">
 <tt class="descclassname">app.api_1_0.rivers.</tt><tt class="descname">get_rivers</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/rivers.html#get_rivers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.rivers.get_rivers" title="Permalink to this definition">¶</a></dt>
 <dd><p>List all rivers</p>
+<p>Example response:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;count&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+  <span class="s">&quot;next&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/sensors/?page=2&quot;</span><span class="p">,</span>
+  <span class="s">&quot;prev&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s">&quot;rivers&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Kennebec&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/rivers/1&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Androscoggin&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/rivers/2&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>
@@ -402,14 +539,82 @@
 </ul>
 <dl class="function">
 <dt id="app.api_1_0.samples.get_sample">
-<tt class="descclassname">app.api_1_0.samples.</tt><tt class="descname">get_sample</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/samples.html#get_sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.samples.get_sample" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">app.api_1_0.samples.</tt><tt class="descname">get_sample</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/samples.html#get_sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.samples.get_sample" title="Permalink to this definition">¶</a></dt>
 <dd><p>Detailed information about sample <em>id</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>id</strong> (<em>int</em>) &#8211; Primary id key of sample</td>
+</tr>
+</tbody>
+</table>
+<p>Example response:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;datetime&quot;</span><span class="p">:</span> <span class="s">&quot;Thu, 05 Jun 2014 13:50:27 GMT&quot;</span><span class="p">,</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">52</span><span class="p">,</span>
+  <span class="s">&quot;sensor&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">&quot;gage&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="s">&quot;Wild River near RT 2 in Gilead Maine&quot;</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Wild River at Gilead&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/gages/2&quot;</span>
+    <span class="p">},</span>
+    <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;level&quot;</span><span class="p">,</span>
+    <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/sensors/5&quot;</span>
+  <span class="p">},</span>
+  <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/samples/52&quot;</span><span class="p">,</span>
+  <span class="s">&quot;value&quot;</span><span class="p">:</span> <span class="mf">24.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt id="app.api_1_0.samples.get_samples">
 <tt class="descclassname">app.api_1_0.samples.</tt><tt class="descname">get_samples</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/samples.html#get_samples"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.samples.get_samples" title="Permalink to this definition">¶</a></dt>
 <dd><p>List all samples</p>
+<p>Example response:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;count&quot;</span><span class="p">:</span> <span class="mi">10696</span><span class="p">,</span>
+  <span class="s">&quot;next&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/samples/?page=2&quot;</span><span class="p">,</span>
+  <span class="s">&quot;prev&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s">&quot;samples&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="s">&quot;datetime&quot;</span><span class="p">:</span> <span class="s">&quot;Thu, 05 Jun 2014 13:50:27 GMT&quot;</span><span class="p">,</span>
+      <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">52</span><span class="p">,</span>
+      <span class="s">&quot;sensor&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&quot;gage&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="s">&quot;Wild River near RT 2 in Gilead Maine&quot;</span><span class="p">,</span>
+          <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Wild River at Gilead&quot;</span><span class="p">,</span>
+          <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/gages/2&quot;</span>
+        <span class="p">},</span>
+        <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;level&quot;</span><span class="p">,</span>
+        <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/sensors/5&quot;</span>
+      <span class="p">},</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/samples/52&quot;</span><span class="p">,</span>
+      <span class="s">&quot;value&quot;</span><span class="p">:</span> <span class="mf">24.0</span>
+    <span class="p">},</span>
+    <span class="p">{</span> <span class="s">&quot;datetime&quot;</span><span class="p">:</span> <span class="s">&quot;Thu, 05 Jun 2014 13:50:27 GMT&quot;</span><span class="p">,</span>
+      <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">53</span><span class="p">,</span>
+      <span class="s">&quot;sensor&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&quot;gage&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="s">&quot;Wild River near RT 2 in Gilead Maine&quot;</span><span class="p">,</span>
+          <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Wild River at Gilead&quot;</span><span class="p">,</span>
+          <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://127.0.0.1:5000/api/1.0/gages/2&quot;</span>
+        <span class="p">},</span>
+        <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;volts&quot;</span><span class="p">,</span>
+        <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/sensors/8&quot;</span>
+      <span class="p">},</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/samples/53&quot;</span><span class="p">,</span>
+      <span class="s">&quot;value&quot;</span><span class="p">:</span> <span class="mf">4.096</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>
@@ -425,12 +630,68 @@
 <dl class="function">
 <dt id="app.api_1_0.sections.get_section">
 <tt class="descclassname">app.api_1_0.sections.</tt><tt class="descname">get_section</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/sections.html#get_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.sections.get_section" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Detailed information about section <em>id</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>id</strong> (<em>int</em>) &#8211; Primary key for section</td>
+</tr>
+</tbody>
+</table>
+<p>Example response:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;access&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s">&quot;description&quot;</span><span class="p">:</span> <span class="s">&quot;Most commonly run from the where Goose Eye Brook joins Bull Branch on down to Twin Bridges, Bull Branch is a gem of Western Maine. It most commonly runs when the Wild River gage in Gilead goes over 4 ft.&quot;</span><span class="p">,</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s">&quot;latitude&quot;</span><span class="p">:</span> <span class="mf">44.517188630525425</span><span class="p">,</span>
+  <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="s">&quot;Ketchum, ME&quot;</span><span class="p">,</span>
+  <span class="s">&quot;longitude&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">70.93158602714539</span><span class="p">,</span>
+  <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Bull Branch&quot;</span><span class="p">,</span>
+  <span class="s">&quot;regions&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="s">&quot;html&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/region/mahoosucs/&quot;</span><span class="p">,</span>
+      <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Mahoosuc Mountains&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/regions/1&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span> <span class="s">&quot;html&quot;</span><span class="p">:</span> <span class="s">&quot;http://127.0.0.1:5000/region/whites/&quot;</span><span class="p">,</span>
+      <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;White Mountains&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/regions/2&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span> <span class="s">&quot;html&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/region/maine/&quot;</span><span class="p">,</span>
+      <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Maine&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/regions/4&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/sections/1&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
 
 <dl class="function">
 <dt id="app.api_1_0.sections.get_sections">
 <tt class="descclassname">app.api_1_0.sections.</tt><tt class="descname">get_sections</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/sections.html#get_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.sections.get_sections" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>List all sections</p>
+<p>Example response:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;count&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s">&quot;next&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s">&quot;prev&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s">&quot;sections&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Bear River&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/sections/2&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Bull Branch&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/sections/1&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
 
 </div>
 </div>
@@ -447,18 +708,99 @@
 <dt id="app.api_1_0.sensors.get_sensor">
 <tt class="descclassname">app.api_1_0.sensors.</tt><tt class="descname">get_sensor</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/sensors.html#get_sensor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.sensors.get_sensor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Detailed information about sensor <em>id</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>id</strong> (<em>int</em>) &#8211; Primary id key of sensor</td>
+</tr>
+</tbody>
+</table>
+<p>Example response:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;description&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s">&quot;ended&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s">&quot;gage&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="s">&quot;Wild River near RT 2 in Gilead Maine&quot;</span><span class="p">,</span>
+    <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Wild River at Gilead&quot;</span><span class="p">,</span>
+    <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/gages/2&quot;</span>
+  <span class="p">},</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="s">&quot;maximum&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s">&quot;minimum&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s">&quot;recent_sample&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">&quot;datetime&quot;</span><span class="p">:</span> <span class="s">&quot;Mon, 25 Aug 2014 13:11:35 GMT&quot;</span><span class="p">,</span>
+    <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1555</span><span class="p">,</span>
+    <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/samples/1555&quot;</span><span class="p">,</span>
+    <span class="s">&quot;value&quot;</span><span class="p">:</span> <span class="mf">25.6666666666667</span>
+  <span class="p">},</span>
+  <span class="s">&quot;started&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;level&quot;</span><span class="p">,</span>
+  <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/sensors/5&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt id="app.api_1_0.sensors.get_sensor_samples">
 <tt class="descclassname">app.api_1_0.sensors.</tt><tt class="descname">get_sensor_samples</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/sensors.html#get_sensor_samples"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.sensors.get_sensor_samples" title="Permalink to this definition">¶</a></dt>
 <dd><p>List samples for sensor <em>id</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>id</strong> (<em>int</em>) &#8211; Primary id key of sensor</td>
+</tr>
+</tbody>
+</table>
+<p>Example response:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;count&quot;</span><span class="p">:</span> <span class="mi">487</span><span class="p">,</span>
+  <span class="s">&quot;next&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s">&quot;prev&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s">&quot;samples&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="s">&quot;datetime&quot;</span><span class="p">:</span> <span class="s">&quot;Thu, 05 Jun 2014 13:50:27 GMT&quot;</span><span class="p">,</span>
+      <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">52</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/samples/52&quot;</span><span class="p">,</span>
+      <span class="s">&quot;value&quot;</span><span class="p">:</span> <span class="mf">24.0</span>
+    <span class="p">},</span>
+    <span class="p">{</span> <span class="s">&quot;datetime&quot;</span><span class="p">:</span> <span class="s">&quot;Thu, 05 Jun 2014 13:50:42 GMT&quot;</span><span class="p">,</span>
+      <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">55</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/samples/55&quot;</span><span class="p">,</span>
+      <span class="s">&quot;value&quot;</span><span class="p">:</span> <span class="mf">24.0</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s">&quot;sensor&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;level&quot;</span><span class="p">,</span>
+    <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/sensors/5&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt id="app.api_1_0.sensors.get_sensors">
 <tt class="descclassname">app.api_1_0.sensors.</tt><tt class="descname">get_sensors</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/sensors.html#get_sensors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.sensors.get_sensors" title="Permalink to this definition">¶</a></dt>
 <dd><p>List all sensors</p>
+<p>Example response:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;count&quot;</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
+  <span class="s">&quot;next&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/sensors/?page=2&quot;</span><span class="p">,</span>
+  <span class="s">&quot;prev&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s">&quot;sensors&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;voltage&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/sensors/2&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;amps&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/sensors/3&quot;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>

@@ -356,6 +356,7 @@ class Gage(db.Model):
 		started (datetime): When samples started to be collected at this gage
 		ended (datetime): If sampling at this gage has stopped, when?
 		description (text): Long description for Gage that can contain HTML or Markdown within reason.
+		key (string): Secret key that samples are signed with
 		short_description (text): Short description for showing on other pages.
 		regions: List of ``Region`` objects that this Gage is in.
 		sensors: List of ``Sensor`` objects that are part of this Gage.

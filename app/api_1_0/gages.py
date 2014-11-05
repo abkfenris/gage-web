@@ -26,16 +26,14 @@ def get_gages():
 	
 	Example response: ::
 	
-		{"count": 5,
+		{ "count": 5,
 		  "gages": [
-		    {
-		      "id": 2,
+		    { "id": 2,
 		      "location": "Wild River near RT 2 in Gilead Maine",
 		      "name": "Wild River at Gilead",
 		      "url": "http://riverflo.ws/api/1.0/gages/2"
 		    },
-		    {
-		      "id": 3,
+		    { "id": 3,
 		      "location": "Bear River near RT 2 in Newry Maine",
 		      "name": "Bear River at Newry",
 		      "url": "http://riverflo.ws/api/1.0/gages/3"
@@ -66,23 +64,24 @@ def get_gage(id):
 	"""
 	Detailed information about gage *id*
 	
+	Parameters:
+		id (int): Primary id key of a gage
+	
 	Example response: ::
 	
-		{"html": "http://riverflo.ws/gage/androscoggin-rumford/",
+		{ "html": "http://riverflo.ws/gage/androscoggin-rumford/",
 		  "id": 4,
 		  "location": null,
 		  "name": "Androscoggin River at Rumford",
 		  "regions": [
-		    {
-		      "html": "http://riverflo.ws/region/maine/",
+		    { "html": "http://riverflo.ws/region/maine/",
 		      "id": 4,
 		      "name": "Maine",
 		      "url": "http://riverflo.ws/api/1.0/regions/4"
 		    }
 		  ],
 		  "sensors": [
-		    {
-		      "id": 10,
+		    { "id": 10,
 		      "recent_sample": {
 		        "datetime": "Mon, 03 Nov 2014 18:15:00 GMT",
 		        "id": 5801,
@@ -92,8 +91,7 @@ def get_gage(id):
 		      "type": "usgs-height",
 		      "url": "http://riverflo.ws/api/1.0/sensors/10"
 		    },
-		    {
-		      "id": 11,
+		    { "id": 11,
 		      "recent_sample": {
 		        "datetime": "Mon, 03 Nov 2014 18:15:00 GMT",
 		        "id": 5866,
@@ -114,6 +112,9 @@ def get_gage(id):
 def gage_new_samples(id):
 	"""
 	Submit new samples to gage *id*
+	
+	Parameters:
+		id (int): Primary id key number of a gage
 	
 	Samples are formatted in body of request as a JSON Web Signature using the ``Gage.key``
 	
@@ -162,8 +163,8 @@ def gage_new_samples(id):
 	
 	Example response: ::
 	
-		{'gage': {u'id': 5,
-			'location': None,
+		{ 'gage': {u'id': 5,
+			'location': 'Androscoggin River downstream of I-95 in Auburn Maine',
 			'name': 'Androscoggin River at Auburn',
 			'url': 'http://riverflo.ws/api/1.0/gages/5'},
 		 'result': 'created',
