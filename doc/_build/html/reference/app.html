@@ -123,7 +123,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="app.api_1_0.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="app.api_1_0.html#app-api-1-0-errors-module">app.api_1_0.errors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.api_1_0.html#module-app.api_1_0.errors">app.api_1_0.errors module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="app.api_1_0.html#module-app.api_1_0.gages">app.api_1_0.gages module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="app.api_1_0.html#id1">Endpoints:</a></li>
 </ul>
@@ -227,7 +227,7 @@
 <li><strong>id</strong> (<em>int</em>) &#8211; Primary key for Gage</li>
 <li><strong>name</strong> (<em>string</em>) &#8211; Nice name for gage</li>
 <li><strong>slug</strong> (<em>string</em>) &#8211; slug used in url</li>
-<li><strong>point</strong> (<em>Point</em>) &#8211; PostGIS Point object</li>
+<li><strong>point</strong> (<em>Point</em>) &#8211; PostGIS Point object. Accepts WKT.</li>
 <li><strong>river_id</strong> (<em>int</em>) &#8211; Foreign key of <tt class="docutils literal"><span class="pre">River</span></tt>.id that the Gage is on.</li>
 <li><strong>river</strong> &#8211; <tt class="docutils literal"><span class="pre">River</span></tt> object</li>
 <li><strong>user_id</strong> (<em>int</em>) &#8211; Foreign key of <tt class="docutils literal"><span class="pre">User</span></tt>.id that &#8216;owns&#8217; the Gage.</li>
@@ -422,9 +422,9 @@ gage.latlon().x for longitude</p>
 <li><strong>short_description</strong> (<em>text</em>) &#8211; Short description for section for showing on other pages.</li>
 <li><strong>access</strong> (<em>string</em>) &#8211; Access restrictions or issues</li>
 <li><strong>location</strong> (<em>string</em>) &#8211; Where is it?</li>
-<li><strong>putin</strong> (<em>Point</em>) &#8211; PostGIS Point object for putin</li>
-<li><strong>takeout</strong> (<em>Point</em>) &#8211; PostGIS Point object for takeout</li>
-<li><strong>path</strong> (<em>Linestring</em>) &#8211; PostGIS Linestring object for river</li>
+<li><strong>putin</strong> (<em>Point</em>) &#8211; PostGIS Point object for putin. Accepts WKT.</li>
+<li><strong>takeout</strong> (<em>Point</em>) &#8211; PostGIS Point object for takeout. Accepts WKT.</li>
+<li><strong>path</strong> (<em>Linestring</em>) &#8211; PostGIS Linestring object for river. Accepts WKT.</li>
 <li><strong>in_elevation</strong> (<em>int</em>) &#8211; Elevation of the putin</li>
 <li><strong>out_elevation</strong> (<em>int</em>) &#8211; Elevation of the takeout</li>
 <li><strong>header_image</strong> (<em>string</em>) &#8211; Header image to override default</li>

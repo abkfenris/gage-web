@@ -385,6 +385,7 @@ class Gage(db.Model):
 	ended = db.Column(db.DateTime)
 	description = db.Column(db.Text)
 	short_description = db.Column(db.Text)
+	key = db.Column(db.String)
 	
 	regions = db.relationship('Region', secondary=gages_regions,
 								backref=db.backref('gages', lazy='dynamic'))
@@ -451,7 +452,7 @@ class Gage(db.Model):
 		sample = Sample(sensor_id=sensor.id, value=value, datetime=sdatetime )
 		db.session.add(sample)
 		db.session.commit()
-		return sensor.id, sensor.stype
+		return sample
 	
 	def __repr__(self):
 		return '<Gage %r>' % self.name
@@ -516,14 +517,15 @@ class Sensor(db.Model):
 	ended = db.Column(db.DateTime)
 	
 	def timediff(self, dateTime):
-		delta = datetime.datetime.now()-datetime.timedelta(minutes=30)
-		return self.stype, str(dateTime), str(datetime.datetime.now()), str(dateTime > delta), str(dateTime - datetime.datetime.now())
+		delta = datetime.datetime.now()-datetime.timedelta(minutes=60)
+		return self.stype, str(dateTime), str(datetime.datetime.now()), str(dateTime > delta), str(datetime.datetime.now() - dateTime)
 	
 	def recent(self):
 		"""
 		Return recent sample value.
 		"""
-		delta = datetime.datetime.now()-datetime.timedelta(minutes=30)
+		delta = datetime.datetime.now()-datetime.timedelta(minutes=60)
+		print delta
 		sample = Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
 		if sample is not None and ( self.local is True or sample.datetime > delta ):
 			print self.timediff(sample.datetime), 'A'

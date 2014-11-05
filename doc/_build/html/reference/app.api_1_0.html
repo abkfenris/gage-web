@@ -164,8 +164,29 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="app-api-1-0-errors-module">
-<h2>app.api_1_0.errors module<a class="headerlink" href="#app-api-1-0-errors-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-app.api_1_0.errors">
+<span id="app-api-1-0-errors-module"></span><h2>app.api_1_0.errors module<a class="headerlink" href="#module-app.api_1_0.errors" title="Permalink to this headline">¶</a></h2>
+<p>Errors that can be referenced by other api routes</p>
+<dl class="function">
+<dt id="app.api_1_0.errors.bad_request">
+<tt class="descclassname">app.api_1_0.errors.</tt><tt class="descname">bad_request</tt><big>(</big><em>message</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/errors.html#bad_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.errors.bad_request" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.api_1_0.errors.forbidden">
+<tt class="descclassname">app.api_1_0.errors.</tt><tt class="descname">forbidden</tt><big>(</big><em>message</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/errors.html#forbidden"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.errors.forbidden" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.api_1_0.errors.unauthorized">
+<tt class="descclassname">app.api_1_0.errors.</tt><tt class="descname">unauthorized</tt><big>(</big><em>message</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/errors.html#unauthorized"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.errors.unauthorized" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.api_1_0.errors.validation_error">
+<tt class="descclassname">app.api_1_0.errors.</tt><tt class="descname">validation_error</tt><big>(</big><em>e</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/errors.html#validation_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.errors.validation_error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 <div class="section" id="module-app.api_1_0.gages">
 <span id="app-api-1-0-gages-module"></span><h2>app.api_1_0.gages module<a class="headerlink" href="#module-app.api_1_0.gages" title="Permalink to this headline">¶</a></h2>
@@ -181,18 +202,148 @@
 <dt id="app.api_1_0.gages.gage_new_samples">
 <tt class="descclassname">app.api_1_0.gages.</tt><tt class="descname">gage_new_samples</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/gages.html#gage_new_samples"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.gages.gage_new_samples" title="Permalink to this definition">¶</a></dt>
 <dd><p>Submit new samples to gage <em>id</em></p>
+<p>Samples are formatted in body of request as a JSON Web Signature using the <tt class="docutils literal"><span class="pre">Gage.key</span></tt></p>
+<p>Example sample submitter:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">itsdangerous</span> <span class="kn">import</span> <span class="n">JSONWebSignatureSerializer</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;samples&#39;</span><span class="p">:[</span>
+        <span class="p">{</span><span class="s">&#39;type&#39;</span><span class="p">:</span><span class="s">&#39;level&#39;</span><span class="p">,</span>
+         <span class="s">&#39;value&#39;</span><span class="p">:</span><span class="mf">16.7</span><span class="p">,</span>
+         <span class="s">&#39;datetime&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+         <span class="p">},</span>
+        <span class="p">{</span><span class="s">&#39;type&#39;</span><span class="p">:</span><span class="s">&#39;amps&#39;</span><span class="p">,</span>
+         <span class="s">&#39;value&#39;</span><span class="p">:</span><span class="mf">367.3</span><span class="p">,</span>
+         <span class="s">&#39;datetime&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+         <span class="p">},</span>
+        <span class="p">{</span><span class="s">&#39;type&#39;</span><span class="p">:</span><span class="s">&#39;voltage&#39;</span><span class="p">,</span>
+         <span class="s">&#39;value&#39;</span><span class="p">:</span><span class="mf">14.3</span><span class="p">,</span>
+         <span class="s">&#39;datetime&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+         <span class="p">},</span>
+        <span class="p">{</span><span class="s">&#39;type&#39;</span><span class="p">:</span><span class="s">&#39;discharge&#39;</span><span class="p">,</span>
+         <span class="s">&#39;value&#39;</span><span class="p">:</span><span class="mi">480</span><span class="p">,</span>
+         <span class="s">&#39;datetime&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+        <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s">&#39;gage&#39;</span><span class="p">:{</span>
+        <span class="s">&#39;id&#39;</span><span class="p">:</span><span class="mi">5</span>
+        <span class="p">}}</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">JSONWebSignatureSerializer</span><span class="p">(</span><span class="s">&#39;&lt;gage.key&gt;&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s">&quot;http://riverflo.ws/api/1.0/gages/&lt;gage.id&gt;/sample&quot;</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">is</span> <span class="mi">200</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+</pre></div>
+</div>
+<p>If the key matches the stored key for the gage id in the url,   the server will iterate over the samples and add them to the database   creating new sensors for the gage if a new sample type is found.        Then the server will return JSON with a status code of 200.</p>
+<p>Example response:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;gage&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">u&#39;id&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s">&#39;location&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;Androscoggin River at Auburn&#39;</span><span class="p">,</span>
+        <span class="s">&#39;url&#39;</span><span class="p">:</span> <span class="s">&#39;http://riverflo.ws/api/1.0/gages/5&#39;</span><span class="p">},</span>
+ <span class="s">&#39;result&#39;</span><span class="p">:</span> <span class="s">&#39;created&#39;</span><span class="p">,</span>
+ <span class="s">&#39;samples&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s">&#39;datetime&#39;</span><span class="p">:</span> <span class="s">&#39;Tue, 04 Nov 2014 20:43:39 GMT&#39;</span><span class="p">,</span>
+   <span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="mi">10781</span><span class="p">,</span>
+   <span class="s">&#39;url&#39;</span><span class="p">:</span> <span class="s">&#39;http://riverflo.ws/api/1.0/samples/10781&#39;</span><span class="p">,</span>
+   <span class="s">&#39;value&#39;</span><span class="p">:</span> <span class="mf">16.7</span><span class="p">},</span>
+  <span class="p">{</span><span class="s">&#39;datetime&#39;</span><span class="p">:</span> <span class="s">&#39;Tue, 04 Nov 2014 20:43:39 GMT&#39;</span><span class="p">,</span>
+   <span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="mi">10782</span><span class="p">,</span>
+   <span class="s">&#39;url&#39;</span><span class="p">:</span> <span class="s">&#39;http://riverflo.ws/api/1.0/samples/10782&#39;</span><span class="p">,</span>
+   <span class="s">&#39;value&#39;</span><span class="p">:</span> <span class="mf">367.3</span><span class="p">},</span>
+  <span class="p">{</span><span class="s">&#39;datetime&#39;</span><span class="p">:</span> <span class="s">&#39;Tue, 04 Nov 2014 20:43:39 GMT&#39;</span><span class="p">,</span>
+   <span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="mi">10783</span><span class="p">,</span>
+   <span class="s">&#39;url&#39;</span><span class="p">:</span> <span class="s">&#39;http://riverflo.ws/api/1.0/samples/10783&#39;</span><span class="p">,</span>
+   <span class="s">&#39;value&#39;</span><span class="p">:</span> <span class="mf">14.3</span><span class="p">},</span>
+  <span class="p">{</span><span class="s">&#39;datetime&#39;</span><span class="p">:</span> <span class="s">&#39;Tue, 04 Nov 2014 20:43:39 GMT&#39;</span><span class="p">,</span>
+   <span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="mi">10784</span><span class="p">,</span>
+   <span class="s">&#39;url&#39;</span><span class="p">:</span> <span class="s">&#39;http://riverflo.ws/api/1.0/samples/10784&#39;</span><span class="p">,</span>
+   <span class="s">&#39;value&#39;</span><span class="p">:</span> <span class="mf">480.0</span><span class="p">}]}</span>
+</pre></div>
+</div>
+<p>If the signature does not match, the server will return JSON    with a status code of 401 - Unauthorized:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;error&#39;</span><span class="p">:</span> <span class="s">&#39;unauthorized&#39;</span><span class="p">,</span> <span class="s">&#39;message&#39;</span><span class="p">:</span> <span class="s">&#39;bad signature&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt id="app.api_1_0.gages.get_gage">
 <tt class="descclassname">app.api_1_0.gages.</tt><tt class="descname">get_gage</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/gages.html#get_gage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.gages.get_gage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Detailed information about gage <em>id</em></p>
+<p>Example response:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;html&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/gage/androscoggin-rumford/&quot;</span><span class="p">,</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Androscoggin River at Rumford&quot;</span><span class="p">,</span>
+  <span class="s">&quot;regions&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s">&quot;html&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/region/maine/&quot;</span><span class="p">,</span>
+      <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Maine&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/regions/4&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s">&quot;sensors&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="s">&quot;recent_sample&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&quot;datetime&quot;</span><span class="p">:</span> <span class="s">&quot;Mon, 03 Nov 2014 18:15:00 GMT&quot;</span><span class="p">,</span>
+        <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5801</span><span class="p">,</span>
+        <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/samples/5801&quot;</span><span class="p">,</span>
+        <span class="s">&quot;value&quot;</span><span class="p">:</span> <span class="mf">4.32</span>
+      <span class="p">},</span>
+      <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;usgs-height&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/sensors/10&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+      <span class="s">&quot;recent_sample&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&quot;datetime&quot;</span><span class="p">:</span> <span class="s">&quot;Mon, 03 Nov 2014 18:15:00 GMT&quot;</span><span class="p">,</span>
+        <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5866</span><span class="p">,</span>
+        <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/samples/5866&quot;</span><span class="p">,</span>
+        <span class="s">&quot;value&quot;</span><span class="p">:</span> <span class="mf">3230.0</span>
+      <span class="p">},</span>
+      <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;usgs-discharge&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/sensors/11&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/gages/4&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt id="app.api_1_0.gages.get_gages">
 <tt class="descclassname">app.api_1_0.gages.</tt><tt class="descname">get_gages</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/api_1_0/gages.html#get_gages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.api_1_0.gages.get_gages" title="Permalink to this definition">¶</a></dt>
 <dd><p>List all gages</p>
+<p>Example response:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;count&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="s">&quot;gages&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="s">&quot;Wild River near RT 2 in Gilead Maine&quot;</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Wild River at Gilead&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/gages/2&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="s">&quot;Bear River near RT 2 in Newry Maine&quot;</span><span class="p">,</span>
+      <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Bear River at Newry&quot;</span><span class="p">,</span>
+      <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/gages/3&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s">&quot;next&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/gages/?page=2&quot;</span><span class="p">,</span>
+  <span class="s">&quot;prev&quot;</span><span class="p">:</span> <span class="n">null</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>
