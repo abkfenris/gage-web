@@ -19,8 +19,21 @@ class SectionView(ModelView):
 	column_list = ('name', 'slug', 'river', 'location')
 	column_labels = dict(slug='URL Slug')
 	column_searchable_list = ('name', River.name)
+	form_overrides = dict(putin=WTFormsMapField)
+	form_args = dict(
+		putin = dict(
+			geometry_type='Point', height=500, width=500
+		)
+	)
+	
+	def scaffold_form(self):
+		form_class = super(SectionView, self).scaffold_form()
+		form_class.putin = WTFormsMapField()
+		return form_class
+	
 
 class GageView(ModelView):
+	can_create = True
 	column_exclude_list = ('point', 'key', 'elevationUnits', 'zipcode', 'visible', 'elevation', 'backend_notes', 'description', 'short_description', 'started', 'ended')
 	column_labels = dict(slug='URL Slug')
 	column_searchable_list = ('name', River.name, 'slug', 'local_town', 'location')
@@ -31,6 +44,9 @@ class GageView(ModelView):
 			geometry_type='Point', height=500, width=500
 		)
 	)
+	
+	def __init__(self, Gage, session, **kwargs):
+		super(GageView, self).__init__(Gage, session, **kwargs)
 	
 	def scaffold_form(self):
 		form_class = super(GageView, self).scaffold_form()
