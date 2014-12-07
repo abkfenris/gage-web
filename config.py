@@ -7,6 +7,7 @@ class Config:
 	dropbox_app_secret = os.environ.get('DROPBOX_APP_SECRET')
 	dropbox_app_token = os.environ.get('DROPBOX_APP_TOKEN')
 	SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+	MAPBOX_MAP_ID = 'fenris.kdh92755'
 	
 	@staticmethod
 	def init_app(app):
