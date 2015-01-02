@@ -1,0 +1,222 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>config &mdash; Gage-Web 0.1 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Gage-Web 0.1 documentation" href="../index.html"/>
+        <link rel="up" title="Module code" href="index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> Gage-Web</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">Gage-Web API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Gage-Web Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/app.html">app package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/config.html">config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/manage.html">manage module</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Gage-Web</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      
+    <li>config</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <h1>Source code for config</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">basedir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
+
+<div class="viewcode-block" id="Config"><a class="viewcode-back" href="../reference/config.html#config.Config">[docs]</a><span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+	<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;SECRET_KEY&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="s">&#39;o4d?2EXxt9.62Qj;ghXm[{#voUmF#$7ExY8T^V8BRC8si8faA$&#39;</span>
+	<span class="n">dropbox_app_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;DROPBOX_APP_KEY&#39;</span><span class="p">)</span>
+	<span class="n">dropbox_app_secret</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;DROPBOX_APP_SECRET&#39;</span><span class="p">)</span>
+	<span class="n">dropbox_app_token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;DROPBOX_APP_TOKEN&#39;</span><span class="p">)</span>
+	<span class="n">SQLALCHEMY_DATABASE_URI</span> <span class="o">=</span> <span class="s">&#39;postgresql://localhost/gage_web&#39;</span>
+	<span class="n">SQLALCHEMY_COMMIT_ON_TEARDOWN</span> <span class="o">=</span> <span class="bp">True</span>
+	<span class="n">DEBUG</span> <span class="o">=</span> <span class="bp">True</span>
+	<span class="n">API_GAGES_PER_PAGE</span> <span class="o">=</span> <span class="mi">2</span>
+	
+	<span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Config.init_app"><a class="viewcode-back" href="../reference/config.html#config.Config.init_app">[docs]</a>	<span class="k">def</span> <span class="nf">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+		<span class="k">pass</span>
+	
+
+</div></div>
+<div class="viewcode-block" id="DevelopmentConfig"><a class="viewcode-back" href="../reference/config.html#config.DevelopmentConfig">[docs]</a><span class="k">class</span> <span class="nc">DevelopmentConfig</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+	<span class="n">DEBUG</span> <span class="o">=</span> <span class="bp">True</span>
+	<span class="n">DATABASE</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;main.db&#39;</span><span class="p">,</span>
+		<span class="s">&#39;engine&#39;</span><span class="p">:</span> <span class="s">&#39;peewee.SqliteDatabase&#39;</span>
+	<span class="p">}</span>
+	<span class="c">#SERVER_NAME = &#39;flows.ngrok.com&#39;</span>
+	
+	</div>
+<div class="viewcode-block" id="TestingConfig"><a class="viewcode-back" href="../reference/config.html#config.TestingConfig">[docs]</a><span class="k">class</span> <span class="nc">TestingConfig</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+	<span class="n">TESTING</span> <span class="o">=</span> <span class="bp">True</span>
+	<span class="n">DATABASE</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;main.db&#39;</span><span class="p">,</span>
+		<span class="s">&#39;engine&#39;</span><span class="p">:</span> <span class="s">&#39;peewee.SqliteDatabase&#39;</span>
+	<span class="p">}</span>
+</div>
+<div class="viewcode-block" id="DockerLocalConfig"><a class="viewcode-back" href="../reference/config.html#config.DockerLocalConfig">[docs]</a><span class="k">class</span> <span class="nc">DockerLocalConfig</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+	<span class="n">DEBUG</span> <span class="o">=</span> <span class="bp">True</span>
+	<span class="n">DATABASE</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;db&#39;</span><span class="p">,</span>
+		<span class="s">&#39;engine&#39;</span><span class="p">:</span> <span class="s">&#39;peewee.PostgresqlDatabase&#39;</span><span class="p">,</span>
+		<span class="s">&#39;user&#39;</span><span class="p">:</span> <span class="s">&#39;postgres&#39;</span>
+	<span class="p">}</span>
+	<span class="n">SERVER_NAME</span> <span class="o">=</span> <span class="s">&quot;localhost&quot;</span>
+
+</div>
+<div class="viewcode-block" id="ProductionConfig"><a class="viewcode-back" href="../reference/config.html#config.ProductionConfig">[docs]</a><span class="k">class</span> <span class="nc">ProductionConfig</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+	<span class="n">DATABASE</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;DATABASE_PATH&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="s">&#39;data.db&#39;</span><span class="p">,</span>
+		<span class="s">&#39;engine&#39;</span><span class="p">:</span> <span class="s">&#39;peewee.SqliteDatabase&#39;</span>
+	<span class="p">}</span>
+	<span class="n">SERVER_NAME</span> <span class="o">=</span> <span class="s">&#39;flows.alexkerney.com&#39;</span>
+</div>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="s">&#39;development&#39;</span><span class="p">:</span> <span class="n">DevelopmentConfig</span><span class="p">,</span>
+	<span class="s">&#39;testing&#39;</span><span class="p">:</span> <span class="n">TestingConfig</span><span class="p">,</span>
+	<span class="s">&#39;production&#39;</span><span class="p">:</span> <span class="n">ProductionConfig</span><span class="p">,</span>
+	
+	<span class="s">&#39;default&#39;</span><span class="p">:</span> <span class="n">DevelopmentConfig</span>
+<span class="p">}</span>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Alex Kerney.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
