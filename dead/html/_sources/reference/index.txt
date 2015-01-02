@@ -1,7 +1,0 @@
-Gage-Web Reference
-==================
-
-..  toctree::
-	:maxdepth: 1
-	app
-	manage
