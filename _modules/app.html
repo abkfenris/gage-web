@@ -112,10 +112,12 @@
 <span class="kn">from</span> <span class="nn">flask.ext.bootstrap</span> <span class="kn">import</span> <span class="n">Bootstrap</span>
 <span class="kn">from</span> <span class="nn">flask.ext.sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
 <span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="kn">from</span> <span class="nn">flask_debugtoolbar</span> <span class="kn">import</span> <span class="n">DebugToolbarExtension</span>
 
 
 <span class="n">bootstrap</span> <span class="o">=</span> <span class="n">Bootstrap</span><span class="p">()</span>
 <span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">()</span>
+<span class="n">toolbar</span> <span class="o">=</span> <span class="n">DebugToolbarExtension</span><span class="p">()</span>
 
 <div class="viewcode-block" id="create_app"><a class="viewcode-back" href="../reference/app.html#app.create_app">[docs]</a><span class="k">def</span> <span class="nf">create_app</span><span class="p">(</span><span class="n">config_name</span><span class="p">):</span>
 	<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
@@ -123,12 +125,16 @@
 	
 	<span class="n">bootstrap</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 	<span class="n">db</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+	<span class="n">toolbar</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 	
 	<span class="kn">from</span> <span class="nn">main</span> <span class="kn">import</span> <span class="n">main</span>
 	<span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">main</span><span class="p">)</span>
 	
-	<span class="kn">from</span> <span class="nn">admin</span> <span class="kn">import</span> <span class="n">admin</span> <span class="k">as</span> <span class="n">admin_blueprint</span>
-	<span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">admin_blueprint</span><span class="p">,</span> <span class="n">url_prefix</span><span class="o">=</span><span class="s">&#39;/admin&#39;</span><span class="p">)</span>
+	<span class="c">#from admin import admin as admin_blueprint</span>
+	<span class="c">#app.register_blueprint(admin_blueprint, url_prefix=&#39;/admin&#39;)</span>
+	
+	<span class="kn">from</span> <span class="nn">admin</span> <span class="kn">import</span> <span class="n">admin</span>
+	<span class="n">admin</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 	
 	<span class="kn">from</span> <span class="nn">api_1_0</span> <span class="kn">import</span> <span class="n">api</span> <span class="k">as</span> <span class="n">api_1_0_blueprint</span>
 	<span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">api_1_0_blueprint</span><span class="p">,</span> <span class="n">url_prefix</span><span class="o">=</span><span class="s">&#39;/api/1.0&#39;</span><span class="p">)</span>
@@ -173,7 +179,7 @@
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

@@ -112,16 +112,150 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-app.admin.views">
-<span id="app-admin-views-module"></span><h2>app.admin.views module<a class="headerlink" href="#module-app.admin.views" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="app.admin.views.indexpage">
-<tt class="descclassname">app.admin.views.</tt><tt class="descname">indexpage</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/admin/views.html#indexpage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.admin.views.indexpage" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<div class="section" id="app-admin-views-module">
+<h2>app.admin.views module<a class="headerlink" href="#app-admin-views-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-app.admin">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-app.admin" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="app.admin.GageView">
+<em class="property">class </em><code class="descclassname">app.admin.</code><code class="descname">GageView</code><span class="sig-paren">(</span><em>model</em>, <em>session</em>, <em>name=None</em>, <em>category=None</em>, <em>endpoint=None</em>, <em>url=None</em>, <em>static_folder=None</em>, <em>menu_class_name=None</em>, <em>menu_icon_type=None</em>, <em>menu_icon_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/admin.html#GageView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.admin.GageView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_admin.contrib.geoa.view.ModelView</span></code></p>
+<dl class="method">
+<dt id="app.admin.GageView.action_view">
+<code class="descname">action_view</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.GageView.action_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mass-model action view.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.GageView.ajax_lookup">
+<code class="descname">ajax_lookup</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.GageView.ajax_lookup" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="app.admin.GageView.ajax_update">
+<code class="descname">ajax_update</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.GageView.ajax_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edits a single column of a record in list view.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="app.admin.GageView.can_create">
+<code class="descname">can_create</code><em class="property"> = True</em><a class="headerlink" href="#app.admin.GageView.can_create" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="app.admin.GageView.column_exclude_list">
+<code class="descname">column_exclude_list</code><em class="property"> = ('key', 'elevationUnits', 'zipcode', 'visible', 'elevation', 'backend_notes', 'description', 'short_description', 'started', 'ended')</em><a class="headerlink" href="#app.admin.GageView.column_exclude_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="app.admin.GageView.column_labels">
+<code class="descname">column_labels</code><em class="property"> = {'slug': 'URL Slug'}</em><a class="headerlink" href="#app.admin.GageView.column_labels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="app.admin.GageView.column_searchable_list">
+<code class="descname">column_searchable_list</code><em class="property"> = ('name', &lt;sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x10d8ee290&gt;, 'slug', 'local_town', 'location')</em><a class="headerlink" href="#app.admin.GageView.column_searchable_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="app.admin.GageView.create_view">
+<code class="descname">create_view</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.GageView.create_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create model view</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.GageView.delete_view">
+<code class="descname">delete_view</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.GageView.delete_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete model view. Only POST method is allowed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.GageView.edit_view">
+<code class="descname">edit_view</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.GageView.edit_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edit model view</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="app.admin.GageView.form_widget_args">
+<code class="descname">form_widget_args</code><em class="property"> = {'point': {'data-width': 500, 'data-height': 500}}</em><a class="headerlink" href="#app.admin.GageView.form_widget_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="app.admin.GageView.index_view">
+<code class="descname">index_view</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.GageView.index_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>List view</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="app.admin.SectionView">
+<em class="property">class </em><code class="descclassname">app.admin.</code><code class="descname">SectionView</code><span class="sig-paren">(</span><em>model</em>, <em>session</em>, <em>name=None</em>, <em>category=None</em>, <em>endpoint=None</em>, <em>url=None</em>, <em>static_folder=None</em>, <em>menu_class_name=None</em>, <em>menu_icon_type=None</em>, <em>menu_icon_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/admin.html#SectionView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.admin.SectionView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_admin.contrib.geoa.view.ModelView</span></code></p>
+<dl class="method">
+<dt id="app.admin.SectionView.action_view">
+<code class="descname">action_view</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.SectionView.action_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mass-model action view.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.SectionView.ajax_lookup">
+<code class="descname">ajax_lookup</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.SectionView.ajax_lookup" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="app.admin.SectionView.ajax_update">
+<code class="descname">ajax_update</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.SectionView.ajax_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edits a single column of a record in list view.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="app.admin.SectionView.column_labels">
+<code class="descname">column_labels</code><em class="property"> = {'slug': 'URL Slug'}</em><a class="headerlink" href="#app.admin.SectionView.column_labels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="app.admin.SectionView.column_list">
+<code class="descname">column_list</code><em class="property"> = ('name', 'path', 'slug', 'river', 'location')</em><a class="headerlink" href="#app.admin.SectionView.column_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="app.admin.SectionView.column_searchable_list">
+<code class="descname">column_searchable_list</code><em class="property"> = ('name', &lt;sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x10d8ee290&gt;)</em><a class="headerlink" href="#app.admin.SectionView.column_searchable_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="app.admin.SectionView.create_view">
+<code class="descname">create_view</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.SectionView.create_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create model view</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.SectionView.delete_view">
+<code class="descname">delete_view</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.SectionView.delete_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete model view. Only POST method is allowed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.SectionView.edit_view">
+<code class="descname">edit_view</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.SectionView.edit_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edit model view</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="app.admin.SectionView.form_widget_args">
+<code class="descname">form_widget_args</code><em class="property"> = {'takeout': {'data-width': 200, 'data-height': 200}, 'path': {'data-width': 600, 'data-height': 600}, 'putin': {'data-width': 400, 'data-height': 400}}</em><a class="headerlink" href="#app.admin.SectionView.form_widget_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="app.admin.SectionView.index_view">
+<code class="descname">index_view</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.SectionView.index_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>List view</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
@@ -172,7 +306,7 @@
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
