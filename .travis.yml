@@ -1,11 +1,12 @@
 language: python
 python:
     - "2.7"
-services:
-    - postgresql
+addons:
+    postgresql: "9.4"
 before_script:
     - psql -U postgres -c 'CREATE DATABASE gage_web_testing;'
     - psql -U postgres -c "CREATE EXTENSION postgis;" gage_web_testing
+cache: pip
 install: "pip install -r requirements.txt"
 script: nosetests --cover-package=app --with-xcoverage
 after_success:
