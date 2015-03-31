@@ -656,7 +656,7 @@ class Sample(db.Model):
 		json_sample = {
 			'id': self.id,
 			'value': self.value,
-			'datetime': self.datetime,
+			'datetime': str(self.datetime),
 			'url': url_for('api.get_sample', id=self.id, _external=True)
 		}
 		return json_sample

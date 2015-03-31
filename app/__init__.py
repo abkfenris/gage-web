@@ -32,7 +32,7 @@ def create_app(config_name):
 	from admin import admin
 	admin.init_app(app)
 	
-	from api_1_0 import api as api_1_0_blueprint
-	app.register_blueprint(api_1_0_blueprint, url_prefix='/api/1.0')
+	from api_0_1 import api as api_0_1_blueprint
+	app.register_blueprint(api_0_1_blueprint, url_prefix='/api/0.1')
 	
 	return app

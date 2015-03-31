@@ -45,11 +45,17 @@ help:
 	@echo "  pseudoxml  to make pseudoxml-XML files for display purposes"
 	@echo "  linkcheck  to check all external links for integrity"
 	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
+	@echo "  ghp		to import html into github-pages branch"
+
+ghp: html
+	ghp-import -n _build/html/
+	@ echo
+	@ echo "github-pages branch created from _build/html"
 
 clean:
 	rm -rf $(BUILDDIR)/*
 
-html:
+html: clean
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."

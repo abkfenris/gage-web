@@ -1,6 +1,7 @@
 import requests
 import datetime
-from dateutil import parser
+import arrow
+#from dateutil import parser
 from .. import db
 
 def get_samples(sensor, remote_id, period='P1D', startDT=None, endDT=None, parameter='00065'):
@@ -20,7 +21,8 @@ def get_samples(sensor, remote_id, period='P1D', startDT=None, endDT=None, param
 	
 	# iterate over samples
 	for sample in r.json()['value']['timeSeries'][0]['values'][0]['value']:
-		time = parser.parse(sample['dateTime']) # parsing time like http://stackoverflow.com/questions/3305413/python-strptime-and-timezones
+		time = arrow.get(sample['dateTime']).datetime
+		# time = parser.parse(sample['dateTime']) # parsing time like http://stackoverflow.com/questions/3305413/python-strptime-and-timezones
 		sample = Sample(sensor_id=sensor.id, value=float(sample['value']), datetime=time )
 		db.session.add(sample)
 		db.session.commit()
