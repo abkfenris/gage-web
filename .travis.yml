@@ -1,4 +1,5 @@
 language: python
+cache: pip
 python:
     - "2.7"
 addons:
@@ -6,8 +7,7 @@ addons:
 before_script:
     - psql -U postgres -c 'CREATE DATABASE gage_web_testing;'
     - psql -U postgres -c "CREATE EXTENSION postgis;" gage_web_testing
-cache: pip
-install: "pip install -r requirements.txt"
+before_install: "pip install -r requirements.txt"
 script: nosetests --cover-package=app --with-xcoverage
 after_success:
     - coveralls
