@@ -15,24 +15,22 @@ bootstrap = Bootstrap()
 db = SQLAlchemy()
 toolbar = DebugToolbarExtension()
 
+
 def create_app(config_name):
-	app = Flask(__name__)
-	app.config.from_object(config[config_name])
-	
-	bootstrap.init_app(app)
-	db.init_app(app)
-	toolbar.init_app(app)
-	
-	from main import main
-	app.register_blueprint(main)
-	
-	#from admin import admin as admin_blueprint
-	#app.register_blueprint(admin_blueprint, url_prefix='/admin')
-	
-	from admin import admin
-	admin.init_app(app)
-	
-	from api_0_1 import api as api_0_1_blueprint
-	app.register_blueprint(api_0_1_blueprint, url_prefix='/api/0.1')
-	
-	return app
+    app = Flask(__name__)
+    app.config.from_object(config[config_name])
+
+    bootstrap.init_app(app)
+    db.init_app(app)
+    toolbar.init_app(app)
+
+    from main import main
+    app.register_blueprint(main)
+
+    from admin import admin
+    admin.init_app(app)
+
+    from api_0_1 import api as api_0_1_blueprint
+    app.register_blueprint(api_0_1_blueprint, url_prefix='/api/0.1')
+
+    return app

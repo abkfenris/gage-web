@@ -10,14 +10,13 @@ Endpoints:
 
 """
 
-from flask import jsonify, request, g, abort, url_for, current_app
+from flask import jsonify, request, url_for, current_app
 from itsdangerous import JSONWebSignatureSerializer, BadSignature
-#from flask.ext import restful
-from .. import db
+
 from ..models import Gage
 from . import api
-#from .errors import forbidden
 from .errors import unauthorized
+
 
 @api.route('/gages/')
 def get_gages():
@@ -44,7 +43,9 @@ def get_gages():
         }
     """
     page = request.args.get('page', 1, type=int)
-    pagination = Gage.query.paginate(page, per_page=current_app.config['API_GAGES_PER_PAGE'], error_out=False)
+    pagination = Gage.query.paginate(page,
+                                     per_page=current_app.config['API_GAGES_PER_PAGE'],  # noqa
+                                     error_out=False)
     gages = pagination.items
     prev = None
     if pagination.has_prev:
@@ -58,6 +59,7 @@ def get_gages():
         'next': next,
         'count': pagination.total
     })
+
 
 @api.route('/gages/<int:id>')
 def get_gage(id):
@@ -108,6 +110,7 @@ def get_gage(id):
     gage = Gage.query.get_or_404(id)
     return jsonify(gage.to_long_json())
 
+
 @api.route('/gages/<int:id>/sample', methods=['POST'])
 def gage_new_samples(id):
     """
@@ -116,7 +119,8 @@ def gage_new_samples(id):
     Parameters:
         id (int): Primary id key number of a gage
 
-    Samples are formatted in body of request as a JSON Web Signature using the ``Gage.key``
+    Samples are formatted in body of request as a JSON Web Signature using the
+    ``Gage.key``
 
     Example sample submitter: ::
 
@@ -164,7 +168,7 @@ def gage_new_samples(id):
     Example response: ::
 
         { 'gage': {u'id': 5,
-            'location': 'Androscoggin River downstream of I-95 in Auburn Maine',
+            'location': 'Androscoggin River downstream of I-95 in Auburn ME',
             'name': 'Androscoggin River at Auburn',
             'url': 'http://riverflo.ws/api/1.0/gages/5'},
          'result': 'created',
