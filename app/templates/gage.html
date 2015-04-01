@@ -12,7 +12,7 @@
   			<p>{{ gage.shortDescription }}</p>
   		</div>
   	</div>
-  	
+
   	<div class="container">
   		<div class="row">
 	  		<div class="col-md-9" role="main">
@@ -44,7 +44,7 @@
 		  					<img src="{{ url_for('.gagesensorplot', id=gage.id, stype=sensor.stype ) }}" class="img-responsive">
 	  					</div>
 	  				{% endfor %}
-	  				
+
 	  				<div class="tab-pane" id="weather">
 	  					<iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat={{ gage.latlon().y }}&lon={{ gage.latlon().x }}&name={{ gage.name }}"> </iframe>
 	  					Other weather resources:
@@ -55,9 +55,9 @@
 	  						<a href="http://www.wunderground.com/weather-forecast/zmw:{{ gage.zipcode }}.1.99999" class="list-group-item">Weather Underground</a>
 	  						<a href="http://www.weather.com/weather/today/{{ gage.zipcode }}:4:US" class="list-group-item">Weather.com</a>
 	  					</div>
-	  					
+
 	  				</div>
-	  				
+
 	  			</div>
 	  		</div>
 	  		<div class="col-md-3">

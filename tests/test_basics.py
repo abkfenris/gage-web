@@ -61,6 +61,7 @@ class BasicTestCase(unittest.TestCase):
                              datetime=datetime.datetime.now(),
                              value=5.8)
         db.session.add(wild_sample)
+        db.session.commit()
 
         # Create a correlation
         # wild_correlation = Correlation(section=wild_section,)

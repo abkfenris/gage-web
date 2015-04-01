@@ -1,4 +1,5 @@
 from test_basics import BasicTestCase
+import time
 
 class MainViewTestCase(BasicTestCase):
     def test_root(self):
@@ -35,10 +36,10 @@ class MainViewTestCase(BasicTestCase):
         assert 'Want more gages here' in rv.data
         assert 'Wild River' in rv.data
 
-    # def test_gage_view(self):
-    #     rv = self.client.get('/gage/wild-river-gilead/')
-    #     assert 'Wild River' in rv.data
-    #     assert 'Gage Height' in rv.data
+    def test_gage_view(self):
+        rv = self.client.get('/gage/wild-river-gilead/')
+        assert 'Wild River' in rv.data
+        assert 'Gage Height' in rv.data
 
     # def test_map_view
     def test_about_view(self):
