@@ -1,8 +1,8 @@
-from flask.ext.admin import Admin, BaseView, expose
+from flask.ext.admin import Admin
 from flask.ext.admin.contrib.geoa import ModelView
 from flask.ext.admin.contrib.fileadmin import FileAdmin
-from flask.ext.admin.model.form import InlineFormAdmin
 import os.path as op
+
 from .. import db
 from ..models import User, Region, River, Section, Gage, Sensor
 
@@ -46,4 +46,5 @@ admin.add_view(ModelView(Region, db.session))
 admin.add_view(ModelView(River, db.session))
 admin.add_view(SectionView(Section, db.session))
 admin.add_view(GageView(Gage, db.session))
+admin.add_view(ModelView(Sensor, db.session))
 admin.add_view(FileAdmin(path, '/static/images/', name='Images'))
