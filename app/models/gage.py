@@ -120,8 +120,9 @@ class Gage(db.Model):
 
     def new_sample(self, stype, value, sdatetime):
         """
-        Process a new sample for the gage, and finds the right ``Sensor`` that the ``Sample`` should be connected to. \
-        If no ``Sensor`` exists for the type of sample, then a new one is created.
+        Process a new sample for the gage, and finds the right ``Sensor`` that
+        the ``Sample`` should be connected to. If no ``Sensor`` exists for the
+        type of sample, then a new one is created.
 
         Arguments:
             stype (str): Sensor type
