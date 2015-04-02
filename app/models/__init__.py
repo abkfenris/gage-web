@@ -3,13 +3,15 @@ from geoalchemy2.shape import to_shape
 from sqlalchemy import func
 from sqlalchemy.dialects.postgresql import JSON
 from flask import url_for
-from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 
 from app import db
 from app.remote import usgs
 
-from .correlation import Correlation
+from .correlation import Correlation  # noqa
+from .user import User  # noqa
+from .region import Region  # noqa
+
 
 sections_regions = db.Table('sections_regions',
     db.Column('section', db.Integer, db.ForeignKey('sections.id')),
@@ -27,103 +29,9 @@ rivers_regions = db.Table('rivers_regions',
 )
 
 
-class User(db.Model):
-    """
-    User model
 
-    Arguments:
-        id (int): Primary User Key
-        username (str): Unique username as chosen by the user
-        email (str): User's email address
-        password_hash (str): Users hashed password
-    """
-    __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True)
-    email = db.Column(db.String(120), unique=True)
-    password_hash = db.Column(db.String(128))
 
-    @property
-    def password(self):
-        raise AttributeError('password is not a readable atribute')
-
-    @password.setter
-    def password(self, password):
-        """
-        Takes user generated password and uses werkzeug.security to create a hash and stores it.
-        """
-        self.password_hash = generate_password_hash(password)
-
-    def verify_password(self, password):
-        """
-        Verify's user's password against stored werkzeug.security hash.
-
-        Arguments:
-            password (str): password to check against stored hash
-        """
-        return check_password_hash(self.password_hash, password)
-
-    # def __init__(self, username, email):
-    #     self.username = username
-    #     self.email = email
-
-    def __repr__(self):
-        return '<User %r>' % self.username
-
-class Region(db.Model):
-    """
-    Regions where Rivers, Sections, and Gages exist
-
-    Arguments:
-        id (int): Primary Region Key
-        name (str): Nice name
-        slug (str): slug for url formatting
-        description (text): Long description that can contain HTML or Markdown within reason.
-        short_description (text): Short description, for showing on other pages.
-        header_image (str): Header image to override default.
-        rivers: List of ``River`` objects for Region.
-        sections: List of ``Section`` objects for Region.
-        gages: List of ``Gage`` objects for Region.
-    """
-    __tablename__ = 'regions'
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80))
-    slug = db.Column(db.String(40))
-    description = db.Column(db.Text)
-    short_description = db.Column(db.Text)
-    header_image = db.Column(db.String(80))
-
-    def to_json(self):
-        """
-        Create a JSON object from region. Used where multiple regions may be displayed simultaneously.
-        """
-        json_region = {
-            'id' : self.id,
-            'name' : self.name,
-            'url' : url_for('api.get_region', id=self.id, _external=True),
-            'html': url_for('main.regionpage', slug=self.slug, _external=True),
-        }
-        return json_region
-
-    def to_long_json(self):
-        """
-        Create a JSON object from region. Used when only one region is to be displayed.
-        """
-        json_region = {
-            'id' : self.id,
-            'name' : self.name,
-            'description' : self.description,
-            'sections': [section.to_json() for section in self.sections],
-            'gages': [gage.to_json() for gage in self.gages],
-            'url': url_for('api.get_region', id=self.id, _external=True),
-            'html': url_for('main.regionpage', slug=self.slug, _external=True)
-        }
-        return json_region
-
-    def __repr__(self):
-        return '<Region %r>' % self.name
 
 class River(db.Model):
     """
