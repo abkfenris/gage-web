@@ -1,7 +1,7 @@
 """
 Model for section correlation to sensor levels.
 """
-from .. import db
+from app import db
 
 
 class Correlation(db.Model):
