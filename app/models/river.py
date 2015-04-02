@@ -70,25 +70,16 @@ class River(db.Model):
         Creates a JSON Object from River. Used where a single river is being
         displayed.
         """
+        json_river = {
+            'id': self.id,
+            'name': self.name,
+            'url': url_for('api.get_river', id=self.id, _external=True),
+            'sections': [section.to_json() for section in self.sections],
+            'tributaries': [river.to_json() for river in self.tributary],
+            'gages': [gage.to_json() for gage in self.gages]
+        }
         if self.parent is not None:
-            json_river = {
-                'id': self.id,
-                'name': self.name,
-                'url': url_for('api.get_river', id=self.id, _external=True),
-                'sections': [section.to_json() for section in self.sections],
-                'downstream': self.parent.to_json(),
-                'tributaries': [river.to_json() for river in self.tributary],
-                'gages': [gage.to_json() for gage in self.gages]
-            }
-        else:
-            json_river = {
-                'id': self.id,
-                'name': self.name,
-                'url': url_for('api.get_river', id=self.id, _external=True),
-                'sections': [section.to_json() for section in self.sections],
-                'tributaries': [river.to_json() for river in self.tributary],
-                'gages': [gage.to_json() for gage in self.gages]
-            }
+            json_river['downstream'] = self.parent.to_json()
         return json_river
 
     def __repr__(self):
