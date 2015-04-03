@@ -72,7 +72,7 @@ class GageClient_0_1_Case(LiveServerTestCase):
                              datetime=datetime.datetime.now(),
                              value=5.8)
         db.session.add(wild_sample)
-        #db.session.commit()
+        db.session.commit()
 
         # Create a correlation
         # wild_correlation = Correlation(section=wild_section,)
@@ -85,8 +85,37 @@ class GageClient_0_1_Case(LiveServerTestCase):
         self.app_context.pop()
 
     def test_server_is_up_and_running(self):
-        response = urllib2.urlopen(self.get_server_url())
-        self.assertEqual(response.code, 200)
+        r = requests.get(self.get_server_url())
+        self.assertEqual(r.status_code, 200)
+
+    def test_api_base(self):
+        r = requests.get('{server}/api/0.1/'.format(server=self.get_server_url()))
+        j = r.json()
+        self.assertIn('gages', j)
+        self.assertIn('sections', j)
+        self.assertIn('regions', j)
+        self.assertIn('rivers', j)
+        self.assertIn('sensors', j)
+        self.assertIn('samples', j)
+
+    def test_api_gages(self):
+        r = requests.get('{server}/api/0.1/gages'.format(server=self.get_server_url()))
+        j = r.json()
+        gage = j['gages'][0]
+        self.assertIn('count', j)
+        self.assertIn('Wild River at Gilead', gage['name'])
+
+
+    def test_gage_client(self):
+        r = requests.get(self.get_server_url())
+        print r
+        gage_client = Client('{server}/api/0.1/gages/1/sample'.format(server=self.get_server_url()), 1, 'password')
+        dt = str(datetime.datetime.now())
+        sensor = 'level'
+        value = 4.2
+        gage_client.reading(sensor, dt, value)
+        self.assertEquals(len(gage_client.readings()), 1)
+        gage_client.send_all()
 
 
 if __name__ == '__main__':
