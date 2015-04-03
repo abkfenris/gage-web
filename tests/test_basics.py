@@ -45,7 +45,8 @@ class BasicTestCase(unittest.TestCase):
                          visible=True,
                          zipcode='04217',
                          local_town='Gilead, ME',
-                         location='Wild River at Gilead above Rt 2',)
+                         location='Wild River at Gilead above Rt 2',
+                         key='password')
         db.session.add(wild_gage)
 
         # Create a sensor
@@ -71,6 +72,9 @@ class BasicTestCase(unittest.TestCase):
         db.session.remove()
         db.drop_all()
         self.app_context.pop()
+
+
+class AppTestCase(BasicTestCase):
 
     def test_app_exists(self):
         self.assertFalse(current_app is None)
