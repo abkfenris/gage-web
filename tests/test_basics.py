@@ -69,6 +69,7 @@ class BasicTestCase(unittest.TestCase):
 
     def tearDown(self):
         # time.sleep(60)
+        db.session.rollback()
         db.session.remove()
         db.drop_all()
         self.app_context.pop()
