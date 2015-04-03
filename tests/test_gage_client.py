@@ -107,8 +107,6 @@ class GageClient_0_1_Case(LiveServerTestCase):
 
 
     def test_gage_client(self):
-        r = requests.get(self.get_server_url())
-        print r
         gage_client = Client('{server}/api/0.1/gages/1/sample'.format(server=self.get_server_url()), 1, 'password')
         dt = str(datetime.datetime.now())
         sensor = 'level'
@@ -116,6 +114,14 @@ class GageClient_0_1_Case(LiveServerTestCase):
         gage_client.reading(sensor, dt, value)
         self.assertEquals(len(gage_client.readings()), 1)
         gage_client.send_all()
+        r = requests.get('{server}/api/0.1/gages/1'.format(server=self.get_server_url()))
+        j = r.json()
+        sample = j['sensors'][1]['recent_sample']
+        self.assertIn('url', sample)
+        self.assertIn('id', sample)
+        self.assertIn('value', sample)
+        self.assertIn('datetime', sample)
+        self.assertEquals(sample['value'], value)
 
 
 if __name__ == '__main__':
