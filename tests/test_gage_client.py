@@ -1,14 +1,13 @@
-import unittest
-from flask_testing import LiveServerTestCase
-import urllib2
 import datetime
+from flask_testing import LiveServerTestCase
+import requests
+import unittest
+
 
 from app import create_app, db
-from app.models import Region, River, Section, Gage, Sensor, Sample, Correlation
-from test_basics import BasicTestCase
+from app.models import Region, River, Section, Gage, Sensor, Sample
 from .gage_client.gage_client import Client
-from flask import current_app
-import requests
+
 
 class GageClient_0_1_Case(LiveServerTestCase):
 
@@ -101,9 +100,14 @@ class GageClient_0_1_Case(LiveServerTestCase):
     def test_api_gages(self):
         r = requests.get('{server}/api/0.1/gages'.format(server=self.get_server_url()))
         j = r.json()
-        gage = j['gages'][0]
         self.assertIn('count', j)
-        self.assertIn('Wild River at Gilead', gage['name'])
+        for gage in j['gages']:
+            if gage['name'] == 'Wild River at Gilead':
+                testgage = gage
+                break
+        else:
+            raise Exception('Wild River at Gilead gage not found')
+        self.assertIn('Wild River at Gilead', testgage['name'])
 
 
     def test_gage_client(self):
@@ -116,6 +120,13 @@ class GageClient_0_1_Case(LiveServerTestCase):
         gage_client.send_all()
         r = requests.get('{server}/api/0.1/gages/1'.format(server=self.get_server_url()))
         j = r.json()
+        for sensor in j['sensors']:
+            r = requests.get(sensor['url'])
+            sj = r.json()
+            if sj['recent_sample']['value'] == value:
+                break
+        else:
+            raise Exception('Sample not found')
         sample = j['sensors'][1]['recent_sample']
         self.assertIn('url', sample)
         self.assertIn('id', sample)
