@@ -9,7 +9,7 @@ class UserModel(BasicTestCase):
     """
     def test_add_user(self):
         """
-        Test if we can create a user and return it
+        Create a user and find it (test_user_model.UserModel)
         """
         user_datastore.create_user(email='test@example.com',
                                    password='password',
@@ -21,7 +21,7 @@ class UserModel(BasicTestCase):
 
     def test_add_role(self):
         """
-        Test if we can create a role and return it
+        Create a role and find it (test_user_model.UserModel)
         """
         user_datastore.create_role(name='admin',
                                    description='Administrator')
