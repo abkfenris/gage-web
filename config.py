@@ -29,7 +29,7 @@ class TestingConfig(Config):
     SECRET_KEY = '1'
     CSRF_ENABLED = False
     SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/gage_web_testing'
-    SQLALCHEMY_ECHO = True
+    #SQLALCHEMY_ECHO = True
 
 
 class DockerLocalConfig(Config):

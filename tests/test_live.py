@@ -1,14 +1,19 @@
-import unittest
-from flask import current_app
-from app import create_app, db
-from app.models import Region, River, Section, Gage, Sensor, Sample, Correlation
-import time
 import datetime
+from flask_testing import LiveServerTestCase
+
+from app import create_app, db
+from app.models import Region, River, Section, Gage, Sensor, Sample
 
 
-class BasicTestCase(unittest.TestCase):
+class LiveServerBase(LiveServerTestCase):
+
+    def create_app(self):
+        app = create_app('testing')
+        app.config['LIVESERVER_PORT'] = 8943
+        return app
+
     def setUp(self):
-        self.app = create_app('testing')
+        self.app = self.create_app()
         self.client = self.app.test_client()
         self.app_context = self.app.app_context()
         self.app_context.push()
@@ -73,12 +78,3 @@ class BasicTestCase(unittest.TestCase):
         db.session.remove()
         db.drop_all()
         self.app_context.pop()
-
-
-class AppTestCase(BasicTestCase):
-
-    def test_app_exists(self):
-        self.assertFalse(current_app is None)
-
-    def test_app_is_testing(self):
-        self.assertTrue(current_app.config['TESTING'])
