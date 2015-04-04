@@ -52,6 +52,23 @@ class API_0_1_Live(LiveServerBase):
         self.assertIn('html', testgage)
         self.assertIn('Wild River at Gilead', testgage['name'])
 
+    def test_api_gage(self):
+        """
+        Retrieve a gage from the server (test_api_0_1.API_0_1_Live)
+        """
+        r = requests.get('{server}/api/0.1/'.format(
+            server=self.get_server_url())).json()
+        r = requests.get(r['gages']).json()
+        r = requests.get(r['gages'][0]['url']).json()
+        self.assertIn('name', r)
+        self.assertIn('id', r)
+        self.assertIn('location', r)
+        self.assertIn('name', r)
+        self.assertIn('regions', r)
+        self.assertIn('sensors', r)
+        self.assertIn('html', r)
+        self.assertIn('url', r)
+
     def test_api_samples(self):
         """
         Retrieve samples from server (test_api_0_1_live.API_0_1_Live)
