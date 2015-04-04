@@ -9,6 +9,8 @@ class Config:
     dropbox_app_token = os.environ.get('DROPBOX_APP_TOKEN')
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     MAPBOX_MAP_ID = 'fenris.kdh92755'
+    SECURITY_POST_LOGIN_VIEW = 'admin/'
+    SECURITY_CHANGEABLE = True
 
     @staticmethod
     def init_app(app):
@@ -39,6 +41,9 @@ class DockerLocalConfig(Config):
 
 class ProductionConfig(Config):
     SERVER_NAME = 'flows.alexkerney.com'
+    SECURITY_PASSWORD_HASH = 'bcrypt'
+    SECURITY_PASSWORD_SALY = (os.environ.get('SECRET_KEY') or
+            'LMB#*42.)tHm4A;9Ce^hoPLN6C[m=3;2oTvK,vXA7EpMG4bg8x')
 
 config = {
     'development': DevelopmentConfig,

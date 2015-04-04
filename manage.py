@@ -6,10 +6,12 @@ if os.environ.get('FLASK_COVERAGE'):
     COV = coverage.coverage(branch=True, include='app/*')
     COV.start()
 
-from app import create_app, db
-from app.models import User, Region, River, Section, Gage, Sensor, Sample
 from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
+
+from app import create_app, db
+from app.models import User, Region, River, Section, Gage, Sensor, Sample
+from app.user_manager import user_manager
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 manager = Manager(app)
@@ -22,6 +24,8 @@ def make_shell_context():
 manager.add_command("shell", Shell(make_context=make_shell_context))
 
 manager.add_command('db', MigrateCommand)
+
+manager.add_command('user', user_manager)
 
 # @manager.command
 # def deploy():
