@@ -69,6 +69,38 @@ class API_0_1_Live(LiveServerBase):
         self.assertIn('html', r)
         self.assertIn('url', r)
 
+    def test_api_regions(self):
+        """
+        Retrieve regions from server (test_api_0_1_live.API_0_1_Live)
+        """
+        # load api base
+        r = requests.get('{server}/api/0.1/'.format(
+            server=self.get_server_url())).json()
+        # load samples from url specified in api base
+        r = requests.get(r['regions']).json()
+        self.assertIn('count', r)
+        self.assertIn('next', r)
+        self.assertIn('prev', r)
+        self.assertIn('regions', r)
+
+    def test_api_region(self):
+        """
+        Retrieve region from server
+        """
+        # load api base
+        r = requests.get('{server}/api/0.1/'.format(
+            server=self.get_server_url())).json()
+        # load samples from url specified in api base
+        r = requests.get(r['regions']).json()
+        r = requests.get(r['regions'][0]['url']).json()
+        self.assertIn('html', r)
+        self.assertIn('id', r)
+        self.assertIn('name', r)
+        self.assertIn('url', r)
+        self.assertIn('rivers', r)
+        self.assertIn('sections', r)
+        self.assertIn('gages', r)
+
     def test_api_samples(self):
         """
         Retrieve samples from server (test_api_0_1_live.API_0_1_Live)
