@@ -36,12 +36,20 @@ class API_0_1_Live(LiveServerBase):
         # load gages from url specified in api base
         r = requests.get(r['gages']).json()
         self.assertIn('count', r)
+        self.assertIn('gages', r)
+        self.assertIn('next', r)
+        self.assertIn('prev', r)
         for gage in r['gages']:
             if gage['name'] == 'Wild River at Gilead':
                 testgage = gage
                 break
         else:
             raise Exception('Wild River at Gilead gage not found')
+        self.assertIn('name', testgage)
+        self.assertIn('id', testgage)
+        self.assertIn('location', testgage)
+        self.assertIn('url', testgage)
+        self.assertIn('html', testgage)
         self.assertIn('Wild River at Gilead', testgage['name'])
 
     def test_api_samples(self):
