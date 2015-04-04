@@ -5,7 +5,7 @@
 {% block navbar %}
 <div class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin-bottom: 0">
   		<div class="container">
-  		
+
 		  	<div class="navbar-header">
 			  	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 			  		<span class="sr-only">Toggle navigation</span>
@@ -19,11 +19,11 @@
 			  		</li>
 			  	</ul>
 		  	</div>
-		  	
+
 		  	<div class="navbar-collapse collapse">
 		  		<ul class="nav navbar-nav">
 		  			{#
-		  				highlighting the active menu items with http://jinja.pocoo.org/docs/tricks/#highlighting-active-menu-items 
+		  				highlighting the active menu items with http://jinja.pocoo.org/docs/tricks/#highlighting-active-menu-items
 		  			#}
 		  			<li>
 		  				<a href="{{ url_for('main.regionspage' ) }}">Regions</a>
@@ -44,13 +44,21 @@
 		  				<a href="{{ url_for('main.aboutpage' ) }}">About</a>
 		  			</li>
 		  		</ul>
-		  		{#
+
 		  		<ul class="nav navbar-nav navbar-right">
+                  <a href="{{ url_for('admin.index') }}">
 		  			<li>
-		  				<button class="btn btn-primary navbar-btn" role="button">Login</button>
+		  				<button class="btn btn-primary navbar-btn" role="button">
+                          {% if current_user.is_authenticated() %}
+                              Admin
+                          {% else %}
+                              Login
+                          {% endif %}
+                        </button>
 		  			</li>
+                  </a>
 		  		</ul>
-		  		
+		  		{#
 		  		<form class="navbar-form navbar-right" role="form">
 		  			<div class="form-group">
 		  				<input type="text" placeholder="Search Gages" class="form-control">
