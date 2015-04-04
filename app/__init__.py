@@ -6,14 +6,18 @@ App builder. Can be imported and used to start the site
 
 from flask import Flask
 from flask.ext.bootstrap import Bootstrap
+from flask_security import Security
 from flask.ext.sqlalchemy import SQLAlchemy
 from config import config
 from flask_debugtoolbar import DebugToolbarExtension
 
 
 bootstrap = Bootstrap()
+security = Security()
 db = SQLAlchemy()
 toolbar = DebugToolbarExtension()
+
+from .models import user_datastore
 
 
 def create_app(config_name):
@@ -22,6 +26,7 @@ def create_app(config_name):
 
     bootstrap.init_app(app)
     db.init_app(app)
+    security.init_app(app, user_datastore)
     toolbar.init_app(app)
 
     from main import main
