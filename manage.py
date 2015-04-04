@@ -6,11 +6,9 @@ if os.environ.get('FLASK_COVERAGE'):
     COV = coverage.coverage(branch=True, include='app/*')
     COV.start()
 
-from flask import url_for, Flask
 from app import create_app, db
 from app.models import User, Region, River, Section, Gage, Sensor, Sample
 from flask.ext.script import Manager, Shell
-import config
 from flask.ext.migrate import Migrate, MigrateCommand
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
@@ -46,7 +44,9 @@ def list_routes():
     output = []
     for rule in app.url_map.iter_rules():
         methods = ','.join(rule.methods)
-        line = urllib.unquote("{:50s} {:20s} {}".format(rule.endpoint, methods, rule))
+        line = urllib.unquote("{:50s} {:20s} {}".format(rule.endpoint,
+                                                        methods,
+                                                        rule))
         output.append(line)
 
     for line in sorted(output):
@@ -85,9 +85,12 @@ def backup():
     """
     import datetime
     from app import backup as backup_db
-    filename = 'gage_web-' + datetime.datetime.now().strftime('%Y%m%d-%H%M') + '.tar'
-    os.system("pg_dump -Ft gage_web > " + filename)
-    print 'Uploading', filename, 'to Dropbox'
+    filename = 'gage_web-{time}.tar'.format(
+        time=datetime.datetime.utcnow().strftime('%Y%m%d-%H%M'))
+    os.system("pg_dump -Ft {db} > {filename}".format(
+        db=db.engine.url.database,
+        filename=filename))
+    print 'Uploading {filename} to Dropbox'.format(filename=filename)
     print backup_db.backup(filename)
     os.system("rm " + filename)
 
