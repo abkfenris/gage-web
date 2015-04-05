@@ -76,7 +76,7 @@ class API_0_1_Live(LiveServerBase):
         # load api base
         r = requests.get('{server}/api/0.1/'.format(
             server=self.get_server_url())).json()
-        # load samples from url specified in api base
+        # load regions from url specified in api base
         r = requests.get(r['regions']).json()
         self.assertIn('count', r)
         self.assertIn('next', r)
@@ -85,7 +85,7 @@ class API_0_1_Live(LiveServerBase):
 
     def test_api_region(self):
         """
-        Retrieve region from server
+        Retrieve region from server (test_api_0_1_live.API_0_1_Live)
         """
         # load api base
         r = requests.get('{server}/api/0.1/'.format(
@@ -101,6 +101,37 @@ class API_0_1_Live(LiveServerBase):
         self.assertIn('sections', r)
         self.assertIn('gages', r)
 
+    def test_api_rivers(self):
+        """
+        Retrieve rivers from server (test_api_0_1_live.API_0_1_Live)
+        """
+        # load api base
+        r = requests.get('{server}/api/0.1/'.format(
+            server=self.get_server_url())).json()
+        # load rivers from url specified in api base
+        r = requests.get(r['rivers']).json()
+        self.assertIn('count', r)
+        self.assertIn('next', r)
+        self.assertIn('prev', r)
+        self.assertIn('rivers', r)
+
+    def test_api_river(self):
+        """
+        Retrieve a river from server (test_api_0_1_live.API_0_1_Live)
+        """
+        # load api base
+        r = requests.get('{server}/api/0.1/'.format(
+            server=self.get_server_url())).json()
+        # load rivers from url specified in api base
+        r = requests.get(r['rivers']).json()
+        r = requests.get(r['rivers'][0]['url']).json()
+        self.assertIn('html', r)
+        self.assertIn('url', r)
+        self.assertIn('sections', r)
+        self.assertIn('gages', r)
+        self.assertIn('regions', r)
+        self.assertIn('tributaries', r)
+
     def test_api_samples(self):
         """
         Retrieve samples from server (test_api_0_1_live.API_0_1_Live)
@@ -111,6 +142,9 @@ class API_0_1_Live(LiveServerBase):
         # load samples from url specified in api base
         r = requests.get(r['samples']).json()
         self.assertIn('count', r)
+        self.assertIn('next', r)
+        self.assertIn('prev', r)
+        self.assertIn('samples', r)
 
     def test_api_sample(self):
         """
@@ -128,6 +162,24 @@ class API_0_1_Live(LiveServerBase):
         self.assertIn('id', r)
         self.assertIn('url', r)
         self.assertIn('sensor', r)
+
+    def test_api_sections(self):
+        """
+        Retrieve sections from server (test_api_0_1_live.API_0_1_Live)
+        """
+        # load api base
+        r = requests.get('{server}/api/0.1/'.format(
+            server=self.get_server_url())).json()
+        # load sections from url specified in api base
+        r = requests.get(r['sections']).json()
+        self.assertIn('count', r)
+        self.assertIn('next', r)
+        self.assertIn('prev', r)
+        self.assertIn('sections', r)
+        section = r['sections'][0]
+        self.assertIn('html', section)
+        self.assertIn('url', section)
+        self.assertIn('id', section)
 
     def test_api_sensors(self):
         """
