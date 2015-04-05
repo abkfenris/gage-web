@@ -9,11 +9,11 @@ from app import db
 
 
 # many to many relationship table for sections and regions
-sections_regions = db.Table('sections_regions',
+sections_regions = db.Table(
+    'sections_regions',
     db.Column('section', db.Integer, db.ForeignKey('sections.id')),
     db.Column('region', db.Integer, db.ForeignKey('regions.id'))
 )
-
 
 
 class Section(db.Model):
@@ -95,8 +95,12 @@ class Section(db.Model):
         json_section = {
             'id': self.id,
             'name': self.name,
-            'html': url_for('main.sectionpage', slug=self.slug, _external=True),
-            'url': url_for('api.get_section', id=self.id, _external=True)
+            'html': url_for('main.sectionpage',
+                            slug=self.slug,
+                            _external=True),
+            'url': url_for('api.get_section',
+                           id=self.id,
+                           _external=True)
         }
         return json_section
 
@@ -108,16 +112,21 @@ class Section(db.Model):
         json_section = {
             'id': self.id,
             'name': self.name,
-            'html': url_for('main.sectionpage', slug=self.slug, _external=True),
+            'html': url_for('main.sectionpage',
+                            slug=self.slug, _external=True),
             'url': url_for('api.get_section', id=self.id, _external=True),
             'regions': [region.to_json() for region in self.regions],
-            'sensors': [correlation.sensor.to_json() for correlation in self.correlations],
-            'gages': [correlation.sensor.gage.to_json() for correlation in self.correlations],
+            'sensors': [correlation.sensor.to_json()
+                        for correlation in self.correlations],
+            'gages': [correlation.sensor.gage.to_json()
+                      for correlation in self.correlations],
             'description': self.description,
             'access': self.access,
             'location': self.location,
-            'latitude': self.inlatlon().y,
-            'longitude': self.inlatlon().x,
+            'in_latitude': self.inlatlon().y,
+            'in_longitude': self.inlatlon().x,
+            'out_latitude': self.outlatlon().y,
+            'out_longitude': self.outlatlon().x
         }
         return json_section
 

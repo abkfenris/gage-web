@@ -181,6 +181,31 @@ class API_0_1_Live(LiveServerBase):
         self.assertIn('url', section)
         self.assertIn('id', section)
 
+    def test_api_section(self):
+        """
+        Retrieve first section from server
+        """
+        # load api base
+        r = requests.get('{server}/api/0.1/'.format(
+            server=self.get_server_url())).json()
+        # load sections from url specified in api base
+        r = requests.get(r['sections']).json()
+        r = requests.get(r['sections'][0]['url']).json()
+        self.assertIn('id', r)
+        self.assertIn('name', r)
+        self.assertIn('html', r)
+        self.assertIn('url', r)
+        self.assertIn('regions', r)
+        self.assertIn('sensors', r)
+        self.assertIn('gages', r)
+        self.assertIn('description', r)
+        self.assertIn('access', r)
+        self.assertIn('location', r)
+        self.assertIn('in_latitude', r)
+        self.assertIn('in_longitude', r)
+        self.assertIn('out_latitude', r)
+        self.assertIn('out_longitude', r)
+
     def test_api_sensors(self):
         """
         Retrive sensors from server (test_api_0_1_live.API_0_1_Live)
