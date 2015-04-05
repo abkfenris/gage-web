@@ -239,3 +239,13 @@ class API_0_1_Live(LiveServerBase):
         self.assertIn('url', r)
         self.assertIn('minimum', r)
         self.assertIn('ended', r)
+
+    def test_api_404(self):
+        """
+        Get a 404 from the api
+        """
+        r = requests.get('{server}/api/0.1/sample'.format(
+            server=self.get_server_url()))
+        print r.text
+        self.assertEquals(404, r.status_code)
+        raise Exception
