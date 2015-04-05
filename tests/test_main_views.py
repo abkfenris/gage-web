@@ -22,6 +22,8 @@ class MainViews(BasicTestCase):
         """
         rv = self.client.get('/region/maine/')
         assert 'Maine' in rv.data
+        rv = self.client.get('/region/1/')
+        assert 'Maine' in rv.data
 
     def test_rivers_view(self):
         """
@@ -35,6 +37,8 @@ class MainViews(BasicTestCase):
         View a single river page (test_main_views.MainViews)
         """
         rv = self.client.get('/river/androscoggin/')
+        assert 'Androscoggin' in rv.data
+        rv = self.client.get('/river/1/')
         assert 'Androscoggin' in rv.data
 
     def test_sections_view(self):
@@ -51,6 +55,8 @@ class MainViews(BasicTestCase):
         """
         rv = self.client.get('/section/wild-river/')
         assert 'Wild River' in rv.data
+        rv = self.client.get('/section/1/')
+        assert 'Wild River' in rv.data
 
     def test_gages_view(self):
         """
@@ -65,6 +71,9 @@ class MainViews(BasicTestCase):
         View a single gage page (test_main_views.MainViews)
         """
         rv = self.client.get('/gage/wild-river-gilead/')
+        assert 'Wild River' in rv.data
+        assert 'Gage Height' in rv.data
+        rv = self.client.get('/gage/1/')
         assert 'Wild River' in rv.data
         assert 'Gage Height' in rv.data
 

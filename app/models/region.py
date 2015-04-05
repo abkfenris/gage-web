@@ -54,6 +54,7 @@ class Region(db.Model):
             'description': self.description,
             'sections': [section.to_json() for section in self.sections],
             'gages': [gage.to_json() for gage in self.gages],
+            'rivers': [river.to_json for river in self.rivers],
             'url': url_for('api.get_region', id=self.id, _external=True),
             'html': url_for('main.regionpage', slug=self.slug, _external=True)
         }

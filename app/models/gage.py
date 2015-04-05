@@ -93,6 +93,9 @@ class Gage(db.Model):
             'id': self.id,
             'name': self.name,
             'location': self.location,
+            'html': url_for('main.gagepage',
+                            slug=self.slug,
+                            _external=True),
             'url': url_for('api.get_gage',
                            id=self.id,
                            _external=True)
