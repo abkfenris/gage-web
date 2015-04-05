@@ -244,8 +244,8 @@ class API_0_1_Live(LiveServerBase):
         """
         Get a 404 from the api
         """
-        r = requests.get('{server}/api/0.1/sample'.format(
-            server=self.get_server_url()))
-        print r.text
+        r = requests.get('{server}/api/0.1/sam'.format(
+            server=self.get_server_url()),
+            headers={'accept': 'application/json'})
         self.assertEquals(404, r.status_code)
-        raise Exception
+        self.assertIn('error', r.json())

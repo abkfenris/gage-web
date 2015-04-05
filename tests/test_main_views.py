@@ -84,3 +84,10 @@ class MainViews(BasicTestCase):
         """
         rv = self.client.get('/about/')
         assert 'But Why' in rv.data
+
+    def test_505_view(self):
+        """
+        Test the 404 error page (test_main_views.MainViews)
+        """
+        rv = self.client.get('/404')
+        assert 'Boof Stroke Not Found' in rv.data
