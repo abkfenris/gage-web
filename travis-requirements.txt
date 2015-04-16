@@ -34,6 +34,7 @@ pyparsing==2.0.3
 python-dateutil==2.4.1
 pytz==2014.10
 PyYAML==3.11
+raven==5.2.0
 requests==2.6.0
 Shapely==1.5.6
 six==1.9.0

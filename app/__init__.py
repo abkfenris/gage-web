@@ -8,9 +8,11 @@ from flask import Flask
 from flask.ext.bootstrap import Bootstrap
 from flask_security import Security
 from flask.ext.sqlalchemy import SQLAlchemy
-from config import config
 from flask_debugtoolbar import DebugToolbarExtension
-
+import logging
+from raven.contrib.flask import Sentry
+from werkzeug.contrib.fixers import ProxyFix
+from config import config
 
 bootstrap = Bootstrap()
 security = Security()
@@ -28,6 +30,10 @@ def create_app(config_name):
     db.init_app(app)
     security.init_app(app, user_datastore)
     toolbar.init_app(app)
+
+    if config is 'production':
+        sentry = Sentry(app, logging=True, level=logging.INFO)
+        app.wsgi_app = ProxyFix(app.wsgi_app)
 
     from main import main
     app.register_blueprint(main)

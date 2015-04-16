@@ -1,0 +1,2 @@
+#!/bin/sh
+GIT_WORK_TREE=/home/www/gage-web git checkout -f
