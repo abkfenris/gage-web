@@ -33,6 +33,7 @@ nose-exclude==0.2.0
 nosexcover==1.0.10
 numpy==1.9.2
 passlib==1.6.2
+py-bcrypt
 psycopg2==2.6
 pyparsing==2.0.3
 python-dateutil==2.4.1
