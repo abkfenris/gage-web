@@ -31,7 +31,7 @@ def create_app(config_name):
     security.init_app(app, user_datastore)
     toolbar.init_app(app)
 
-    if config is 'production':
+    if config_name is 'production':
         sentry = Sentry(app, logging=True, level=logging.INFO)
         app.wsgi_app = ProxyFix(app.wsgi_app)
 

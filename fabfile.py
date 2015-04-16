@@ -141,6 +141,7 @@ def deploy():
     """
     with lcd(LOCAL_APP_DIR):
         local('git push production master')
+        sudo('supervisorctl restart gage-web')
 
 
 def install_requirements():
