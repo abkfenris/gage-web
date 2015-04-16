@@ -9,14 +9,18 @@
   			<h4>Bad Beta</h4>
   		</div>
   	</div>
-  	
+
   	<div class="container">
   		<div class="row">
 	  		<div class="col-md-8" role="main">
-		  		
+
 	  			<h3>We screwed up and C1d when we should have K1d.</h3>
 	  			<img src="{{ url_for('static', filename='img/500-canoe.jpg' ) }}" class="img-responsive xs-hidden">
 	  			<p>Try the top menu, or checking out one of the gages on the right while we get a different boat.</p>
+                {% if g.sentry_event_id %}
+                <p>If you want to be awesome and help us make this site awesome tell <a href="mailto:abk@mac.com">Alex</a> about the error and include the error id below.</p>
+                <p>The error identifier is {{ g.sentry_event_id }}</p>
+                {% endif %}
 
 	  		</div>
 	  		<div class="col-md-4">
@@ -28,7 +32,7 @@
 	  			 	</a>
 	  			 {% endfor %}
 	  			 </div>
-	  			
+
 	  		</div>
   	</div>
 {% endblock %}
