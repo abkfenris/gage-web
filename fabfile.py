@@ -121,14 +121,14 @@ def configure_git():
     2. Create post-recieve hook
     """
     require.directory(GIT_DIR, use_sudo=True)
-    #with cd(GIT_DIR):
-    #    sudo('mkdir gage-web.git')
-    #    with cd('gage-web.git'):
-    #        sudo('git init --bare')
-    #        with lcd(LOCAL_CONFIG_DIR):
-    #            with cd('hooks'):
-    #                put('./post-receive', './', use_sudo=True)
-    #                sudo('chmod +x post-receive')
+    with cd(GIT_DIR):
+        sudo('mkdir gage-web.git')
+        with cd('gage-web.git'):
+            sudo('git init --bare')
+            with lcd(LOCAL_CONFIG_DIR):
+                with cd('hooks'):
+                    put('./post-receive', './', use_sudo=True)
+                    sudo('chmod +x post-receive')
     with lcd(LOCAL_APP_DIR):
         local(
             'git remote add production {user}@{server}:{GIT_DIR}/gage-web.git'
@@ -143,6 +143,58 @@ def deploy():
         local('git push production master')
 
 
+def install_requirements():
+    """
+    Install requirements into virtualenv
+    """
+    with fabtools.python.virtualenv(ENV_DIR):
+        with cd(WWW_DIR):
+            require.python.requirements('requirements.txt')
+
+
+def install_config_files():
+    """
+    Put config files for gunicorn, supervisord, nginx
+    """
+    # host-export
+    with cd(WWW_DIR + '/server-config'):
+        require.file('host-export', source=LOCAL_CONFIG_DIR+'/host-export')
+        sudo('chmod +x host-export')
+    # gunicorn
+    with cd('/home/www'):
+        fabtools.files.upload_template(
+            LOCAL_CONFIG_DIR + '/gunicorn-start-gage',
+            '.',
+            use_sudo=True,
+            use_jinja=True,
+            user=USER,
+            context={
+                'WWW_DIR': WWW_DIR,
+                'ENV_DIR': ENV_DIR,
+                'USER': USER,
+                'GROUP': GROUP
+            },
+            chown=True),
+        sudo('chmod +x gunicorn-start-gage')
+    # supervisord
+    with cd('/etc/supervisor/conf.d/'):
+        require.file('gage-web.conf',
+                     source=LOCAL_CONFIG_DIR+'/gage-web.conf',
+                     use_sudo=True)
+        require.directory('/home/www/logs/gage-web/')
+        sudo('supervisorctl reread')
+        sudo('supervisorctl update')
+    # nginx
+    with cd('/etc/nginx/sites-available'):
+        require.file('gage-web',
+                     source=LOCAL_CONFIG_DIR+'/gage-web',
+                     use_sudo=True)
+        sudo('ln -s /etc/nginx/sites-available/gage-web' +
+             ' /etc/nginx/sites-enabled/gage-web')
+        sudo('service nginx configtest')
+        sudo('service nginx restart')
+
+
 def bootstrap():
     """
     Setup all the things
@@ -152,5 +204,8 @@ def bootstrap():
     create_venv()
     install_system_requirements()
     # create_database()
-    configure_git()
+    # configure_git()
     deploy()
+    install_requirements()
+    # Install ssl scripts
+    install_config_files()
