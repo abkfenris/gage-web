@@ -1,0 +1,3 @@
+python:
+    command: /usr/bin/env python $(which nosetests) --exclude-dir=tests/gage_client/
+    watch_glob: "*.py"

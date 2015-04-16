@@ -1,12 +1,42 @@
-from flask.ext.admin import Admin
-from flask.ext.admin.contrib.geoa import ModelView
-from flask.ext.admin.contrib.fileadmin import FileAdmin
+from flask import redirect, url_for
+from flask_admin import Admin, AdminIndexView, expose
+from flask.ext.admin.contrib.geoa import ModelView as _ModelView
+from flask_admin.base import MenuLink
+from flask.ext.admin.contrib.fileadmin import FileAdmin as _FileAdmin
+from flask_security import (roles_required,
+                            roles_accepted,
+                            current_user,
+                            login_required)
 import os.path as op
 
 from .. import db
 from ..models import User, Region, River, Section, Gage, Sensor
 
 path = op.join(op.dirname(__file__), '../static/images')
+
+
+class ModelView(_ModelView):
+    def is_accessible(self):
+        return current_user.is_authenticated()
+
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(url_for('security.login'))
+
+
+class FileAdmin(_FileAdmin):
+    def is_accessible(self):
+        return current_user.is_authenticated()
+
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(url_for('security.login'))
+
+
+class UserView(ModelView):
+    def is_accessible(self):
+        """
+        Only allow admins to see other users
+        """
+        return current_user.has_role('admin')
 
 
 class SectionView(ModelView):
@@ -40,11 +70,30 @@ class GageView(ModelView):
     form_widget_args = {'point': {'data-height': 500, 'data-width': 500}}
 
 
-admin = Admin(name="Riverflo.ws")
-admin.add_view(ModelView(User, db.session))
+class MyAdminIndexView(AdminIndexView):
+
+    @expose('/')
+    def index(self):
+        if not current_user.is_authenticated():
+            return redirect(url_for('security.login'))
+        return super(MyAdminIndexView, self).index()
+
+
+class AuthenticatedMenuLink(MenuLink):
+    def is_accessible(self):
+        return current_user.is_authenticated()
+
+
+admin = Admin(name="Riverflo.ws",
+              index_view=MyAdminIndexView(),
+              template_mode='bootstrap3',
+              )
+admin.add_view(UserView(User, db.session))
 admin.add_view(ModelView(Region, db.session))
 admin.add_view(ModelView(River, db.session))
 admin.add_view(SectionView(Section, db.session))
 admin.add_view(GageView(Gage, db.session))
 admin.add_view(ModelView(Sensor, db.session))
 admin.add_view(FileAdmin(path, '/static/images/', name='Images'))
+admin.add_link(AuthenticatedMenuLink(name='Logout',
+                                     endpoint='security.logout'))

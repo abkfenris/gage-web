@@ -9,6 +9,8 @@ class Config:
     dropbox_app_token = os.environ.get('DROPBOX_APP_TOKEN')
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     MAPBOX_MAP_ID = 'fenris.kdh92755'
+    SECURITY_POST_LOGIN_VIEW = 'admin/'
+    SECURITY_CHANGEABLE = True
 
     @staticmethod
     def init_app(app):
@@ -29,7 +31,7 @@ class TestingConfig(Config):
     SECRET_KEY = '1'
     CSRF_ENABLED = False
     SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/gage_web_testing'
-    SQLALCHEMY_ECHO = True
+    #SQLALCHEMY_ECHO = True
 
 
 class DockerLocalConfig(Config):
@@ -39,6 +41,9 @@ class DockerLocalConfig(Config):
 
 class ProductionConfig(Config):
     SERVER_NAME = 'flows.alexkerney.com'
+    SECURITY_PASSWORD_HASH = 'bcrypt'
+    SECURITY_PASSWORD_SALY = (os.environ.get('SECRET_KEY') or
+            'LMB#*42.)tHm4A;9Ce^hoPLN6C[m=3;2oTvK,vXA7EpMG4bg8x')
 
 config = {
     'development': DevelopmentConfig,

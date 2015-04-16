@@ -1,0 +1,3 @@
+[submodule "tests/gage_client"]
+	path = tests/gage_client
+	url = https://abkfenris@github.com/abkfenris/gage-client.git
