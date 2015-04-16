@@ -93,7 +93,7 @@ class Sensor(db.Model):
         elif sample is None and self.local is False:
             # print self.timediff(sample.datetime), 'F'
             if self.remote_parameter is None:
-                print self.timediff(sample.datetime), 'G'
+                # print self.timediff(sample.datetime), 'G'
                 usgs.get_samples(self,
                                  self.remote_id,
                                  period='P7D')
