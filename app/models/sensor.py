@@ -3,6 +3,7 @@ Model for sensor
 """
 import datetime
 from flask import url_for
+import logging
 from sqlalchemy.dialects.postgresql import JSON
 
 from app import db
@@ -83,10 +84,27 @@ class Sensor(db.Model):
         """
         delta = datetime.datetime.now()-datetime.timedelta(minutes=60)
         # print delta
+        logging.info('Recent for sensor {name}'.format(name=self.name))
         sample = Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
+        logging.info('Retrieved sample: {sample}'.format(sample=sample))
         if sample is not None and (self.local is True or sample.datetime > delta):
             # print self.timediff(sample.datetime), 'A'
             return sample
+        elif sample is None and self.local is False:
+            # print self.timediff(sample.datetime), 'F'
+            if self.remote_parameter is None:
+                print self.timediff(sample.datetime), 'G'
+                usgs.get_samples(self,
+                                 self.remote_id,
+                                 period='P7D')
+            else:
+                print self.timediff(sample.datetime), 'H'
+                usgs.get_samples(self,
+                                 self.remote_id,
+                                 period='P7D',
+                                 parameter=self.remote_parameter)
+            # print self.timediff(sample.datetime), 'I'
+            return Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
         elif sample is not None and self.local is False and sample.datetime < delta:
             # print self.timediff(sample.datetime), 'B'
             if self.remote_parameter is None:
@@ -103,21 +121,6 @@ class Sensor(db.Model):
                                  endDT=datetime.datetime.utcnow(),
                                  parameter=self.remote_parameter)
             # print self.timediff(sample.datetime), 'E'
-            return Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
-        elif sample is None and self.local is False:
-            # print self.timediff(sample.datetime), 'F'
-            if self.remote_parameter is None:
-                print self.timediff(sample.datetime), 'G'
-                usgs.get_samples(self,
-                                 self.remote_id,
-                                 period='P7D')
-            else:
-                print self.timediff(sample.datetime), 'H'
-                usgs.get_samples(self,
-                                 self.remote_id,
-                                 period='P7D',
-                                 parameter=self.remote_parameter)
-            # print self.timediff(sample.datetime), 'I'
             return Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
         else:
             # print self.timediff(sample.datetime), 'J'
