@@ -1,7 +1,7 @@
 """
 Fabfile to setup and deploy gage-web
 """
-from fabric.api import cd, run, local, env, sudo, put, prompt, lcd
+from fabric.api import cd, run, local, env, sudo, put, prompt, lcd, prefix
 from fabric.contrib.console import confirm
 from fabtools import require
 import fabtools
@@ -196,6 +196,27 @@ def install_config_files():
         sudo('service nginx restart')
 
 
+def upgrade_db_schema():
+    """
+    With manage.py setup database
+    """
+    with prefix('source {ENV_DIR}/bin/activate'.format(ENV_DIR=ENV_DIR)):
+        with prefix('source {WWW_DIR}/server-config/host-export'.format(WWW_DIR=WWW_DIR)):
+            with cd(WWW_DIR):
+                sudo('python manage.py db upgrade')
+
+
+def create_roles():
+    """
+    Create user and admin roles
+    """
+    with prefix('source {ENV_DIR}/bin/activate'.format(ENV_DIR=ENV_DIR)):
+        with prefix('source {WWW_DIR}/server-config/host-export'.format(WWW_DIR=WWW_DIR)):
+            with cd(WWW_DIR):
+                sudo('python manage.py user create_role -n admin -d "Site Administrators"')
+                sudo('python manage.py user create_role -n user -d Users')
+
+
 def bootstrap():
     """
     Setup all the things
@@ -210,3 +231,4 @@ def bootstrap():
     install_requirements()
     # Install ssl scripts
     install_config_files()
+    upgrade_db_schema()

@@ -6,13 +6,13 @@
 
 
 {% block content %}
-  	<div class="jumbotron" style="background-image: url({{ url_for('static', filename='img/header.jpg' ) }}); background-size: 100%;">
+  	<div class="jumbotron" style="background-image: url({% if section.header_image is none() %}{{ url_for('static', filename='img/header.jpg' ) }}{% else %}{{ section.header_image }}{% endif %}); background-size: 100%;">
   		<div class="container">
   			<h1>{{ section.name }}</h1>
   			<p>{{ section.shortDescription }}</p>
   		</div>
   	</div>
-  	
+
   	<div class="container">
   		<div class="row">
 	  		<div class="col-md-9" role="main">
@@ -26,7 +26,7 @@
 	  			</ul>
 	  			<!-- Tab contents -->
 	  			<div class="tab-content">
-		  				  				
+
 	  				<div class="tab-pane active" id="info">
 	  					<div class="container">
 		  					{{ section.description }}
@@ -47,15 +47,15 @@
 	  						{#<a href="http://www.wunderground.com/weather-forecast/zmw:{{ section.zipcode }}.1.99999" class="list-group-item">Weather Underground</a>
 	  						<a href="http://www.weather.com/weather/today/{{ section.zipcode }}:4:US" class="list-group-item">Weather.com</a>#}
 	  					</div>
-	  					
+
 	  				</div>
-	  				
+
 	  				{% for correlation in section.correlations %}
 	  				<div class="tab-pane" id="{{ correlation.sensor.stype}}">
 		  				<img src="{{ url_for('.gagesensorplot', id=correlation.sensor.gage_id, stype=correlation.sensor.stype ) }}" class="img-responsive">
 	  				</div>
 	  				{% endfor %}
-	  				
+
 	  			</div>
 	  		</div>
 	  		<div class="col-md-3">
