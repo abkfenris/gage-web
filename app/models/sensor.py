@@ -51,7 +51,7 @@ class Sensor(db.Model):
 
     stype = db.Column(db.String(80))
     name = db.Column(db.String(80))
-    slug = db.Column(db.String(40))
+    slug = db.Column(db.String(80))
     prefix = db.Column(db.String(10))
     suffix = db.Column(db.String(10))
     local = db.Column(db.Boolean)

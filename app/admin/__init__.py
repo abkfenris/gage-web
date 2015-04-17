@@ -14,6 +14,8 @@ from ..models import User, Region, River, Section, Gage, Sensor
 
 path = op.join(op.dirname(__file__), '../static/images')
 
+h_w = {'data-height': 400, 'data-width': 600}
+
 
 class ModelView(_ModelView):
     def is_accessible(self):
@@ -43,9 +45,9 @@ class SectionView(ModelView):
     column_list = ('name', 'path', 'slug', 'river', 'location')
     column_labels = dict(slug='URL Slug')
     column_searchable_list = ('name', River.name)
-    form_widget_args = {'putin': {'data-height': 400, 'data-width': 400},
-                        'takeout': {'data-height': 200, 'data-width': 200},
-                        'path': {'data-height': 600, 'data-width': 600}}
+    form_widget_args = {'putin': h_w,
+                        'takeout': h_w,
+                        'path': h_w}
 
 
 class GageView(ModelView):
@@ -67,7 +69,7 @@ class GageView(ModelView):
                               'local_town',
                               'location')
     # inline_models = (Sensor,)
-    form_widget_args = {'point': {'data-height': 500, 'data-width': 500}}
+    form_widget_args = {'point': h_w}
 
 
 class MyAdminIndexView(AdminIndexView):

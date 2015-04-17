@@ -48,9 +48,9 @@ class Gage(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    slug = db.Column(db.String(40), unique=True)
+    slug = db.Column(db.String(80), unique=True)
     # primary_sensor_id = db.Column(db.Integer, db.ForeignKey('sensor.id'))
-    point = db.Column(Geometry('POINT'))
+    point = db.Column(Geometry('POINT', 4326))
 
     river_id = db.Column(db.Integer, db.ForeignKey('rivers.id'))
     river = db.relationship('River', backref='gages')

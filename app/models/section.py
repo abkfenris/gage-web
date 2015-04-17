@@ -44,7 +44,7 @@ class Section(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    slug = db.Column(db.String(40), unique=True)
+    slug = db.Column(db.String(80), unique=True)
 
     river_id = db.Column(db.Integer, db.ForeignKey('rivers.id'))
     river = db.relationship('River', backref='sections')
@@ -53,9 +53,9 @@ class Section(db.Model):
     short_description = db.Column(db.Text)
     access = db.Column(db.String)
     location = db.Column(db.String)
-    putin = db.Column(Geometry('POINT'))
-    takeout = db.Column(Geometry('POINT'))
-    path = db.Column(Geometry('LINESTRING'))
+    putin = db.Column(Geometry('POINT', 4326))
+    takeout = db.Column(Geometry('POINT', 4326))
+    path = db.Column(Geometry('LINESTRING', 4326))
     in_elevation = db.Column(db.Integer)
     out_elevation = db.Column(db.Integer)
     header_image = db.Column(db.String(80))

@@ -25,7 +25,7 @@ class Region(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    slug = db.Column(db.String(40))
+    slug = db.Column(db.String(80))
     description = db.Column(db.Text)
     short_description = db.Column(db.Text)
     header_image = db.Column(db.String(80))
