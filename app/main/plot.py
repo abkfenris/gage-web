@@ -4,7 +4,10 @@ Ways that a plot of a selected sensor can be displayed
 
 from flask import make_response
 import datetime
-import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 import matplotlib
 matplotlib.use('Agg')
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
@@ -80,7 +83,7 @@ def gagesensorplot(id,
     else:
         fig.suptitle(sensor.title)
     canvas = FigureCanvas(fig)
-    png_output = StringIO.StringIO()
+    png_output = StringIO()
     canvas.print_png(png_output)
     response = make_response(png_output.getvalue())
     response.headers['Content-Type'] = 'image/png'

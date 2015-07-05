@@ -58,3 +58,4 @@ docs/_build/
 target/
 *.ipynb
 fabhosts.py
+tox.ini

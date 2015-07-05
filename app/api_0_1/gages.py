@@ -206,15 +206,15 @@ def gage_new_samples(id):
     else:
         samples = req_json['samples']
         output = []
-        print samples
+        print(samples)
         for sample in samples:
             result = gage.new_sample(stype=sample['type'].lower(),
                                      value=sample['value'],
                                      sdatetime=sample['datetime'])
             result_json = result.to_sensor_json()
-            print result_json
+            print(result_json)
             result_json['sender_id'] = sample['sender_id']
-            print result_json
+            print(result_json)
             output.append(result_json)
         return jsonify({
             'gage': gage.to_json(),

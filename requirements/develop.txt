@@ -3,4 +3,3 @@
 -r not-travis.txt
 
 # Flask Extensions
-Flask-DebugToolbar==0.10.0
