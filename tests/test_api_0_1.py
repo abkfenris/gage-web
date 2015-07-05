@@ -1,4 +1,4 @@
-from test_basics import BasicTestCase
+from .test_basics import BasicTestCase
 
 
 class APITestCase(BasicTestCase):

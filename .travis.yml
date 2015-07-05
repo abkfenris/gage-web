@@ -19,7 +19,7 @@ before_install:
 install:
     - conda create --yes -n gage-web python=$TRAVIS_PYTHON_VERSION pip numpy matplotlib
     - source activate gage-web
-    - pip install -r travis-requirements.txt
+    - pip install -r requirements/travis.txt
 script: nosetests -v --exclude-dir=tests/gage_client/ --cover-package=app --with-xcoverage
 after_success:
     - coveralls
