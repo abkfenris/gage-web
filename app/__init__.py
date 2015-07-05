@@ -35,13 +35,13 @@ def create_app(config_name):
         sentry = Sentry(app, logging=True, level=logging.INFO)
         app.wsgi_app = ProxyFix(app.wsgi_app)
 
-    from main import main
+    from .main import main
     app.register_blueprint(main)
 
-    from admin import admin
+    from .admin import admin
     admin.init_app(app)
 
-    from api_0_1 import api as api_0_1_blueprint
+    from .api_0_1 import api as api_0_1_blueprint
     app.register_blueprint(api_0_1_blueprint, url_prefix='/api/0.1')
 
     return app
