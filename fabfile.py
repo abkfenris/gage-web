@@ -232,3 +232,4 @@ def bootstrap():
     # Install ssl scripts
     install_config_files()
     upgrade_db_schema()
+    create_roles()
