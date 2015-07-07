@@ -97,7 +97,7 @@ class Gage(db.Model):
                             slug=self.slug,
                             _external=True),
             'url': url_for('api.get_gage',
-                           id=self.id,
+                           gid=self.id,
                            _external=True)
         }
         return json_post
@@ -111,7 +111,7 @@ class Gage(db.Model):
             'name': self.name,
             'location': self.location,
             'url': url_for('api.get_gage',
-                           id=self.id,
+                           gid=self.id,
                            _external=True),
             'html': url_for('main.gagepage',
                             slug=self.slug,
