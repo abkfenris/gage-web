@@ -134,7 +134,7 @@ class Sensor(db.Model):
         json_post = {
             'id': self.id,
             'type': self.stype,
-            'url': url_for('api.get_sensor', id=self.id, _external=True)
+            'url': url_for('api.get_sensor', sid=self.id, _external=True)
         }
         return json_post
 
@@ -152,7 +152,7 @@ class Sensor(db.Model):
             'maximum': self.maximum,
             'started': self.started,
             'ended': self.ended,
-            'url': url_for('api.get_sensor', id=self.id, _external=True),
+            'url': url_for('api.get_sensor', sid=self.id, _external=True),
             'gage': self.gage.to_json(),
             'recent_sample': sample.to_sensor_json()
         }
@@ -167,7 +167,7 @@ class Sensor(db.Model):
         json_post = {
             'id': self.id,
             'type': self.stype,
-            'url': url_for('api.get_sensor', id=self.id, _external=True),
+            'url': url_for('api.get_sensor', sid=self.id, _external=True),
             'recent_sample': sample.to_sensor_json()
         }
         return json_post
@@ -181,7 +181,7 @@ class Sensor(db.Model):
             'id': self.id,
             'type': self.stype,
             'gage': self.gage.to_json(),
-            'url': url_for('api.get_sensor', id=self.id, _external=True)
+            'url': url_for('api.get_sensor', sid=self.id, _external=True)
         }
         return json_sensor
 
