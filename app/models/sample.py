@@ -37,7 +37,7 @@ class Sample(db.Model):
             'sensor': self.sensor.to_sample_json(),
             'value': self.value,
             'datetime': self.datetime,
-            'url': url_for('api.get_sample', id=self.id, _external=True)
+            'url': url_for('api.get_sample', sid=self.id, _external=True)
         }
         return json_sample
 
@@ -49,7 +49,7 @@ class Sample(db.Model):
             'id': self.id,
             'value': self.value,
             'datetime': str(self.datetime),
-            'url': url_for('api.get_sample', id=self.id, _external=True)
+            'url': url_for('api.get_sample', sid=self.id, _external=True)
         }
         return json_sample
 
