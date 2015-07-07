@@ -17,8 +17,8 @@ from .blueprint import main
 from ..models import Gage, Sensor, Sample
 
 
-@main.route('/gage/<int:id>/<stype>.png')
-def gagesensorplot(id,
+@main.route('/gage/<int:gid>/<stype>.png')
+def gagesensorplot(gid,
                    stype,
                    days=7,
                    start=None,
@@ -36,7 +36,7 @@ def gagesensorplot(id,
     number or previous days, or by explicitly selecting a YYYYMMDD start and
     end date can plot a custom range
     """
-    gage = Gage.query.get_or_404(id)
+    gage = Gage.query.get_or_404(gid)
     sensor = Sensor.query.filter_by(gage_id=gage.id).filter_by(stype=stype.lower()).first_or_404()
     if end is None:
         date_end = datetime.datetime.utcnow()

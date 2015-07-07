@@ -1,0 +1,5 @@
+pylint:
+    disable:
+        - unused-argument
+ignore-paths:
+    - migrations/

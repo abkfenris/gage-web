@@ -2,10 +2,9 @@
 The main public routes to view the site
 """
 
-from flask import render_template, Response, make_response, url_for, current_app
+from flask import render_template
 
 from .blueprint import main
-from .. import db
 from ..models import Gage, Region, Section, River, Sensor
 
 # Normal Pages
@@ -40,15 +39,15 @@ def gagespage():
     return render_template('gages.html', Gage=Gage)
 
 
-@main.route('/gage/<int:id>/')
+@main.route('/gage/<int:gid>/')
 @main.route('/gage/<slug>/')
-def gagepage(id=None, slug=None):
+def gagepage(gid=None, slug=None):
     """**/gage/<slug>/**
 
     Individual gage page
     """
     if slug is None:
-        gage = Gage.query.get_or_404(id)
+        gage = Gage.query.get_or_404(gid)
     else:
         gage = Gage.query.filter_by(slug=slug).first_or_404()
     return render_template('gage.html', Gage=Gage, gage=gage)
@@ -64,15 +63,15 @@ def regionspage():
     return render_template('regions.html', Gage=Gage, Region=Region)
 
 
-@main.route('/region/<int:id>/')
+@main.route('/region/<int:rid>/')
 @main.route('/region/<slug>/')
-def regionpage(id=None, slug=None):
+def regionpage(rid=None, slug=None):
     """**/region/<slug>/**
 
     Individual region page
     """
     if slug is None:
-        region = Region.query.get_or_404(id)
+        region = Region.query.get_or_404(rid)
     else:
         region = Region.query.filter_by(slug=slug).first_or_404()
     return render_template('region.html',
@@ -93,15 +92,15 @@ def sectionspage():
     return render_template('sections.html', Gage=Gage, Section=Section)
 
 
-@main.route('/section/<int:id>/')
+@main.route('/section/<int:sid>/')
 @main.route('/section/<slug>')
-def sectionpage(id=None, slug=None):
+def sectionpage(sid=None, slug=None):
     """**/section/<slug>/**
 
     Individual section page
     """
     if slug is None:
-        section = Section.query.get_or_404(id)
+        section = Section.query.get_or_404(sid)
     else:
         section = Section.query.filter_by(slug=slug).first_or_404()
     return render_template('section.html',
@@ -124,15 +123,15 @@ def riverspage():
                            Section=Section)
 
 
-@main.route('/river/<int:id>/')
+@main.route('/river/<int:rid>/')
 @main.route('/river/<slug>/')
-def riverpage(id=None, slug=None):
+def riverpage(rid=None, slug=None):
     """**/river/<slug>/**
 
     Individual river page
     """
     if slug is None:
-        river = River.query.get_or_404(id)
+        river = River.query.get_or_404(rid)
     else:
         river = River.query.filter_by(slug=slug).first_or_404()
     return render_template('river.html',
