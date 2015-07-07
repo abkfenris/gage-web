@@ -42,10 +42,10 @@ def get_rivers():
     rivers = pagination.items
     prev = None
     if pagination.has_prev:
-        prev = url_for('.get_sensors', page=page-1, _external=True)
+        prev = url_for('.get_rivers', page=page-1, _external=True)
     next = None
     if pagination.has_next:
-        next = url_for('.get_sensors', page=page+1, _external=True)
+        next = url_for('.get_rivers', page=page+1, _external=True)
     return jsonify({
         'rivers': [river.to_json() for river in rivers],
         'prev': prev,
