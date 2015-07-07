@@ -38,7 +38,7 @@ class Region(db.Model):
         json_region = {
             'id': self.id,
             'name': self.name,
-            'url': url_for('api.get_region', id=self.id, _external=True),
+            'url': url_for('api.get_region', rid=self.id, _external=True),
             'html': url_for('main.regionpage', slug=self.slug, _external=True),
         }
         return json_region
@@ -55,7 +55,7 @@ class Region(db.Model):
             'sections': [section.to_json() for section in self.sections],
             'gages': [gage.to_json() for gage in self.gages],
             'rivers': [river.to_json for river in self.rivers],
-            'url': url_for('api.get_region', id=self.id, _external=True),
+            'url': url_for('api.get_region', rid=self.id, _external=True),
             'html': url_for('main.regionpage', slug=self.slug, _external=True)
         }
         return json_region

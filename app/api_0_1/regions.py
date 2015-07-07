@@ -45,19 +45,19 @@ def get_regions():
     prev = None
     if pagination.has_prev:
         prev = url_for('.get_regions', page=page-1, _external=True)
-    next = None
+    next_p = None
     if pagination.has_next:
-        next = url_for('.get_regions', page=page+1, _external=True)
+        next_p = url_for('.get_regions', page=page+1, _external=True)
     return jsonify({
         'regions': [region.to_json() for region in regions],
         'prev': prev,
-        'next': next,
+        'next': next_p,
         'count': pagination.total
     })
 
 
-@api.route('/regions/<int:id>')
-def get_region(id):
+@api.route('/regions/<int:rid>')
+def get_region(rid):
     """
     Detailed information about region *id*
 
@@ -95,5 +95,5 @@ def get_region(id):
           "url": "http://riverflo.ws/api/1.0/regions/1"
         }
     """
-    region = Region.query.get_or_404(id)
+    region = Region.query.get_or_404(rid)
     return jsonify(region.to_long_json())
