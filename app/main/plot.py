@@ -13,7 +13,7 @@ matplotlib.use('Agg')
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 
-from . import main
+from .blueprint import main
 from ..models import Gage, Sensor, Sample
 
 

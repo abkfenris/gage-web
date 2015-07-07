@@ -2,7 +2,7 @@
 When things go wrong sitewide they are handled by the app_errorhandlers
 """
 from flask import render_template, request, jsonify
-from . import main
+from .blueprint import main
 from ..models import Gage
 
 

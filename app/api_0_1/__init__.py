@@ -21,10 +21,9 @@ Endpoints:
 - **/api/1.0/sections/** - **GET** List all sections
 - **/api/1.0/sections/<id>** - **GET** Detailed information about section *id*
 """
-
 from flask import Blueprint, jsonify, url_for
 
-api = Blueprint('api', __name__)
+from .blueprint import api
 
 # Import other API views
 from . import gages, sensors, samples, rivers, sections, regions  # noqa
