@@ -5,7 +5,7 @@ from flask import url_for
 from geoalchemy2 import Geometry
 from geoalchemy2.shape import to_shape
 
-from app import db
+from app.database import db
 from .sensor import Sensor
 from .sample import Sample
 

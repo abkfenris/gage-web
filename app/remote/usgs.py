@@ -1,6 +1,6 @@
 import requests
 import arrow
-from .. import db
+from ..database import db
 
 
 def get_samples(sensor,

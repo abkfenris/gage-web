@@ -6,7 +6,7 @@ from flask import url_for
 import logging
 from sqlalchemy.dialects.postgresql import JSON
 
-from app import db
+from app.database import db
 from app.remote import usgs
 from .sample import Sample
 

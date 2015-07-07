@@ -9,7 +9,7 @@ from flask_security import (roles_required,
                             login_required)
 import os.path as op
 
-from .. import db
+from ..database import db
 from ..models import User, Region, River, Section, Gage, Sensor
 
 path = op.join(op.dirname(__file__), '../static/images')

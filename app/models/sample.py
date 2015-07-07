@@ -3,7 +3,7 @@ Model for sample
 """
 from flask import url_for
 
-from app import db
+from app.database import db
 
 
 class Sample(db.Model):

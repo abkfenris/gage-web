@@ -2,7 +2,7 @@
 River model
 """
 from flask import url_for
-from app import db
+from app.database import db
 
 # many to many table to connect rivers to regions
 rivers_regions = db.Table('rivers_regions',
