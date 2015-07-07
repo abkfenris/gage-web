@@ -27,7 +27,7 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
-    API_GAGES_PER_PAGE = 10
+    API_GAGES_PER_PAGE = 1
     SECRET_KEY = '1'  # noqa
     CSRF_ENABLED = False
     SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/gage_web_testing'
