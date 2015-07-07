@@ -62,7 +62,7 @@ class River(db.Model):
             'id': self.id,
             'name': self.name,
             'html': url_for('main.riverpage', slug=self.slug, _external=True),
-            'url': url_for('api.get_river', id=self.id, _external=True),
+            'url': url_for('api.get_river', rid=self.id, _external=True),
         }
         return json_river
 
@@ -75,7 +75,7 @@ class River(db.Model):
             'id': self.id,
             'name': self.name,
             'html': url_for('main.riverpage', slug=self.slug, _external=True),
-            'url': url_for('api.get_river', id=self.id, _external=True),
+            'url': url_for('api.get_river', rid=self.id, _external=True),
             'regions': [region.to_json() for region in self.regions],
             'sections': [section.to_json() for section in self.sections],
             'tributaries': [river.to_json() for river in self.tributary],
