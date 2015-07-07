@@ -4,12 +4,10 @@ specific file on demand
 """
 
 import os
-import posixpath
 import time
 
-from dropbox.client import DropboxClient, ErrorResponse
+from dropbox.client import DropboxClient
 from config import DevelopmentConfig
-from app import db
 
 
 def backup(filename):
