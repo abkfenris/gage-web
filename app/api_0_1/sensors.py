@@ -9,7 +9,7 @@ Endpoints:
 from flask import jsonify, request, url_for, current_app
 
 from ..models import Sensor, Sample
-from . import api
+from .blueprint import api
 
 
 @api.route('/sensors/')

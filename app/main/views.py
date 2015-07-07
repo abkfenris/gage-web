@@ -4,7 +4,7 @@ The main public routes to view the site
 
 from flask import render_template
 
-from . import main
+from .blueprint import main
 from ..models import Gage, Region, Section, River, Sensor
 
 # Normal Pages

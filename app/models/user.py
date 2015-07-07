@@ -3,7 +3,7 @@ Model for user
 """
 from flask_security import UserMixin, RoleMixin, SQLAlchemyUserDatastore
 
-from app import db
+from app.database import db
 
 roles_users = db.Table('roles_users',
                        db.Column('user_id',

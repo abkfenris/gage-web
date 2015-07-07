@@ -8,7 +8,7 @@ Endpoints:
 from flask import jsonify, request, url_for, current_app
 
 from ..models import Sample
-from . import api
+from .blueprint import api
 
 
 @api.route('/samples/')

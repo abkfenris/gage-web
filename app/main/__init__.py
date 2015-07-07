@@ -2,9 +2,8 @@
 Main public interface to the website.
 """
 
-from flask import Blueprint
-
-main = Blueprint('main', __name__)
+# import blueprint
+from .blueprint import main  # noqa
 
 # importing views for blueprint
 from . import views, errors, plot  # noqa

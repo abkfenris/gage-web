@@ -3,7 +3,7 @@ Region model
 """
 from flask import url_for
 
-from app import db
+from app.database import db
 
 
 class Region(db.Model):

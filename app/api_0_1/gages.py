@@ -14,7 +14,7 @@ from flask import jsonify, request, url_for, current_app
 from itsdangerous import JSONWebSignatureSerializer, BadSignature
 
 from ..models import Gage
-from . import api
+from .blueprint import api
 from .errors import unauthorized
 
 
