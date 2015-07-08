@@ -143,7 +143,7 @@ class Sensor(db.Model):
         Creates a JSON object from sensor. Used where a single sensor will be
         displayed.
         """
-        sample = Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
+        sample = self.recent()
         json_post = {
             'id': self.id,
             'type': self.stype,
@@ -163,7 +163,7 @@ class Sensor(db.Model):
         Creates a JSON object from sensor. Displayed with gage JSON and includes
         most recent sample.
         """
-        sample = Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
+        sample = self.recent()
         json_post = {
             'id': self.id,
             'type': self.stype,
