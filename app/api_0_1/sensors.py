@@ -122,6 +122,7 @@ def get_sensor_samples(sid):
         }
     """
     sensor = Sensor.query.get_or_404(sid)
+    sensor.recent()
     page = request.args.get('page', 1, type=int)
     pagination = Sample.query.filter_by(sensor_id=sid).paginate(page,
                                                                 per_page=current_app.config['API_GAGES_PER_PAGE'],  # noqa
@@ -129,10 +130,10 @@ def get_sensor_samples(sid):
     samples = pagination.items
     prev = None
     if pagination.has_prev:
-        prev = url_for('.get_sensor_samples', page=page-1)
+        prev = url_for('.get_sensor_samples', page=page-1, _external=True)
     next_p = None
     if pagination.has_next:
-        next_p = url_for('.get_sensor_samples', page=page+1)
+        next_p = url_for('.get_sensor_samples', page=page+1, _external=True)
     return jsonify({
         'sensor': sensor.to_json(),
         'samples': [sample.to_sensor_json() for sample in samples],

@@ -1,0 +1,164 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.6.0 CPython/2.7.9 Darwin/14.4.0]
+    method: GET
+    uri: http://waterservices.usgs.gov/nwis/iv/?format=json,1.1&sites=01054200&period=P7D&parameterCd=00065
+  response:
+    body:
+      string: !!binary |
+        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
+        xJcqLMn3UWKJL31ZnhqyxJc6LPGlCkvyfZxZpokhS3zpyzI1ZIkvdVjiS1+WQzOW5Pt4szR71zkl
+        38ebpd17BeT7eLO0a1sn38ebpd3zJfk+ziwzu/tY8n28Wdrdx5Lv483S7t6HfB9vlnZ9XuT7OLMc
+        2rXHku/jzdLOl+T7eLO0e6eSfB9nliO7ZxLyfbxZ2rUVkO/jzHJsyRJfurI8smSJL11ZHts9X5Lv
+        48zyxK5eku/jynI0SOyeL8n3cWaZWdZLfOnKcmT3jgj5Pt4s7e59yPdxZjm2a1sn30eJJb4UYZmR
+        7yPjy4x8H2+WZn1eGfk+Ms8kGfk+3iwzM5bk+3iztLv3Id/HmeXQ7DcIGfk+3izN3o/NyPfxZmnW
+        T5KR7+PN0uzdrYx8H5k+r4x8H2+Wdm0F5Pt4s7RrKyDfx5ulXVsB+T7eLO3aCsj3cWaZ2vWTkO/j
+        zdLo3iebJvRferM0aivoWOJLX5ZGbQUdS3zpy9Lo3qdjiS9dWVpldEeW9F96s7S796H/0pulUbtP
+        xxJf+rK0u4+l/9Kbpd19LP2Xzr+/PDXq8+pY4ktflnb3sfRferO0u4+l/9KbpdG7W5El/ZfeLO3u
+        Y+m/9GZp1BfdscSXvizt2mPpvxTJhIksGZ/Em6XdMwnjk3izNPo9SccSX/qytHu+ZHwSb5Z2/SSM
+        T+LN0u75kvFJvFnaPV8yPok3S7s+L8Yn8WZp11bA+CTeWcB2bQWMTyKS69yxxJe+LO3aChifxJul
+        XVsB45N4s7Tri2Z8Em+Wdu0+jE/izdKu3YfxSbxZ2rX7MD6JN0u7dh/GJ/Fmadfuw/gkIuN5dSzx
+        pQpLxifxZmnX7sP4JEos8aUvS7s2PMYn8WZp1oaXku/jzdKsDS8l38ebpVkbXkq+jzdLsza8lHwf
+        HZbk+3izNGuPTcn38WZp1h6bku/jzHJs1oaXku/jzdLsPbyUfB9vlmZteCn5Pkos8aUvS7s2PPJ9
+        dFiS7+PN0q49lnwfb5Z27bHk+3iztGvDI99HhyX5Pt4s7dpjyffxZmnXHku+jzPLkV17LPk+3izt
+        2mPJ9/FmadeGR76PN0uzdypT8n2UWOJLX5Z2bXjk+yixxJe+LO3aY8n38WZp14ZHvo83S7s2PPJ9
+        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
+    headers:
+      connection: [close]
+      content-encoding: [gzip]
+      content-type: [application/json]
+      date: ['Wed, 08 Jul 2015 03:05:04 GMT']
+      responsetime: [D=49972 t=1436324704307238]
+      server: [GlassFish Server Open Source Edition  4.1]
+      vary: [Accept-Encoding]
+      x-ua-compatible: ['IE=edge,chrome=1']
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.6.0 CPython/2.7.9 Darwin/14.4.0]
+    method: GET
+    uri: http://waterservices.usgs.gov/nwis/iv/?format=json,1.1&sites=01054200&startDT=2015-07-07T21:45Z&endDT=2015-07-08T03:05Z&parameterCd=00065
+  response:
+    body:
+      string: !!binary |
+        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
+        ETSqL/8CzMMMtQQzAAA=
+    headers:
+      connection: [close]
+      content-encoding: [gzip]
+      content-type: [application/json]
+      date: ['Wed, 08 Jul 2015 03:05:06 GMT']
+      responsetime: [D=20224 t=1436324706564379]
+      server: [GlassFish Server Open Source Edition  4.1]
+      vary: [Accept-Encoding]
+      x-ua-compatible: ['IE=edge,chrome=1']
+    status: {code: 200, message: OK}
+version: 1

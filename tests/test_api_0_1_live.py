@@ -1,4 +1,5 @@
 import requests
+import vcr
 
 from .test_live import LiveServerBase
 
@@ -52,6 +53,7 @@ class API_0_1_Live(LiveServerBase):
         self.assertIn('html', testgage)
         self.assertIn('Wild River at Gilead', testgage['name'])
 
+    @vcr.use_cassette('tests/fixtures/test_api_gage', ignore_localhost=True)
     def test_api_gage(self):
         """
         Retrieve a gage from the server (test_api_0_1.API_0_1_Live)

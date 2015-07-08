@@ -21,6 +21,6 @@ install:
     - conda create --yes -n gage-web python=$TRAVIS_PYTHON_VERSION pip numpy matplotlib
     - source activate gage-web
     - pip install -r requirements/travis.txt
-script: coverage run --source=app -m py.test
+script: coverage run --source=app -m py.test -v
 after_success:
     - coveralls

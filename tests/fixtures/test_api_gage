@@ -1,0 +1,113 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.6.0 CPython/2.7.9 Darwin/14.4.0]
+    method: GET
+    uri: http://waterservices.usgs.gov/nwis/iv/?format=json,1.1&sites=01054200&period=P7D&parameterCd=00065
+  response:
+    body:
+      string: !!binary |
+        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
+    headers:
+      connection: [close]
+      content-encoding: [gzip]
+      content-type: [application/json]
+      date: ['Wed, 08 Jul 2015 03:04:27 GMT']
+      responsetime: [D=49076 t=1436324667886346]
+      server: [GlassFish Server Open Source Edition  4.1]
+      vary: [Accept-Encoding]
+      x-ua-compatible: ['IE=edge,chrome=1']
+    status: {code: 200, message: OK}
+version: 1
