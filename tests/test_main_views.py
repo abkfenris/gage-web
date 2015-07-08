@@ -72,7 +72,7 @@ class MainViews(BasicTestCase):
         assert 'Want more gages here' in str(rv.data)
         assert 'Wild River' in str(rv.data)
 
-    @my_vcr.use_cassette('tests/fixtures/main_test_gage_view',ignore_localhost=True)
+    @my_vcr.use_cassette('tests/fixtures/main_test_gage_view', ignore_localhost=True)
     def test_gage_view(self):
         """
         View a single gage page (test_main_views.MainViews)
