@@ -8,8 +8,8 @@ A web interface for a low cost stream height gauging system.
 .. image:: https://landscape.io/github/abkfenris/gage-web/master/landscape.svg?style=flat
     :target: https://landscape.io/github/abkfenris/gage-web/master
     :alt: Code Health
-.. image:: http://www.quantifiedcode.com/api/v1/project/93572355e00d48b68c65593e24f7beb6/badge.svg
-    :target: http://www.quantifiedcode.com/app/project/93572355e00d48b68c65593e24f7beb6
+.. image:: http://www.quantifiedcode.com/api/v1/project/f5832a59b9b34632adea7f5c41d9385b/badge.svg
+    :target: http://www.quantifiedcode.com/app/project/f5832a59b9b34632adea7f5c41d9385b
     :alt: Code Issues
 .. image:: https://requires.io/github/abkfenris/gage-web/requirements.svg?branch=develop
     :target: https://requires.io/github/abkfenris/gage-web/requirements/?branch=develop
