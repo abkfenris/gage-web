@@ -3,7 +3,7 @@ import vcr
 from .test_basics import BasicTestCase
 
 my_vcr = vcr.VCR(
-    match_on = ['host', 'method']
+    match_on = ['method']
 )
 
 
