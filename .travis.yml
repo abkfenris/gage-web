@@ -24,4 +24,5 @@ install:
 script: coverage run --source=app -m py.test -v
 after_success:
     - coveralls
+    - codecov
 sudo: false
