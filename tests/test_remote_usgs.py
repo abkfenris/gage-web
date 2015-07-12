@@ -20,3 +20,11 @@ class TestUSGS(BasicTestCase):
                                                     remote_parameter=None)\
                                          .with_entities(Sensor.id).all()
         usgs.get_multiple_level([sensor[0] for sensor in usgs_level_sensors])
+
+    def test_get_other_sample(self):
+        usgs_other_sensors = Sensor.query.filter(Sensor.local == False,
+                                                 Sensor.remote_type == 'usgs',
+                                                 Sensor.remote_parameter != None)\
+                                         .with_entities(Sensor.id).all()
+        for sensor in usgs_other_sensors:
+            usgs.get_other_sample(sensor[0])

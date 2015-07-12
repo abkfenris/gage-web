@@ -3,7 +3,6 @@ Model for sensor
 """
 import datetime
 from flask import url_for, current_app
-import logging
 from sqlalchemy.dialects.postgresql import JSON
 
 from app.database import db

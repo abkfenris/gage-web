@@ -14,7 +14,7 @@ class Sample(db.Model):
         id (int): Primary Sample key
         sensor_id (int): Foreign ``Sensor``.id key
         sensor: ``Sensor`` object related to this sample
-        datetime (datetime): ``datetime`` object of this sample
+        datetime (datetime): ``datetime`` object of this sample (should in UTC)
         value (float): Value of sample
     """
     __tablename__ = 'samples'

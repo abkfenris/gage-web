@@ -28,8 +28,7 @@ def fetch_usgs_other_sample(sensor_id):
     """
     Fetch other types of USGS samples, 1 sensor at a time
     """
-    print('Other USGS sensor')
-    print(sensor_id)
+    usgs.get_other_sample(sensor_id)
 
 
 def fetch_h2oline_sample(sensor_id):

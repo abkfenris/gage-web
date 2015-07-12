@@ -27,6 +27,27 @@ def usgs_dt_value(site_json):
     return  dt, v
 
 
+def add_new_sample(sensor_id, dt, svalue, deltaminutes=30):
+    """
+    Adds a new sample with an associacted remote sensor
+    if there hasn't been a sample recorded within the last deltaminutes
+    (default is 10).
+    Arguments:
+        sensor_id (int): Primary key for sensor
+        dt (datetime): Datetime of sample
+        svalue (float): Value of sample
+    """
+    delta = datetime.datetime.now() - datetime.timedelta(minutes=deltaminutes)
+    sample = Sample.query.filter_by(sensor_id=sensor_id)\
+                         .order_by(Sample.datetime.desc()).first()
+    if sample is None or (sample.datetime < delta and (sample.datetime != dt.replace(tzinfo=None))):
+        new_sample = Sample(sensor_id=sensor_id,
+                            value=svalue,
+                            datetime=dt)
+        db.session.add(new_sample)
+        db.session.commit()
+
+
 def get_multiple_level_sites(site_id_list):
     """
     Get the latest level from multiple usgs sensors
@@ -38,17 +59,7 @@ def get_multiple_level_sites(site_id_list):
         sc = site_code(site)
         dt, v = usgs_dt_value(site)
         sensor = Sensor.query.filter(Sensor.remote_id == sc).first()
-        sample = Sample.query.filter_by(sensor_id=sensor.id)\
-                             .order_by(Sample.datetime.desc()).first()
-        # only add a new sample if there is none, or there hasn't been one
-        # in the last 10 min
-        delta = datetime.datetime.now() - datetime.timedelta(minutes=10)
-        if sample is None or sample.datetime < delta:
-            sample = Sample(sensor_id=sensor.id,
-                            value=v,
-                            datetime=dt)
-            db.session.add(sample)
-            db.session.commit()
+        add_new_sample(sensor.id, dt, v)
 
 
 def get_multiple_level(sensor_id_list):
@@ -57,6 +68,16 @@ def get_multiple_level(sensor_id_list):
     """
     remote_sensors = Sensor.query.filter(Sensor.id.in_(sensor_id_list)).all()
     get_multiple_level_sites([sensor.remote_id for sensor in remote_sensors])
+
+
+def get_other_sample(sensor_id):
+    sensor = Sensor.query.filter(Sensor.id == sensor_id).first()
+    url = (URLBASE +
+           '&sites=' + sensor.remote_id +
+           '&parameterCD=' + sensor.remote_parameter)
+    site = requests.get(url).json()['value']['timeSeries'][0]
+    dt, v = usgs_dt_value(site)
+    add_new_sample(sensor.id, dt, v)
 
 
 def get_samples(sensor,
