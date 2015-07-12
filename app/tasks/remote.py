@@ -2,15 +2,14 @@
 Celery tasks for fetching remote samples
 """
 from app.models import Sensor
-# from app.remote import h2oline, usgs
+from app.remote import h2oline, usgs
 
 
 def fetch_usgs_level_samples_chunk(sensor_id_list):
     """
     Fetch an individual chunk of samples from the usgs sensors
     """
-    print('USGS level sensor chunk')
-    print(sensor_id_list)
+    usgs.get_multiple_level(sensor_id_list)
 
 
 def fetch_usgs_level_samples_all(sensor_id_list):
@@ -19,7 +18,7 @@ def fetch_usgs_level_samples_all(sensor_id_list):
     http://waterservices.usgs.gov/rest/IV-Service.html#Multiple
     This service can return up to 100 gages worth at a time.
     """
-    samples_per_request = 1
+    samples_per_request = 2
     for chunk in [sensor_id_list[x:x+samples_per_request] for x in
                   xrange(0, len(sensor_id_list), samples_per_request)]:
         fetch_usgs_level_samples_chunk(chunk)

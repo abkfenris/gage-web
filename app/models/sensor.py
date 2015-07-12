@@ -2,12 +2,11 @@
 Model for sensor
 """
 import datetime
-from flask import url_for
+from flask import url_for, current_app
 import logging
 from sqlalchemy.dialects.postgresql import JSON
 
 from app.database import db
-from app.remote import usgs
 from .sample import Sample
 
 
@@ -82,11 +81,9 @@ class Sensor(db.Model):
         """
         Return recent sample value.
         """
-        delta = datetime.datetime.now()-datetime.timedelta(minutes=60)
-        # print delta
-        logging.info('Recent for sensor {name}'.format(name=self.name))
+        current_app.logger.info('Recent for sensor {name}'.format(name=self.name))
         sample = Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
-        logging.info('Retrieved sample: {sample}'.format(sample=sample))
+        current_app.logger.info('Retrieved sample: {sample}'.format(sample=sample))
         return sample
 
     def to_json(self):

@@ -4,9 +4,7 @@ from flask.ext.admin.contrib.geoa import ModelView as _ModelView
 from flask_admin.base import MenuLink
 from flask.ext.admin.contrib.fileadmin import FileAdmin as _FileAdmin
 from flask_security import (roles_required,
-                            roles_accepted,
-                            current_user,
-                            login_required)
+                            current_user)
 import os.path as op
 
 from ..database import db

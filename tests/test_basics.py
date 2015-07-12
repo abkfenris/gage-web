@@ -55,7 +55,18 @@ class BasicTestCase(unittest.TestCase):
                              local=False, remote_type='usgs',
                              remote_id='01054200',
                              gage=wild_gage)
+        diamond_height = Sensor(name='Gage Height',
+                                stype='usgs-height',
+                                local=False, remote_type='usgs',
+                                remote_id='01052500')
+        diamond_discharge = Sensor(name='Discharge',
+                                   stype='usgs-discharge',
+                                   local=False, remote_type='usgs',
+                                   remote_id='01052500',
+                                   remote_parameter='00060')
         db.session.add(wild_sensor)
+        db.session.add(diamond_height)
+        db.session.add(diamond_discharge)
 
         # Create a sample
         #wild_sample = Sample(sensor=wild_sensor,
