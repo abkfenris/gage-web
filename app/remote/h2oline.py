@@ -52,10 +52,3 @@ def get_cfs(site_num, parameter='CFS', soup=None):
     result = p.search(cfs_strings[0])
     start, end = result.start(), result.end()
     return float(cfs_strings[0][start:end])
-
-
-def get_samples(sensor,
-                remote_id):
-    from ..models import Sample
-
-    # format url

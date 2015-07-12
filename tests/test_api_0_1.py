@@ -17,7 +17,6 @@ class APITestCase(BasicTestCase):
         rv = self.client.get('/api/0.1/gages/')
         assert 'Wild River' in str(rv.data)
 
-    @vcr.use_cassette('tests/fixtures/test_api_gage')
     def test_api_gage(self):
         rv = self.client.get('/api/0.1/gages/1')
         assert 'Wild River' in str(rv.data)
@@ -51,17 +50,14 @@ class APITestCase(BasicTestCase):
         rv = self.client.get('/api/0.1/sections/1')
         assert 'Wild River' in str(rv.data)
 
-    @vcr.use_cassette('tests/fixtures/test_api_sensors')
     def test_api_sensors(self):
         rv = self.client.get('/api/0.1/sensors/')
         assert 'usgs-height' in str(rv.data)
 
-    @vcr.use_cassette('tests/fixtures/test_api_sensor')
     def test_api_sensor(self):
         rv = self.client.get('/api/0.1/sensors/1')
         assert 'Wild River' in str(rv.data)
 
-    @vcr.use_cassette('tests/fixtures/test_api_sensor_samples')
     def test_api_sensor_samples(self):
         rv = self.client.get('/api/0/1/sensors/1/samples')
         assert 'Wild River' in str(rv.data)

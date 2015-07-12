@@ -1,0 +1,66 @@
+"""
+Celery tasks for fetching remote samples
+"""
+from app.models import Sensor
+# from app.remote import h2oline, usgs
+
+
+def fetch_usgs_level_samples_chunk(sensor_id_list):
+    """
+    Fetch an individual chunk of samples from the usgs sensors
+    """
+    print('USGS level sensor chunk')
+    print(sensor_id_list)
+
+
+def fetch_usgs_level_samples_all(sensor_id_list):
+    """
+    Fetch USGS level samples from the USGS Instantaneous Values Web Service
+    http://waterservices.usgs.gov/rest/IV-Service.html#Multiple
+    This service can return up to 100 gages worth at a time.
+    """
+    samples_per_request = 1
+    for chunk in [sensor_id_list[x:x+samples_per_request] for x in
+                  xrange(0, len(sensor_id_list), samples_per_request)]:
+        fetch_usgs_level_samples_chunk(chunk)
+
+
+def fetch_usgs_other_sample(sensor_id):
+    """
+    Fetch other types of USGS samples, 1 sensor at a time
+    """
+    print('Other USGS sensor')
+    print(sensor_id)
+
+
+def fetch_h2oline_sample(sensor_id):
+    """
+    Fetch h2oline sample
+    """
+    print('h2oline sensor')
+    print(sensor_id)
+
+
+def fetch_remote_samples():
+    """
+    Create tasks for all remote sensors to be updated
+    """
+    # Fetch remote USGS level gages
+    usgs_level_sensors = Sensor.query.filter_by(local=False,
+                                                remote_type='usgs',
+                                                remote_parameter=None)\
+                                     .with_entities(Sensor.id).all()
+    fetch_usgs_level_samples_all([sensor[0] for sensor in usgs_level_sensors])
+    # Fetch other USGS gages
+    usgs_other_sensors = Sensor.query.filter(Sensor.local == False,
+                                             Sensor.remote_type == 'usgs',
+                                             Sensor.remote_parameter != None)\
+                                     .with_entities(Sensor.id).all()
+    for sensor in usgs_other_sensors:
+        fetch_usgs_other_sample(sensor[0])
+    # Fetch h2oline gages
+    other_remote_sensors = Sensor.query.filter(Sensor.local == False,
+                                               Sensor.remote_type == 'h2oline')\
+                                       .with_entities(Sensor.id).all()
+    for sensor in other_remote_sensors:
+        fetch_h2oline_sample(sensor[0])
