@@ -28,4 +28,6 @@ source bin/activate
 
 export PYTHONPATH=$FLASKDIR:$PYTHONPATH
 
+cd $FLASKDIR
+
 exec celery worker -A celery_worker.celery --loglevel=info

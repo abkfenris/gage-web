@@ -28,4 +28,6 @@ source bin/activate
 
 export PYTHONPATH=$FLASKDIR:$PYTHONPATH
 
+cd $FLASKDIR
+
 exec celery beat -A celery_worker.celery -l info --pidfile=/tmp/celerybeat-myapp.pid

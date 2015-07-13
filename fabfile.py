@@ -140,8 +140,8 @@ def deploy():
     Push current master to production and restart gunicorn
     """
     with lcd(LOCAL_APP_DIR):
-        local('git push production master')
-        sudo('supervisorctl restart gage-web')
+        local('git push production develop')
+        sudo('supervisorctl restart gage:*')
 
 
 def install_requirements():
@@ -256,6 +256,7 @@ def setup_celery():
             require.directory('/home/www/logs/gage-web/')
             sudo('supervisorctl reread')
             sudo('supervisorctl update')
+            sudo('supervisorctl restart gage:*')
 
 
 def bootstrap():
