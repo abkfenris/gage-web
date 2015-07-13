@@ -64,9 +64,20 @@ class BasicTestCase(unittest.TestCase):
                                    local=False, remote_type='usgs',
                                    remote_id='01052500',
                                    remote_parameter='00060')
+        rapid_cfs = Sensor(name='Rapid CFS',
+                           stype='h2oline-cfs',
+                           local=False, remote_type='h2oline',
+                           remote_id='235127')
+        azicohos_level = Sensor(name='Aziscohol height',
+                                stype='h2oline-height',
+                                local=False, remote_type='h2oline',
+                                remote_id='235130',
+                                remote_parameter='FT')
         db.session.add(wild_sensor)
         db.session.add(diamond_height)
         db.session.add(diamond_discharge)
+        db.session.add(rapid_cfs)
+        db.session.add(azicohos_level)
 
         # Create a sample
         #wild_sample = Sample(sensor=wild_sensor,

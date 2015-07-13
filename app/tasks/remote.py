@@ -19,6 +19,10 @@ def fetch_usgs_level_samples_all(sensor_id_list):
     This service can return up to 100 gages worth at a time.
     """
     samples_per_request = 2
+    try:
+        xrange
+    except NameError:
+        xrange = range
     for chunk in [sensor_id_list[x:x+samples_per_request] for x in
                   xrange(0, len(sensor_id_list), samples_per_request)]:
         fetch_usgs_level_samples_chunk(chunk)
@@ -35,8 +39,7 @@ def fetch_h2oline_sample(sensor_id):
     """
     Fetch h2oline sample
     """
-    print('h2oline sensor')
-    print(sensor_id)
+    h2oline.get_sample(sensor_id)
 
 
 def fetch_remote_samples():
@@ -49,6 +52,7 @@ def fetch_remote_samples():
                                                 remote_parameter=None)\
                                      .with_entities(Sensor.id).all()
     fetch_usgs_level_samples_all([sensor[0] for sensor in usgs_level_sensors])
+
     # Fetch other USGS gages
     usgs_other_sensors = Sensor.query.filter(Sensor.local == False,
                                              Sensor.remote_type == 'usgs',
@@ -56,6 +60,7 @@ def fetch_remote_samples():
                                      .with_entities(Sensor.id).all()
     for sensor in usgs_other_sensors:
         fetch_usgs_other_sample(sensor[0])
+
     # Fetch h2oline gages
     other_remote_sensors = Sensor.query.filter(Sensor.local == False,
                                                Sensor.remote_type == 'h2oline')\

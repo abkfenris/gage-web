@@ -1,11 +1,15 @@
 """
-Get flows from h2oline.com sites
+Get flows (and other parameters) from h2oline.com sites
 """
-
+import datetime
 import re
 
 from bs4 import BeautifulSoup
 import requests
+import parsedatetime
+
+from app.models import Sensor
+from . import add_new_sample
 
 
 def get_soup(site_num):
@@ -37,6 +41,15 @@ def get_cfs_strings(site_num, parameter='CFS', soup=None):
     return soup.body.findAll(text=p)
 
 
+def get_parameter_start_end(string, parameter):
+    """
+    Return the start and end of the parameter in the string
+    """
+    p = re.compile('([\d.]+)+(?= {})'.format(parameter))
+    result = p.search(string)
+    return result.start(), result.end()
+
+
 def get_cfs(site_num, parameter='CFS', soup=None):
     """
     Return float of first CFS found
@@ -46,7 +59,40 @@ def get_cfs(site_num, parameter='CFS', soup=None):
         cfs_strings = get_cfs_strings(site_num, parameter=parameter)
     else:
         cfs_strings = get_cfs_strings(site_num, parameter=parameter, soup=soup)
-    p = re.compile('([\d.]+)+(?= {})'.format(parameter))
-    result = p.search(cfs_strings[0])
-    start, end = result.start(), result.end()
+    start, end = get_parameter_start_end(cfs_strings[0], parameter)
     return float(cfs_strings[0][start:end])
+
+
+def natural_to_datetime(timestring):
+    """
+    Takes a natural sentance
+    Returns a datetime instance
+    """
+    cal = parsedatetime.Calendar()
+    t = cal.parse(timestring)
+    return datetime.datetime(*t[0][0:7])
+
+
+def get_dt_cfs(site_num, parameter='CFS', soup=None):
+    """
+    Returns datetime and float of first CFS (or other parameter) found
+    """
+    if soup is None:
+        cfs_strings = get_cfs_strings(site_num, parameter=parameter)
+    else:
+        cfs_strings = get_cfs_strings(site_num, parameter=parameter, soup=soup)
+    start, end = get_parameter_start_end(cfs_strings[0], parameter)
+    dt = natural_to_datetime(cfs_strings[0][:start])
+    return dt, float(cfs_strings[0][start:end])
+
+
+def get_sample(sensor_id):
+    """
+    Takes a sensor id, tries to get the latest sample from the site
+    """
+    sensor = Sensor.query.filter(Sensor.id == sensor_id).first()
+    if sensor.remote_parameter is None:
+        dt, v = get_dt_cfs(sensor.remote_id)
+    else:
+        dt, v = get_dt_cfs(sensor.remote_id, parameter=sensor.remote_parameter)
+    add_new_sample(sensor.id, dt, v)
