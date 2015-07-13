@@ -19,12 +19,13 @@ def fetch_usgs_level_samples_all(sensor_id_list):
     This service can return up to 100 gages worth at a time.
     """
     samples_per_request = 2
+    # dealing with python 3 renaming xrange
     try:
-        xrange
+        x_range = xrange
     except NameError:
-        xrange = range
+        x_range = range
     for chunk in [sensor_id_list[x:x+samples_per_request] for x in
-                  xrange(0, len(sensor_id_list), samples_per_request)]:
+                  x_range(0, len(sensor_id_list), samples_per_request)]:
         fetch_usgs_level_samples_chunk(chunk)
 
 

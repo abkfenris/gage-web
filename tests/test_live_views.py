@@ -5,7 +5,7 @@ import requests
 from .test_live import LiveServerBase
 
 
-class GageClient_0_1(LiveServerBase):
+class GageClient01(LiveServerBase):
     def test_index_page(self):
         """
         Test that the index page loads

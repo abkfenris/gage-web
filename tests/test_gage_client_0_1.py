@@ -5,7 +5,7 @@ from .gage_client.gage_client import Client
 from .test_live import LiveServerBase
 
 
-class GageClient_0_1(LiveServerBase):
+class GageClient01(LiveServerBase):
 
     def test_gage_client(self):
         """
