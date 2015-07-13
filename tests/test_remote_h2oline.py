@@ -33,3 +33,10 @@ class TestH2Oline(BasicTestCase):
         dt, value = h2oline.get_dt_cfs(self.SITE_NUM)
         assert type(dt) == datetime.datetime
         assert type(value) == float
+
+    @my_vcr.use_cassette('tests/fixture/h2oline_soup_get_dt_cfs')
+    def test_soup_get_dt_cfs(self):
+        soup = h2oline.get_soup(self.SITE_NUM)
+        dt, value = h2oline.get_dt_cfs(self.SITE_NUM, soup=soup)
+        assert type(dt) == datetime.datetime
+        assert type(value) == float
