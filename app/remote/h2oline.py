@@ -5,6 +5,7 @@ import datetime
 import re
 
 from bs4 import BeautifulSoup
+from flask import current_app
 import requests
 import parsedatetime
 
@@ -70,7 +71,15 @@ def natural_to_datetime(timestring):
     """
     cal = parsedatetime.Calendar()
     t = cal.parse(timestring)
-    return datetime.datetime(*t[0][0:7])
+    dt = datetime.datetime(*t[0][0:7])
+    # If the datetime parsed is not within 7 days of today just use right now
+    if (datetime.datetime.now() - dt) > datetime.timedelta(days=7):
+        return dt
+    else:
+        current_app.logger.warning('Unable to find a valid date within "{}".'
+                                   .format(timestring) + 'Found {} instead'
+                                   .format(str(dt)))
+        return datetime.datetime.now()
 
 
 def get_dt_cfs(site_num, parameter='CFS', soup=None):

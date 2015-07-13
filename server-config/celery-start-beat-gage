@@ -1,0 +1,31 @@
+#!/bin/bash
+
+##############################################################
+### Need to set environmental variables for flask to run   ###
+### in host-export. Use host-export-example                ###
+##############################################################
+
+# gunicorn starter from http://prakhar.me/articles/flask-on-nginx-and-gunicorn/
+
+# Local variables
+
+NAME="riverflo.ws"
+FLASKDIR={{ WWW_DIR }}
+VENVDIR={{ ENV_DIR }}
+USER={{ USER }}
+GROUP={{ GROUP }}
+NUM_WORKERS=5
+LOG_FILE=/home/www/logs/gage-web/gunicorn.log
+
+# Exported variables
+source $FLASKDIR"/server-config/host-export"
+
+echo "Starting $NAME"
+
+# activate the virtualenv
+cd $VENVDIR
+source bin/activate
+
+export PYTHONPATH=$FLASKDIR:$PYTHONPATH
+
+exec celery beat -A celery_worker.celery -l info --pidfile=/tmp/celerybeat-myapp.pid

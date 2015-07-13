@@ -5,7 +5,7 @@ A web interface for a low cost stream height gauging system.
 
 .. image:: https://img.shields.io/travis/abkfenris/gage-web.svg
     :target: https://travis-ci.org/abkfenris/gage-web
-.. image:: https://landscape.io/github/abkfenris/gage-web/master/landscape.svg?style=flat
+.. image:: https://landscape.io/github/abkfenris/gage-web/develop/landscape.svg?style=flat
     :target: https://landscape.io/github/abkfenris/gage-web/master
     :alt: Code Health
 .. image:: http://www.quantifiedcode.com/api/v1/project/f5832a59b9b34632adea7f5c41d9385b/badge.svg
