@@ -21,6 +21,7 @@ class TestUSGS(BasicTestCase):
                                          .with_entities(Sensor.id).all()
         usgs.get_multiple_level([sensor[0] for sensor in usgs_level_sensors])
 
+    @my_vcr.use_cassette('tests/fixtures/usgs_get_other_samples')
     def test_get_other_sample(self):
         usgs_other_sensors = Sensor.query.filter(Sensor.local == False,
                                                  Sensor.remote_type == 'usgs',
