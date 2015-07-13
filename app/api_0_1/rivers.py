@@ -10,7 +10,7 @@ Endpoints:
 from flask import jsonify, request, url_for, current_app
 
 from ..models import River
-from . import api
+from .blueprint import api
 
 
 @api.route('/rivers/')
@@ -42,20 +42,20 @@ def get_rivers():
     rivers = pagination.items
     prev = None
     if pagination.has_prev:
-        prev = url_for('.get_sensors', page=page-1, _external=True)
-    next = None
+        prev = url_for('.get_rivers', page=page-1, _external=True)
+    next_p = None
     if pagination.has_next:
-        next = url_for('.get_sensors', page=page+1, _external=True)
+        next_p = url_for('.get_rivers', page=page+1, _external=True)
     return jsonify({
         'rivers': [river.to_json() for river in rivers],
         'prev': prev,
-        'next': next,
+        'next': next_p,
         'count': pagination.total
     })
 
 
-@api.route('/rivers/<int:id>')
-def get_river(id):
+@api.route('/rivers/<int:rid>')
+def get_river(rid):
     """
     Detailed information about river *id*
 
@@ -105,5 +105,5 @@ def get_river(id):
           "url": "http://riverflo.ws/api/1.0/rivers/2"
         }
     """
-    river = River.query.get_or_404(id)
+    river = River.query.get_or_404(rid)
     return jsonify(river.to_long_json())

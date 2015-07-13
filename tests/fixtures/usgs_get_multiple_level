@@ -1,0 +1,51 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.6.0 CPython/2.7.9 Darwin/14.4.0]
+    method: GET
+    uri: http://waterservices.usgs.gov/nwis/iv/?format=json,1.1&sites=01054200,01052500&parameterCD=00065
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAO1YbW/aSBD+K5Z16idwbPOWWIpOuVDlcqK9KJC21yiqFnuAbZdd6l2T5qr895tZ
+        27BASNPqqpNO4Qve8bzPPLMDX33J5uAnvtRRYvgchpBz0JegF0pqGN0twG/4GaSC5ZDZY+KrfBqk
+        BZtpHtwyA/lcBKN9ojpVVuYjW7IvwRdkHXOZBX+cvPvtpYA5SPPLmVBjJoaWseEvmShQ4Kv/uYD8
+        7lxOFB3SHJjhSpIdP5GFEI2S4epygNpnxiySgwPrjYZ8yVPQQaGnOpiq5YG85fqALw8mKp8zc/xR
+        K9mIguiF5gb0cRiFnXYchg16iDth+GLBckwKqjrtH4dh2O2gW2mOzDln5IxQqXXmgvjQ+vXJYJCs
+        1Hj1iXTd2IhQbixgxW510htKeEUtQ1pZ9pPrm4aPjzOVnTIhICtZ7hu+VAZTcP21ztS3zBtbtFL/
+        LIdJ/Wy4ESQ+4QINJjYZVLCZuq1tOTbmKoPjwcno5XDU8PDAJxyyIZcpHBPvdxiioC+ZnMJeY2XY
+        55k+ptC+Q3UtuFdzHEadZthrRvEoDpMwTKJu0D3svH+CiRyw37Tpj/YqP8qOunE3DZvxYRY2owg6
+        zcOjMG12UwaH4263NRl3n27okSgucrXkGhuQCS9jhnmITU8X44+QGs8oL4fydeCdKTq76CD+LWTM
+        QCwOfl04ShEoWGNUymWJGVL2BNczrnFQYH3zvb4vGdNh9ARdBONtPQgJ+GJAkpsrPKynlkWFVkWe
+        Qj03qKtflxOuz9lcycy75KjXk8By7y2On1uVm5k3qCDd8F7/TjZR7BQ7fgNnNajwvQSS+4TE12/P
+        h5XAeb+OgU1BpnelAv9qeEYcJa30peTKYMIKYdaxUSTvlVw5XzGMKjKR/sbvPycTDSjmN8NOYt0h
+        6sl4THW3UeA7xKmPycnYneDTmRmyJZdT/Yiq9n5VfauKQrzSoPu7Kv3E5AUgzxRUnUkygcepe9a5
+        Jn0Xw7Ok3YoJDALfmYLy1G4Hh71eB0lKTitasxcFYafXuW/YmSuG6MK7v2g2IgUELK3mV3VCsa6G
+        I1ufmWI1Uqtxuds6WBJhpFMPCrC84YibTgi0Beq822iD4Wire6sbtBY/JeAWOd/tfWygNs7+7e6v
+        5GdFul+01dpj1CCoHxMLw97DkqkqpLnbEsW4Fc9qThynjObF+tK9X99mVM/6eRcq1a25g5MllnFc
+        4DJxV9GSK8nNGxLTzlVJUGp3DsNeHMYOUGyX3azZKmSfIba8GVBTNryJcfT0QePFvagaeZMPwNTr
+        RrXX9HGKLCHzrDu09lDsTuYQwZAzcYopnyqKoOobNl8IeAUZX3ddgVFRhujbxTydN5xak11LdN5C
+        oY2L6GWy13z12MHaKKtUk2FV6V8XZaP6Q+wbrhEtfi21nl7luZpe1K+Rf39z7yIpB8QtrPpkB1hS
+        IQRZmcakeWQ/QViNagToGnILSOsIS0paJtdO8wrV9fq0BmPdpn7dI/7eZrWN5WTBadI4aMVllYGE
+        TtK0yFlKkFgtmEzQnkNT69q/8NFsioGq3C1BLb65XUSdJKLhHGD+VrOVwq8n7qbw1ejUAR3tMKtq
+        VPfZ+m6p3ByarA/LzR5cc1Wbo+NnqcelCDYeWjGXqKx/b9yWKUnUnk6PrGiucIrP2RsH4g+SR/iL
+        YSPFOIaUNLkSA1iCcBXuFtUZUDQJCAB6p162zKtT1ckXvsOxORh2FqqHlilXnBIRfmu8FcsP+fzT
+        hzTzH7jrHwjc3fltBLtFLCmbzvs1ecDlp90uapG1svgVcqoOtJecrX/57LY2XrA3q1lBC8zqF0Vi
+        R3tSjYXGI/vWWy7qZYsZ74wLYFnDe8W4hMc2LPoR87xh/aQNq3UUdvDT3dqywuCod9SL4/j/tWjF
+        P7BoxT+2aMWtMHpetJ4XredF68FFq9P7aYtWG/v3edF6XrT+80Wr/e8tWrQDbS5adixw9HzChAac
+        kM5/5nZal1fPsBhruu7tzLCs9/8AhRhfduIXAAA=
+    headers:
+      connection: [close]
+      content-encoding: [gzip]
+      content-type: [application/json]
+      date: ['Sun, 12 Jul 2015 20:00:16 GMT']
+      responsetime: [D=22939 t=1436731216671679]
+      server: [GlassFish Server Open Source Edition  4.1]
+      vary: [Accept-Encoding]
+      x-ua-compatible: ['IE=edge,chrome=1']
+    status: {code: 200, message: OK}
+version: 1

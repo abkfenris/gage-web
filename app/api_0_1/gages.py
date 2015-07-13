@@ -14,7 +14,7 @@ from flask import jsonify, request, url_for, current_app
 from itsdangerous import JSONWebSignatureSerializer, BadSignature
 
 from ..models import Gage
-from . import api
+from .blueprint import api
 from .errors import unauthorized
 
 
@@ -50,19 +50,19 @@ def get_gages():
     prev = None
     if pagination.has_prev:
         prev = url_for('.get_gages', page=page-1, _external=True)
-    next = None
+    next_p = None
     if pagination.has_next:
-        next = url_for('.get_gages', page=page+1, _external=True)
+        next_p = url_for('.get_gages', page=page+1, _external=True)
     return jsonify({
         'gages': [gage.to_json() for gage in gages],
         'prev': prev,
-        'next': next,
+        'next': next_p,
         'count': pagination.total
     })
 
 
-@api.route('/gages/<int:id>')
-def get_gage(id):
+@api.route('/gages/<int:gid>')
+def get_gage(gid):
     """
     Detailed information about gage *id*
 
@@ -107,12 +107,12 @@ def get_gage(id):
           "url": "http://riverflo.ws/api/1.0/gages/4"
         }
     """
-    gage = Gage.query.get_or_404(id)
+    gage = Gage.query.get_or_404(gid)
     return jsonify(gage.to_long_json())
 
 
-@api.route('/gages/<int:id>/sample', methods=['POST'])
-def gage_new_samples(id):
+@api.route('/gages/<int:gid>/sample', methods=['POST'])
+def gage_new_samples(gid):
     """
     Submit new samples to gage *id*
 
@@ -195,7 +195,7 @@ def gage_new_samples(id):
         {'error': 'unauthorized', 'message': 'bad signature'}
 
     """
-    gage = Gage.query.get_or_404(id)
+    gage = Gage.query.get_or_404(gid)
     s = JSONWebSignatureSerializer(gage.key)
     try:
         req_json = s.loads(request.data)

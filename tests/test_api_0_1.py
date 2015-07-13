@@ -1,3 +1,5 @@
+import vcr
+
 from .test_basics import BasicTestCase
 
 
@@ -30,6 +32,7 @@ class APITestCase(BasicTestCase):
     def test_api_rivers(self):
         rv = self.client.get('/api/0.1/rivers/')
         assert 'Androscoggin' in str(rv.data)
+        rv = self.client.get('/api/0.1/rivers/?page=2')
         assert 'Wild River' in str(rv.data)
 
     def test_api_river(self):

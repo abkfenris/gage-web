@@ -114,6 +114,9 @@ class API_0_1_Live(LiveServerBase):
         self.assertIn('next', r)
         self.assertIn('prev', r)
         self.assertIn('rivers', r)
+        self.assertIn('Androscoggin River', r['rivers'][0]['name'])
+        r = requests.get(r['next']).json()
+        self.assertIn('Wild River', r['rivers'][0]['name'])
 
     def test_api_river(self):
         """

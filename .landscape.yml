@@ -1,0 +1,8 @@
+pylint:
+    disable:
+        - unused-argument
+pep8:
+    disable:
+        - E712
+ignore-paths:
+    - migrations

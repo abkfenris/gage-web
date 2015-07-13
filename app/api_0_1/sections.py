@@ -8,7 +8,7 @@ Endpoints:
 from flask import jsonify, request, url_for, current_app
 
 from ..models import Section
-from . import api
+from .blueprint import api
 
 
 @api.route('/sections/')
@@ -41,19 +41,19 @@ def get_sections():
     prev = None
     if pagination.has_prev:
         prev = url_for('.get_sections', page=page-1)
-    next = None
+    next_p = None
     if pagination.has_next:
-        next = url_for('.get_sections', page=page+1)
+        next_p = url_for('.get_sections', page=page+1)
     return jsonify({
         'sections': [section.to_json() for section in sections],
         'prev': prev,
-        'next': next,
+        'next': next_p,
         'count': pagination.total
     })
 
 
-@api.route('/sections/<int:id>')
-def get_section(id):
+@api.route('/sections/<int:sid>')
+def get_section(sid):
     """
     Detailed information about section *id*
 
@@ -89,5 +89,5 @@ def get_section(id):
           "url": "http://riverflo.ws/api/1.0/sections/1"
         }
     """
-    section = Section.query.get_or_404(id)
+    section = Section.query.get_or_404(sid)
     return jsonify(section.to_long_json())

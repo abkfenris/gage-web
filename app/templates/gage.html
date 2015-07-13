@@ -41,7 +41,7 @@
 	  				</div>
 	  				{% for sensor in gage.sensors.all() %}
 	  					<div class="tab-pane" id="{{ sensor.stype }}">
-		  					<img src="{{ url_for('.gagesensorplot', id=gage.id, stype=sensor.stype ) }}" class="img-responsive">
+		  					<img src="{{ url_for('.gagesensorplot', gid=gage.id, stype=sensor.stype ) }}" class="img-responsive">
 	  					</div>
 	  				{% endfor %}
 
