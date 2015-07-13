@@ -4,11 +4,11 @@ from app.database import db
 from app.models import Sample
 
 
-def add_new_sample(sensor_id, dt, svalue, deltaminutes=30):
+def add_new_sample(sensor_id, dt, svalue, deltaminutes=10):
     """
     Adds a new sample with an associacted remote sensor
     if there hasn't been a sample recorded within the last deltaminutes
-    (default is 30).
+    (default is 10).
     Arguments:
         sensor_id (int): Primary key for sensor
         dt (datetime): Datetime of sample

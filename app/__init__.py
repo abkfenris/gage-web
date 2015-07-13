@@ -36,6 +36,9 @@ def create_app(config_name):
         sentry = Sentry(app, logging=True, level=logging.INFO)
         app.wsgi_app = ProxyFix(app.wsgi_app)
 
+    from app.celery import celery
+    celery.conf.update(app.config)
+
     from .main import main
     app.register_blueprint(main)
 

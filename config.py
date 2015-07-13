@@ -12,6 +12,7 @@ class Config:
     MAPBOX_ACCESS_TOKEN = os.environ.get('MAPBOX_ACCESS_TOKEN')
     SECURITY_POST_LOGIN_VIEW = 'admin/'
     SECURITY_CHANGEABLE = True
+    CELERY_BROKER_URL = 'redis://localhost:6379/1'
 
     @staticmethod
     def init_app(app):
@@ -31,6 +32,7 @@ class TestingConfig(Config):
     SECRET_KEY = '1'  # noqa
     CSRF_ENABLED = False
     SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/gage_web_testing'
+    CELERY_ALWAYS_EAGER = True
     # SQLALCHEMY_ECHO = True
 
 
