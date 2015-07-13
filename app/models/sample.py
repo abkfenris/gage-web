@@ -3,7 +3,7 @@ Model for sample
 """
 from flask import url_for
 
-from app import db
+from app.database import db
 
 
 class Sample(db.Model):
@@ -14,7 +14,7 @@ class Sample(db.Model):
         id (int): Primary Sample key
         sensor_id (int): Foreign ``Sensor``.id key
         sensor: ``Sensor`` object related to this sample
-        datetime (datetime): ``datetime`` object of this sample
+        datetime (datetime): ``datetime`` object of this sample (should in UTC)
         value (float): Value of sample
     """
     __tablename__ = 'samples'
@@ -37,7 +37,7 @@ class Sample(db.Model):
             'sensor': self.sensor.to_sample_json(),
             'value': self.value,
             'datetime': self.datetime,
-            'url': url_for('api.get_sample', id=self.id, _external=True)
+            'url': url_for('api.get_sample', sid=self.id, _external=True)
         }
         return json_sample
 
@@ -49,7 +49,7 @@ class Sample(db.Model):
             'id': self.id,
             'value': self.value,
             'datetime': str(self.datetime),
-            'url': url_for('api.get_sample', id=self.id, _external=True)
+            'url': url_for('api.get_sample', sid=self.id, _external=True)
         }
         return json_sample
 

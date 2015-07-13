@@ -8,7 +8,7 @@ Endpoints:
 from flask import jsonify, request, url_for, current_app
 
 from ..models import Sample
-from . import api
+from .blueprint import api
 
 
 @api.route('/samples/')
@@ -65,19 +65,19 @@ def get_samples():
     prev = None
     if pagination.has_prev:
         prev = url_for('.get_samples', page=page-1, _external=True)
-    next = None
+    next_p = None
     if pagination.has_next:
-        next = url_for('.get_samples', page=page+1, _external=True)
+        next_p = url_for('.get_samples', page=page+1, _external=True)
     return jsonify({
         'samples': [sample.to_json() for sample in samples],
         'prev': prev,
-        'next': next,
+        'next': next_p,
         'count': pagination.total
     })
 
 
-@api.route('/samples/<int:id>')
-def get_sample(id):
+@api.route('/samples/<int:sid>')
+def get_sample(sid):
     """
     Detailed information about sample *id*
 
@@ -103,5 +103,5 @@ def get_sample(id):
           "value": 24.0
         }
     """
-    sample = Sample.query.get_or_404(id)
+    sample = Sample.query.get_or_404(sid)
     return jsonify(sample.to_json())

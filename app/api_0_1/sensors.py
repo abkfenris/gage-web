@@ -9,7 +9,7 @@ Endpoints:
 from flask import jsonify, request, url_for, current_app
 
 from ..models import Sensor, Sample
-from . import api
+from .blueprint import api
 
 
 @api.route('/sensors/')
@@ -42,19 +42,19 @@ def get_sensors():
     prev = None
     if pagination.has_prev:
         prev = url_for('.get_sensors', page=page-1, _external=True)
-    next = None
+    next_p = None
     if pagination.has_next:
-        next = url_for('.get_sensors', page=page+1, _external=True)
+        next_p = url_for('.get_sensors', page=page+1, _external=True)
     return jsonify({
         'sensors': [sensor.to_json() for sensor in sensors],
         'prev': prev,
-        'next': next,
+        'next': next_p,
         'count': pagination.total
     })
 
 
-@api.route('/sensors/<int:id>')
-def get_sensor(id):
+@api.route('/sensors/<int:sid>')
+def get_sensor(sid):
     """
     Detailed information about sensor *id*
 
@@ -85,12 +85,12 @@ def get_sensor(id):
           "url": "http://riverflo.ws/api/1.0/sensors/5"
         }
     """
-    sensor = Sensor.query.get_or_404(id)
+    sensor = Sensor.query.get_or_404(sid)
     return jsonify(sensor.to_long_json())
 
 
-@api.route('/sensors/<int:id>/samples')
-def get_sensor_samples(id):
+@api.route('/sensors/<int:sid>/samples')
+def get_sensor_samples(sid):
     """
     List samples for sensor *id*
 
@@ -121,22 +121,23 @@ def get_sensor_samples(id):
           }
         }
     """
-    sensor = Sensor.query.get_or_404(id)
+    sensor = Sensor.query.get_or_404(sid)
+    sensor.recent()
     page = request.args.get('page', 1, type=int)
-    pagination = Sample.query.filter_by(sensor_id=id).paginate(page,
-                                                               per_page=current_app.config['API_GAGES_PER_PAGE'],  # noqa
-                                                               error_out=False)
+    pagination = Sample.query.filter_by(sensor_id=sid).paginate(page,
+                                                                per_page=current_app.config['API_GAGES_PER_PAGE'],  # noqa
+                                                                error_out=False)
     samples = pagination.items
     prev = None
     if pagination.has_prev:
-        prev = url_for('.get_sensor_samples', page=page-1)
-    next = None
+        prev = url_for('.get_sensor_samples', page=page-1, _external=True)
+    next_p = None
     if pagination.has_next:
-        next = url_for('.get_sensor_samples', page=page+1)
+        next_p = url_for('.get_sensor_samples', page=page+1, _external=True)
     return jsonify({
         'sensor': sensor.to_json(),
         'samples': [sample.to_sensor_json() for sample in samples],
         'prev': prev,
-        'next': next,
+        'next': next_p,
         'count': pagination.total,
     })

@@ -1,0 +1,85 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.6.0 CPython/2.7.9 Darwin/14.4.0]
+    method: GET
+    uri: http://www.h2oline.com/default.aspx?pg=si&op=235127
+  response:
+    body: {string: !!python/unicode "\r\n\r\n<html>\r\n<head><meta http-equiv=\"Content-Type\"
+        content=\"text/html\" /><meta name=\"keywords\" content=\"Fishing, boating,
+        kayaking, levels, flows, guages, gages, gage, guage, fish, boat, raft, rafting,
+        whitewater, white water, river running, salmon, fish, TransCanada, Brascan,
+        Waterline, H2O-Line, H2OLine\" /><meta name=\"description\" content=\"River
+        flow information available by toll-free phone and on the web.\" /><title>\r\n\tSite
+        235127\r\n</title><link href=\"default.css\" media=\"screen\" rel=\"stylesheet\"
+        type=\"text/css\" /><link href=\"default.css\" media=\"print\" rel=\"stylesheet\"
+        type=\"text/css\" /></head>\r\n<body>\r\n<form name=\"ctl01\" method=\"post\"
+        action=\"default.aspx?pg=si&amp;op=235127\" id=\"ctl01\">\r\n<input type=\"hidden\"
+        name=\"__VIEWSTATE\" id=\"__VIEWSTATE\" value=\"/wEPDwUJMjc4MzY3MjYwD2QWAgIDD2QWDAIHDxYCHgRUZXh0BcQDPGEgaHJlZj0nZGVmYXVsdC5hc3B4Jz5XYXRlcmxpbmUgSG9tZTwvYT4mbmJzcDt8Jm5ic3A7PGEgaHJlZj0nZGVmYXVsdC5hc3B4P3BnPXAyJz5TdGF0ZSBTaXRlIENvZGUgSW5kZXg8L2E+Jm5ic3A7fCZuYnNwOzxhIGhyZWY9J2RlZmF1bHQuYXNweD9wZz1wMyc+ODAwIFJlcG9ydCBOdW1iZXJzPC9hPiZuYnNwO3wmbmJzcDs8YSBocmVmPSdkZWZhdWx0LmFzcHg/cGc9cDQnPkZsb3dDYXN0JmNvcHk7IFNpdGVzPC9hPiZuYnNwO3wmbmJzcDs8YSBocmVmPSdkZWZhdWx0LmFzcHg/cGc9c2kmb3A9MjM1MTI3JmZtdD1wZGYnPlByaW50YWJsZSBQREY8L2E+PGJyPjxicj48YSBocmVmPSdkZWZhdWx0LmFzcHg/cGc9Y28mb3A9UkVMJz5CYWNrIHRvIEJyb29rZmllbGQgUmVuZXdhYmxlIFBvd2VyPC9hPiB8IDxhIGhyZWY9J2RlZmF1bHQuYXNweD9wZz1zdCZvcD1NRSc+QmFjayB0byBNYWluZTwvYT5kAgkPDxYCHgdWaXNpYmxlaGQWBAIBDw8WBB8AZR8BaGRkAgMPDxYCHwFoZGQCCw9kFgQCAQ8PFgIfAAXxDg0KICAgIDx0YWJsZSB3aWR0aD02MTBweCBib3JkZXI9MCBjZWxscGFkZGluZz0wIGNlbGxzcGFjaW5nPTA+DQogICAgPHRyPjx0ZCB2YWxpZ249dG9wIGFsaWduPWxlZnQ+DQogICAgPHAgaWQ9UFBTdHlsZTItUD4NCiAgICAgICAgPHNwYW4gaWQ9UFBTdHlsZTMtQz4yMzUxMjcgUkFQSUQgUklWRVIgTUlERExFIERBTSBPTiBSSUNIQVJEU09OIExBS0UsIE1FPC9zcGFuPjxzcGFuIGlkPUZvb3Rlci1DPjxicj4gUFVCTElTSEVEIE9OIEpVTCAxMiwgMjAxNSBBVCAyMjoyODowMiAgICAgICAgLSBFWFBJUkVTIEpVTCAxMyAxMTo1OSBQTTxicj48L3NwYW4+DQogICAgPC9wPg0KICAgIDwvdGQ+PC90cj4NCiAgICA8L3RhYmxlPg0KDQo8IS0tI0lOQ0xVREUgRklMRT0iaW5jbHVkZXMveEJyb29rZmllbGQgUmVuZXdhYmxlIFBvd2VyIC0gTWFpbmUudHh0Ii0tPg0KDQogICAgPHRhYmxlIHdpZHRoPTYxMHB4IGJvcmRlcj0wIGNlbGxwYWRkaW5nPTAgY2VsbHNwYWNpbmc9MD4NCiAgICA8dHI+PHRkIHZhbGlnbj10b3AgYWxpZ249bGVmdD4NCiAgICA8cCBpZD1QUFN0eWxlNC1QPg0KICAgICAgICA8c3BhbiBpZD1Gb290ZXItQz48YnI+IA0KIEZvciB0aGUgUmFwaWQgUml2ZXIgYXQgQnJvb2tmaWVsZCBSZW5ld2FibGUgUG93ZXIncyBNaWRkbGUgRGFtIG9uIFJpY2hhcmRzb24gTGFrZSBpbiBNRTxicj48YnI+IDxicj4gQXQgNzoxMCBQTSB0b2RheSB0aGUgdG90YWwgZmxvdyBiZWxvdyB0aGUgZGFtIHdhcyA4MDAgQ0ZTPGJyPlJlYWRpbmdzIGF2YWlsYWJsZSBmb3IgdGhpcyBmbG93IGhhdmUgbm90IGNoYW5nZWQgc2lnbmlmaWNhbnRseSBhcyBvZiAxMDoxOCBQTSB0b2RheTxicj4gPGJyPiBUaGUgZm9sbG93aW5nIGZvcmVjYXN0IGZvciBmbG93cyBiZWxvdyB0aGUgZGFtIGlzIGJhc2VkIG9uIHRoZSBtb3N0ICByZWNlbnQgbG9hZCBmb3JlY2FzdCBmcm9tIHRoZSBOZXcgRW5nbGFuZCBJbmRlcGVuZGVudCBTeXN0ZW0gb3BlcmF0b3IgIHdoaWNoIHNjaGVkdWxlcyBhbmQgZGlzcGF0Y2hlcyBnZW5lcmF0aW9uIHRocm91Z2hvdXQgdGhlIHJlZ2lvbjogIDxicj5VbnRpbCAxMTo1OSBQTSBNb24gSlVMIDEzLCA4MDAgQ0ZTPGJyPiA8YnI+IEZsb3dzIHdpbGwgb2Z0ZW4gZGlmZmVyIGZyb20gdGhpcyBmb3JlY2FzdCBmb3IgcmVhc29ucyBiZXlvbmQgdGhlIGNvbXBhbnkncyBjb250cm9sIGluY2x1ZGluZyByZWdpb25hbCBlbmVyZ3kgZGVtYW5kIGFuZCBjbGVhcmluZyBwcmljZSwgc3lzdGVtIG9wZXJhdGluZyBjb25kaXRpb25zLCBlcXVpcG1lbnQgZmFpbHVyZXMgYW5kIHdlYXRoZXIuPGJyPiA8YnI+IEFsbCBwdWJsaXNoZWQgZmxvd3MgYXJlIGFwcHJveGltYXRlIGFuZCBmb3JlY2FzdHMgYXJlIGVzdGltYXRlcyBvbmx5LiBBY3R1YWwgZmxvd3Mgd2lsbCB2YXJ5IGFuZCBjYW4gY2hhbmdlIHF1aWNrbHkgYXQgYW55IHRpbWUuIEFsd2F5cyBiZSBhbGVydCBhbmQgd2VhciBhbiBhcHByb3ZlZCBmbG90YXRpb24gZGV2aWNlLiBOZXZlciBnbyBpbiBvciBuZWFyIHRoZSB3YXRlciB1bnRpbCB5b3Uga25vdyBhbmQgYWNjZXB0IHRoZSByaXNrcyB5b3UgYXJlIGFzc3VtaW5nIGJ5IGJlaW5nIGluIHRoaXMgYXJlYSE8YnI+PGJyPkZvciBjdXJyZW50IGZsb29kIHBvdGVudGlhbCwgZmxvb2QgY29uZGl0aW9ucywgb3IgZmxvb2QgZm9yZWNhc3RzIHBsZWFzZSBjb250YWN0IHRoZSBPeGZvcmQgQ291bnR5IEVtZXJnZW5jeSBNYW5hZ2VtZW50IEFnZW5jeSBhdCAoMjA3KSA3NDMtNjMzNi48YnI+PGJyPjxicj4gPGJyPjxicj4gPGEgaHJlZj0iL3NyY3MvMjAxNV9SYXBpZF9hbmRfTWFnYWxsb3dheS5wZGYiPkFOTlVBTCBSRUxFQVNFIHVzaW5nIHBkZiBGT1IgMjAxNTwvYT48YnI+PC9zcGFuPg0KICAgIDwvcD4NCiAgICA8L3RkPjwvdHI+DQogICAgPC90YWJsZT4NCmRkAgMPFgIfAAWoAzxkaXYgY2xhc3M9c2l0ZV9mb290ZXI+VGhlIG1vc3QgcmVjZW50IHJlcG9ydCBmb3IgdGhpcyBzaXRlIGlzIGFsc28gYXZhaWxhYmxlIG9uIDxhIGhyZWY9J2RlZmF1bHQuYXNweD9wZz1wMTEnPldhdGVybGluZSdzIFRvbGwtRnJlZUhvdGxpbmU8L2E+Ljxicj5Cb2F0ZXJzIGNhbGwgMS04MDAgNDUyLTE3MzcuIEFuZ2xlcnMgY2FsbCAxLTgwMCA0NTItMTc0Mi48YnI+QXQgdGhlIHZvaWNlIHByb21wdCwgZW50ZXIgdGhlIHNpeC1kaWdpdCBjb2RlIGZvciB0aGlzIHNpdGUuPGJyPjxicj48YnI+PGEgaHJlZj0nZGVmYXVsdC5hc3B4P3BnPWNvJm9wPVJFTCc+QmFjayB0byBCcm9va2ZpZWxkIFJlbmV3YWJsZSBQb3dlcjwvYT4gfCA8YSBocmVmPSdkZWZhdWx0LmFzcHg/cGc9c3Qmb3A9TUUnPkJhY2sgdG8gTWFpbmU8L2E+PGJyPjxicj48L2Rpdj5kAg0PDxYCHwBlZGQCDw8WAh8ABbsCPGEgaHJlZj0nZGVmYXVsdC5hc3B4Jz5XYXRlcmxpbmUgSG9tZTwvYT4mbmJzcDt8Jm5ic3A7PGEgaHJlZj0nZGVmYXVsdC5hc3B4P3BnPXAyJz5TdGF0ZSBTaXRlIENvZGUgSW5kZXg8L2E+Jm5ic3A7fCZuYnNwOzxhIGhyZWY9J2RlZmF1bHQuYXNweD9wZz1wMyc+ODAwIFJlcG9ydCBOdW1iZXJzPC9hPiZuYnNwO3wmbmJzcDs8YSBocmVmPSdkZWZhdWx0LmFzcHg/cGc9cDQnPkZsb3dDYXN0JmNvcHk7IFNpdGVzPC9hPiZuYnNwO3wmbmJzcDs8YSBocmVmPSdkZWZhdWx0LmFzcHg/cGc9c2kmb3A9MjM1MTI3JmZtdD1wZGYnPlByaW50YWJsZSBQREY8L2E+ZAIRDw8WAh8ABaoBV2F0ZXJsaW5lIGlzIGFuIGVsZWN0cm9uaWMgcHVibGljYXRpb24gb2YgVmlydHVhbCBQdWJsaXNoaW5nIExMQy48YnI+Q29weXJpZ2h0ICZjb3B5OyAxOTkyIC0gMjAxNSBWaXJ0dWFsIFB1Ymxpc2hpbmcgTExDIEFsbCBSaWdodHMgUmVzZXJ2ZWQ8YnI+aHR0cDovL3d3dy5oMm9saW5lLmNvbTxicj5kZGSZhuM4J7V67iWHaOgojkTHrCKPjA==\"
+        />\r\n\r\n<input type=\"hidden\" name=\"__VIEWSTATEGENERATOR\" id=\"__VIEWSTATEGENERATOR\"
+        value=\"CA0B0334\" />\r\n\r\n<div class=left_bar>\r\n</div>\r\n\r\n<div class=cont_bar>\r\n\r\n\t<div
+        class=cont_head>\r\n\t\t<div class=center_sec>\r\n\t\t\t\r\n\t\t\t<div id=\"head_logo_sec\"
+        class=\"head_sec\">\r\n\t\r\n\t\t\t\t<img src=\"images/wline_logo_lt_blue.jpg\"
+        width=255 height=80 border=0><br>\r\n\t\t\t\tFlowCast&copy;<br>\r\n\t\t\t\r\n</div>\r\n\t\t\t\r\n\t\t\t<a
+        href='default.aspx'>Waterline Home</a>&nbsp;|&nbsp;<a href='default.aspx?pg=p2'>State
+        Site Code Index</a>&nbsp;|&nbsp;<a href='default.aspx?pg=p3'>800 Report Numbers</a>&nbsp;|&nbsp;<a
+        href='default.aspx?pg=p4'>FlowCast&copy; Sites</a>&nbsp;|&nbsp;<a href='default.aspx?pg=si&op=235127&fmt=pdf'>Printable
+        PDF</a><br><br><a href='default.aspx?pg=co&op=REL'>Back to Brookfield Renewable
+        Power</a> | <a href='default.aspx?pg=st&op=ME'>Back to Maine</a>\r\n\t\t</div>\r\n\t</div>\r\n\r\n\t<div
+        class=cont_main id=cont_main>\r\n\t\t\r\n\t\t<div id=\"txt_content_div\" class=\"txt_content\">\r\n\t\r\n\t\t\t<span
+        id=\"txt_content\">\r\n    <table width=610px border=0 cellpadding=0 cellspacing=0>\r\n
+        \   <tr><td valign=top align=left>\r\n    <p id=PPStyle2-P>\r\n        <span
+        id=PPStyle3-C>235127 RAPID RIVER MIDDLE DAM ON RICHARDSON LAKE, ME</span><span
+        id=Footer-C><br> PUBLISHED ON JUL 12, 2015 AT 22:28:02        - EXPIRES JUL
+        13 11:59 PM<br></span>\r\n    </p>\r\n    </td></tr>\r\n    </table>\r\n\r\n<!--#INCLUDE
+        FILE=\"includes/xBrookfield Renewable Power - Maine.txt\"-->\r\n\r\n    <table
+        width=610px border=0 cellpadding=0 cellspacing=0>\r\n    <tr><td valign=top
+        align=left>\r\n    <p id=PPStyle4-P>\r\n        <span id=Footer-C><br> \r\n
+        For the Rapid River at Brookfield Renewable Power's Middle Dam on Richardson
+        Lake in ME<br><br> <br> At 7:10 PM today the total flow below the dam was
+        800 CFS<br>Readings available for this flow have not changed significantly
+        as of 10:18 PM today<br> <br> The following forecast for flows below the dam
+        is based on the most  recent load forecast from the New England Independent
+        System operator  which schedules and dispatches generation throughout the
+        region:  <br>Until 11:59 PM Mon JUL 13, 800 CFS<br> <br> Flows will often
+        differ from this forecast for reasons beyond the company's control including
+        regional energy demand and clearing price, system operating conditions, equipment
+        failures and weather.<br> <br> All published flows are approximate and forecasts
+        are estimates only. Actual flows will vary and can change quickly at any time.
+        Always be alert and wear an approved flotation device. Never go in or near
+        the water until you know and accept the risks you are assuming by being in
+        this area!<br><br>For current flood potential, flood conditions, or flood
+        forecasts please contact the Oxford County Emergency Management Agency at
+        (207) 743-6336.<br><br><br> <br><br> <a href=\"/srcs/2015_Rapid_and_Magalloway.pdf\">ANNUAL
+        RELEASE using pdf FOR 2015</a><br></span>\r\n    </p>\r\n    </td></tr>\r\n
+        \   </table>\r\n</span>\r\n\t\t\t<div class=site_footer>The most recent report
+        for this site is also available on <a href='default.aspx?pg=p11'>Waterline's
+        Toll-FreeHotline</a>.<br>Boaters call 1-800 452-1737. Anglers call 1-800 452-1742.<br>At
+        the voice prompt, enter the six-digit code for this site.<br><br><br><a href='default.aspx?pg=co&op=REL'>Back
+        to Brookfield Renewable Power</a> | <a href='default.aspx?pg=st&op=ME'>Back
+        to Maine</a><br><br></div>\r\n\t\t\r\n</div>\r\n\t\t<div class=txt_links><span
+        id=\"txt_links\"></span></div>\r\n\t</div>\r\n\r\n\t<div class=cont_head>\r\n\t\t<div
+        class=center_sec>\r\n\t\t\t<a href='default.aspx'>Waterline Home</a>&nbsp;|&nbsp;<a
+        href='default.aspx?pg=p2'>State Site Code Index</a>&nbsp;|&nbsp;<a href='default.aspx?pg=p3'>800
+        Report Numbers</a>&nbsp;|&nbsp;<a href='default.aspx?pg=p4'>FlowCast&copy;
+        Sites</a>&nbsp;|&nbsp;<a href='default.aspx?pg=si&op=235127&fmt=pdf'>Printable
+        PDF</a>\r\n\t\t\t<br><br>\r\n\t\t\t<span id=z-Bottom-of-Form-C>\r\n\t\t\t\t<span
+        id=\"cr_foot\">Waterline is an electronic publication of Virtual Publishing
+        LLC.<br>Copyright &copy; 1992 - 2015 Virtual Publishing LLC All Rights Reserved<br>http://www.h2oline.com<br></span>\r\n\t\t\t</span>\r\n\r\n\t\t</div>\r\n\t</div>\r\n\r\n\r\n</div>\r\n\r\n<div
+        class=right_bar>\r\n</div>\r\n\r\n\r\n\r\n</form>\r\n\t\r\n</body>\r\n</html>"}
+    headers:
+      cache-control: [no-cache]
+      content-length: ['9488']
+      content-type: [text/html; charset=utf-8]
+      date: ['Mon, 13 Jul 2015 02:44:51 GMT']
+      expires: ['-1']
+      pragma: [no-cache]
+      server: [Microsoft-IIS/7.5]
+      x-aspnet-version: [2.0.50727]
+      x-powered-by: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

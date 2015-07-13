@@ -1,6 +1,6 @@
 from app import user_datastore
 
-from test_basics import BasicTestCase
+from .test_basics import BasicTestCase
 
 
 class UserModel(BasicTestCase):

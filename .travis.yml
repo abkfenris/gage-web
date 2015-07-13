@@ -1,6 +1,7 @@
 language: python
 python:
     - "2.7"
+    - "3.4"
 addons:
     postgresql: "9.3"
 before_script:
@@ -19,7 +20,9 @@ before_install:
 install:
     - conda create --yes -n gage-web python=$TRAVIS_PYTHON_VERSION pip numpy matplotlib
     - source activate gage-web
-    - pip install -r travis-requirements.txt
-script: nosetests -v --exclude-dir=tests/gage_client/ --cover-package=app --with-xcoverage
+    - pip install -r requirements/travis.txt
+script: coverage run --source=app -m py.test -v
 after_success:
     - coveralls
+    - codecov
+sudo: false

@@ -3,7 +3,7 @@ Errors that can be referenced by other api routes
 """
 from flask import jsonify
 from app.exceptions import ValidationError
-from . import api
+from .blueprint import api
 
 
 def bad_request(message):

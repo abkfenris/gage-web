@@ -4,18 +4,21 @@ Ways that a plot of a selected sensor can be displayed
 
 from flask import make_response
 import datetime
-import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 import matplotlib
 matplotlib.use('Agg')
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 
-from . import main
+from .blueprint import main
 from ..models import Gage, Sensor, Sample
 
 
-@main.route('/gage/<int:id>/<stype>.png')
-def gagesensorplot(id,
+@main.route('/gage/<int:gid>/<stype>.png')
+def gagesensorplot(gid,
                    stype,
                    days=7,
                    start=None,
@@ -33,7 +36,7 @@ def gagesensorplot(id,
     number or previous days, or by explicitly selecting a YYYYMMDD start and
     end date can plot a custom range
     """
-    gage = Gage.query.get_or_404(id)
+    gage = Gage.query.get_or_404(gid)
     sensor = Sensor.query.filter_by(gage_id=gage.id).filter_by(stype=stype.lower()).first_or_404()
     if end is None:
         date_end = datetime.datetime.utcnow()
@@ -80,7 +83,7 @@ def gagesensorplot(id,
     else:
         fig.suptitle(sensor.title)
     canvas = FigureCanvas(fig)
-    png_output = StringIO.StringIO()
+    png_output = StringIO()
     canvas.print_png(png_output)
     response = make_response(png_output.getvalue())
     response.headers['Content-Type'] = 'image/png'

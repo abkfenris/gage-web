@@ -94,8 +94,8 @@ def backup():
     os.system("pg_dump -Ft {db} > {filename}".format(
         db=db.engine.url.database,
         filename=filename))
-    print 'Uploading {filename} to Dropbox'.format(filename=filename)
-    print backup_db.backup(filename)
+    print('Uploading {filename} to Dropbox'.format(filename=filename))
+    print(backup_db.backup(filename))
     os.system("rm " + filename)
 
 

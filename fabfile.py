@@ -140,8 +140,8 @@ def deploy():
     Push current master to production and restart gunicorn
     """
     with lcd(LOCAL_APP_DIR):
-        local('git push production master')
-        sudo('supervisorctl restart gage-web')
+        local('git push production develop')
+        sudo('supervisorctl restart gage:*')
 
 
 def install_requirements():
@@ -215,6 +215,48 @@ def create_roles():
             with cd(WWW_DIR):
                 sudo('python manage.py user create_role -n admin -d "Site Administrators"')
                 sudo('python manage.py user create_role -n user -d Users')
+
+def setup_celery():
+    """
+    Upload configs for celery, make sure redis is running
+    """
+    with cd('/home/www'):
+        fabtools.files.upload_template(
+            LOCAL_CONFIG_DIR + '/celery-start-gage',
+            '.',
+            use_sudo=True,
+            use_jinja=True,
+            user=USER,
+            context={
+                'WWW_DIR': WWW_DIR,
+                'ENV_DIR': ENV_DIR,
+                'USER': USER,
+                'GROUP': GROUP
+            },
+            chown=True),
+        sudo('chmod +x celery-start-gage')
+        fabtools.files.upload_template(
+            LOCAL_CONFIG_DIR + '/celery-start-beat-gage',
+            '.',
+            use_sudo=True,
+            use_jinja=True,
+            user=USER,
+            context={
+                'WWW_DIR': WWW_DIR,
+                'ENV_DIR': ENV_DIR,
+                'USER': USER,
+                'GROUP': GROUP
+            },
+            chown=True),
+        sudo('chmod +x celery-start-beat-gage')
+        with cd('/etc/supervisor/conf.d/'):
+            require.file('gage-web.conf',
+                         source=LOCAL_CONFIG_DIR+'/gage-web.conf',
+                         use_sudo=True)
+            require.directory('/home/www/logs/gage-web/')
+            sudo('supervisorctl reread')
+            sudo('supervisorctl update')
+            sudo('supervisorctl restart gage:*')
 
 
 def bootstrap():

@@ -2,12 +2,10 @@
 Model for sensor
 """
 import datetime
-from flask import url_for
-import logging
+from flask import url_for, current_app
 from sqlalchemy.dialects.postgresql import JSON
 
-from app import db
-from app.remote import usgs
+from app.database import db
 from .sample import Sample
 
 
@@ -82,49 +80,10 @@ class Sensor(db.Model):
         """
         Return recent sample value.
         """
-        delta = datetime.datetime.now()-datetime.timedelta(minutes=60)
-        # print delta
-        logging.info('Recent for sensor {name}'.format(name=self.name))
+        current_app.logger.info('Recent for sensor {name}'.format(name=self.name))
         sample = Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
-        logging.info('Retrieved sample: {sample}'.format(sample=sample))
-        if sample is not None and (self.local is True or sample.datetime > delta):
-            # print self.timediff(sample.datetime), 'A'
-            return sample
-        elif sample is None and self.local is False:
-            # print self.timediff(sample.datetime), 'F'
-            if self.remote_parameter is None:
-                # print self.timediff(sample.datetime), 'G'
-                usgs.get_samples(self,
-                                 self.remote_id,
-                                 period='P7D')
-            else:
-                print self.timediff(sample.datetime), 'H'
-                usgs.get_samples(self,
-                                 self.remote_id,
-                                 period='P7D',
-                                 parameter=self.remote_parameter)
-            # print self.timediff(sample.datetime), 'I'
-            return Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
-        elif sample is not None and self.local is False and sample.datetime < delta:
-            # print self.timediff(sample.datetime), 'B'
-            if self.remote_parameter is None:
-                # print self.timediff(sample.datetime), 'C'
-                usgs.get_samples(self,
-                                 self.remote_id,
-                                 startDT=sample.datetime,
-                                 endDT=datetime.datetime.utcnow())
-            else:
-                # print self.timediff(sample.datetime), 'D'
-                usgs.get_samples(self,
-                                 self.remote_id,
-                                 startDT=sample.datetime,
-                                 endDT=datetime.datetime.utcnow(),
-                                 parameter=self.remote_parameter)
-            # print self.timediff(sample.datetime), 'E'
-            return Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
-        else:
-            # print self.timediff(sample.datetime), 'J'
-            pass
+        current_app.logger.info('Retrieved sample: {sample}'.format(sample=sample))
+        return sample
 
     def to_json(self):
         """
@@ -134,7 +93,7 @@ class Sensor(db.Model):
         json_post = {
             'id': self.id,
             'type': self.stype,
-            'url': url_for('api.get_sensor', id=self.id, _external=True)
+            'url': url_for('api.get_sensor', sid=self.id, _external=True)
         }
         return json_post
 
@@ -143,7 +102,7 @@ class Sensor(db.Model):
         Creates a JSON object from sensor. Used where a single sensor will be
         displayed.
         """
-        sample = Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
+        sample = self.recent()
         json_post = {
             'id': self.id,
             'type': self.stype,
@@ -152,10 +111,11 @@ class Sensor(db.Model):
             'maximum': self.maximum,
             'started': self.started,
             'ended': self.ended,
-            'url': url_for('api.get_sensor', id=self.id, _external=True),
-            'gage': self.gage.to_json(),
-            'recent_sample': sample.to_sensor_json()
+            'url': url_for('api.get_sensor', sid=self.id, _external=True),
+            'gage': self.gage.to_json()
         }
+        if sample is not None:
+            json_post['recent_sample'] = sample.to_sensor_json()
         return json_post
 
     def to_gage_json(self):
@@ -163,13 +123,14 @@ class Sensor(db.Model):
         Creates a JSON object from sensor. Displayed with gage JSON and includes
         most recent sample.
         """
-        sample = Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
+        sample = self.recent()
         json_post = {
             'id': self.id,
             'type': self.stype,
-            'url': url_for('api.get_sensor', id=self.id, _external=True),
-            'recent_sample': sample.to_sensor_json()
+            'url': url_for('api.get_sensor', sid=self.id, _external=True)
         }
+        if sample is not None:
+            json_post['recent_sample'] = sample.to_sensor_json()
         return json_post
 
     def to_sample_json(self):
@@ -181,7 +142,7 @@ class Sensor(db.Model):
             'id': self.id,
             'type': self.stype,
             'gage': self.gage.to_json(),
-            'url': url_for('api.get_sensor', id=self.id, _external=True)
+            'url': url_for('api.get_sensor', sid=self.id, _external=True)
         }
         return json_sensor
 

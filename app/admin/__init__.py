@@ -4,12 +4,10 @@ from flask.ext.admin.contrib.geoa import ModelView as _ModelView
 from flask_admin.base import MenuLink
 from flask.ext.admin.contrib.fileadmin import FileAdmin as _FileAdmin
 from flask_security import (roles_required,
-                            roles_accepted,
-                            current_user,
-                            login_required)
+                            current_user)
 import os.path as op
 
-from .. import db
+from ..database import db
 from ..models import User, Region, River, Section, Gage, Sensor
 
 path = op.join(op.dirname(__file__), '../static/images')

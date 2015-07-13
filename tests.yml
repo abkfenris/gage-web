@@ -1,6 +1,9 @@
 python:
-    command: /usr/bin/env python $(which nosetests) --exclude-dir=tests/gage_client/
+    command: py.test
     watch_glob: "*.py"
+#python:
+#    command: /usr/bin/env python $(which nosetests) --exclude-dir=tests/gage_client/
+#    watch_glob: "*.py"
 #health:
 #    command: /usr/local/bin/prospector
 #    watch_glob: "*.py"

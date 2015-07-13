@@ -5,7 +5,7 @@ from flask import url_for
 from geoalchemy2 import Geometry
 from geoalchemy2.shape import to_shape
 
-from app import db
+from app.database import db
 
 
 # many to many relationship table for sections and regions
@@ -99,7 +99,7 @@ class Section(db.Model):
                             slug=self.slug,
                             _external=True),
             'url': url_for('api.get_section',
-                           id=self.id,
+                           sid=self.id,
                            _external=True)
         }
         return json_section
@@ -114,7 +114,7 @@ class Section(db.Model):
             'name': self.name,
             'html': url_for('main.sectionpage',
                             slug=self.slug, _external=True),
-            'url': url_for('api.get_section', id=self.id, _external=True),
+            'url': url_for('api.get_section', sid=self.id, _external=True),
             'regions': [region.to_json() for region in self.regions],
             'sensors': [correlation.sensor.to_json()
                         for correlation in self.correlations],
