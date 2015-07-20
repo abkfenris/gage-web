@@ -20,7 +20,7 @@ LOG_FILE=/home/www/logs/gage-web/gunicorn.log
 # Exported variables
 source $FLASKDIR"/server-config/host-export"
 
-echo "Starting $NAME"
+echo "Starting $NAME celery worker"
 
 # activate the virtualenv
 cd $VENVDIR
