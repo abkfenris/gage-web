@@ -80,10 +80,10 @@ class BasicTestCase(unittest.TestCase):
         db.session.add(azicohos_level)
 
         # Create a sample
-        #wild_sample = Sample(sensor=wild_sensor,
-        #                     datetime=datetime.datetime.now(),
-        #                     value=5.8)
-        #db.session.add(wild_sample)
+        wild_sample = Sample(sensor=wild_sensor,
+                             datetime=datetime.datetime.now(),
+                             value=5.8)
+        db.session.add(wild_sample)
         db.session.commit()
 
         # Create a correlation

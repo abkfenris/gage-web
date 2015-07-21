@@ -7,7 +7,7 @@ import datetime
 try:
     from StringIO import StringIO
 except ImportError:
-    from io import StringIO
+    from io import BytesIO
 
 from .blueprint import main
 from ..models import Sensor, Sample
@@ -39,8 +39,8 @@ class SensorPlot(object):
 
         Defaults to data within last seven days
         """
-        start = request.args.get('start', None)
-        end = request.args.get('end', None)
+        start = request.args.get('start')
+        end = request.args.get('end')
         if start:
             start = datetime.datetime.strptime(start, '%Y%m%d')
         if end:
@@ -104,7 +104,10 @@ class SensorPlot(object):
         from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
         fig = self.matplot()
         canvas = FigureCanvas(fig)
-        png_output = StringIO()
+        try:
+            png_output = StringIO()
+        except NameError:
+            png_output = BytesIO()
         canvas.print_png(png_output)
         return png_output.getvalue()
 
@@ -115,7 +118,10 @@ class SensorPlot(object):
         from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
         fig = self.matplot()
         canvas = FigureCanvas(fig)
-        jpg_output = StringIO()
+        try:
+            jpg_output = StringIO()
+        except NameError:
+            jpg_output = BytesIO()
         canvas.print_jpg(jpg_output)
         return jpg_output.getvalue()
 

@@ -13,7 +13,7 @@ def forbidden(e):
     """
     Handle 403 Forbidden errors in html and json
     """
-    current_app.logger.error('{} got a 403 Forbidden error trying to access {}. {}'.format(
+    current_app.logger.error('{0} got a 403 Forbidden error trying to access {1}. {2}'.format(
         getattr(current_user, 'email', 'Anonymous'),
         request.url,
         e
@@ -31,7 +31,7 @@ def page_not_found(e):
     """
     Handle 404 Page Not Found errors in html and json
     """
-    current_app.logger.error('{} got a 404 Page Not Found trying to access {}. {}'.format(
+    current_app.logger.error('{0} got a 404 Page Not Found trying to access {1}. {2}'.format(
         getattr(current_user, 'email', 'Anonymous'),
         request.url,
         e
@@ -49,7 +49,7 @@ def internal_server_error(e):
     """
     Handle 500 Internal Server errors in html and json
     """
-    current_app.logger.error('{} got a 500 Internal Server Error trying to access {}. {}'.format(
+    current_app.logger.error('{0} got a 500 Internal Server Error trying to access {1}. {2}'.format(
         getattr(current_user, 'email', 'Anonymous'),
         request.url,
         e
