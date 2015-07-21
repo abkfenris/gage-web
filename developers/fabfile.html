@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Overview: module code &mdash; Gage-Web 0.1 documentation</title>
+  <title>fabfile.py &mdash; Gage-Web 0.1 documentation</title>
   
 
   
@@ -30,7 +30,10 @@
   
 
   
-    <link rel="top" title="Gage-Web 0.1 documentation" href="../index.html"/> 
+    <link rel="top" title="Gage-Web 0.1 documentation" href="../index.html"/>
+        <link rel="up" title="Server Documentation" href="index.html"/>
+        <link rel="next" title="Local Development" href="local.html"/>
+        <link rel="prev" title="Server Documentation" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -69,7 +72,7 @@
         
           
           
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../api.html">Gage-Web API Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#api">API</a></li>
 </ul>
@@ -95,21 +98,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../reference/manage.html">manage module</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Server Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../developers/fabfile.html">fabfile.py</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../developers/fabfile.html#hosts">Hosts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Server Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">fabfile.py</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hosts">Hosts</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../developers/local.html">Local Development</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#requirements">Requirements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#environment-variables">Environment Variables</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#initial-migration">Initial Migration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#working-with-users-and-roles">Working with Users and Roles</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../developers/local.html#roles">Roles</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../developers/local.html#users">Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local.html">Local Development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="local.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="local.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="local.html#initial-migration">Initial Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="local.html#working-with-users-and-roles">Working with Users and Roles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="local.html#roles">Roles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="local.html#users">Users</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#running-everything">Running Everything</a></li>
+<li class="toctree-l3"><a class="reference internal" href="local.html#running-everything">Running Everything</a></li>
 </ul>
 </li>
 </ul>
@@ -138,9 +141,13 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-    <li>Overview: module code</li>
+          <li><a href="index.html">Server Documentation</a> &raquo;</li>
+      
+    <li>fabfile.py</li>
       <li class="wy-breadcrumbs-aside">
         
+          
+            <a href="../_sources/developers/fabfile.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -149,17 +156,57 @@
 </div>
           <div role="main" class="document">
             
-  <h1>All modules for which code is available</h1>
-<ul><li><a href="app.html">app</a></li>
-<ul><li><a href="app/admin.html">app.admin</a></li>
-<li><a href="app/main/errors.html">app.main.errors</a></li>
-<li><a href="app/main/plot.html">app.main.plot</a></li>
-<li><a href="app/main/views.html">app.main.views</a></li>
-</ul><li><a href="manage.html">manage</a></li>
+  <div class="section" id="fabfile-py">
+<h1>fabfile.py<a class="headerlink" href="#fabfile-py" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://www.fabfile.org">Fabric</a> is basically a makefile, except has server
+management built in. Being able to run <tt class="docutils literal"><span class="pre">fab</span> <span class="pre">prod</span> <span class="pre">deploy</span></tt> to send your latest
+modification to the server is sweet. It also is a great way to document common
+tasks that you do when managing servers, without writing the whole process up in
+Sphinx or elsewhere.</p>
+<ul class="simple">
+<li><a class="reference internal" href="#hosts">Hosts</a></li>
 </ul>
+<div class="section" id="hosts">
+<h2>Hosts<a class="headerlink" href="#hosts" title="Permalink to this headline">¶</a></h2>
+<p>Fabric seems to work best when you can login into a host with ssh keys, and
+have sudo rights. So that the <tt class="docutils literal"><span class="pre">fabfile.py</span></tt> can be in source control, but
+host information can be left out, the fabfile can get hosts from <tt class="docutils literal"><span class="pre">fabhosts.py</span></tt>.</p>
+<p>To create <tt class="docutils literal"><span class="pre">fabhost.py</span></tt> either copy and modify <tt class="docutils literal"><span class="pre">fabhost-example.py</span></tt> or write
+along these lines:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">env</span>
+
+<span class="k">def</span> <span class="nf">prod</span><span class="p">():</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="s">&#39;user&#39;</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">hosts</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s">&#39;host.com&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+<p>Then to run fabric with those hosts, just <tt class="docutils literal"><span class="pre">fab</span> <span class="pre">prod</span> <span class="pre">&lt;command&gt;</span></tt>.</p>
+<p>If you are awesome enough to have staging servers or other groups of server that
+you will be commanding, define another command in <tt class="docutils literal"><span class="pre">fabhosts.py</span></tt> and modify
+<tt class="docutils literal"><span class="pre">fabfile.py</span></tt> import statement</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">fabhost</span> <span class="kn">import</span> <span class="n">prod</span><span class="p">,</span> <span class="n">staging</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+
 
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="local.html" class="btn btn-neutral float-right" title="Local Development" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Server Documentation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>HTTP Routing Table &mdash; Gage-Web 0.1 documentation</title>
@@ -14,7 +15,6 @@
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   
   
@@ -28,6 +28,8 @@
   
 
   
+
+  
     <link rel="top" title="Gage-Web 0.1 documentation" href="index.html"/>
  
 
@@ -38,7 +40,7 @@
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -49,32 +51,79 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
-        <a href="index.html" class="fa fa-home"> Gage-Web</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+        
+
+        
+          <a href="index.html" class="icon icon-home"> Gage-Web
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+
+        
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
-        
-            <ul>
+          
+          
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="api.html">Gage-Web API Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reference/index.html">Gage-Web Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="reference/app.html">app package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/app.html">app package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="reference/app.admin.html">app.admin package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/app.api_1_0.html">app.api_1_0 package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/app.main.html">app.main package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#module-app.admin">app.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#app-api-module">app.api module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#app-auth-module">app.auth module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#app-backup-module">app.backup module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#module-app.models">app.models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#module-app">Module contents</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="reference/config.html">config module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/manage.html">manage module</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="developers/index.html">Server Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="developers/fabfile.html">fabfile.py</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developers/fabfile.html#hosts">Hosts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developers/local.html">Local Development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#initial-migration">Initial Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#working-with-users-and-roles">Working with Users and Roles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="developers/local.html#roles">Roles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="developers/local.html#users">Users</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#running-everything">Running Everything</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
+          
         
       </div>
       &nbsp;
@@ -99,11 +148,13 @@
     <li></li>
       <li class="wy-breadcrumbs-aside">
         
+          
+        
       </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document">
             
 
    <h1>HTTP Routing Table</h1>
@@ -111,7 +162,10 @@
    <div class="modindex-jumpbox">
    <a href="#cap-/_debug_toolbar"><strong>/_debug_toolbar</strong></a> | 
    <a href="#cap-/admin"><strong>/admin</strong></a> | 
-   <a href="#cap-/api"><strong>/api</strong></a>
+   <a href="#cap-/api"><strong>/api</strong></a> | 
+   <a href="#cap-/change"><strong>/change</strong></a> | 
+   <a href="#cap-/login"><strong>/login</strong></a> | 
+   <a href="#cap-/logout"><strong>/logout</strong></a>
    </div>
 
    <table class="indextable modindextable" cellspacing="0" cellpadding="2">
@@ -121,7 +175,7 @@
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--_debug_toolbar-static-(path-filename)"><code class="xref">GET /_debug_toolbar/static/(path:filename)</code></a></td><td>
+       <a href="api.html#get--_debug_toolbar-static-(path-filename)"><tt class="xref">GET /_debug_toolbar/static/(path:filename)</tt></a></td><td>
        <em></em></td></tr>
      <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
      <tr class="cap" id="cap-/admin"><td></td><td>
@@ -129,282 +183,322 @@
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-fileadmin-"><code class="xref">GET /admin/fileadmin/</code></a></td><td>
+       <a href="api.html#get--admin-fileadmin-"><tt class="xref">GET /admin/fileadmin/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-fileadmin-b-(path-path)"><code class="xref">GET /admin/fileadmin/b/(path:path)</code></a></td><td>
+       <a href="api.html#get--admin-fileadmin-b-(path-path)"><tt class="xref">GET /admin/fileadmin/b/(path:path)</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-fileadmin-download-(path-path)"><code class="xref">GET /admin/fileadmin/download/(path:path)</code></a></td><td>
+       <a href="api.html#get--admin-fileadmin-download-(path-path)"><tt class="xref">GET /admin/fileadmin/download/(path:path)</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-fileadmin-edit-"><code class="xref">GET /admin/fileadmin/edit/</code></a></td><td>
+       <a href="api.html#get--admin-fileadmin-edit-"><tt class="xref">GET /admin/fileadmin/edit/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-fileadmin-mkdir-"><code class="xref">GET /admin/fileadmin/mkdir/</code></a></td><td>
+       <a href="api.html#get--admin-fileadmin-mkdir-"><tt class="xref">GET /admin/fileadmin/mkdir/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-fileadmin-mkdir-(path-path)"><code class="xref">GET /admin/fileadmin/mkdir/(path:path)</code></a></td><td>
+       <a href="api.html#get--admin-fileadmin-mkdir-(path-path)"><tt class="xref">GET /admin/fileadmin/mkdir/(path:path)</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-fileadmin-rename-"><code class="xref">GET /admin/fileadmin/rename/</code></a></td><td>
+       <a href="api.html#get--admin-fileadmin-rename-"><tt class="xref">GET /admin/fileadmin/rename/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-fileadmin-upload-"><code class="xref">GET /admin/fileadmin/upload/</code></a></td><td>
+       <a href="api.html#get--admin-fileadmin-upload-"><tt class="xref">GET /admin/fileadmin/upload/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-fileadmin-upload-(path-path)"><code class="xref">GET /admin/fileadmin/upload/(path:path)</code></a></td><td>
+       <a href="api.html#get--admin-fileadmin-upload-(path-path)"><tt class="xref">GET /admin/fileadmin/upload/(path:path)</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-gage-"><code class="xref">GET /admin/gage/</code></a></td><td>
+       <a href="api.html#get--admin-gage-"><tt class="xref">GET /admin/gage/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-gage-edit-"><code class="xref">GET /admin/gage/edit/</code></a></td><td>
+       <a href="api.html#get--admin-gage-edit-"><tt class="xref">GET /admin/gage/edit/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-gage-new-"><code class="xref">GET /admin/gage/new/</code></a></td><td>
+       <a href="api.html#get--admin-gage-new-"><tt class="xref">GET /admin/gage/new/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-region-"><code class="xref">GET /admin/region/</code></a></td><td>
+       <a href="api.html#get--admin-region-"><tt class="xref">GET /admin/region/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-region-edit-"><code class="xref">GET /admin/region/edit/</code></a></td><td>
+       <a href="api.html#get--admin-region-edit-"><tt class="xref">GET /admin/region/edit/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-region-new-"><code class="xref">GET /admin/region/new/</code></a></td><td>
+       <a href="api.html#get--admin-region-new-"><tt class="xref">GET /admin/region/new/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-river-"><code class="xref">GET /admin/river/</code></a></td><td>
+       <a href="api.html#get--admin-river-"><tt class="xref">GET /admin/river/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-river-edit-"><code class="xref">GET /admin/river/edit/</code></a></td><td>
+       <a href="api.html#get--admin-river-edit-"><tt class="xref">GET /admin/river/edit/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-river-new-"><code class="xref">GET /admin/river/new/</code></a></td><td>
+       <a href="api.html#get--admin-river-new-"><tt class="xref">GET /admin/river/new/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-section-"><code class="xref">GET /admin/section/</code></a></td><td>
+       <a href="api.html#get--admin-section-"><tt class="xref">GET /admin/section/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-section-edit-"><code class="xref">GET /admin/section/edit/</code></a></td><td>
+       <a href="api.html#get--admin-section-edit-"><tt class="xref">GET /admin/section/edit/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-section-new-"><code class="xref">GET /admin/section/new/</code></a></td><td>
+       <a href="api.html#get--admin-section-new-"><tt class="xref">GET /admin/section/new/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-user-"><code class="xref">GET /admin/user/</code></a></td><td>
+       <a href="api.html#get--admin-sensor-"><tt class="xref">GET /admin/sensor/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-user-edit-"><code class="xref">GET /admin/user/edit/</code></a></td><td>
+       <a href="api.html#get--admin-sensor-edit-"><tt class="xref">GET /admin/sensor/edit/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--admin-user-new-"><code class="xref">GET /admin/user/new/</code></a></td><td>
+       <a href="api.html#get--admin-sensor-new-"><tt class="xref">GET /admin/sensor/new/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-fileadmin-delete-"><code class="xref">POST /admin/fileadmin/delete/</code></a></td><td>
+       <a href="api.html#get--admin-user-"><tt class="xref">GET /admin/user/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-fileadmin-edit-"><code class="xref">POST /admin/fileadmin/edit/</code></a></td><td>
+       <a href="api.html#get--admin-user-edit-"><tt class="xref">GET /admin/user/edit/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-fileadmin-mkdir-"><code class="xref">POST /admin/fileadmin/mkdir/</code></a></td><td>
+       <a href="api.html#get--admin-user-new-"><tt class="xref">GET /admin/user/new/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-fileadmin-mkdir-(path-path)"><code class="xref">POST /admin/fileadmin/mkdir/(path:path)</code></a></td><td>
+       <a href="api.html#post--admin-fileadmin-delete-"><tt class="xref">POST /admin/fileadmin/delete/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-fileadmin-rename-"><code class="xref">POST /admin/fileadmin/rename/</code></a></td><td>
+       <a href="api.html#post--admin-fileadmin-edit-"><tt class="xref">POST /admin/fileadmin/edit/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-fileadmin-upload-"><code class="xref">POST /admin/fileadmin/upload/</code></a></td><td>
+       <a href="api.html#post--admin-fileadmin-mkdir-"><tt class="xref">POST /admin/fileadmin/mkdir/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-fileadmin-upload-(path-path)"><code class="xref">POST /admin/fileadmin/upload/(path:path)</code></a></td><td>
+       <a href="api.html#post--admin-fileadmin-mkdir-(path-path)"><tt class="xref">POST /admin/fileadmin/mkdir/(path:path)</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-gage-action-"><code class="xref">POST /admin/gage/action/</code></a></td><td>
+       <a href="api.html#post--admin-fileadmin-rename-"><tt class="xref">POST /admin/fileadmin/rename/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-gage-ajax-update-"><code class="xref">POST /admin/gage/ajax/update/</code></a></td><td>
+       <a href="api.html#post--admin-fileadmin-upload-"><tt class="xref">POST /admin/fileadmin/upload/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-gage-delete-"><code class="xref">POST /admin/gage/delete/</code></a></td><td>
+       <a href="api.html#post--admin-fileadmin-upload-(path-path)"><tt class="xref">POST /admin/fileadmin/upload/(path:path)</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-gage-edit-"><code class="xref">POST /admin/gage/edit/</code></a></td><td>
+       <a href="api.html#post--admin-gage-action-"><tt class="xref">POST /admin/gage/action/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-gage-new-"><code class="xref">POST /admin/gage/new/</code></a></td><td>
+       <a href="api.html#post--admin-gage-ajax-update-"><tt class="xref">POST /admin/gage/ajax/update/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-region-action-"><code class="xref">POST /admin/region/action/</code></a></td><td>
+       <a href="api.html#post--admin-gage-delete-"><tt class="xref">POST /admin/gage/delete/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-region-ajax-update-"><code class="xref">POST /admin/region/ajax/update/</code></a></td><td>
+       <a href="api.html#post--admin-gage-edit-"><tt class="xref">POST /admin/gage/edit/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-region-delete-"><code class="xref">POST /admin/region/delete/</code></a></td><td>
+       <a href="api.html#post--admin-gage-new-"><tt class="xref">POST /admin/gage/new/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-region-edit-"><code class="xref">POST /admin/region/edit/</code></a></td><td>
+       <a href="api.html#post--admin-region-action-"><tt class="xref">POST /admin/region/action/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-region-new-"><code class="xref">POST /admin/region/new/</code></a></td><td>
+       <a href="api.html#post--admin-region-ajax-update-"><tt class="xref">POST /admin/region/ajax/update/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-river-action-"><code class="xref">POST /admin/river/action/</code></a></td><td>
+       <a href="api.html#post--admin-region-delete-"><tt class="xref">POST /admin/region/delete/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-river-ajax-update-"><code class="xref">POST /admin/river/ajax/update/</code></a></td><td>
+       <a href="api.html#post--admin-region-edit-"><tt class="xref">POST /admin/region/edit/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-river-delete-"><code class="xref">POST /admin/river/delete/</code></a></td><td>
+       <a href="api.html#post--admin-region-new-"><tt class="xref">POST /admin/region/new/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-river-edit-"><code class="xref">POST /admin/river/edit/</code></a></td><td>
+       <a href="api.html#post--admin-river-action-"><tt class="xref">POST /admin/river/action/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-river-new-"><code class="xref">POST /admin/river/new/</code></a></td><td>
+       <a href="api.html#post--admin-river-ajax-update-"><tt class="xref">POST /admin/river/ajax/update/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-section-action-"><code class="xref">POST /admin/section/action/</code></a></td><td>
+       <a href="api.html#post--admin-river-delete-"><tt class="xref">POST /admin/river/delete/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-section-ajax-update-"><code class="xref">POST /admin/section/ajax/update/</code></a></td><td>
+       <a href="api.html#post--admin-river-edit-"><tt class="xref">POST /admin/river/edit/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-section-delete-"><code class="xref">POST /admin/section/delete/</code></a></td><td>
+       <a href="api.html#post--admin-river-new-"><tt class="xref">POST /admin/river/new/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-section-edit-"><code class="xref">POST /admin/section/edit/</code></a></td><td>
+       <a href="api.html#post--admin-section-action-"><tt class="xref">POST /admin/section/action/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-section-new-"><code class="xref">POST /admin/section/new/</code></a></td><td>
+       <a href="api.html#post--admin-section-ajax-update-"><tt class="xref">POST /admin/section/ajax/update/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-user-action-"><code class="xref">POST /admin/user/action/</code></a></td><td>
+       <a href="api.html#post--admin-section-delete-"><tt class="xref">POST /admin/section/delete/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-user-ajax-update-"><code class="xref">POST /admin/user/ajax/update/</code></a></td><td>
+       <a href="api.html#post--admin-section-edit-"><tt class="xref">POST /admin/section/edit/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-user-delete-"><code class="xref">POST /admin/user/delete/</code></a></td><td>
+       <a href="api.html#post--admin-section-new-"><tt class="xref">POST /admin/section/new/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-user-edit-"><code class="xref">POST /admin/user/edit/</code></a></td><td>
+       <a href="api.html#post--admin-sensor-action-"><tt class="xref">POST /admin/sensor/action/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--admin-user-new-"><code class="xref">POST /admin/user/new/</code></a></td><td>
+       <a href="api.html#post--admin-sensor-ajax-update-"><tt class="xref">POST /admin/sensor/ajax/update/</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api.html#post--admin-sensor-delete-"><tt class="xref">POST /admin/sensor/delete/</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api.html#post--admin-sensor-edit-"><tt class="xref">POST /admin/sensor/edit/</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api.html#post--admin-sensor-new-"><tt class="xref">POST /admin/sensor/new/</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api.html#post--admin-user-action-"><tt class="xref">POST /admin/user/action/</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api.html#post--admin-user-ajax-update-"><tt class="xref">POST /admin/user/ajax/update/</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api.html#post--admin-user-delete-"><tt class="xref">POST /admin/user/delete/</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api.html#post--admin-user-edit-"><tt class="xref">POST /admin/user/edit/</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api.html#post--admin-user-new-"><tt class="xref">POST /admin/user/new/</tt></a></td><td>
        <em></em></td></tr>
      <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
      <tr class="cap" id="cap-/api"><td></td><td>
@@ -412,77 +506,111 @@
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--api-1.0-"><code class="xref">GET /api/1.0/</code></a></td><td>
+       <a href="api.html#get--api-0.1-"><tt class="xref">GET /api/0.1/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--api-1.0-gages-"><code class="xref">GET /api/1.0/gages/</code></a></td><td>
+       <a href="api.html#get--api-0.1-gages-"><tt class="xref">GET /api/0.1/gages/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--api-1.0-gages-(int-id)"><code class="xref">GET /api/1.0/gages/(int:id)</code></a></td><td>
+       <a href="api.html#get--api-0.1-gages-(int-gid)"><tt class="xref">GET /api/0.1/gages/(int:gid)</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--api-1.0-regions-"><code class="xref">GET /api/1.0/regions/</code></a></td><td>
+       <a href="api.html#get--api-0.1-regions-"><tt class="xref">GET /api/0.1/regions/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--api-1.0-regions-(int-id)"><code class="xref">GET /api/1.0/regions/(int:id)</code></a></td><td>
+       <a href="api.html#get--api-0.1-regions-(int-rid)"><tt class="xref">GET /api/0.1/regions/(int:rid)</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--api-1.0-rivers-"><code class="xref">GET /api/1.0/rivers/</code></a></td><td>
+       <a href="api.html#get--api-0.1-rivers-"><tt class="xref">GET /api/0.1/rivers/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--api-1.0-rivers-(int-id)"><code class="xref">GET /api/1.0/rivers/(int:id)</code></a></td><td>
+       <a href="api.html#get--api-0.1-rivers-(int-rid)"><tt class="xref">GET /api/0.1/rivers/(int:rid)</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--api-1.0-samples-"><code class="xref">GET /api/1.0/samples/</code></a></td><td>
+       <a href="api.html#get--api-0.1-samples-"><tt class="xref">GET /api/0.1/samples/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--api-1.0-samples-(int-id)"><code class="xref">GET /api/1.0/samples/(int:id)</code></a></td><td>
+       <a href="api.html#get--api-0.1-samples-(int-sid)"><tt class="xref">GET /api/0.1/samples/(int:sid)</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--api-1.0-sections-"><code class="xref">GET /api/1.0/sections/</code></a></td><td>
+       <a href="api.html#get--api-0.1-sections-"><tt class="xref">GET /api/0.1/sections/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--api-1.0-sections-(int-id)"><code class="xref">GET /api/1.0/sections/(int:id)</code></a></td><td>
+       <a href="api.html#get--api-0.1-sections-(int-sid)"><tt class="xref">GET /api/0.1/sections/(int:sid)</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--api-1.0-sensors-"><code class="xref">GET /api/1.0/sensors/</code></a></td><td>
+       <a href="api.html#get--api-0.1-sensors-"><tt class="xref">GET /api/0.1/sensors/</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--api-1.0-sensors-(int-id)"><code class="xref">GET /api/1.0/sensors/(int:id)</code></a></td><td>
+       <a href="api.html#get--api-0.1-sensors-(int-sid)"><tt class="xref">GET /api/0.1/sensors/(int:sid)</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#get--api-1.0-sensors-(int-id)-samples"><code class="xref">GET /api/1.0/sensors/(int:id)/samples</code></a></td><td>
+       <a href="api.html#get--api-0.1-sensors-(int-sid)-samples"><tt class="xref">GET /api/0.1/sensors/(int:sid)/samples</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api.html#post--api-1.0-gages-(int-id)-sample"><code class="xref">POST /api/1.0/gages/(int:id)/sample</code></a></td><td>
+       <a href="api.html#post--api-0.1-gages-(int-gid)-sample"><tt class="xref">POST /api/0.1/gages/(int:gid)/sample</tt></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-/change"><td></td><td>
+       <strong>/change</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api.html#get--change"><tt class="xref">GET /change</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api.html#post--change"><tt class="xref">POST /change</tt></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-/login"><td></td><td>
+       <strong>/login</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api.html#get--login"><tt class="xref">GET /login</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api.html#post--login"><tt class="xref">POST /login</tt></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-/logout"><td></td><td>
+       <strong>/logout</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api.html#get--logout"><tt class="xref">GET /logout</tt></a></td><td>
        <em></em></td></tr>
    </table>
 
@@ -498,9 +626,10 @@
         &copy; Copyright 2014, Alex Kerney.
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
+
         </div>
       </div>
 
@@ -524,7 +653,7 @@
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

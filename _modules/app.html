@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>app &mdash; Gage-Web 0.1 documentation</title>
@@ -14,7 +15,6 @@
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   
   
@@ -28,11 +28,13 @@
   
 
   
+
+  
     <link rel="top" title="Gage-Web 0.1 documentation" href="../index.html"/>
         <link rel="up" title="Module code" href="index.html"/> 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -43,32 +45,79 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
-        <a href="../index.html" class="fa fa-home"> Gage-Web</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+        
+
+        
+          <a href="../index.html" class="icon icon-home"> Gage-Web
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+
+        
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
-        
-            <ul>
+          
+          
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">Gage-Web API Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Gage-Web Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../reference/app.html">app package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/app.html">app package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/app.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/app.admin.html">app.admin package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/app.api_1_0.html">app.api_1_0 package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/app.main.html">app.main package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/app.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/app.html#module-app.admin">app.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/app.html#app-api-module">app.api module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/app.html#app-auth-module">app.auth module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/app.html#app-backup-module">app.backup module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/app.html#module-app.models">app.models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/app.html#module-app">Module contents</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/config.html">config module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/manage.html">manage module</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Server Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developers/fabfile.html">fabfile.py</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developers/fabfile.html#hosts">Hosts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developers/local.html">Local Development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#initial-migration">Initial Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#working-with-users-and-roles">Working with Users and Roles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developers/local.html#roles">Roles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developers/local.html#users">Users</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#running-everything">Running Everything</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
+          
         
       </div>
       &nbsp;
@@ -95,11 +144,13 @@
     <li>app</li>
       <li class="wy-breadcrumbs-aside">
         
+          
+        
       </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document">
             
   <h1>Source code for app</h1><div class="highlight"><pre>
 <span class="c">#!/usr/bin/python</span>
@@ -110,36 +161,49 @@
 
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 <span class="kn">from</span> <span class="nn">flask.ext.bootstrap</span> <span class="kn">import</span> <span class="n">Bootstrap</span>
-<span class="kn">from</span> <span class="nn">flask.ext.sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
-<span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="kn">from</span> <span class="nn">flask_security</span> <span class="kn">import</span> <span class="n">Security</span>
 <span class="kn">from</span> <span class="nn">flask_debugtoolbar</span> <span class="kn">import</span> <span class="n">DebugToolbarExtension</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">raven.contrib.flask</span> <span class="kn">import</span> <span class="n">Sentry</span>
+<span class="kn">from</span> <span class="nn">werkzeug.contrib.fixers</span> <span class="kn">import</span> <span class="n">ProxyFix</span>
 
+<span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="kn">from</span> <span class="nn">.database</span> <span class="kn">import</span> <span class="n">db</span>
 
 <span class="n">bootstrap</span> <span class="o">=</span> <span class="n">Bootstrap</span><span class="p">()</span>
-<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">()</span>
+<span class="n">security</span> <span class="o">=</span> <span class="n">Security</span><span class="p">()</span>
 <span class="n">toolbar</span> <span class="o">=</span> <span class="n">DebugToolbarExtension</span><span class="p">()</span>
 
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">user_datastore</span>
+
+
 <div class="viewcode-block" id="create_app"><a class="viewcode-back" href="../reference/app.html#app.create_app">[docs]</a><span class="k">def</span> <span class="nf">create_app</span><span class="p">(</span><span class="n">config_name</span><span class="p">):</span>
-	<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
-	<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="n">config_name</span><span class="p">])</span>
-	
-	<span class="n">bootstrap</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-	<span class="n">db</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-	<span class="n">toolbar</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-	
-	<span class="kn">from</span> <span class="nn">main</span> <span class="kn">import</span> <span class="n">main</span>
-	<span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">main</span><span class="p">)</span>
-	
-	<span class="c">#from admin import admin as admin_blueprint</span>
-	<span class="c">#app.register_blueprint(admin_blueprint, url_prefix=&#39;/admin&#39;)</span>
-	
-	<span class="kn">from</span> <span class="nn">admin</span> <span class="kn">import</span> <span class="n">admin</span>
-	<span class="n">admin</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-	
-	<span class="kn">from</span> <span class="nn">api_1_0</span> <span class="kn">import</span> <span class="n">api</span> <span class="k">as</span> <span class="n">api_1_0_blueprint</span>
-	<span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">api_1_0_blueprint</span><span class="p">,</span> <span class="n">url_prefix</span><span class="o">=</span><span class="s">&#39;/api/1.0&#39;</span><span class="p">)</span>
-	
-	<span class="k">return</span> <span class="n">app</span></div>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="n">config_name</span><span class="p">])</span>
+
+    <span class="n">bootstrap</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+    <span class="n">db</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+    <span class="n">security</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">user_datastore</span><span class="p">)</span>
+    <span class="n">toolbar</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">config_name</span> <span class="ow">is</span> <span class="s">&#39;production&#39;</span><span class="p">:</span>
+        <span class="n">sentry</span> <span class="o">=</span> <span class="n">Sentry</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">logging</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">wsgi_app</span> <span class="o">=</span> <span class="n">ProxyFix</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">wsgi_app</span><span class="p">)</span>
+
+    <span class="kn">from</span> <span class="nn">app.celery</span> <span class="kn">import</span> <span class="n">celery</span>
+    <span class="n">celery</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+
+    <span class="kn">from</span> <span class="nn">.main</span> <span class="kn">import</span> <span class="n">main</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">main</span><span class="p">)</span>
+
+    <span class="kn">from</span> <span class="nn">.admin</span> <span class="kn">import</span> <span class="n">admin</span>
+    <span class="n">admin</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+    <span class="kn">from</span> <span class="nn">.api_0_1</span> <span class="kn">import</span> <span class="n">api</span> <span class="k">as</span> <span class="n">api_0_1_blueprint</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">api_0_1_blueprint</span><span class="p">,</span> <span class="n">url_prefix</span><span class="o">=</span><span class="s">&#39;/api/0.1&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">app</span></div>
 </pre></div>
 
           </div>
@@ -153,9 +217,10 @@
         &copy; Copyright 2014, Alex Kerney.
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
+
         </div>
       </div>
 
@@ -179,7 +244,7 @@
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

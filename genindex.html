@@ -6,6 +6,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Index &mdash; Gage-Web 0.1 documentation</title>
@@ -15,7 +16,6 @@
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   
   
@@ -29,10 +29,12 @@
   
 
   
+
+  
     <link rel="top" title="Gage-Web 0.1 documentation" href="index.html"/> 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -43,32 +45,79 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
-        <a href="index.html" class="fa fa-home"> Gage-Web</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+        
+
+        
+          <a href="index.html" class="icon icon-home"> Gage-Web
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+
+        
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
-        
-            <ul>
+          
+          
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="api.html">Gage-Web API Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reference/index.html">Gage-Web Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="reference/app.html">app package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/app.html">app package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="reference/app.admin.html">app.admin package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/app.api_1_0.html">app.api_1_0 package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/app.main.html">app.main package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#module-app.admin">app.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#app-api-module">app.api module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#app-auth-module">app.auth module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#app-backup-module">app.backup module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#module-app.models">app.models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#module-app">Module contents</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="reference/config.html">config module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/manage.html">manage module</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="developers/index.html">Server Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="developers/fabfile.html">fabfile.py</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developers/fabfile.html#hosts">Hosts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developers/local.html">Local Development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#initial-migration">Initial Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#working-with-users-and-roles">Working with Users and Roles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="developers/local.html#roles">Roles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="developers/local.html#users">Users</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#running-everything">Running Everything</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
+          
         
       </div>
       &nbsp;
@@ -93,17 +142,20 @@
     <li></li>
       <li class="wy-breadcrumbs-aside">
         
+          
+        
       </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document">
             
 
 <h1 id="index">Index</h1>
 
 <div class="genindex-jumpbox">
- <a href="#A"><strong>A</strong></a>
+ <a href="#Symbols"><strong>Symbols</strong></a>
+ | <a href="#A"><strong>A</strong></a>
  | <a href="#B"><strong>B</strong></a>
  | <a href="#C"><strong>C</strong></a>
  | <a href="#D"><strong>D</strong></a>
@@ -111,18 +163,98 @@
  | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
  | <a href="#I"><strong>I</strong></a>
+ | <a href="#J"><strong>J</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
- | <a href="#N"><strong>N</strong></a>
- | <a href="#O"><strong>O</strong></a>
  | <a href="#P"><strong>P</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
  | <a href="#U"><strong>U</strong></a>
- | <a href="#V"><strong>V</strong></a>
  
 </div>
+<h2 id="Symbols">Symbols</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt>
+    -a &lt;y&gt; or &lt;active&gt;, --active &lt;y&gt; or &lt;active&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="developers/local.html#cmdoption-create_user-a">create_user command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    -d &lt;description&gt;, --description &lt;description&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="developers/local.html#cmdoption-create_role-d">create_role command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    -n &lt;name&gt;, --name &lt;name&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="developers/local.html#cmdoption-create_role-n">create_role command line option</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt>
+    -p &lt;password&gt;, --password &lt;password&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="developers/local.html#cmdoption-create_user-p">create_user command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    -u &lt;name@server.com&gt; or --user &lt;name@server.com&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="developers/local.html#cmdoption-activate_user-u">activate_user command line option</a>
+  </dt>
+
+        
+  <dt><a href="developers/local.html#cmdoption-add_role-u">add_role command line option</a>
+  </dt>
+
+        
+  <dt><a href="developers/local.html#cmdoption-remove_role-u">remove_role command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    -u &lt;name@server.com&gt;, --user &lt;name@server.com&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="developers/local.html#cmdoption-create_user-u">create_user command line option</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+</tr></table>
+
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
@@ -131,12 +263,46 @@
   </dt>
 
       
-  <dt><a href="reference/app.admin.html#app.admin.GageView.action_view">action_view() (app.admin.GageView method)</a>, <a href="reference/app.html#app.admin.GageView.action_view">[1]</a>
+  <dt><a href="reference/app.admin.html#app.admin.FileAdmin.action_view">action_view() (app.admin.FileAdmin method)</a>, <a href="reference/app.html#app.admin.FileAdmin.action_view">[1]</a>
   </dt>
 
       <dd><dl>
         
+  <dt><a href="reference/app.admin.html#app.admin.GageView.action_view">(app.admin.GageView method)</a>, <a href="reference/app.html#app.admin.GageView.action_view">[1]</a>
+  </dt>
+
+        
+  <dt><a href="reference/app.admin.html#app.admin.ModelView.action_view">(app.admin.ModelView method)</a>, <a href="reference/app.html#app.admin.ModelView.action_view">[1]</a>
+  </dt>
+
+        
   <dt><a href="reference/app.admin.html#app.admin.SectionView.action_view">(app.admin.SectionView method)</a>, <a href="reference/app.html#app.admin.SectionView.action_view">[1]</a>
+  </dt>
+
+        
+  <dt><a href="reference/app.admin.html#app.admin.UserView.action_view">(app.admin.UserView method)</a>, <a href="reference/app.html#app.admin.UserView.action_view">[1]</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    activate_user command line option
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="developers/local.html#cmdoption-activate_user-u">-u &lt;name@server.com&gt; or --user &lt;name@server.com&gt;</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    add_role command line option
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="developers/local.html#cmdoption-add_role-u">-u &lt;name@server.com&gt; or --user &lt;name@server.com&gt;</a>
   </dt>
 
       </dl></dd>
@@ -146,7 +312,15 @@
 
       <dd><dl>
         
+  <dt><a href="reference/app.admin.html#app.admin.ModelView.ajax_lookup">(app.admin.ModelView method)</a>, <a href="reference/app.html#app.admin.ModelView.ajax_lookup">[1]</a>
+  </dt>
+
+        
   <dt><a href="reference/app.admin.html#app.admin.SectionView.ajax_lookup">(app.admin.SectionView method)</a>, <a href="reference/app.html#app.admin.SectionView.ajax_lookup">[1]</a>
+  </dt>
+
+        
+  <dt><a href="reference/app.admin.html#app.admin.UserView.ajax_lookup">(app.admin.UserView method)</a>, <a href="reference/app.html#app.admin.UserView.ajax_lookup">[1]</a>
   </dt>
 
       </dl></dd>
@@ -156,7 +330,15 @@
 
       <dd><dl>
         
+  <dt><a href="reference/app.admin.html#app.admin.ModelView.ajax_update">(app.admin.ModelView method)</a>, <a href="reference/app.html#app.admin.ModelView.ajax_update">[1]</a>
+  </dt>
+
+        
   <dt><a href="reference/app.admin.html#app.admin.SectionView.ajax_update">(app.admin.SectionView method)</a>, <a href="reference/app.html#app.admin.SectionView.ajax_update">[1]</a>
+  </dt>
+
+        
+  <dt><a href="reference/app.admin.html#app.admin.UserView.ajax_update">(app.admin.UserView method)</a>, <a href="reference/app.html#app.admin.UserView.ajax_update">[1]</a>
   </dt>
 
       </dl></dd>
@@ -164,46 +346,10 @@
   <dt><a href="index.html#module-app">app (module)</a>, <a href="reference/app.html#module-app">[1]</a>
   </dt>
 
-      
-  <dt><a href="reference/app.admin.html#module-app.admin">app.admin (module)</a>, <a href="reference/app.html#module-app.admin">[1]</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.api_1_0.html#module-app.api_1_0">app.api_1_0 (module)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.api_1_0.html#module-app.api_1_0.errors">app.api_1_0.errors (module)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.api_1_0.html#module-app.api_1_0.gages">app.api_1_0.gages (module)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.api_1_0.html#module-app.api_1_0.regions">app.api_1_0.regions (module)</a>
-  </dt>
-
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/app.api_1_0.html#module-app.api_1_0.rivers">app.api_1_0.rivers (module)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.api_1_0.html#module-app.api_1_0.samples">app.api_1_0.samples (module)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.api_1_0.html#module-app.api_1_0.sections">app.api_1_0.sections (module)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.api_1_0.html#module-app.api_1_0.sensors">app.api_1_0.sensors (module)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.html#module-app.backup">app.backup (module)</a>
+  <dt><a href="reference/app.admin.html#module-app.admin">app.admin (module)</a>, <a href="reference/app.html#module-app.admin">[1]</a>
   </dt>
 
       
@@ -226,6 +372,10 @@
   <dt><a href="reference/app.html#module-app.models">app.models (module)</a>
   </dt>
 
+      
+  <dt><a href="reference/app.admin.html#app.admin.AuthenticatedMenuLink">AuthenticatedMenuLink (class in app.admin)</a>, <a href="reference/app.html#app.admin.AuthenticatedMenuLink">[1]</a>
+  </dt>
+
   </dl></td>
 </tr></table>
 
@@ -233,19 +383,7 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/app.html#app.backup.backup">backup() (in module app.backup)</a>
-  </dt>
-
-      <dd><dl>
-        
-  <dt><a href="reference/manage.html#manage.backup">(in module manage)</a>
-  </dt>
-
-      </dl></dd>
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
-      
-  <dt><a href="reference/app.api_1_0.html#app.api_1_0.errors.bad_request">bad_request() (in module app.api_1_0.errors)</a>
+  <dt><a href="reference/manage.html#manage.backup">backup() (in module manage)</a>
   </dt>
 
   </dl></td>
@@ -276,8 +414,6 @@
   <dt><a href="reference/app.admin.html#app.admin.SectionView.column_list">column_list (app.admin.SectionView attribute)</a>, <a href="reference/app.html#app.admin.SectionView.column_list">[1]</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/app.admin.html#app.admin.GageView.column_searchable_list">column_searchable_list (app.admin.GageView attribute)</a>, <a href="reference/app.html#app.admin.GageView.column_searchable_list">[1]</a>
   </dt>
@@ -288,21 +424,61 @@
   </dt>
 
       </dl></dd>
-      
-  <dt><a href="reference/app.html#app.models.Correlation">Correlation (class in app.models)</a>
-  </dt>
-
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/app.html#app.create_app">create_app() (in module app)</a>
   </dt>
 
+      
+  <dt>
+    create_role command line option
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="developers/local.html#cmdoption-create_role-d">-d &lt;description&gt;, --description &lt;description&gt;</a>
+  </dt>
+
+        
+  <dt><a href="developers/local.html#cmdoption-create_role-n">-n &lt;name&gt;, --name &lt;name&gt;</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    create_user command line option
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="developers/local.html#cmdoption-create_user-a">-a &lt;y&gt; or &lt;active&gt;, --active &lt;y&gt; or &lt;active&gt;</a>
+  </dt>
+
+        
+  <dt><a href="developers/local.html#cmdoption-create_user-p">-p &lt;password&gt;, --password &lt;password&gt;</a>
+  </dt>
+
+        
+  <dt><a href="developers/local.html#cmdoption-create_user-u">-u &lt;name@server.com&gt;, --user &lt;name@server.com&gt;</a>
+  </dt>
+
+      </dl></dd>
       
   <dt><a href="reference/app.admin.html#app.admin.GageView.create_view">create_view() (app.admin.GageView method)</a>, <a href="reference/app.html#app.admin.GageView.create_view">[1]</a>
   </dt>
 
       <dd><dl>
         
+  <dt><a href="reference/app.admin.html#app.admin.ModelView.create_view">(app.admin.ModelView method)</a>, <a href="reference/app.html#app.admin.ModelView.create_view">[1]</a>
+  </dt>
+
+        
   <dt><a href="reference/app.admin.html#app.admin.SectionView.create_view">(app.admin.SectionView method)</a>, <a href="reference/app.html#app.admin.SectionView.create_view">[1]</a>
+  </dt>
+
+        
+  <dt><a href="reference/app.admin.html#app.admin.UserView.create_view">(app.admin.UserView method)</a>, <a href="reference/app.html#app.admin.UserView.create_view">[1]</a>
   </dt>
 
       </dl></dd>
@@ -313,15 +489,37 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
+  <dt><a href="reference/app.main.html#app.main.plot.SensorPlot.data">data() (app.main.plot.SensorPlot method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/app.admin.html#app.admin.FileAdmin.delete">delete() (app.admin.FileAdmin method)</a>, <a href="reference/app.html#app.admin.FileAdmin.delete">[1]</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
   <dt><a href="reference/app.admin.html#app.admin.GageView.delete_view">delete_view() (app.admin.GageView method)</a>, <a href="reference/app.html#app.admin.GageView.delete_view">[1]</a>
   </dt>
 
       <dd><dl>
         
+  <dt><a href="reference/app.admin.html#app.admin.ModelView.delete_view">(app.admin.ModelView method)</a>, <a href="reference/app.html#app.admin.ModelView.delete_view">[1]</a>
+  </dt>
+
+        
   <dt><a href="reference/app.admin.html#app.admin.SectionView.delete_view">(app.admin.SectionView method)</a>, <a href="reference/app.html#app.admin.SectionView.delete_view">[1]</a>
   </dt>
 
+        
+  <dt><a href="reference/app.admin.html#app.admin.UserView.delete_view">(app.admin.UserView method)</a>, <a href="reference/app.html#app.admin.UserView.delete_view">[1]</a>
+  </dt>
+
       </dl></dd>
+      
+  <dt><a href="reference/app.admin.html#app.admin.FileAdmin.download">download() (app.admin.FileAdmin method)</a>, <a href="reference/app.html#app.admin.FileAdmin.download">[1]</a>
+  </dt>
+
   </dl></td>
 </tr></table>
 
@@ -329,12 +527,26 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
+  <dt><a href="reference/app.admin.html#app.admin.FileAdmin.edit">edit() (app.admin.FileAdmin method)</a>, <a href="reference/app.html#app.admin.FileAdmin.edit">[1]</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
   <dt><a href="reference/app.admin.html#app.admin.GageView.edit_view">edit_view() (app.admin.GageView method)</a>, <a href="reference/app.html#app.admin.GageView.edit_view">[1]</a>
   </dt>
 
       <dd><dl>
         
+  <dt><a href="reference/app.admin.html#app.admin.ModelView.edit_view">(app.admin.ModelView method)</a>, <a href="reference/app.html#app.admin.ModelView.edit_view">[1]</a>
+  </dt>
+
+        
   <dt><a href="reference/app.admin.html#app.admin.SectionView.edit_view">(app.admin.SectionView method)</a>, <a href="reference/app.html#app.admin.SectionView.edit_view">[1]</a>
+  </dt>
+
+        
+  <dt><a href="reference/app.admin.html#app.admin.UserView.edit_view">(app.admin.UserView method)</a>, <a href="reference/app.html#app.admin.UserView.edit_view">[1]</a>
   </dt>
 
       </dl></dd>
@@ -345,15 +557,13 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/app.api_1_0.html#app.api_1_0.errors.forbidden">forbidden() (in module app.api_1_0.errors)</a>
+  <dt><a href="reference/app.admin.html#app.admin.FileAdmin">FileAdmin (class in app.admin)</a>, <a href="reference/app.html#app.admin.FileAdmin">[1]</a>
   </dt>
 
-      <dd><dl>
-        
-  <dt><a href="reference/app.main.html#app.main.errors.forbidden">(in module app.main.errors)</a>
+      
+  <dt><a href="reference/app.main.html#app.main.errors.forbidden">forbidden() (in module app.main.errors)</a>
   </dt>
 
-      </dl></dd>
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
@@ -373,14 +583,6 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/app.html#app.models.Gage">Gage (class in app.models)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.api_1_0.html#app.api_1_0.gages.gage_new_samples">gage_new_samples() (in module app.api_1_0.gages)</a>
-  </dt>
-
-      
   <dt><a href="reference/app.main.html#app.main.views.gagepage">gagepage() (in module app.main.views)</a>
   </dt>
 
@@ -389,65 +591,17 @@
   </dt>
 
       
-  <dt><a href="reference/app.main.html#app.main.views.gagespage">gagespage() (in module app.main.views)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.admin.html#app.admin.GageView">GageView (class in app.admin)</a>, <a href="reference/app.html#app.admin.GageView">[1]</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.api_1_0.html#app.api_1_0.gages.get_gage">get_gage() (in module app.api_1_0.gages)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.api_1_0.html#app.api_1_0.gages.get_gages">get_gages() (in module app.api_1_0.gages)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.api_1_0.html#app.api_1_0.regions.get_region">get_region() (in module app.api_1_0.regions)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.api_1_0.html#app.api_1_0.regions.get_regions">get_regions() (in module app.api_1_0.regions)</a>
+  <dt><a href="reference/app.main.html#app.main.plot.gagesensorplotjpg">gagesensorplotjpg() (in module app.main.plot)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/app.api_1_0.html#app.api_1_0.rivers.get_river">get_river() (in module app.api_1_0.rivers)</a>
+  <dt><a href="reference/app.main.html#app.main.views.gagespage">gagespage() (in module app.main.views)</a>
   </dt>
 
       
-  <dt><a href="reference/app.api_1_0.html#app.api_1_0.rivers.get_rivers">get_rivers() (in module app.api_1_0.rivers)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.api_1_0.html#app.api_1_0.samples.get_sample">get_sample() (in module app.api_1_0.samples)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.api_1_0.html#app.api_1_0.samples.get_samples">get_samples() (in module app.api_1_0.samples)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.api_1_0.html#app.api_1_0.sections.get_section">get_section() (in module app.api_1_0.sections)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.api_1_0.html#app.api_1_0.sections.get_sections">get_sections() (in module app.api_1_0.sections)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.api_1_0.html#app.api_1_0.sensors.get_sensor">get_sensor() (in module app.api_1_0.sensors)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.api_1_0.html#app.api_1_0.sensors.get_sensor_samples">get_sensor_samples() (in module app.api_1_0.sensors)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.api_1_0.html#app.api_1_0.sensors.get_sensors">get_sensors() (in module app.api_1_0.sensors)</a>
+  <dt><a href="reference/app.admin.html#app.admin.GageView">GageView (class in app.admin)</a>, <a href="reference/app.html#app.admin.GageView">[1]</a>
   </dt>
 
   </dl></td>
@@ -457,33 +611,79 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
+  <dt><a href="reference/app.admin.html#app.admin.FileAdmin.inaccessible_callback">inaccessible_callback() (app.admin.FileAdmin method)</a>, <a href="reference/app.html#app.admin.FileAdmin.inaccessible_callback">[1]</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="reference/app.admin.html#app.admin.ModelView.inaccessible_callback">(app.admin.ModelView method)</a>, <a href="reference/app.html#app.admin.ModelView.inaccessible_callback">[1]</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="reference/app.admin.html#app.admin.FileAdmin.index">index() (app.admin.FileAdmin method)</a>, <a href="reference/app.html#app.admin.FileAdmin.index">[1]</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="reference/app.admin.html#app.admin.MyAdminIndexView.index">(app.admin.MyAdminIndexView method)</a>, <a href="reference/app.html#app.admin.MyAdminIndexView.index">[1]</a>
+  </dt>
+
+      </dl></dd>
+      
   <dt><a href="reference/app.admin.html#app.admin.GageView.index_view">index_view() (app.admin.GageView method)</a>, <a href="reference/app.html#app.admin.GageView.index_view">[1]</a>
   </dt>
 
       <dd><dl>
         
+  <dt><a href="reference/app.admin.html#app.admin.ModelView.index_view">(app.admin.ModelView method)</a>, <a href="reference/app.html#app.admin.ModelView.index_view">[1]</a>
+  </dt>
+
+        
   <dt><a href="reference/app.admin.html#app.admin.SectionView.index_view">(app.admin.SectionView method)</a>, <a href="reference/app.html#app.admin.SectionView.index_view">[1]</a>
   </dt>
 
-      </dl></dd>
-      
-  <dt><a href="reference/app.api_1_0.html#app.api_1_0.indexpage">indexpage() (in module app.api_1_0)</a>
-  </dt>
-
-      <dd><dl>
         
-  <dt><a href="reference/app.main.html#app.main.views.indexpage">(in module app.main.views)</a>
+  <dt><a href="reference/app.admin.html#app.admin.UserView.index_view">(app.admin.UserView method)</a>, <a href="reference/app.html#app.admin.UserView.index_view">[1]</a>
   </dt>
 
       </dl></dd>
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/app.html#app.models.Section.inlatlon">inlatlon() (app.models.Section method)</a>
+  <dt><a href="reference/app.main.html#app.main.views.indexpage">indexpage() (in module app.main.views)</a>
   </dt>
 
       
   <dt><a href="reference/app.main.html#app.main.errors.internal_server_error">internal_server_error() (in module app.main.errors)</a>
+  </dt>
+
+      
+  <dt><a href="reference/app.admin.html#app.admin.AuthenticatedMenuLink.is_accessible">is_accessible() (app.admin.AuthenticatedMenuLink method)</a>, <a href="reference/app.html#app.admin.AuthenticatedMenuLink.is_accessible">[1]</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="reference/app.admin.html#app.admin.FileAdmin.is_accessible">(app.admin.FileAdmin method)</a>, <a href="reference/app.html#app.admin.FileAdmin.is_accessible">[1]</a>
+  </dt>
+
+        
+  <dt><a href="reference/app.admin.html#app.admin.ModelView.is_accessible">(app.admin.ModelView method)</a>, <a href="reference/app.html#app.admin.ModelView.is_accessible">[1]</a>
+  </dt>
+
+        
+  <dt><a href="reference/app.admin.html#app.admin.UserView.is_accessible">(app.admin.UserView method)</a>, <a href="reference/app.html#app.admin.UserView.is_accessible">[1]</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+</tr></table>
+
+<h2 id="J">J</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/app.main.html#app.main.plot.SensorPlot.jpg">jpg() (app.main.plot.SensorPlot method)</a>
   </dt>
 
   </dl></td>
@@ -491,12 +691,6 @@
 
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%" valign="top"><dl>
-      
-  <dt><a href="reference/app.html#app.models.Gage.latlon">latlon() (app.models.Gage method)</a>
-  </dt>
-
-  </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/manage.html#manage.list_routes">list_routes() (in module manage)</a>
@@ -512,30 +706,26 @@
   <dt><a href="reference/manage.html#manage.make_shell_context">make_shell_context() (in module manage)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/manage.html#module-manage">manage (module)</a>
   </dt>
 
-  </dl></td>
-</tr></table>
-
-<h2 id="N">N</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/app.html#app.models.Gage.new_sample">new_sample() (app.models.Gage method)</a>
+  <dt><a href="reference/app.main.html#app.main.plot.SensorPlot.matplot">matplot() (app.main.plot.SensorPlot method)</a>
   </dt>
 
   </dl></td>
-</tr></table>
-
-<h2 id="O">O</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/app.html#app.models.Section.outlatlon">outlatlon() (app.models.Section method)</a>
+  <dt><a href="reference/app.admin.html#app.admin.FileAdmin.mkdir">mkdir() (app.admin.FileAdmin method)</a>, <a href="reference/app.html#app.admin.FileAdmin.mkdir">[1]</a>
+  </dt>
+
+      
+  <dt><a href="reference/app.admin.html#app.admin.ModelView">ModelView (class in app.admin)</a>, <a href="reference/app.html#app.admin.ModelView">[1]</a>
+  </dt>
+
+      
+  <dt><a href="reference/app.admin.html#app.admin.MyAdminIndexView">MyAdminIndexView (class in app.admin)</a>, <a href="reference/app.html#app.admin.MyAdminIndexView">[1]</a>
   </dt>
 
   </dl></td>
@@ -549,19 +739,17 @@
   </dt>
 
   </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/app.main.html#app.main.plot.SensorPlot.png">png() (app.main.plot.SensorPlot method)</a>
+  </dt>
+
+  </dl></td>
 </tr></table>
 
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
-      
-  <dt><a href="reference/app.html#app.models.Sensor.recent">recent() (app.models.Sensor method)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.html#app.models.Region">Region (class in app.models)</a>
-  </dt>
-
       
   <dt><a href="reference/app.main.html#app.main.views.regionpage">regionpage() (in module app.main.views)</a>
   </dt>
@@ -570,10 +758,21 @@
   <dt><a href="reference/app.main.html#app.main.views.regionspage">regionspage() (in module app.main.views)</a>
   </dt>
 
+      
+  <dt>
+    remove_role command line option
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="developers/local.html#cmdoption-remove_role-u">-u &lt;name@server.com&gt; or --user &lt;name@server.com&gt;</a>
+  </dt>
+
+      </dl></dd>
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/app.html#app.models.River">River (class in app.models)</a>
+  <dt><a href="reference/app.admin.html#app.admin.FileAdmin.rename">rename() (app.admin.FileAdmin method)</a>, <a href="reference/app.html#app.admin.FileAdmin.rename">[1]</a>
   </dt>
 
       
@@ -591,29 +790,21 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/app.html#app.models.Sample">Sample (class in app.models)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.html#app.models.Section">Section (class in app.models)</a>
-  </dt>
-
-      
   <dt><a href="reference/app.main.html#app.main.views.sectionpage">sectionpage() (in module app.main.views)</a>
+  </dt>
+
+      
+  <dt><a href="reference/app.main.html#app.main.views.sectionspage">sectionspage() (in module app.main.views)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/app.main.html#app.main.views.sectionspage">sectionspage() (in module app.main.views)</a>
-  </dt>
-
-      
   <dt><a href="reference/app.admin.html#app.admin.SectionView">SectionView (class in app.admin)</a>, <a href="reference/app.html#app.admin.SectionView">[1]</a>
   </dt>
 
       
-  <dt><a href="reference/app.html#app.models.Sensor">Sensor (class in app.models)</a>
+  <dt><a href="reference/app.main.html#app.main.plot.SensorPlot">SensorPlot (class in app.main.plot)</a>
   </dt>
 
   </dl></td>
@@ -626,68 +817,6 @@
   <dt><a href="reference/manage.html#manage.test">test() (in module manage)</a>
   </dt>
 
-      
-  <dt><a href="reference/app.html#app.models.Sensor.to_gage_json">to_gage_json() (app.models.Sensor method)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.html#app.models.Gage.to_json">to_json() (app.models.Gage method)</a>
-  </dt>
-
-      <dd><dl>
-        
-  <dt><a href="reference/app.html#app.models.Region.to_json">(app.models.Region method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/app.html#app.models.River.to_json">(app.models.River method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/app.html#app.models.Sample.to_json">(app.models.Sample method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/app.html#app.models.Section.to_json">(app.models.Section method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/app.html#app.models.Sensor.to_json">(app.models.Sensor method)</a>
-  </dt>
-
-      </dl></dd>
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
-      
-  <dt><a href="reference/app.html#app.models.Gage.to_long_json">to_long_json() (app.models.Gage method)</a>
-  </dt>
-
-      <dd><dl>
-        
-  <dt><a href="reference/app.html#app.models.Region.to_long_json">(app.models.Region method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/app.html#app.models.River.to_long_json">(app.models.River method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/app.html#app.models.Section.to_long_json">(app.models.Section method)</a>
-  </dt>
-
-        
-  <dt><a href="reference/app.html#app.models.Sensor.to_long_json">(app.models.Sensor method)</a>
-  </dt>
-
-      </dl></dd>
-      
-  <dt><a href="reference/app.html#app.models.Sensor.to_sample_json">to_sample_json() (app.models.Sensor method)</a>
-  </dt>
-
-      
-  <dt><a href="reference/app.html#app.models.Sample.to_sensor_json">to_sensor_json() (app.models.Sample method)</a>
-  </dt>
-
   </dl></td>
 </tr></table>
 
@@ -695,29 +824,13 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/app.api_1_0.html#app.api_1_0.errors.unauthorized">unauthorized() (in module app.api_1_0.errors)</a>
+  <dt><a href="reference/app.admin.html#app.admin.FileAdmin.upload">upload() (app.admin.FileAdmin method)</a>, <a href="reference/app.html#app.admin.FileAdmin.upload">[1]</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/app.html#app.models.User">User (class in app.models)</a>
-  </dt>
-
-  </dl></td>
-</tr></table>
-
-<h2 id="V">V</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%" valign="top"><dl>
-      
-  <dt><a href="reference/app.api_1_0.html#app.api_1_0.errors.validation_error">validation_error() (in module app.api_1_0.errors)</a>
-  </dt>
-
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
-      
-  <dt><a href="reference/app.html#app.models.User.verify_password">verify_password() (app.models.User method)</a>
+  <dt><a href="reference/app.admin.html#app.admin.UserView">UserView (class in app.admin)</a>, <a href="reference/app.html#app.admin.UserView">[1]</a>
   </dt>
 
   </dl></td>
@@ -736,9 +849,10 @@
         &copy; Copyright 2014, Alex Kerney.
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
+
         </div>
       </div>
 
@@ -762,7 +876,7 @@
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

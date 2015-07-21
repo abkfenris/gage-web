@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Welcome to Gage-Web’s documentation! &mdash; Gage-Web 0.1 documentation</title>
@@ -14,7 +15,6 @@
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   
   
@@ -28,11 +28,13 @@
   
 
   
+
+  
     <link rel="top" title="Gage-Web 0.1 documentation" href="#"/>
         <link rel="next" title="Gage-Web API Documentation" href="api.html"/> 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -43,32 +45,79 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
-        <a href="#" class="fa fa-home"> Gage-Web</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+        
+
+        
+          <a href="#" class="icon icon-home"> Gage-Web
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+
+        
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
-        
-            <ul>
+          
+          
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="api.html">Gage-Web API Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reference/index.html">Gage-Web Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="reference/app.html">app package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/app.html">app package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="reference/app.admin.html">app.admin package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/app.api_1_0.html">app.api_1_0 package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/app.main.html">app.main package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#module-app.admin">app.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#app-api-module">app.api module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#app-auth-module">app.auth module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#app-backup-module">app.backup module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#module-app.models">app.models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#module-app">Module contents</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="reference/config.html">config module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/manage.html">manage module</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="developers/index.html">Server Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="developers/fabfile.html">fabfile.py</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developers/fabfile.html#hosts">Hosts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developers/local.html">Local Development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#initial-migration">Initial Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#working-with-users-and-roles">Working with Users and Roles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="developers/local.html#roles">Roles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="developers/local.html#users">Users</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#running-everything">Running Everything</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
+          
         
       </div>
       &nbsp;
@@ -93,17 +142,56 @@
     <li>Welcome to Gage-Web&#8217;s documentation!</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="_sources/index.txt" rel="nofollow"> View page source</a>
+          
+            <a href="_sources/index.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document">
             
   <div class="section" id="welcome-to-gage-web-s-documentation">
 <h1>Welcome to Gage-Web&#8217;s documentation!<a class="headerlink" href="#welcome-to-gage-web-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Logging system built around gages which each have sensors who accept a single value per time.</p>
+<blockquote>
+<div><p>A web interface for a low cost stream height gauging system.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Test Status</th>
+<th class="head"><a class="reference external" href="https://travis-ci.org/abkfenris/gage-web"><img alt="travis" src="https://travis-ci.org/abkfenris/gage-web.svg?branch=develop" /></a></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Test Coverage</td>
+<td><a class="reference external" href="http://codecov.io/github/abkfenris/gage-web?branch=develop"><img alt="codecov" src="http://codecov.io/github/abkfenris/gage-web/coverage.svg?branch=develop" /></a>
+<a class="reference external" href="https://coveralls.io/github/abkfenris/gage-web?branch=develop"><img alt="coveralls" src="https://coveralls.io/repos/abkfenris/gage-web/badge.svg?branch=develop&amp;service=github:target:https://coveralls.io/github/abkfenris/gage-web?branch=develop" /></a></td>
+</tr>
+<tr class="row-odd"><td>Requirements</td>
+<td><a class="reference external" href="https://requires.io/github/abkfenris/gage-web/requirements/?branch=develop"><img alt="Requirements Status" src="https://requires.io/github/abkfenris/gage-web/requirements.svg?branch=develop" /></a></td>
+</tr>
+<tr class="row-even"><td>Python 3</td>
+<td><a class="reference external" href="https://caniusepython3.com/check/903e9600-cba1-47b4-9765-bc91b57ec1ad"><img alt="caniuse" src="https://caniusepython3.com/check/903e9600-cba1-47b4-9765-bc91b57ec1ad.svg?style=flat" /></a></td>
+</tr>
+<tr class="row-odd"><td>Code Health</td>
+<td><p class="first"><a class="reference external" href="https://landscape.io/github/abkfenris/gage-web/master"><img alt="Code Health" src="https://landscape.io/github/abkfenris/gage-web/develop/landscape.svg?style=flat" /></a>
+<a class="reference external" href="http://www.quantifiedcode.com/app/project/f5832a59b9b34632adea7f5c41d9385b"><img alt="Code Issues" src="http://www.quantifiedcode.com/api/v1/project/f5832a59b9b34632adea7f5c41d9385b/badge.svg" /></a></p>
+<p class="last"><a class="reference external" href="https://scrutinizer-ci.com/g/abkfenris/gage-web/?branch=develop"><img alt="Scrutinizer Code Quality" src="https://scrutinizer-ci.com/g/abkfenris/gage-web/badges/quality-score.png?b=develop)" /></a>
+<a class="reference external" href="https://codeclimate.com/github/abkfenris/gage-web"><img alt="codeclimate" src="https://codeclimate.com/github/abkfenris/gage-web/badges/gpa.svg" /></a></p>
+</td>
+</tr>
+<tr class="row-even"><td>Issues</td>
+<td><a class="reference external" href="https://github.com/abkfenris/gage-web/issues"><img alt="issues" src="https://img.shields.io/github/issues/abkfenris/gage-web.svg" /></a></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div></blockquote>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <ul>
@@ -112,9 +200,34 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reference/index.html">Gage-Web Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="reference/app.html">app package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/app.html">app package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#module-app.admin">app.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#app-api-module">app.api module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#app-auth-module">app.auth module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#app-backup-module">app.backup module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#module-app.models">app.models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#module-app">Module contents</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="reference/config.html">config module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/manage.html">manage module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="developers/index.html">Server Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="developers/fabfile.html">fabfile.py</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developers/fabfile.html#hosts">Hosts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developers/local.html">Local Development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#initial-migration">Initial Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#working-with-users-and-roles">Working with Users and Roles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#running-everything">Running Everything</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -136,7 +249,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="api.html" class="btn btn-neutral float-right" title="Gage-Web API Documentation"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="api.html" class="btn btn-neutral float-right" title="Gage-Web API Documentation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>
@@ -149,9 +262,10 @@
         &copy; Copyright 2014, Alex Kerney.
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
+
         </div>
       </div>
 
@@ -175,7 +289,7 @@
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

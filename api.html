@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Gage-Web API Documentation &mdash; Gage-Web 0.1 documentation</title>
@@ -14,7 +15,6 @@
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   
   
@@ -28,12 +28,14 @@
   
 
   
+
+  
     <link rel="top" title="Gage-Web 0.1 documentation" href="index.html"/>
         <link rel="next" title="Gage-Web Reference" href="reference/index.html"/>
         <link rel="prev" title="Welcome to Gage-Web’s documentation!" href="index.html"/> 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -44,32 +46,79 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
-        <a href="index.html" class="fa fa-home"> Gage-Web</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+        
+
+        
+          <a href="index.html" class="icon icon-home"> Gage-Web
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+
+        
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
-        
-            <ul class="current">
+          
+          
+              <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="">Gage-Web API Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reference/index.html">Gage-Web Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="reference/app.html">app package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/app.html">app package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="reference/app.admin.html">app.admin package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/app.api_1_0.html">app.api_1_0 package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/app.main.html">app.main package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#module-app.admin">app.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#app-api-module">app.api module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#app-auth-module">app.auth module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#app-backup-module">app.backup module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#module-app.models">app.models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/app.html#module-app">Module contents</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="reference/config.html">config module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/manage.html">manage module</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="developers/index.html">Server Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="developers/fabfile.html">fabfile.py</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developers/fabfile.html#hosts">Hosts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developers/local.html">Local Development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#initial-migration">Initial Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#working-with-users-and-roles">Working with Users and Roles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="developers/local.html#roles">Roles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="developers/local.html#users">Users</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="developers/local.html#running-everything">Running Everything</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
+          
         
       </div>
       &nbsp;
@@ -94,13 +143,15 @@
     <li>Gage-Web API Documentation</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="_sources/api.txt" rel="nofollow"> View page source</a>
+          
+            <a href="_sources/api.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document">
             
   <div class="section" id="gage-web-api-documentation">
 <h1>Gage-Web API Documentation<a class="headerlink" href="#gage-web-api-documentation" title="Permalink to this headline">¶</a></h1>
@@ -108,55 +159,61 @@
 <h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
 <dl class="post">
 <dt id="post--admin-section-ajax-update-">
-<code class="descname">POST </code><code class="descname">/admin/section/ajax/update/</code><a class="headerlink" href="#post--admin-section-ajax-update-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/section/ajax/update/</tt><a class="headerlink" href="#post--admin-section-ajax-update-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edits a single column of a record in list view.</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-region-ajax-update-">
-<code class="descname">POST </code><code class="descname">/admin/region/ajax/update/</code><a class="headerlink" href="#post--admin-region-ajax-update-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/region/ajax/update/</tt><a class="headerlink" href="#post--admin-region-ajax-update-" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edits a single column of a record in list view.</p>
+</dd></dl>
+
+<dl class="post">
+<dt id="post--admin-sensor-ajax-update-">
+<tt class="descname">POST </tt><tt class="descname">/admin/sensor/ajax/update/</tt><a class="headerlink" href="#post--admin-sensor-ajax-update-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edits a single column of a record in list view.</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-river-ajax-update-">
-<code class="descname">POST </code><code class="descname">/admin/river/ajax/update/</code><a class="headerlink" href="#post--admin-river-ajax-update-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/river/ajax/update/</tt><a class="headerlink" href="#post--admin-river-ajax-update-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edits a single column of a record in list view.</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-user-ajax-update-">
-<code class="descname">POST </code><code class="descname">/admin/user/ajax/update/</code><a class="headerlink" href="#post--admin-user-ajax-update-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/user/ajax/update/</tt><a class="headerlink" href="#post--admin-user-ajax-update-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edits a single column of a record in list view.</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-gage-ajax-update-">
-<code class="descname">POST </code><code class="descname">/admin/gage/ajax/update/</code><a class="headerlink" href="#post--admin-gage-ajax-update-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/gage/ajax/update/</tt><a class="headerlink" href="#post--admin-gage-ajax-update-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edits a single column of a record in list view.</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-fileadmin-delete-">
-<code class="descname">POST </code><code class="descname">/admin/fileadmin/delete/</code><a class="headerlink" href="#post--admin-fileadmin-delete-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/fileadmin/delete/</tt><a class="headerlink" href="#post--admin-fileadmin-delete-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete view method</p>
 </dd></dl>
 
 <dl class="get">
 <dt id="get--admin-fileadmin-rename-">
-<code class="descname">GET </code><code class="descname">/admin/fileadmin/rename/</code><a class="headerlink" href="#get--admin-fileadmin-rename-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/fileadmin/rename/</tt><a class="headerlink" href="#get--admin-fileadmin-rename-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rename view method</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-fileadmin-rename-">
-<code class="descname">POST </code><code class="descname">/admin/fileadmin/rename/</code><a class="headerlink" href="#post--admin-fileadmin-rename-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/fileadmin/rename/</tt><a class="headerlink" href="#post--admin-fileadmin-rename-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rename view method</p>
 </dd></dl>
 
 <dl class="get">
 <dt id="get--admin-fileadmin-upload-">
-<code class="descname">GET </code><code class="descname">/admin/fileadmin/upload/</code><a class="headerlink" href="#get--admin-fileadmin-upload-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/fileadmin/upload/</tt><a class="headerlink" href="#get--admin-fileadmin-upload-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Upload view method</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -173,7 +230,7 @@
 
 <dl class="post">
 <dt id="post--admin-fileadmin-upload-">
-<code class="descname">POST </code><code class="descname">/admin/fileadmin/upload/</code><a class="headerlink" href="#post--admin-fileadmin-upload-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/fileadmin/upload/</tt><a class="headerlink" href="#post--admin-fileadmin-upload-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Upload view method</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -190,7 +247,7 @@
 
 <dl class="get">
 <dt id="get--admin-fileadmin-mkdir-">
-<code class="descname">GET </code><code class="descname">/admin/fileadmin/mkdir/</code><a class="headerlink" href="#get--admin-fileadmin-mkdir-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/fileadmin/mkdir/</tt><a class="headerlink" href="#get--admin-fileadmin-mkdir-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Directory creation view method</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -207,7 +264,7 @@
 
 <dl class="post">
 <dt id="post--admin-fileadmin-mkdir-">
-<code class="descname">POST </code><code class="descname">/admin/fileadmin/mkdir/</code><a class="headerlink" href="#post--admin-fileadmin-mkdir-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/fileadmin/mkdir/</tt><a class="headerlink" href="#post--admin-fileadmin-mkdir-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Directory creation view method</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -224,199 +281,235 @@
 
 <dl class="get">
 <dt id="get--admin-fileadmin-edit-">
-<code class="descname">GET </code><code class="descname">/admin/fileadmin/edit/</code><a class="headerlink" href="#get--admin-fileadmin-edit-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/fileadmin/edit/</tt><a class="headerlink" href="#get--admin-fileadmin-edit-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edit view method</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-fileadmin-edit-">
-<code class="descname">POST </code><code class="descname">/admin/fileadmin/edit/</code><a class="headerlink" href="#post--admin-fileadmin-edit-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/fileadmin/edit/</tt><a class="headerlink" href="#post--admin-fileadmin-edit-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edit view method</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-section-action-">
-<code class="descname">POST </code><code class="descname">/admin/section/action/</code><a class="headerlink" href="#post--admin-section-action-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/section/action/</tt><a class="headerlink" href="#post--admin-section-action-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mass-model action view.</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-section-delete-">
-<code class="descname">POST </code><code class="descname">/admin/section/delete/</code><a class="headerlink" href="#post--admin-section-delete-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/section/delete/</tt><a class="headerlink" href="#post--admin-section-delete-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete model view. Only POST method is allowed.</p>
 </dd></dl>
 
 <dl class="get">
 <dt id="get--admin-section-edit-">
-<code class="descname">GET </code><code class="descname">/admin/section/edit/</code><a class="headerlink" href="#get--admin-section-edit-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/section/edit/</tt><a class="headerlink" href="#get--admin-section-edit-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edit model view</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-section-edit-">
-<code class="descname">POST </code><code class="descname">/admin/section/edit/</code><a class="headerlink" href="#post--admin-section-edit-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/section/edit/</tt><a class="headerlink" href="#post--admin-section-edit-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edit model view</p>
 </dd></dl>
 
 <dl class="get">
 <dt id="get--admin-section-new-">
-<code class="descname">GET </code><code class="descname">/admin/section/new/</code><a class="headerlink" href="#get--admin-section-new-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/section/new/</tt><a class="headerlink" href="#get--admin-section-new-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create model view</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-section-new-">
-<code class="descname">POST </code><code class="descname">/admin/section/new/</code><a class="headerlink" href="#post--admin-section-new-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/section/new/</tt><a class="headerlink" href="#post--admin-section-new-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create model view</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-region-action-">
-<code class="descname">POST </code><code class="descname">/admin/region/action/</code><a class="headerlink" href="#post--admin-region-action-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/region/action/</tt><a class="headerlink" href="#post--admin-region-action-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mass-model action view.</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-region-delete-">
-<code class="descname">POST </code><code class="descname">/admin/region/delete/</code><a class="headerlink" href="#post--admin-region-delete-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/region/delete/</tt><a class="headerlink" href="#post--admin-region-delete-" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete model view. Only POST method is allowed.</p>
+</dd></dl>
+
+<dl class="post">
+<dt id="post--admin-sensor-action-">
+<tt class="descname">POST </tt><tt class="descname">/admin/sensor/action/</tt><a class="headerlink" href="#post--admin-sensor-action-" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mass-model action view.</p>
+</dd></dl>
+
+<dl class="post">
+<dt id="post--admin-sensor-delete-">
+<tt class="descname">POST </tt><tt class="descname">/admin/sensor/delete/</tt><a class="headerlink" href="#post--admin-sensor-delete-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete model view. Only POST method is allowed.</p>
 </dd></dl>
 
 <dl class="get">
 <dt id="get--admin-region-edit-">
-<code class="descname">GET </code><code class="descname">/admin/region/edit/</code><a class="headerlink" href="#get--admin-region-edit-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/region/edit/</tt><a class="headerlink" href="#get--admin-region-edit-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edit model view</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-region-edit-">
-<code class="descname">POST </code><code class="descname">/admin/region/edit/</code><a class="headerlink" href="#post--admin-region-edit-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/region/edit/</tt><a class="headerlink" href="#post--admin-region-edit-" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edit model view</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--admin-sensor-edit-">
+<tt class="descname">GET </tt><tt class="descname">/admin/sensor/edit/</tt><a class="headerlink" href="#get--admin-sensor-edit-" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edit model view</p>
+</dd></dl>
+
+<dl class="post">
+<dt id="post--admin-sensor-edit-">
+<tt class="descname">POST </tt><tt class="descname">/admin/sensor/edit/</tt><a class="headerlink" href="#post--admin-sensor-edit-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edit model view</p>
 </dd></dl>
 
 <dl class="get">
 <dt id="get--admin-region-new-">
-<code class="descname">GET </code><code class="descname">/admin/region/new/</code><a class="headerlink" href="#get--admin-region-new-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/region/new/</tt><a class="headerlink" href="#get--admin-region-new-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create model view</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-region-new-">
-<code class="descname">POST </code><code class="descname">/admin/region/new/</code><a class="headerlink" href="#post--admin-region-new-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/region/new/</tt><a class="headerlink" href="#post--admin-region-new-" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create model view</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--admin-sensor-new-">
+<tt class="descname">GET </tt><tt class="descname">/admin/sensor/new/</tt><a class="headerlink" href="#get--admin-sensor-new-" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create model view</p>
+</dd></dl>
+
+<dl class="post">
+<dt id="post--admin-sensor-new-">
+<tt class="descname">POST </tt><tt class="descname">/admin/sensor/new/</tt><a class="headerlink" href="#post--admin-sensor-new-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create model view</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-river-action-">
-<code class="descname">POST </code><code class="descname">/admin/river/action/</code><a class="headerlink" href="#post--admin-river-action-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/river/action/</tt><a class="headerlink" href="#post--admin-river-action-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mass-model action view.</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-river-delete-">
-<code class="descname">POST </code><code class="descname">/admin/river/delete/</code><a class="headerlink" href="#post--admin-river-delete-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/river/delete/</tt><a class="headerlink" href="#post--admin-river-delete-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete model view. Only POST method is allowed.</p>
 </dd></dl>
 
 <dl class="get">
 <dt id="get--admin-river-edit-">
-<code class="descname">GET </code><code class="descname">/admin/river/edit/</code><a class="headerlink" href="#get--admin-river-edit-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/river/edit/</tt><a class="headerlink" href="#get--admin-river-edit-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edit model view</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-river-edit-">
-<code class="descname">POST </code><code class="descname">/admin/river/edit/</code><a class="headerlink" href="#post--admin-river-edit-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/river/edit/</tt><a class="headerlink" href="#post--admin-river-edit-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edit model view</p>
 </dd></dl>
 
 <dl class="get">
 <dt id="get--admin-river-new-">
-<code class="descname">GET </code><code class="descname">/admin/river/new/</code><a class="headerlink" href="#get--admin-river-new-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/river/new/</tt><a class="headerlink" href="#get--admin-river-new-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create model view</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-river-new-">
-<code class="descname">POST </code><code class="descname">/admin/river/new/</code><a class="headerlink" href="#post--admin-river-new-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/river/new/</tt><a class="headerlink" href="#post--admin-river-new-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create model view</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-user-action-">
-<code class="descname">POST </code><code class="descname">/admin/user/action/</code><a class="headerlink" href="#post--admin-user-action-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/user/action/</tt><a class="headerlink" href="#post--admin-user-action-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mass-model action view.</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-user-delete-">
-<code class="descname">POST </code><code class="descname">/admin/user/delete/</code><a class="headerlink" href="#post--admin-user-delete-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/user/delete/</tt><a class="headerlink" href="#post--admin-user-delete-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete model view. Only POST method is allowed.</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-gage-action-">
-<code class="descname">POST </code><code class="descname">/admin/gage/action/</code><a class="headerlink" href="#post--admin-gage-action-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/gage/action/</tt><a class="headerlink" href="#post--admin-gage-action-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mass-model action view.</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-gage-delete-">
-<code class="descname">POST </code><code class="descname">/admin/gage/delete/</code><a class="headerlink" href="#post--admin-gage-delete-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/gage/delete/</tt><a class="headerlink" href="#post--admin-gage-delete-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete model view. Only POST method is allowed.</p>
 </dd></dl>
 
 <dl class="get">
 <dt id="get--admin-user-edit-">
-<code class="descname">GET </code><code class="descname">/admin/user/edit/</code><a class="headerlink" href="#get--admin-user-edit-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/user/edit/</tt><a class="headerlink" href="#get--admin-user-edit-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edit model view</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-user-edit-">
-<code class="descname">POST </code><code class="descname">/admin/user/edit/</code><a class="headerlink" href="#post--admin-user-edit-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/user/edit/</tt><a class="headerlink" href="#post--admin-user-edit-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edit model view</p>
 </dd></dl>
 
 <dl class="get">
 <dt id="get--admin-gage-edit-">
-<code class="descname">GET </code><code class="descname">/admin/gage/edit/</code><a class="headerlink" href="#get--admin-gage-edit-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/gage/edit/</tt><a class="headerlink" href="#get--admin-gage-edit-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edit model view</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-gage-edit-">
-<code class="descname">POST </code><code class="descname">/admin/gage/edit/</code><a class="headerlink" href="#post--admin-gage-edit-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/gage/edit/</tt><a class="headerlink" href="#post--admin-gage-edit-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edit model view</p>
 </dd></dl>
 
 <dl class="get">
 <dt id="get--admin-user-new-">
-<code class="descname">GET </code><code class="descname">/admin/user/new/</code><a class="headerlink" href="#get--admin-user-new-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/user/new/</tt><a class="headerlink" href="#get--admin-user-new-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create model view</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-user-new-">
-<code class="descname">POST </code><code class="descname">/admin/user/new/</code><a class="headerlink" href="#post--admin-user-new-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/user/new/</tt><a class="headerlink" href="#post--admin-user-new-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create model view</p>
 </dd></dl>
 
 <dl class="get">
 <dt id="get--admin-gage-new-">
-<code class="descname">GET </code><code class="descname">/admin/gage/new/</code><a class="headerlink" href="#get--admin-gage-new-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/gage/new/</tt><a class="headerlink" href="#get--admin-gage-new-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create model view</p>
 </dd></dl>
 
 <dl class="post">
 <dt id="post--admin-gage-new-">
-<code class="descname">POST </code><code class="descname">/admin/gage/new/</code><a class="headerlink" href="#post--admin-gage-new-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/gage/new/</tt><a class="headerlink" href="#post--admin-gage-new-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create model view</p>
 </dd></dl>
 
 <dl class="get">
-<dt id="get--api-1.0-sections-">
-<code class="descname">GET </code><code class="descname">/api/1.0/sections/</code><a class="headerlink" href="#get--api-1.0-sections-" title="Permalink to this definition">¶</a></dt>
+<dt id="get--api-0.1-sections-">
+<tt class="descname">GET </tt><tt class="descname">/api/0.1/sections/</tt><a class="headerlink" href="#get--api-0.1-sections-" title="Permalink to this definition">¶</a></dt>
 <dd><p>List all sections</p>
 <p>Example response:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;count&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
@@ -438,8 +531,8 @@
 </dd></dl>
 
 <dl class="get">
-<dt id="get--api-1.0-sensors-">
-<code class="descname">GET </code><code class="descname">/api/1.0/sensors/</code><a class="headerlink" href="#get--api-1.0-sensors-" title="Permalink to this definition">¶</a></dt>
+<dt id="get--api-0.1-sensors-">
+<tt class="descname">GET </tt><tt class="descname">/api/0.1/sensors/</tt><a class="headerlink" href="#get--api-0.1-sensors-" title="Permalink to this definition">¶</a></dt>
 <dd><p>List all sensors</p>
 <p>Example response:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;count&quot;</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
@@ -461,8 +554,8 @@
 </dd></dl>
 
 <dl class="get">
-<dt id="get--api-1.0-samples-">
-<code class="descname">GET </code><code class="descname">/api/1.0/samples/</code><a class="headerlink" href="#get--api-1.0-samples-" title="Permalink to this definition">¶</a></dt>
+<dt id="get--api-0.1-samples-">
+<tt class="descname">GET </tt><tt class="descname">/api/0.1/samples/</tt><a class="headerlink" href="#get--api-0.1-samples-" title="Permalink to this definition">¶</a></dt>
 <dd><p>List all samples</p>
 <p>Example response:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;count&quot;</span><span class="p">:</span> <span class="mi">10696</span><span class="p">,</span>
@@ -508,8 +601,8 @@
 </dd></dl>
 
 <dl class="get">
-<dt id="get--api-1.0-regions-">
-<code class="descname">GET </code><code class="descname">/api/1.0/regions/</code><a class="headerlink" href="#get--api-1.0-regions-" title="Permalink to this definition">¶</a></dt>
+<dt id="get--api-0.1-regions-">
+<tt class="descname">GET </tt><tt class="descname">/api/0.1/regions/</tt><a class="headerlink" href="#get--api-0.1-regions-" title="Permalink to this definition">¶</a></dt>
 <dd><p>List all regions</p>
 <p>Example response:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;count&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
@@ -533,8 +626,8 @@
 </dd></dl>
 
 <dl class="get">
-<dt id="get--api-1.0-rivers-">
-<code class="descname">GET </code><code class="descname">/api/1.0/rivers/</code><a class="headerlink" href="#get--api-1.0-rivers-" title="Permalink to this definition">¶</a></dt>
+<dt id="get--api-0.1-rivers-">
+<tt class="descname">GET </tt><tt class="descname">/api/0.1/rivers/</tt><a class="headerlink" href="#get--api-0.1-rivers-" title="Permalink to this definition">¶</a></dt>
 <dd><p>List all rivers</p>
 <p>Example response:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;count&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
@@ -556,8 +649,8 @@
 </dd></dl>
 
 <dl class="get">
-<dt id="get--api-1.0-gages-">
-<code class="descname">GET </code><code class="descname">/api/1.0/gages/</code><a class="headerlink" href="#get--api-1.0-gages-" title="Permalink to this definition">¶</a></dt>
+<dt id="get--api-0.1-gages-">
+<tt class="descname">GET </tt><tt class="descname">/api/0.1/gages/</tt><a class="headerlink" href="#get--api-0.1-gages-" title="Permalink to this definition">¶</a></dt>
 <dd><p>List all gages</p>
 <p>Example response:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;count&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
@@ -575,14 +668,14 @@
   <span class="p">],</span>
   <span class="s">&quot;next&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/gages/?page=2&quot;</span><span class="p">,</span>
   <span class="s">&quot;prev&quot;</span><span class="p">:</span> <span class="n">null</span>
-<span class="p">}</span>       
+<span class="p">}</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="get">
 <dt id="get--admin-fileadmin-">
-<code class="descname">GET </code><code class="descname">/admin/fileadmin/</code><a class="headerlink" href="#get--admin-fileadmin-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/fileadmin/</tt><a class="headerlink" href="#get--admin-fileadmin-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Index view method</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -599,44 +692,80 @@
 
 <dl class="get">
 <dt id="get--admin-section-">
-<code class="descname">GET </code><code class="descname">/admin/section/</code><a class="headerlink" href="#get--admin-section-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/section/</tt><a class="headerlink" href="#get--admin-section-" title="Permalink to this definition">¶</a></dt>
 <dd><p>List view</p>
 </dd></dl>
 
 <dl class="get">
 <dt id="get--admin-region-">
-<code class="descname">GET </code><code class="descname">/admin/region/</code><a class="headerlink" href="#get--admin-region-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/region/</tt><a class="headerlink" href="#get--admin-region-" title="Permalink to this definition">¶</a></dt>
+<dd><p>List view</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--admin-sensor-">
+<tt class="descname">GET </tt><tt class="descname">/admin/sensor/</tt><a class="headerlink" href="#get--admin-sensor-" title="Permalink to this definition">¶</a></dt>
 <dd><p>List view</p>
 </dd></dl>
 
 <dl class="get">
 <dt id="get--admin-river-">
-<code class="descname">GET </code><code class="descname">/admin/river/</code><a class="headerlink" href="#get--admin-river-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/river/</tt><a class="headerlink" href="#get--admin-river-" title="Permalink to this definition">¶</a></dt>
 <dd><p>List view</p>
 </dd></dl>
 
 <dl class="get">
 <dt id="get--admin-user-">
-<code class="descname">GET </code><code class="descname">/admin/user/</code><a class="headerlink" href="#get--admin-user-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/user/</tt><a class="headerlink" href="#get--admin-user-" title="Permalink to this definition">¶</a></dt>
 <dd><p>List view</p>
 </dd></dl>
 
 <dl class="get">
 <dt id="get--admin-gage-">
-<code class="descname">GET </code><code class="descname">/admin/gage/</code><a class="headerlink" href="#get--admin-gage-" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/gage/</tt><a class="headerlink" href="#get--admin-gage-" title="Permalink to this definition">¶</a></dt>
 <dd><p>List view</p>
 </dd></dl>
 
 <dl class="get">
-<dt id="get--api-1.0-">
-<code class="descname">GET </code><code class="descname">/api/1.0/</code><a class="headerlink" href="#get--api-1.0-" title="Permalink to this definition">¶</a></dt>
+<dt id="get--api-0.1-">
+<tt class="descname">GET </tt><tt class="descname">/api/0.1/</tt><a class="headerlink" href="#get--api-0.1-" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>GET /api/1.0/</strong></p>
 <p>List of basic api routes</p>
 </dd></dl>
 
 <dl class="get">
-<dt id="get--api-1.0-sensors-(int-id)-samples">
-<code class="descname">GET </code><code class="descname">/api/1.0/sensors/</code><span class="sig-paren">(</span><em class="property">int: </em><em>id</em><span class="sig-paren">)</span><code class="descname">/samples</code><a class="headerlink" href="#get--api-1.0-sensors-(int-id)-samples" title="Permalink to this definition">¶</a></dt>
+<dt id="get--logout">
+<tt class="descname">GET </tt><tt class="descname">/logout</tt><a class="headerlink" href="#get--logout" title="Permalink to this definition">¶</a></dt>
+<dd><p>View function which handles a logout request.</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--change">
+<tt class="descname">GET </tt><tt class="descname">/change</tt><a class="headerlink" href="#get--change" title="Permalink to this definition">¶</a></dt>
+<dd><p>View function which handles a change password request.</p>
+</dd></dl>
+
+<dl class="post">
+<dt id="post--change">
+<tt class="descname">POST </tt><tt class="descname">/change</tt><a class="headerlink" href="#post--change" title="Permalink to this definition">¶</a></dt>
+<dd><p>View function which handles a change password request.</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--login">
+<tt class="descname">GET </tt><tt class="descname">/login</tt><a class="headerlink" href="#get--login" title="Permalink to this definition">¶</a></dt>
+<dd><p>View function for login view</p>
+</dd></dl>
+
+<dl class="post">
+<dt id="post--login">
+<tt class="descname">POST </tt><tt class="descname">/login</tt><a class="headerlink" href="#post--login" title="Permalink to this definition">¶</a></dt>
+<dd><p>View function for login view</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--api-0.1-sensors-(int-sid)-samples">
+<tt class="descname">GET </tt><tt class="descname">/api/0.1/sensors/</tt><big>(</big><em class="property">int: </em><em>sid</em><big>)</big><tt class="descname">/samples</tt><a class="headerlink" href="#get--api-0.1-sensors-(int-sid)-samples" title="Permalink to this definition">¶</a></dt>
 <dd><p>List samples for sensor <em>id</em></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -669,58 +798,59 @@
 </dd></dl>
 
 <dl class="post">
-<dt id="post--api-1.0-gages-(int-id)-sample">
-<code class="descname">POST </code><code class="descname">/api/1.0/gages/</code><span class="sig-paren">(</span><em class="property">int: </em><em>id</em><span class="sig-paren">)</span><code class="descname">/sample</code><a class="headerlink" href="#post--api-1.0-gages-(int-id)-sample" title="Permalink to this definition">¶</a></dt>
+<dt id="post--api-0.1-gages-(int-gid)-sample">
+<tt class="descname">POST </tt><tt class="descname">/api/0.1/gages/</tt><big>(</big><em class="property">int: </em><em>gid</em><big>)</big><tt class="descname">/sample</tt><a class="headerlink" href="#post--api-0.1-gages-(int-gid)-sample" title="Permalink to this definition">¶</a></dt>
 <dd><p>Submit new samples to gage <em>id</em></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd>id (int): Primary id key number of a gage</dd>
 </dl>
-<p>Samples are formatted in body of request as a JSON Web Signature using the <code class="docutils literal"><span class="pre">Gage.key</span></code></p>
+<p>Samples are formatted in body of request as a JSON Web Signature using the
+<tt class="docutils literal"><span class="pre">Gage.key</span></tt></p>
 <p>Example sample submitter:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">itsdangerous</span> <span class="kn">import</span> <span class="n">JSONWebSignatureSerializer</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;samples&#39;</span><span class="p">:[</span>
-        <span class="p">{</span><span class="s">&#39;type&#39;</span><span class="p">:</span><span class="s">&#39;level&#39;</span><span class="p">,</span>
-         <span class="s">&#39;value&#39;</span><span class="p">:</span><span class="mf">16.7</span><span class="p">,</span> 
-         <span class="s">&#39;datetime&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
-         <span class="p">},</span>
-        <span class="p">{</span><span class="s">&#39;type&#39;</span><span class="p">:</span><span class="s">&#39;amps&#39;</span><span class="p">,</span>
-         <span class="s">&#39;value&#39;</span><span class="p">:</span><span class="mf">367.3</span><span class="p">,</span>
-         <span class="s">&#39;datetime&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
-         <span class="p">},</span>
-        <span class="p">{</span><span class="s">&#39;type&#39;</span><span class="p">:</span><span class="s">&#39;voltage&#39;</span><span class="p">,</span>
-         <span class="s">&#39;value&#39;</span><span class="p">:</span><span class="mf">14.3</span><span class="p">,</span>
-         <span class="s">&#39;datetime&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
-         <span class="p">},</span>
-        <span class="p">{</span><span class="s">&#39;type&#39;</span><span class="p">:</span><span class="s">&#39;discharge&#39;</span><span class="p">,</span>
-         <span class="s">&#39;value&#39;</span><span class="p">:</span><span class="mi">480</span><span class="p">,</span>
-         <span class="s">&#39;datetime&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
-        <span class="p">}</span>
-        <span class="p">],</span>
-        <span class="s">&#39;gage&#39;</span><span class="p">:{</span>
-        <span class="s">&#39;id&#39;</span><span class="p">:</span><span class="mi">5</span>
-        <span class="p">}}</span>
+    <span class="p">{</span><span class="s">&#39;type&#39;</span><span class="p">:</span><span class="s">&#39;level&#39;</span><span class="p">,</span>
+     <span class="s">&#39;value&#39;</span><span class="p">:</span><span class="mf">16.7</span><span class="p">,</span>
+     <span class="s">&#39;datetime&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+     <span class="p">},</span>
+    <span class="p">{</span><span class="s">&#39;type&#39;</span><span class="p">:</span><span class="s">&#39;amps&#39;</span><span class="p">,</span>
+     <span class="s">&#39;value&#39;</span><span class="p">:</span><span class="mf">367.3</span><span class="p">,</span>
+     <span class="s">&#39;datetime&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+     <span class="p">},</span>
+    <span class="p">{</span><span class="s">&#39;type&#39;</span><span class="p">:</span><span class="s">&#39;voltage&#39;</span><span class="p">,</span>
+     <span class="s">&#39;value&#39;</span><span class="p">:</span><span class="mf">14.3</span><span class="p">,</span>
+     <span class="s">&#39;datetime&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+     <span class="p">},</span>
+    <span class="p">{</span><span class="s">&#39;type&#39;</span><span class="p">:</span><span class="s">&#39;discharge&#39;</span><span class="p">,</span>
+     <span class="s">&#39;value&#39;</span><span class="p">:</span><span class="mi">480</span><span class="p">,</span>
+     <span class="s">&#39;datetime&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+    <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s">&#39;gage&#39;</span><span class="p">:{</span>
+    <span class="s">&#39;id&#39;</span><span class="p">:</span><span class="mi">5</span>
+    <span class="p">}}</span>
 
 <span class="n">s</span> <span class="o">=</span> <span class="n">JSONWebSignatureSerializer</span><span class="p">(</span><span class="s">&#39;&lt;gage.key&gt;&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="s">&quot;http://riverflo.ws/api/1.0/gages/&lt;gage.id&gt;/sample&quot;</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">is</span> <span class="mi">200</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">True</span>
-        <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">False</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s">&quot;http://riverflo.ws/api/1.0/gages/&lt;gage.id&gt;/sample&quot;</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">is</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">False</span>
 </pre></div>
 </div>
-<p>If the key matches the stored key for the gage id in the url,   the server will iterate over the samples and add them to the database   creating new sensors for the gage if a new sample type is found.        Then the server will return JSON with a status code of 200.</p>
+<p>If the key matches the stored key for the gage id in the url,     the server will iterate over the samples and add them to the database     creating new sensors for the gage if a new sample type is found.     Then the server will return JSON with a status code of 200.</p>
 <p>Example response:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&#39;gage&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">u&#39;id&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-        <span class="s">&#39;location&#39;</span><span class="p">:</span> <span class="s">&#39;Androscoggin River downstream of I-95 in Auburn Maine&#39;</span><span class="p">,</span>
-        <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;Androscoggin River at Auburn&#39;</span><span class="p">,</span>
-        <span class="s">&#39;url&#39;</span><span class="p">:</span> <span class="s">&#39;http://riverflo.ws/api/1.0/gages/5&#39;</span><span class="p">},</span>
+    <span class="s">&#39;location&#39;</span><span class="p">:</span> <span class="s">&#39;Androscoggin River downstream of I-95 in Auburn ME&#39;</span><span class="p">,</span>
+    <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;Androscoggin River at Auburn&#39;</span><span class="p">,</span>
+    <span class="s">&#39;url&#39;</span><span class="p">:</span> <span class="s">&#39;http://riverflo.ws/api/1.0/gages/5&#39;</span><span class="p">},</span>
  <span class="s">&#39;result&#39;</span><span class="p">:</span> <span class="s">&#39;created&#39;</span><span class="p">,</span>
  <span class="s">&#39;samples&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s">&#39;datetime&#39;</span><span class="p">:</span> <span class="s">&#39;Tue, 04 Nov 2014 20:43:39 GMT&#39;</span><span class="p">,</span>
    <span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="mi">10781</span><span class="p">,</span>
@@ -740,7 +870,7 @@
    <span class="s">&#39;value&#39;</span><span class="p">:</span> <span class="mf">480.0</span><span class="p">}]}</span>
 </pre></div>
 </div>
-<p>If the signature does not match, the server will return JSON    with a status code of 401 - Unauthorized:</p>
+<p>If the signature does not match, the server will return JSON     with a status code of 401 - Unauthorized:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;error&#39;</span><span class="p">:</span> <span class="s">&#39;unauthorized&#39;</span><span class="p">,</span> <span class="s">&#39;message&#39;</span><span class="p">:</span> <span class="s">&#39;bad signature&#39;</span><span class="p">}</span>
 </pre></div>
 </div>
@@ -748,7 +878,7 @@
 
 <dl class="get">
 <dt id="get--admin-fileadmin-download-(path-path)">
-<code class="descname">GET </code><code class="descname">/admin/fileadmin/download/</code><span class="sig-paren">(</span><em class="property">path: </em><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#get--admin-fileadmin-download-(path-path)" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/fileadmin/download/</tt><big>(</big><em class="property">path: </em><em>path</em><big>)</big><a class="headerlink" href="#get--admin-fileadmin-download-(path-path)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Download view method.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -765,7 +895,7 @@
 
 <dl class="get">
 <dt id="get--admin-fileadmin-upload-(path-path)">
-<code class="descname">GET </code><code class="descname">/admin/fileadmin/upload/</code><span class="sig-paren">(</span><em class="property">path: </em><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#get--admin-fileadmin-upload-(path-path)" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/fileadmin/upload/</tt><big>(</big><em class="property">path: </em><em>path</em><big>)</big><a class="headerlink" href="#get--admin-fileadmin-upload-(path-path)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Upload view method</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -782,7 +912,7 @@
 
 <dl class="post">
 <dt id="post--admin-fileadmin-upload-(path-path)">
-<code class="descname">POST </code><code class="descname">/admin/fileadmin/upload/</code><span class="sig-paren">(</span><em class="property">path: </em><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#post--admin-fileadmin-upload-(path-path)" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/fileadmin/upload/</tt><big>(</big><em class="property">path: </em><em>path</em><big>)</big><a class="headerlink" href="#post--admin-fileadmin-upload-(path-path)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Upload view method</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -799,7 +929,7 @@
 
 <dl class="get">
 <dt id="get--admin-fileadmin-mkdir-(path-path)">
-<code class="descname">GET </code><code class="descname">/admin/fileadmin/mkdir/</code><span class="sig-paren">(</span><em class="property">path: </em><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#get--admin-fileadmin-mkdir-(path-path)" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/fileadmin/mkdir/</tt><big>(</big><em class="property">path: </em><em>path</em><big>)</big><a class="headerlink" href="#get--admin-fileadmin-mkdir-(path-path)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Directory creation view method</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -816,7 +946,7 @@
 
 <dl class="post">
 <dt id="post--admin-fileadmin-mkdir-(path-path)">
-<code class="descname">POST </code><code class="descname">/admin/fileadmin/mkdir/</code><span class="sig-paren">(</span><em class="property">path: </em><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#post--admin-fileadmin-mkdir-(path-path)" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">POST </tt><tt class="descname">/admin/fileadmin/mkdir/</tt><big>(</big><em class="property">path: </em><em>path</em><big>)</big><a class="headerlink" href="#post--admin-fileadmin-mkdir-(path-path)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Directory creation view method</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -833,7 +963,7 @@
 
 <dl class="get">
 <dt id="get--admin-fileadmin-b-(path-path)">
-<code class="descname">GET </code><code class="descname">/admin/fileadmin/b/</code><span class="sig-paren">(</span><em class="property">path: </em><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#get--admin-fileadmin-b-(path-path)" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/admin/fileadmin/b/</tt><big>(</big><em class="property">path: </em><em>path</em><big>)</big><a class="headerlink" href="#get--admin-fileadmin-b-(path-path)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Index view method</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -849,8 +979,8 @@
 </dd></dl>
 
 <dl class="get">
-<dt id="get--api-1.0-sections-(int-id)">
-<code class="descname">GET </code><code class="descname">/api/1.0/sections/</code><span class="sig-paren">(</span><em class="property">int: </em><em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#get--api-1.0-sections-(int-id)" title="Permalink to this definition">¶</a></dt>
+<dt id="get--api-0.1-sections-(int-sid)">
+<tt class="descname">GET </tt><tt class="descname">/api/0.1/sections/</tt><big>(</big><em class="property">int: </em><em>sid</em><big>)</big><a class="headerlink" href="#get--api-0.1-sections-(int-sid)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Detailed information about section <em>id</em></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -858,7 +988,7 @@
 </dl>
 <p>Example response:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;access&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s">&quot;description&quot;</span><span class="p">:</span> <span class="s">&quot;Most commonly run from the where Goose Eye Brook joins Bull Branch on down to Twin Bridges, Bull Branch is a gem of Western Maine. It most commonly runs when the Wild River gage in Gilead goes over 4 ft.&quot;</span><span class="p">,</span>
+  <span class="s">&quot;description&quot;</span><span class="p">:</span> <span class="s">&quot;Most commonly run from the where Goose Eye Brook&quot;</span><span class="p">,</span>
   <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="s">&quot;latitude&quot;</span><span class="p">:</span> <span class="mf">44.517188630525425</span><span class="p">,</span>
   <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="s">&quot;Ketchum, ME&quot;</span><span class="p">,</span>
@@ -888,8 +1018,8 @@
 </dd></dl>
 
 <dl class="get">
-<dt id="get--api-1.0-sensors-(int-id)">
-<code class="descname">GET </code><code class="descname">/api/1.0/sensors/</code><span class="sig-paren">(</span><em class="property">int: </em><em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#get--api-1.0-sensors-(int-id)" title="Permalink to this definition">¶</a></dt>
+<dt id="get--api-0.1-sensors-(int-sid)">
+<tt class="descname">GET </tt><tt class="descname">/api/0.1/sensors/</tt><big>(</big><em class="property">int: </em><em>sid</em><big>)</big><a class="headerlink" href="#get--api-0.1-sensors-(int-sid)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Detailed information about sensor <em>id</em></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -922,8 +1052,8 @@
 </dd></dl>
 
 <dl class="get">
-<dt id="get--api-1.0-samples-(int-id)">
-<code class="descname">GET </code><code class="descname">/api/1.0/samples/</code><span class="sig-paren">(</span><em class="property">int: </em><em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#get--api-1.0-samples-(int-id)" title="Permalink to this definition">¶</a></dt>
+<dt id="get--api-0.1-samples-(int-sid)">
+<tt class="descname">GET </tt><tt class="descname">/api/0.1/samples/</tt><big>(</big><em class="property">int: </em><em>sid</em><big>)</big><a class="headerlink" href="#get--api-0.1-samples-(int-sid)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Detailed information about sample <em>id</em></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -951,15 +1081,15 @@
 </dd></dl>
 
 <dl class="get">
-<dt id="get--api-1.0-regions-(int-id)">
-<code class="descname">GET </code><code class="descname">/api/1.0/regions/</code><span class="sig-paren">(</span><em class="property">int: </em><em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#get--api-1.0-regions-(int-id)" title="Permalink to this definition">¶</a></dt>
+<dt id="get--api-0.1-regions-(int-rid)">
+<tt class="descname">GET </tt><tt class="descname">/api/0.1/regions/</tt><big>(</big><em class="property">int: </em><em>rid</em><big>)</big><a class="headerlink" href="#get--api-0.1-regions-(int-rid)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Detailed information about region <em>id</em></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd>id (int): Primary id key of region</dd>
 </dl>
 <p>Example response:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;description&quot;</span><span class="p">:</span> <span class="s">&quot;The Mahoosuc Mountains are the Northern most section of the White Mountains and stretch between Bethel and Newry Maine and Gorham and Berlin New Hampshire.&quot;</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;description&quot;</span><span class="p">:</span> <span class="s">&quot;The Mahoosuc Mountains are in Maine.&quot;</span><span class="p">,</span>
   <span class="s">&quot;gages&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
       <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="s">&quot;Bear River near RT 2 in Newry Maine&quot;</span><span class="p">,</span>
@@ -992,8 +1122,8 @@
 </dd></dl>
 
 <dl class="get">
-<dt id="get--api-1.0-rivers-(int-id)">
-<code class="descname">GET </code><code class="descname">/api/1.0/rivers/</code><span class="sig-paren">(</span><em class="property">int: </em><em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#get--api-1.0-rivers-(int-id)" title="Permalink to this definition">¶</a></dt>
+<dt id="get--api-0.1-rivers-(int-rid)">
+<tt class="descname">GET </tt><tt class="descname">/api/0.1/rivers/</tt><big>(</big><em class="property">int: </em><em>rid</em><big>)</big><a class="headerlink" href="#get--api-0.1-rivers-(int-rid)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Detailed information about river <em>id</em></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1007,12 +1137,12 @@
   <span class="p">},</span>
   <span class="s">&quot;gages&quot;</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-      <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="s">&quot;Androscoggin River downstream of I-95 in Auburn Maine&quot;</span><span class="p">,</span>
+      <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="s">&quot;Androscoggin River downstream of I-95 in Auburn ME&quot;</span><span class="p">,</span>
       <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Androscoggin River at Auburn&quot;</span><span class="p">,</span>
       <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/gages/5&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span> <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-      <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="s">&quot;Androscoggin River below lower power plant and 1000 ft upstream of the Swift River in Rumford Maine&quot;</span><span class="p">,</span>
+      <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="s">&quot;Androscoggin River below lower power plant&quot;</span><span class="p">,</span>
       <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="s">&quot;Androscoggin River at Rumford&quot;</span><span class="p">,</span>
       <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;http://riverflo.ws/api/1.0/gages/4&quot;</span>
     <span class="p">}</span>
@@ -1045,8 +1175,8 @@
 </dd></dl>
 
 <dl class="get">
-<dt id="get--api-1.0-gages-(int-id)">
-<code class="descname">GET </code><code class="descname">/api/1.0/gages/</code><span class="sig-paren">(</span><em class="property">int: </em><em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#get--api-1.0-gages-(int-id)" title="Permalink to this definition">¶</a></dt>
+<dt id="get--api-0.1-gages-(int-gid)">
+<tt class="descname">GET </tt><tt class="descname">/api/0.1/gages/</tt><big>(</big><em class="property">int: </em><em>gid</em><big>)</big><a class="headerlink" href="#get--api-0.1-gages-(int-gid)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Detailed information about gage <em>id</em></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1094,7 +1224,7 @@
 
 <dl class="get">
 <dt id="get--_debug_toolbar-static-(path-filename)">
-<code class="descname">GET </code><code class="descname">/_debug_toolbar/static/</code><span class="sig-paren">(</span><em class="property">path: </em><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#get--_debug_toolbar-static-(path-filename)" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">GET </tt><tt class="descname">/_debug_toolbar/static/</tt><big>(</big><em class="property">path: </em><em>filename</em><big>)</big><a class="headerlink" href="#get--_debug_toolbar-static-(path-filename)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send a static file from the flask-debugtoolbar static directory.</p>
 </dd></dl>
 
@@ -1107,10 +1237,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="reference/index.html" class="btn btn-neutral float-right" title="Gage-Web Reference"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="reference/index.html" class="btn btn-neutral float-right" title="Gage-Web Reference" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Welcome to Gage-Web’s documentation!"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="Welcome to Gage-Web’s documentation!" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -1122,9 +1252,10 @@
         &copy; Copyright 2014, Alex Kerney.
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
+
         </div>
       </div>
 
@@ -1148,7 +1279,7 @@
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

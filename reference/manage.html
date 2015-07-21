@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>manage module &mdash; Gage-Web 0.1 documentation</title>
@@ -14,7 +15,6 @@
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   
   
@@ -28,12 +28,15 @@
   
 
   
+
+  
     <link rel="top" title="Gage-Web 0.1 documentation" href="../index.html"/>
         <link rel="up" title="Gage-Web Reference" href="index.html"/>
+        <link rel="next" title="Server Documentation" href="../developers/index.html"/>
         <link rel="prev" title="config module" href="config.html"/> 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -44,32 +47,79 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
-        <a href="../index.html" class="fa fa-home"> Gage-Web</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+        
+
+        
+          <a href="../index.html" class="icon icon-home"> Gage-Web
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+
+        
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
-        
-            <ul class="current">
+          
+          
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../api.html">Gage-Web API Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Gage-Web Reference</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="app.html">app package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.html">app package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="app.admin.html">app.admin package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="app.api_1_0.html">app.api_1_0 package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="app.main.html">app.main package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="app.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app.html#module-app.admin">app.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app.html#app-api-module">app.api module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app.html#app-auth-module">app.auth module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app.html#app-backup-module">app.backup module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app.html#module-app.models">app.models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app.html#module-app">Module contents</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="config.html">config module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">manage module</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Server Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developers/fabfile.html">fabfile.py</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developers/fabfile.html#hosts">Hosts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developers/local.html">Local Development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#initial-migration">Initial Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#working-with-users-and-roles">Working with Users and Roles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developers/local.html#roles">Roles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developers/local.html#users">Users</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#running-everything">Running Everything</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
+          
         
       </div>
       &nbsp;
@@ -96,36 +146,38 @@
     <li>manage module</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="../_sources/reference/manage.txt" rel="nofollow"> View page source</a>
+          
+            <a href="../_sources/reference/manage.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document">
             
   <div class="section" id="module-manage">
 <span id="manage-module"></span><h1>manage module<a class="headerlink" href="#module-manage" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="manage.backup">
-<code class="descclassname">manage.</code><code class="descname">backup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manage.html#backup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#manage.backup" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">manage.</tt><tt class="descname">backup</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/manage.html#backup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#manage.backup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Backup database to Dropbox</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="manage.list_routes">
-<code class="descclassname">manage.</code><code class="descname">list_routes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manage.html#list_routes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#manage.list_routes" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">manage.</tt><tt class="descname">list_routes</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/manage.html#list_routes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#manage.list_routes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lists routes for app</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="manage.make_shell_context">
-<code class="descclassname">manage.</code><code class="descname">make_shell_context</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manage.html#make_shell_context"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#manage.make_shell_context" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">manage.</tt><tt class="descname">make_shell_context</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/manage.html#make_shell_context"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#manage.make_shell_context" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="manage.test">
-<code class="descclassname">manage.</code><code class="descname">test</code><span class="sig-paren">(</span><em>coverage=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/manage.html#test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#manage.test" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">manage.</tt><tt class="descname">test</tt><big>(</big><em>coverage=False</em><big>)</big><a class="reference internal" href="../_modules/manage.html#test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#manage.test" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the unit tests.</p>
 </dd></dl>
 
@@ -137,8 +189,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="../developers/index.html" class="btn btn-neutral float-right" title="Server Documentation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-        <a href="config.html" class="btn btn-neutral" title="config module"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+        <a href="config.html" class="btn btn-neutral" title="config module" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -150,9 +204,10 @@
         &copy; Copyright 2014, Alex Kerney.
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
+
         </div>
       </div>
 
@@ -176,7 +231,7 @@
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

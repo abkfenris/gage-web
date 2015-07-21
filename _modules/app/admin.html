@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>app.admin &mdash; Gage-Web 0.1 documentation</title>
@@ -14,7 +15,6 @@
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   
   
@@ -28,11 +28,13 @@
   
 
   
+
+  
     <link rel="top" title="Gage-Web 0.1 documentation" href="../../index.html"/>
         <link rel="up" title="app" href="../app.html"/> 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -43,32 +45,79 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
-        <a href="../../index.html" class="fa fa-home"> Gage-Web</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+        
+
+        
+          <a href="../../index.html" class="icon icon-home"> Gage-Web
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+
+        
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
-        
-            <ul>
+          
+          
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">Gage-Web API Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Gage-Web Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/app.html">app package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/app.html">app package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/app.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/app.admin.html">app.admin package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/app.api_1_0.html">app.api_1_0 package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/app.main.html">app.main package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/app.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/app.html#module-app.admin">app.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/app.html#app-api-module">app.api module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/app.html#app-auth-module">app.auth module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/app.html#app-backup-module">app.backup module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/app.html#module-app.models">app.models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/app.html#module-app">Module contents</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/config.html">config module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/manage.html">manage module</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/index.html">Server Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../developers/fabfile.html">fabfile.py</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../developers/fabfile.html#hosts">Hosts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../developers/local.html">Local Development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../developers/local.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../developers/local.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../developers/local.html#initial-migration">Initial Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../developers/local.html#working-with-users-and-roles">Working with Users and Roles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../developers/local.html#roles">Roles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../developers/local.html#users">Users</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../developers/local.html#running-everything">Running Everything</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
+          
         
       </div>
       &nbsp;
@@ -97,75 +146,114 @@
     <li>app.admin</li>
       <li class="wy-breadcrumbs-aside">
         
+          
+        
       </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document">
             
   <h1>Source code for app.admin</h1><div class="highlight"><pre>
-<span class="c">#from flask import Blueprint</span>
-<span class="c">#</span>
-<span class="c">#admin = Blueprint(&#39;admin&#39;, __name__)</span>
-<span class="c">#</span>
-<span class="c">#from . import views</span>
-
-<span class="kn">from</span> <span class="nn">flask.ext.admin</span> <span class="kn">import</span> <span class="n">Admin</span><span class="p">,</span> <span class="n">BaseView</span><span class="p">,</span> <span class="n">expose</span>
-<span class="kn">from</span> <span class="nn">flask.ext.admin.contrib.geoa</span> <span class="kn">import</span> <span class="n">ModelView</span>
-<span class="kn">from</span> <span class="nn">flask.ext.admin.contrib.fileadmin</span> <span class="kn">import</span> <span class="n">FileAdmin</span>
-<span class="kn">from</span> <span class="nn">flask.ext.admin.model.form</span> <span class="kn">import</span> <span class="n">InlineFormAdmin</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span>
+<span class="kn">from</span> <span class="nn">flask_admin</span> <span class="kn">import</span> <span class="n">Admin</span><span class="p">,</span> <span class="n">AdminIndexView</span><span class="p">,</span> <span class="n">expose</span>
+<span class="kn">from</span> <span class="nn">flask.ext.admin.contrib.geoa</span> <span class="kn">import</span> <span class="n">ModelView</span> <span class="k">as</span> <span class="n">_ModelView</span>
+<span class="kn">from</span> <span class="nn">flask_admin.base</span> <span class="kn">import</span> <span class="n">MenuLink</span>
+<span class="kn">from</span> <span class="nn">flask.ext.admin.contrib.fileadmin</span> <span class="kn">import</span> <span class="n">FileAdmin</span> <span class="k">as</span> <span class="n">_FileAdmin</span>
+<span class="kn">from</span> <span class="nn">flask_security</span> <span class="kn">import</span> <span class="p">(</span><span class="n">roles_required</span><span class="p">,</span>
+                            <span class="n">current_user</span><span class="p">)</span>
 <span class="kn">import</span> <span class="nn">os.path</span> <span class="kn">as</span> <span class="nn">op</span>
-<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">db</span>
+
+<span class="kn">from</span> <span class="nn">..database</span> <span class="kn">import</span> <span class="n">db</span>
 <span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">Region</span><span class="p">,</span> <span class="n">River</span><span class="p">,</span> <span class="n">Section</span><span class="p">,</span> <span class="n">Gage</span><span class="p">,</span> <span class="n">Sensor</span>
-<span class="c">#from .fields import WTFormsMapField</span>
 
 <span class="n">path</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s">&#39;../static/images&#39;</span><span class="p">)</span>
 
+<span class="n">h_w</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;data-height&#39;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span> <span class="s">&#39;data-width&#39;</span><span class="p">:</span> <span class="mi">600</span><span class="p">}</span>
+
+
+<div class="viewcode-block" id="ModelView"><a class="viewcode-back" href="../../reference/app.admin.html#app.admin.ModelView">[docs]</a><span class="k">class</span> <span class="nc">ModelView</span><span class="p">(</span><span class="n">_ModelView</span><span class="p">):</span>
+<div class="viewcode-block" id="ModelView.is_accessible"><a class="viewcode-back" href="../../reference/app.admin.html#app.admin.ModelView.is_accessible">[docs]</a>    <span class="k">def</span> <span class="nf">is_accessible</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="ModelView.inaccessible_callback"><a class="viewcode-back" href="../../reference/app.admin.html#app.admin.ModelView.inaccessible_callback">[docs]</a>    <span class="k">def</span> <span class="nf">inaccessible_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s">&#39;security.login&#39;</span><span class="p">))</span>
+
+</div></div>
+<div class="viewcode-block" id="FileAdmin"><a class="viewcode-back" href="../../reference/app.admin.html#app.admin.FileAdmin">[docs]</a><span class="k">class</span> <span class="nc">FileAdmin</span><span class="p">(</span><span class="n">_FileAdmin</span><span class="p">):</span>
+<div class="viewcode-block" id="FileAdmin.is_accessible"><a class="viewcode-back" href="../../reference/app.admin.html#app.admin.FileAdmin.is_accessible">[docs]</a>    <span class="k">def</span> <span class="nf">is_accessible</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="FileAdmin.inaccessible_callback"><a class="viewcode-back" href="../../reference/app.admin.html#app.admin.FileAdmin.inaccessible_callback">[docs]</a>    <span class="k">def</span> <span class="nf">inaccessible_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s">&#39;security.login&#39;</span><span class="p">))</span>
+
+</div></div>
+<div class="viewcode-block" id="UserView"><a class="viewcode-back" href="../../reference/app.admin.html#app.admin.UserView">[docs]</a><span class="k">class</span> <span class="nc">UserView</span><span class="p">(</span><span class="n">ModelView</span><span class="p">):</span>
+<div class="viewcode-block" id="UserView.is_accessible"><a class="viewcode-back" href="../../reference/app.admin.html#app.admin.UserView.is_accessible">[docs]</a>    <span class="k">def</span> <span class="nf">is_accessible</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Only allow admins to see other users</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">current_user</span><span class="o">.</span><span class="n">has_role</span><span class="p">(</span><span class="s">&#39;admin&#39;</span><span class="p">)</span>
+
+</div></div>
 <div class="viewcode-block" id="SectionView"><a class="viewcode-back" href="../../reference/app.admin.html#app.admin.SectionView">[docs]</a><span class="k">class</span> <span class="nc">SectionView</span><span class="p">(</span><span class="n">ModelView</span><span class="p">):</span>
-	<span class="n">column_list</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;path&#39;</span><span class="p">,</span> <span class="s">&#39;slug&#39;</span><span class="p">,</span> <span class="s">&#39;river&#39;</span><span class="p">,</span> <span class="s">&#39;location&#39;</span><span class="p">)</span>
-	<span class="n">column_labels</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">slug</span><span class="o">=</span><span class="s">&#39;URL Slug&#39;</span><span class="p">)</span>
-	<span class="n">column_searchable_list</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="n">River</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-	<span class="n">form_widget_args</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;putin&#39;</span><span class="p">:{</span><span class="s">&#39;data-height&#39;</span><span class="p">:</span><span class="mi">400</span><span class="p">,</span> <span class="s">&#39;data-width&#39;</span><span class="p">:</span><span class="mi">400</span><span class="p">},</span>
-	                    <span class="s">&#39;takeout&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;data-height&#39;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s">&#39;data-width&#39;</span><span class="p">:</span> <span class="mi">200</span><span class="p">},</span>
-	                    <span class="s">&#39;path&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;data-height&#39;</span><span class="p">:</span><span class="mi">600</span><span class="p">,</span> <span class="s">&#39;data-width&#39;</span><span class="p">:</span> <span class="mi">600</span><span class="p">}}</span>
-	<span class="c">#form_overrides = dict(putin=WTFormsMapField)</span>
-	<span class="c">#form_args = dict(</span>
-	<span class="c">#	putin = dict(</span>
-	<span class="c">#		geometry_type=&#39;Point&#39;, height=500, width=500</span>
-	<span class="c">#	)</span>
-	<span class="c">#)</span>
-	
-	<span class="c">#def scaffold_form(self):</span>
-	<span class="c">#	form_class = super(SectionView, self).scaffold_form()</span>
-	<span class="c">#	form_class.putin = WTFormsMapField()</span>
-	<span class="c">#	return form_class</span>
-	
+    <span class="n">column_list</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;path&#39;</span><span class="p">,</span> <span class="s">&#39;slug&#39;</span><span class="p">,</span> <span class="s">&#39;river&#39;</span><span class="p">,</span> <span class="s">&#39;location&#39;</span><span class="p">)</span>
+    <span class="n">column_labels</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">slug</span><span class="o">=</span><span class="s">&#39;URL Slug&#39;</span><span class="p">)</span>
+    <span class="n">column_searchable_list</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="n">River</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">form_widget_args</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;putin&#39;</span><span class="p">:</span> <span class="n">h_w</span><span class="p">,</span>
+                        <span class="s">&#39;takeout&#39;</span><span class="p">:</span> <span class="n">h_w</span><span class="p">,</span>
+                        <span class="s">&#39;path&#39;</span><span class="p">:</span> <span class="n">h_w</span><span class="p">}</span>
+
 </div>
 <div class="viewcode-block" id="GageView"><a class="viewcode-back" href="../../reference/app.admin.html#app.admin.GageView">[docs]</a><span class="k">class</span> <span class="nc">GageView</span><span class="p">(</span><span class="n">ModelView</span><span class="p">):</span>
-	<span class="n">can_create</span> <span class="o">=</span> <span class="bp">True</span>
-	<span class="n">column_exclude_list</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;key&#39;</span><span class="p">,</span> <span class="s">&#39;elevationUnits&#39;</span><span class="p">,</span> <span class="s">&#39;zipcode&#39;</span><span class="p">,</span> <span class="s">&#39;visible&#39;</span><span class="p">,</span> <span class="s">&#39;elevation&#39;</span><span class="p">,</span> <span class="s">&#39;backend_notes&#39;</span><span class="p">,</span> <span class="s">&#39;description&#39;</span><span class="p">,</span> <span class="s">&#39;short_description&#39;</span><span class="p">,</span> <span class="s">&#39;started&#39;</span><span class="p">,</span> <span class="s">&#39;ended&#39;</span><span class="p">)</span>
-	<span class="n">column_labels</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">slug</span><span class="o">=</span><span class="s">&#39;URL Slug&#39;</span><span class="p">)</span>
-	<span class="n">column_searchable_list</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="n">River</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s">&#39;slug&#39;</span><span class="p">,</span> <span class="s">&#39;local_town&#39;</span><span class="p">,</span> <span class="s">&#39;location&#39;</span><span class="p">)</span>
-	<span class="c">#inline_models = (Sensor,)</span>
-	<span class="c">#form_overrides = dict(point=WTFormsMapField)</span>
-	<span class="n">form_widget_args</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;point&#39;</span><span class="p">:{</span><span class="s">&#39;data-height&#39;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span> <span class="s">&#39;data-width&#39;</span><span class="p">:</span> <span class="mi">500</span><span class="p">}}</span>
-	
-	<span class="c">#def __init__(self, Gage, session, **kwargs):</span>
-	<span class="c">#	super(GageView, self).__init__(Gage, session, **kwargs)</span>
-	<span class="c">#</span>
-	<span class="c">#def scaffold_form(self):</span>
-	<span class="c">#	form_class = super(GageView, self).scaffold_form()</span>
-	<span class="c">#	form_class.point = WTFormsMapField()</span>
-	<span class="c">#	return form_class</span>
-	
+    <span class="n">can_create</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">column_exclude_list</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;key&#39;</span><span class="p">,</span>
+                           <span class="s">&#39;elevationUnits&#39;</span><span class="p">,</span>
+                           <span class="s">&#39;zipcode&#39;</span><span class="p">,</span>
+                           <span class="s">&#39;visible&#39;</span><span class="p">,</span>
+                           <span class="s">&#39;elevation&#39;</span><span class="p">,</span>
+                           <span class="s">&#39;backend_notes&#39;</span><span class="p">,</span>
+                           <span class="s">&#39;description&#39;</span><span class="p">,</span>
+                           <span class="s">&#39;short_description&#39;</span><span class="p">,</span>
+                           <span class="s">&#39;started&#39;</span><span class="p">,</span>
+                           <span class="s">&#39;ended&#39;</span><span class="p">)</span>
+    <span class="n">column_labels</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">slug</span><span class="o">=</span><span class="s">&#39;URL Slug&#39;</span><span class="p">)</span>
+    <span class="n">column_searchable_list</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span>
+                              <span class="n">River</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                              <span class="s">&#39;slug&#39;</span><span class="p">,</span>
+                              <span class="s">&#39;local_town&#39;</span><span class="p">,</span>
+                              <span class="s">&#39;location&#39;</span><span class="p">)</span>
+    <span class="c"># inline_models = (Sensor,)</span>
+    <span class="n">form_widget_args</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;point&#39;</span><span class="p">:</span> <span class="n">h_w</span><span class="p">}</span>
+
 </div>
-<span class="n">admin</span> <span class="o">=</span> <span class="n">Admin</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Riverflo.ws&quot;</span><span class="p">)</span>
-<span class="n">admin</span><span class="o">.</span><span class="n">add_view</span><span class="p">(</span><span class="n">ModelView</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="p">))</span>
+<div class="viewcode-block" id="MyAdminIndexView"><a class="viewcode-back" href="../../reference/app.admin.html#app.admin.MyAdminIndexView">[docs]</a><span class="k">class</span> <span class="nc">MyAdminIndexView</span><span class="p">(</span><span class="n">AdminIndexView</span><span class="p">):</span>
+
+    <span class="nd">@expose</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="MyAdminIndexView.index"><a class="viewcode-back" href="../../reference/app.admin.html#app.admin.MyAdminIndexView.index">[docs]</a>    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s">&#39;security.login&#39;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">MyAdminIndexView</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">()</span>
+
+</div></div>
+<div class="viewcode-block" id="AuthenticatedMenuLink"><a class="viewcode-back" href="../../reference/app.admin.html#app.admin.AuthenticatedMenuLink">[docs]</a><span class="k">class</span> <span class="nc">AuthenticatedMenuLink</span><span class="p">(</span><span class="n">MenuLink</span><span class="p">):</span>
+<div class="viewcode-block" id="AuthenticatedMenuLink.is_accessible"><a class="viewcode-back" href="../../reference/app.admin.html#app.admin.AuthenticatedMenuLink.is_accessible">[docs]</a>    <span class="k">def</span> <span class="nf">is_accessible</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">()</span>
+
+</div></div>
+<span class="n">admin</span> <span class="o">=</span> <span class="n">Admin</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Riverflo.ws&quot;</span><span class="p">,</span>
+              <span class="n">index_view</span><span class="o">=</span><span class="n">MyAdminIndexView</span><span class="p">(),</span>
+              <span class="n">template_mode</span><span class="o">=</span><span class="s">&#39;bootstrap3&#39;</span><span class="p">,</span>
+              <span class="p">)</span>
+<span class="n">admin</span><span class="o">.</span><span class="n">add_view</span><span class="p">(</span><span class="n">UserView</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="p">))</span>
 <span class="n">admin</span><span class="o">.</span><span class="n">add_view</span><span class="p">(</span><span class="n">ModelView</span><span class="p">(</span><span class="n">Region</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="p">))</span>
 <span class="n">admin</span><span class="o">.</span><span class="n">add_view</span><span class="p">(</span><span class="n">ModelView</span><span class="p">(</span><span class="n">River</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="p">))</span>
 <span class="n">admin</span><span class="o">.</span><span class="n">add_view</span><span class="p">(</span><span class="n">SectionView</span><span class="p">(</span><span class="n">Section</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="p">))</span>
 <span class="n">admin</span><span class="o">.</span><span class="n">add_view</span><span class="p">(</span><span class="n">GageView</span><span class="p">(</span><span class="n">Gage</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="p">))</span>
+<span class="n">admin</span><span class="o">.</span><span class="n">add_view</span><span class="p">(</span><span class="n">ModelView</span><span class="p">(</span><span class="n">Sensor</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="p">))</span>
 <span class="n">admin</span><span class="o">.</span><span class="n">add_view</span><span class="p">(</span><span class="n">FileAdmin</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s">&#39;/static/images/&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;Images&#39;</span><span class="p">))</span>
+<span class="n">admin</span><span class="o">.</span><span class="n">add_link</span><span class="p">(</span><span class="n">AuthenticatedMenuLink</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Logout&#39;</span><span class="p">,</span>
+                                     <span class="n">endpoint</span><span class="o">=</span><span class="s">&#39;security.logout&#39;</span><span class="p">))</span>
 </pre></div>
 
           </div>
@@ -179,9 +267,10 @@
         &copy; Copyright 2014, Alex Kerney.
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
+
         </div>
       </div>
 
@@ -205,7 +294,7 @@
       <script type="text/javascript" src="../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

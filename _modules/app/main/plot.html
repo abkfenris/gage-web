@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>app.main.plot &mdash; Gage-Web 0.1 documentation</title>
@@ -14,7 +15,6 @@
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   
   
@@ -28,11 +28,13 @@
   
 
   
+
+  
     <link rel="top" title="Gage-Web 0.1 documentation" href="../../../index.html"/>
         <link rel="up" title="app" href="../../app.html"/> 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -43,32 +45,79 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
-        <a href="../../../index.html" class="fa fa-home"> Gage-Web</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+        
+
+        
+          <a href="../../../index.html" class="icon icon-home"> Gage-Web
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+
+        
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
-        
-            <ul>
+          
+          
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api.html">Gage-Web API Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../api.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">Gage-Web Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../reference/app.html">app package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../reference/app.html">app package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/app.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/app.admin.html">app.admin package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/app.api_1_0.html">app.api_1_0 package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../reference/app.main.html">app.main package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/app.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/app.html#module-app.admin">app.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/app.html#app-api-module">app.api module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/app.html#app-auth-module">app.auth module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/app.html#app-backup-module">app.backup module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/app.html#module-app.models">app.models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../reference/app.html#module-app">Module contents</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../../../reference/config.html">config module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../reference/manage.html">manage module</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/index.html">Server Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../developers/fabfile.html">fabfile.py</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../developers/fabfile.html#hosts">Hosts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developers/local.html">Local Development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../developers/local.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developers/local.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developers/local.html#initial-migration">Initial Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developers/local.html#working-with-users-and-roles">Working with Users and Roles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../developers/local.html#roles">Roles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../developers/local.html#users">Users</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../developers/local.html#running-everything">Running Everything</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
+          
         
       </div>
       &nbsp;
@@ -97,98 +146,159 @@
     <li>app.main.plot</li>
       <li class="wy-breadcrumbs-aside">
         
+          
+        
       </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document">
             
   <h1>Source code for app.main.plot</h1><div class="highlight"><pre>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Ways that a plot of a selected sensor can be displayed</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">make_response</span><span class="p">,</span> <span class="n">url_for</span><span class="p">,</span> <span class="n">current_app</span><span class="p">,</span> <span class="n">jsonify</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">make_response</span><span class="p">,</span> <span class="n">request</span>
 <span class="kn">import</span> <span class="nn">datetime</span>
-<span class="kn">import</span> <span class="nn">StringIO</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span>
-<span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s">&#39;Agg&#39;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">matplotlib.backends.backend_agg</span> <span class="kn">import</span> <span class="n">FigureCanvasAgg</span> <span class="k">as</span> <span class="n">FigureCanvas</span>
-<span class="kn">from</span> <span class="nn">matplotlib.figure</span> <span class="kn">import</span> <span class="n">Figure</span>
-<span class="kn">from</span> <span class="nn">matplotlib.dates</span> <span class="kn">import</span> <span class="n">DateFormatter</span><span class="p">,</span> <span class="n">datestr2num</span><span class="p">,</span> <span class="n">DayLocator</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">StringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">main</span>
-<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">db</span>
-<span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">Gage</span><span class="p">,</span> <span class="n">Sensor</span><span class="p">,</span> <span class="n">Sample</span>
+<span class="kn">from</span> <span class="nn">.blueprint</span> <span class="kn">import</span> <span class="n">main</span>
+<span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">Sensor</span><span class="p">,</span> <span class="n">Sample</span>
 
 
+<div class="viewcode-block" id="SensorPlot"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.plot.SensorPlot">[docs]</a><span class="k">class</span> <span class="nc">SensorPlot</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base plot object for Sensors</span>
 
-<span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/gage/&lt;int:id&gt;/&lt;stype&gt;.png&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="gagesensorplot"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.plot.gagesensorplot">[docs]</a><span class="k">def</span> <span class="nf">gagesensorplot</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">stype</span><span class="p">,</span> <span class="n">days</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">minimum</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">medium</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">huge</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-	<span class="sd">&quot;&quot;&quot;**/gage/&lt;id&gt;/&lt;sensor type&gt;.png**</span>
-<span class="sd">	</span>
-<span class="sd">	Draw a plot for the requested gage&#39;s sensor</span>
-<span class="sd">	</span>
-<span class="sd">	Defaults to drawing the previous several days, but can draw a different number or previous days, or by explicitly selecting a YYYYMMDD start and end date can plot a custom range</span>
-<span class="sd">	&quot;&quot;&quot;</span>
-	<span class="n">gage</span> <span class="o">=</span> <span class="n">Gage</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get_or_404</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
-	<span class="c">#print gage.name,</span>
-	<span class="n">sensor</span> <span class="o">=</span> <span class="n">Sensor</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">gage_id</span><span class="o">=</span><span class="n">gage</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">stype</span><span class="o">=</span><span class="n">stype</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span><span class="o">.</span><span class="n">first_or_404</span><span class="p">()</span>
-	<span class="c">#print sensor.stype,</span>
-	<span class="k">if</span> <span class="n">end</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
-		<span class="n">date_end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
-	<span class="k">else</span><span class="p">:</span>
-		<span class="n">date_end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">end</span><span class="p">),</span> <span class="s">&#39;%Y%m</span><span class="si">%d</span><span class="s">&#39;</span><span class="p">)</span>
-	
-	<span class="k">if</span> <span class="n">start</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
-		<span class="n">date_begin</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span> <span class="o">-</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">days</span><span class="p">)</span>
-	<span class="k">else</span><span class="p">:</span>
-		<span class="n">date_begin</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">start</span><span class="p">),</span> <span class="s">&#39;%Y%m</span><span class="si">%d</span><span class="s">&#39;</span><span class="p">)</span>
-	
-	<span class="n">date_pad</span> <span class="o">=</span> <span class="n">date_begin</span> <span class="o">-</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-	<span class="n">date_range</span> <span class="o">=</span> <span class="n">date_end</span> <span class="o">-</span> <span class="n">date_begin</span>
-	<span class="n">days</span> <span class="o">=</span> <span class="n">date_range</span><span class="o">.</span><span class="n">days</span>
-	<span class="c">#print days, date_begin, date_end</span>
-	<span class="n">fig</span> <span class="o">=</span> <span class="n">Figure</span><span class="p">()</span>
-	<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-	<span class="n">ay</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-	<span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
-	<span class="n">y</span> <span class="o">=</span> <span class="p">[]</span> <span class="c"># need to figure out how to reverse axi</span>
-	<span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">Sample</span><span class="o">.</span><span class="n">query</span>\
-						<span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">sensor_id</span><span class="o">=</span><span class="n">sensor</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>\
-						<span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sample</span><span class="o">.</span><span class="n">datetime</span><span class="p">):</span>
-		<span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">datetime</span><span class="p">)</span>
-		<span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-	<span class="c">#print x</span>
-	<span class="c">#print y</span>
-	<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">)</span>
-	<span class="k">if</span> <span class="n">minimum</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-	
-	<span class="c"># Color the plot with correlation levels</span>
-		<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">minimum</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&quot;#888888&quot;</span><span class="p">)</span>
-	<span class="k">if</span> <span class="n">low</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-		<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&quot;#8a6d3b&quot;</span><span class="p">)</span>
-	<span class="k">if</span> <span class="n">medium</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-		<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">medium</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&quot;#3c763d&quot;</span><span class="p">)</span>
-	<span class="k">if</span> <span class="n">high</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-		<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">high</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&quot;#31708f&quot;</span><span class="p">)</span>
-	<span class="k">if</span> <span class="n">huge</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-		<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">huge</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&quot;#a94442&quot;</span><span class="p">)</span>
-	
-	<span class="c"># Figure out what we want to use as our sensor title</span>
-	<span class="k">if</span> <span class="n">sensor</span><span class="o">.</span><span class="n">title</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-		<span class="k">if</span> <span class="n">sensor</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-			<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gage</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">sensor</span><span class="o">.</span><span class="n">stype</span><span class="p">))</span>
-		<span class="k">else</span><span class="p">:</span>
-			<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gage</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">sensor</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
-	<span class="k">else</span><span class="p">:</span>
-		<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">sensor</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
-	<span class="n">canvas</span> <span class="o">=</span> <span class="n">FigureCanvas</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-	<span class="n">png_output</span> <span class="o">=</span> <span class="n">StringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
-	<span class="n">canvas</span><span class="o">.</span><span class="n">print_png</span><span class="p">(</span><span class="n">png_output</span><span class="p">)</span>
-	<span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">png_output</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>
-	<span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">&#39;Content-Type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;image/png&#39;</span>
-	<span class="k">return</span> <span class="n">response</span></div>
+<span class="sd">    Arguments:</span>
+<span class="sd">        gid (int): Gage.id</span>
+<span class="sd">        stype (string): sensor type for gage</span>
+
+<span class="sd">    Currently supports matplotlib, but designed to be adaptable to support bokeh</span>
+<span class="sd">    or others</span>
+
+<span class="sd">    If ?start=YYYYMMDD(&amp;end=YYYYMMDD) argument, then the plot will use those</span>
+<span class="sd">    dates instead of the default 7 days.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gid</span><span class="p">,</span> <span class="n">stype</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gid</span> <span class="o">=</span> <span class="n">gid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stype</span> <span class="o">=</span> <span class="n">stype</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">Sensor</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">gage_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">gid</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">stype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">stype</span><span class="p">)</span><span class="o">.</span><span class="n">first_or_404</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">id</span>
+
+<div class="viewcode-block" id="SensorPlot.data"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.plot.SensorPlot.data">[docs]</a>    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns sensor data</span>
+
+<span class="sd">        Defaults to data within last seven days</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;start&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;end&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">start</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="s">&#39;%Y%m</span><span class="si">%d</span><span class="s">&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">end</span><span class="p">:</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="s">&#39;%Y%m</span><span class="si">%d</span><span class="s">&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">start</span> <span class="ow">and</span> <span class="n">end</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Sample</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">Sample</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span>
+                                       <span class="n">Sample</span><span class="o">.</span><span class="n">datetime</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">,</span>
+                                       <span class="n">Sample</span><span class="o">.</span><span class="n">sensor_id</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">sid</span><span class="p">)</span>\
+                               <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sample</span><span class="o">.</span><span class="n">datetime</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">start</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Sample</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">start</span> <span class="o">&lt;</span> <span class="n">Sample</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span>
+                                       <span class="n">Sample</span><span class="o">.</span><span class="n">sensor_id</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">sid</span><span class="p">)</span>\
+                               <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sample</span><span class="o">.</span><span class="n">datetime</span><span class="p">)</span>
+        <span class="n">seven_ago</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span> <span class="o">-</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Sample</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Sample</span><span class="o">.</span><span class="n">datetime</span> <span class="o">&gt;</span> <span class="n">seven_ago</span><span class="p">,</span>
+                                   <span class="n">Sample</span><span class="o">.</span><span class="n">sensor_id</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">sid</span><span class="p">)</span>\
+                           <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sample</span><span class="o">.</span><span class="n">datetime</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">_setaxislimits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set limits for y axis. If not set on sensor, then use a buffer of 10%</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ymin</span> <span class="o">==</span> <span class="n">ymax</span><span class="p">:</span>
+            <span class="n">ybuff</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">ymin</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ybuff</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">*</span><span class="p">(</span><span class="n">ymax</span><span class="o">-</span><span class="n">ymin</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">minimum</span><span class="p">:</span>
+            <span class="n">axis</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ymin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">minimum</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">axis</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ymin</span><span class="o">=</span><span class="n">ymin</span><span class="o">-</span><span class="n">ybuff</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">maximum</span><span class="p">:</span>
+            <span class="n">axis</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ymax</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">maximum</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">axis</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ymax</span><span class="o">=</span><span class="n">ymax</span><span class="o">+</span><span class="n">ybuff</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SensorPlot.matplot"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.plot.SensorPlot.matplot">[docs]</a>    <span class="k">def</span> <span class="nf">matplot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a matplotlib figure for building into a plot</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">matplotlib</span>
+        <span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s">&#39;Agg&#39;</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">matplotlib.figure</span> <span class="kn">import</span> <span class="n">Figure</span>
+        <span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">Figure</span><span class="p">()</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">datetime</span><span class="p">)</span>
+            <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">&#39;-&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_setaxislimits</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">fig</span>
+</div>
+<div class="viewcode-block" id="SensorPlot.png"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.plot.SensorPlot.png">[docs]</a>    <span class="k">def</span> <span class="nf">png</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a StringIO PNG plot for the sensor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">matplotlib.backends.backend_agg</span> <span class="kn">import</span> <span class="n">FigureCanvasAgg</span> <span class="k">as</span> <span class="n">FigureCanvas</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">matplot</span><span class="p">()</span>
+        <span class="n">canvas</span> <span class="o">=</span> <span class="n">FigureCanvas</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+        <span class="n">png_output</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+        <span class="n">canvas</span><span class="o">.</span><span class="n">print_png</span><span class="p">(</span><span class="n">png_output</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">png_output</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="SensorPlot.jpg"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.plot.SensorPlot.jpg">[docs]</a>    <span class="k">def</span> <span class="nf">jpg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a StringIO JPG plot for the sensor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">matplotlib.backends.backend_agg</span> <span class="kn">import</span> <span class="n">FigureCanvasAgg</span> <span class="k">as</span> <span class="n">FigureCanvas</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">matplot</span><span class="p">()</span>
+        <span class="n">canvas</span> <span class="o">=</span> <span class="n">FigureCanvas</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+        <span class="n">jpg_output</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+        <span class="n">canvas</span><span class="o">.</span><span class="n">print_jpg</span><span class="p">(</span><span class="n">jpg_output</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">jpg_output</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+
+</div></div>
+<span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/gage/&lt;int:gid&gt;/&lt;stype&gt;.png&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="gagesensorplot"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.plot.gagesensorplot">[docs]</a><span class="k">def</span> <span class="nf">gagesensorplot</span><span class="p">(</span><span class="n">gid</span><span class="p">,</span> <span class="n">stype</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;**/gage/&lt;id&gt;/&lt;sensor type&gt;.png**</span>
+
+<span class="sd">    Draw a PNG plot for the requested gage&#39;s sensor</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">SensorPlot</span><span class="p">(</span><span class="n">gid</span><span class="p">,</span> <span class="n">stype</span><span class="p">)</span><span class="o">.</span><span class="n">png</span><span class="p">())</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">&#39;Content-Type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;image/png&#39;</span>
+    <span class="k">return</span> <span class="n">response</span>
+
+</div>
+<span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/gage/&lt;int:gid&gt;/&lt;stype&gt;.jpg&#39;</span><span class="p">)</span>
+<span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/gage/&lt;int:gid&gt;/&lt;stype&gt;.jpeg&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="gagesensorplotjpg"><a class="viewcode-back" href="../../../reference/app.main.html#app.main.plot.gagesensorplotjpg">[docs]</a><span class="k">def</span> <span class="nf">gagesensorplotjpg</span><span class="p">(</span><span class="n">gid</span><span class="p">,</span> <span class="n">stype</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;**/gage/&lt;id&gt;/&lt;sensor type&gt;.jpg**</span>
+<span class="sd">    **/gage/&lt;id&gt;/&lt;sensor type&gt;.jpeg**</span>
+
+<span class="sd">    Draw a JPEG plot for the requested gage&#39;s sensor</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">SensorPlot</span><span class="p">(</span><span class="n">gid</span><span class="p">,</span> <span class="n">stype</span><span class="p">)</span><span class="o">.</span><span class="n">jpg</span><span class="p">())</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">&#39;Content-Type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;image/jpeg&#39;</span>
+    <span class="k">return</span> <span class="n">response</span></div>
 </pre></div>
 
           </div>
@@ -202,9 +312,10 @@
         &copy; Copyright 2014, Alex Kerney.
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
+
         </div>
       </div>
 
@@ -228,7 +339,7 @@
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

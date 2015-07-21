@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>manage &mdash; Gage-Web 0.1 documentation</title>
@@ -14,7 +15,6 @@
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   
   
@@ -28,11 +28,13 @@
   
 
   
+
+  
     <link rel="top" title="Gage-Web 0.1 documentation" href="../index.html"/>
         <link rel="up" title="Module code" href="index.html"/> 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -43,32 +45,79 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
-        <a href="../index.html" class="fa fa-home"> Gage-Web</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+        
+
+        
+          <a href="../index.html" class="icon icon-home"> Gage-Web
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+
+        
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
-        
-            <ul>
+          
+          
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">Gage-Web API Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Gage-Web Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../reference/app.html">app package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/app.html">app package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/app.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/app.admin.html">app.admin package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/app.api_1_0.html">app.api_1_0 package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/app.main.html">app.main package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/app.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/app.html#module-app.admin">app.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/app.html#app-api-module">app.api module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/app.html#app-auth-module">app.auth module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/app.html#app-backup-module">app.backup module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/app.html#module-app.models">app.models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/app.html#module-app">Module contents</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/config.html">config module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/manage.html">manage module</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Server Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developers/fabfile.html">fabfile.py</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developers/fabfile.html#hosts">Hosts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developers/local.html">Local Development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#initial-migration">Initial Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#working-with-users-and-roles">Working with Users and Roles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developers/local.html#roles">Roles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developers/local.html#users">Users</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#running-everything">Running Everything</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
+          
         
       </div>
       &nbsp;
@@ -95,102 +144,114 @@
     <li>manage</li>
       <li class="wy-breadcrumbs-aside">
         
+          
+        
       </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document">
             
   <h1>Source code for manage</h1><div class="highlight"><pre>
 <span class="c">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="n">COV</span> <span class="o">=</span> <span class="bp">None</span>
 <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;FLASK_COVERAGE&#39;</span><span class="p">):</span>
-	<span class="kn">import</span> <span class="nn">coverage</span>
-	<span class="n">COV</span> <span class="o">=</span> <span class="n">coverage</span><span class="o">.</span><span class="n">coverage</span><span class="p">(</span><span class="n">branch</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="s">&#39;app/*&#39;</span><span class="p">)</span>
-	<span class="n">COV</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="kn">import</span> <span class="nn">coverage</span>
+    <span class="n">COV</span> <span class="o">=</span> <span class="n">coverage</span><span class="o">.</span><span class="n">coverage</span><span class="p">(</span><span class="n">branch</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="s">&#39;app/*&#39;</span><span class="p">)</span>
+    <span class="n">COV</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
-<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">url_for</span><span class="p">,</span> <span class="n">Flask</span>
-<span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">create_app</span><span class="p">,</span> <span class="n">db</span>
-<span class="kn">from</span> <span class="nn">app.models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">Region</span><span class="p">,</span> <span class="n">River</span><span class="p">,</span> <span class="n">Section</span><span class="p">,</span> <span class="n">Gage</span><span class="p">,</span> <span class="n">Sensor</span><span class="p">,</span> <span class="n">Sample</span>
 <span class="kn">from</span> <span class="nn">flask.ext.script</span> <span class="kn">import</span> <span class="n">Manager</span><span class="p">,</span> <span class="n">Shell</span>
-<span class="kn">import</span> <span class="nn">config</span>
 <span class="kn">from</span> <span class="nn">flask.ext.migrate</span> <span class="kn">import</span> <span class="n">Migrate</span><span class="p">,</span> <span class="n">MigrateCommand</span>
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">(</span><span class="s">&#39;default&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">create_app</span><span class="p">,</span> <span class="n">db</span>
+<span class="kn">from</span> <span class="nn">app.models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">Region</span><span class="p">,</span> <span class="n">River</span><span class="p">,</span> <span class="n">Section</span><span class="p">,</span> <span class="n">Gage</span><span class="p">,</span> <span class="n">Sensor</span><span class="p">,</span> <span class="n">Sample</span>
+<span class="kn">from</span> <span class="nn">app.user_manager</span> <span class="kn">import</span> <span class="n">user_manager</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">&#39;FLASK_CONFIG&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="s">&#39;default&#39;</span><span class="p">)</span>
 <span class="n">manager</span> <span class="o">=</span> <span class="n">Manager</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 <span class="n">migrate</span> <span class="o">=</span> <span class="n">Migrate</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
 
+
 <div class="viewcode-block" id="make_shell_context"><a class="viewcode-back" href="../reference/manage.html#manage.make_shell_context">[docs]</a><span class="k">def</span> <span class="nf">make_shell_context</span><span class="p">():</span>
-	<span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span> <span class="n">User</span><span class="o">=</span><span class="n">User</span><span class="p">,</span> <span class="n">Region</span><span class="o">=</span><span class="n">Region</span><span class="p">,</span> <span class="n">River</span><span class="o">=</span><span class="n">River</span><span class="p">,</span> <span class="n">Section</span><span class="o">=</span><span class="n">Section</span><span class="p">,</span> <span class="n">Gage</span><span class="o">=</span><span class="n">Gage</span><span class="p">,</span> <span class="n">Sensor</span><span class="o">=</span><span class="n">Sensor</span><span class="p">,</span> <span class="n">Sample</span><span class="o">=</span><span class="n">Sample</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span> <span class="n">User</span><span class="o">=</span><span class="n">User</span><span class="p">,</span> <span class="n">Region</span><span class="o">=</span><span class="n">Region</span><span class="p">,</span> <span class="n">River</span><span class="o">=</span><span class="n">River</span><span class="p">,</span>
+                <span class="n">Section</span><span class="o">=</span><span class="n">Section</span><span class="p">,</span> <span class="n">Gage</span><span class="o">=</span><span class="n">Gage</span><span class="p">,</span> <span class="n">Sensor</span><span class="o">=</span><span class="n">Sensor</span><span class="p">,</span> <span class="n">Sample</span><span class="o">=</span><span class="n">Sample</span><span class="p">)</span></div>
 <span class="n">manager</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="s">&quot;shell&quot;</span><span class="p">,</span> <span class="n">Shell</span><span class="p">(</span><span class="n">make_context</span><span class="o">=</span><span class="n">make_shell_context</span><span class="p">))</span>
 
 <span class="n">manager</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="s">&#39;db&#39;</span><span class="p">,</span> <span class="n">MigrateCommand</span><span class="p">)</span>
 
-<span class="c">#@manager.command</span>
-<span class="c">#def deploy():</span>
-<span class="c">#	&quot;&quot;&quot;Run deployment tasks.&quot;&quot;&quot;</span>
-<span class="c">#	from flask.ext.migrate import upgrade</span>
-<span class="c">#	</span>
-<span class="c">#	# migrate database to latest revision</span>
-<span class="c">#	upgrade()</span>
+<span class="n">manager</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="s">&#39;user&#39;</span><span class="p">,</span> <span class="n">user_manager</span><span class="p">)</span>
+
+<span class="c"># @manager.command</span>
+<span class="c"># def deploy():</span>
+<span class="c">#    &quot;&quot;&quot;Run deployment tasks.&quot;&quot;&quot;</span>
+<span class="c">#    from flask.ext.migrate import upgrade</span>
+<span class="c">#</span>
+<span class="c">#    # migrate database to latest revision</span>
+<span class="c">#    upgrade()</span>
 
 
-
-<span class="c"># http://flask.pocoo.org/snippets/117/ manager helper to list routes http://stackoverflow.com/questions/13317536/get-a-list-of-all-routes-defined-in-the-app</span>
+<span class="c"># http://flask.pocoo.org/snippets/117/ manager helper to list routes</span>
+<span class="c"># http://stackoverflow.com/questions/13317536/get-a-list-of-all-routes-defined-in-the-app</span>
 <span class="nd">@manager.command</span>
 <div class="viewcode-block" id="list_routes"><a class="viewcode-back" href="../reference/manage.html#manage.list_routes">[docs]</a><span class="k">def</span> <span class="nf">list_routes</span><span class="p">():</span>
-	<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">	Lists routes for app</span>
-<span class="sd">	&quot;&quot;&quot;</span>
-	<span class="kn">import</span> <span class="nn">urllib</span>
-	
-	<span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
-	<span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">app</span><span class="o">.</span><span class="n">url_map</span><span class="o">.</span><span class="n">iter_rules</span><span class="p">():</span>
-		<span class="n">methods</span> <span class="o">=</span> <span class="s">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">methods</span><span class="p">)</span>
-		<span class="n">line</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">unquote</span><span class="p">(</span><span class="s">&quot;{:50s} {:20s} {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">methods</span><span class="p">,</span> <span class="n">rule</span><span class="p">))</span>
-		<span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-	
-	<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">output</span><span class="p">):</span>
-		<span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Lists routes for app</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">urllib</span>
+
+    <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">app</span><span class="o">.</span><span class="n">url_map</span><span class="o">.</span><span class="n">iter_rules</span><span class="p">():</span>
+        <span class="n">methods</span> <span class="o">=</span> <span class="s">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">methods</span><span class="p">)</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">unquote</span><span class="p">(</span><span class="s">&quot;{:50s} {:20s} {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">endpoint</span><span class="p">,</span>
+                                                        <span class="n">methods</span><span class="p">,</span>
+                                                        <span class="n">rule</span><span class="p">))</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">output</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
 </div>
 <span class="nd">@manager.command</span>
 <div class="viewcode-block" id="test"><a class="viewcode-back" href="../reference/manage.html#manage.test">[docs]</a><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">coverage</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-	<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">	Run the unit tests.</span>
-<span class="sd">	&quot;&quot;&quot;</span>
-	<span class="k">if</span> <span class="n">coverage</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;FLASK_COVERAGE&#39;</span><span class="p">):</span>
-		<span class="kn">import</span> <span class="nn">sys</span>
-		<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;FLASK_COVERAGE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;1&#39;</span>
-		<span class="n">os</span><span class="o">.</span><span class="n">execvp</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">]</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run the unit tests.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">coverage</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;FLASK_COVERAGE&#39;</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">sys</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;FLASK_COVERAGE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;1&#39;</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">execvp</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">]</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
 
-	<span class="kn">import</span> <span class="nn">unittest</span>
-	<span class="n">tests</span> <span class="o">=</span> <span class="n">unittest</span><span class="o">.</span><span class="n">TestLoader</span><span class="p">()</span><span class="o">.</span><span class="n">discover</span><span class="p">(</span><span class="s">&#39;tests&#39;</span><span class="p">)</span>
-	<span class="n">unittest</span><span class="o">.</span><span class="n">TextTestRunner</span><span class="p">(</span><span class="n">verbosity</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tests</span><span class="p">)</span>
-	<span class="k">if</span> <span class="n">COV</span><span class="p">:</span>
-		<span class="n">COV</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-		<span class="n">COV</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-		<span class="k">print</span><span class="p">(</span><span class="s">&#39;Coverage Summary:&#39;</span><span class="p">)</span>
-		<span class="n">COV</span><span class="o">.</span><span class="n">report</span><span class="p">()</span>
-		<span class="n">basedir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
-		<span class="n">covdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">basedir</span><span class="p">,</span> <span class="s">&#39;tmp/coverage&#39;</span><span class="p">)</span>
-		<span class="n">COV</span><span class="o">.</span><span class="n">html_report</span><span class="p">(</span><span class="n">directory</span><span class="o">=</span><span class="n">covdir</span><span class="p">)</span>
-		<span class="k">print</span><span class="p">(</span><span class="s">&#39;HTML version: file://</span><span class="si">%s</span><span class="s">/index.html&#39;</span> <span class="o">%</span> <span class="n">covdir</span><span class="p">)</span>
-		<span class="n">COV</span><span class="o">.</span><span class="n">erase</span><span class="p">()</span>
+    <span class="kn">import</span> <span class="nn">unittest</span>
+    <span class="n">tests</span> <span class="o">=</span> <span class="n">unittest</span><span class="o">.</span><span class="n">TestLoader</span><span class="p">()</span><span class="o">.</span><span class="n">discover</span><span class="p">(</span><span class="s">&#39;tests&#39;</span><span class="p">)</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">TextTestRunner</span><span class="p">(</span><span class="n">verbosity</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tests</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">COV</span><span class="p">:</span>
+        <span class="n">COV</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="n">COV</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39;Coverage Summary:&#39;</span><span class="p">)</span>
+        <span class="n">COV</span><span class="o">.</span><span class="n">report</span><span class="p">()</span>
+        <span class="n">basedir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
+        <span class="n">covdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">basedir</span><span class="p">,</span> <span class="s">&#39;tmp/coverage&#39;</span><span class="p">)</span>
+        <span class="n">COV</span><span class="o">.</span><span class="n">html_report</span><span class="p">(</span><span class="n">directory</span><span class="o">=</span><span class="n">covdir</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39;HTML version: file://</span><span class="si">%s</span><span class="s">/index.html&#39;</span> <span class="o">%</span> <span class="n">covdir</span><span class="p">)</span>
+        <span class="n">COV</span><span class="o">.</span><span class="n">erase</span><span class="p">()</span>
+
 </div>
 <span class="nd">@manager.command</span>
 <div class="viewcode-block" id="backup"><a class="viewcode-back" href="../reference/manage.html#manage.backup">[docs]</a><span class="k">def</span> <span class="nf">backup</span><span class="p">():</span>
-	<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">	Backup database to Dropbox</span>
-<span class="sd">	&quot;&quot;&quot;</span>
-	<span class="kn">import</span> <span class="nn">datetime</span>
-	<span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">backup</span> <span class="k">as</span> <span class="n">backup_db</span>
-	<span class="n">filename</span> <span class="o">=</span> <span class="s">&#39;gage_web-&#39;</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%Y%m</span><span class="si">%d</span><span class="s">-%H%M&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;.tar&#39;</span>
-	<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;pg_dump -Ft gage_web &gt; &quot;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
-	<span class="k">print</span> <span class="s">&#39;Uploading&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="s">&#39;to Dropbox&#39;</span>
-	<span class="k">print</span> <span class="n">backup_db</span><span class="o">.</span><span class="n">backup</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-	<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;rm &quot;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
-
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Backup database to Dropbox</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">datetime</span>
+    <span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">backup</span> <span class="k">as</span> <span class="n">backup_db</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="s">&#39;gage_web-{time}.tar&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">time</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%Y%m</span><span class="si">%d</span><span class="s">-%H%M&#39;</span><span class="p">))</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;pg_dump -Ft {db} &gt; {filename}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">database</span><span class="p">,</span>
+        <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;Uploading {filename} to Dropbox&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">backup_db</span><span class="o">.</span><span class="n">backup</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s">&quot;rm &quot;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
 
 </div>
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
@@ -208,9 +269,10 @@
         &copy; Copyright 2014, Alex Kerney.
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
+
         </div>
       </div>
 
@@ -234,7 +296,7 @@
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

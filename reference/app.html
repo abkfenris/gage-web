@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>app package &mdash; Gage-Web 0.1 documentation</title>
@@ -14,7 +15,6 @@
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   
   
@@ -28,13 +28,15 @@
   
 
   
+
+  
     <link rel="top" title="Gage-Web 0.1 documentation" href="../index.html"/>
         <link rel="up" title="Gage-Web Reference" href="index.html"/>
         <link rel="next" title="app.admin package" href="app.admin.html"/>
         <link rel="prev" title="Gage-Web Reference" href="index.html"/> 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -45,32 +47,79 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
-        <a href="../index.html" class="fa fa-home"> Gage-Web</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+        
+
+        
+          <a href="../index.html" class="icon icon-home"> Gage-Web
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+
+        
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
-        
-            <ul class="current">
+          
+          
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../api.html">Gage-Web API Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#api">API</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Gage-Web Reference</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="">app package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">app package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="app.admin.html">app.admin package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="app.api_1_0.html">app.api_1_0 package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="app.main.html">app.main package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-app.admin">app.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#app-api-module">app.api module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#app-auth-module">app.auth module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#app-backup-module">app.backup module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-app.models">app.models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-app">Module contents</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="config.html">config module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manage.html">manage module</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Server Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developers/fabfile.html">fabfile.py</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developers/fabfile.html#hosts">Hosts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developers/local.html">Local Development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#initial-migration">Initial Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#working-with-users-and-roles">Working with Users and Roles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developers/local.html#roles">Roles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developers/local.html#users">Users</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developers/local.html#running-everything">Running Everything</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
+          
         
       </div>
       &nbsp;
@@ -97,13 +146,15 @@
     <li>app package</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="../_sources/reference/app.txt" rel="nofollow"> View page source</a>
+          
+            <a href="../_sources/reference/app.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
   </ul>
   <hr/>
 </div>
-          <div role="main">
+          <div role="main" class="document">
             
   <div class="section" id="app-package">
 <h1>app package<a class="headerlink" href="#app-package" title="Permalink to this headline">¶</a></h1>
@@ -118,36 +169,15 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="app.api_1_0.html">app.api_1_0 package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="app.api_1_0.html#module-app.api_1_0">Module contents</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="app.api_1_0.html#endpoints">Endpoints:</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="app.api_1_0.html#module-contents">Module contents</a></li>
 <li class="toctree-l2"><a class="reference internal" href="app.api_1_0.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="app.api_1_0.html#module-app.api_1_0.errors">app.api_1_0.errors module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="app.api_1_0.html#module-app.api_1_0.gages">app.api_1_0.gages module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="app.api_1_0.html#id1">Endpoints:</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="app.api_1_0.html#module-app.api_1_0.regions">app.api_1_0.regions module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="app.api_1_0.html#id2">Endpoints:</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="app.api_1_0.html#module-app.api_1_0.rivers">app.api_1_0.rivers module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="app.api_1_0.html#id3">Endpoints:</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="app.api_1_0.html#module-app.api_1_0.samples">app.api_1_0.samples module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="app.api_1_0.html#id4">Endpoints:</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="app.api_1_0.html#module-app.api_1_0.sections">app.api_1_0.sections module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="app.api_1_0.html#id5">Endpoints:</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="app.api_1_0.html#module-app.api_1_0.sensors">app.api_1_0.sensors module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="app.api_1_0.html#id6">Endpoints:</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="app.api_1_0.html#app-api-1-0-errors-module">app.api_1_0.errors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.api_1_0.html#app-api-1-0-gages-module">app.api_1_0.gages module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.api_1_0.html#app-api-1-0-regions-module">app.api_1_0.regions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.api_1_0.html#app-api-1-0-rivers-module">app.api_1_0.rivers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.api_1_0.html#app-api-1-0-samples-module">app.api_1_0.samples module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.api_1_0.html#app-api-1-0-sections-module">app.api_1_0.sections module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.api_1_0.html#app-api-1-0-sensors-module">app.api_1_0.sensors module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="app.main.html">app.main package</a><ul>
@@ -166,140 +196,367 @@
 <div class="section" id="module-app.admin">
 <span id="app-admin-module"></span><h2>app.admin module<a class="headerlink" href="#module-app.admin" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
+<dt id="app.admin.AuthenticatedMenuLink">
+<em class="property">class </em><tt class="descclassname">app.admin.</tt><tt class="descname">AuthenticatedMenuLink</tt><big>(</big><em>name</em>, <em>url=None</em>, <em>endpoint=None</em>, <em>category=None</em>, <em>class_name=None</em>, <em>icon_type=None</em>, <em>icon_value=None</em><big>)</big><a class="reference internal" href="../_modules/app/admin.html#AuthenticatedMenuLink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.admin.AuthenticatedMenuLink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_admin.menu.MenuLink</span></tt></p>
+<dl class="method">
+<dt id="app.admin.AuthenticatedMenuLink.is_accessible">
+<tt class="descname">is_accessible</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/admin.html#AuthenticatedMenuLink.is_accessible"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.admin.AuthenticatedMenuLink.is_accessible" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="app.admin.FileAdmin">
+<em class="property">class </em><tt class="descclassname">app.admin.</tt><tt class="descname">FileAdmin</tt><big>(</big><em>base_path</em>, <em>base_url=None</em>, <em>name=None</em>, <em>category=None</em>, <em>endpoint=None</em>, <em>url=None</em>, <em>verify_path=True</em>, <em>menu_class_name=None</em>, <em>menu_icon_type=None</em>, <em>menu_icon_value=None</em><big>)</big><a class="reference internal" href="../_modules/app/admin.html#FileAdmin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.admin.FileAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_admin.contrib.fileadmin.FileAdmin</span></tt></p>
+<dl class="method">
+<dt id="app.admin.FileAdmin.action_view">
+<tt class="descname">action_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.FileAdmin.action_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="app.admin.FileAdmin.delete">
+<tt class="descname">delete</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.FileAdmin.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete view method</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.FileAdmin.download">
+<tt class="descname">download</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.FileAdmin.download" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download view method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> &#8211; File path.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.FileAdmin.edit">
+<tt class="descname">edit</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.FileAdmin.edit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edit view method</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.FileAdmin.inaccessible_callback">
+<tt class="descname">inaccessible_callback</tt><big>(</big><em>name</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/app/admin.html#FileAdmin.inaccessible_callback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.admin.FileAdmin.inaccessible_callback" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="app.admin.FileAdmin.index">
+<tt class="descname">index</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.FileAdmin.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Index view method</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> &#8211; Optional directory path. If not provided, will use the base directory</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.FileAdmin.is_accessible">
+<tt class="descname">is_accessible</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/admin.html#FileAdmin.is_accessible"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.admin.FileAdmin.is_accessible" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="app.admin.FileAdmin.mkdir">
+<tt class="descname">mkdir</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.FileAdmin.mkdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory creation view method</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> &#8211; Optional directory path. If not provided, will use the base directory</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.FileAdmin.rename">
+<tt class="descname">rename</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.FileAdmin.rename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rename view method</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.FileAdmin.upload">
+<tt class="descname">upload</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.FileAdmin.upload" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload view method</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> &#8211; Optional directory path. If not provided, will use the base directory</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="app.admin.GageView">
-<em class="property">class </em><code class="descclassname">app.admin.</code><code class="descname">GageView</code><span class="sig-paren">(</span><em>model</em>, <em>session</em>, <em>name=None</em>, <em>category=None</em>, <em>endpoint=None</em>, <em>url=None</em>, <em>static_folder=None</em>, <em>menu_class_name=None</em>, <em>menu_icon_type=None</em>, <em>menu_icon_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/admin.html#GageView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.admin.GageView" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_admin.contrib.geoa.view.ModelView</span></code></p>
+<em class="property">class </em><tt class="descclassname">app.admin.</tt><tt class="descname">GageView</tt><big>(</big><em>model</em>, <em>session</em>, <em>name=None</em>, <em>category=None</em>, <em>endpoint=None</em>, <em>url=None</em>, <em>static_folder=None</em>, <em>menu_class_name=None</em>, <em>menu_icon_type=None</em>, <em>menu_icon_value=None</em><big>)</big><a class="reference internal" href="../_modules/app/admin.html#GageView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.admin.GageView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="app.admin.html#app.admin.ModelView" title="app.admin.ModelView"><tt class="xref py py-class docutils literal"><span class="pre">app.admin.ModelView</span></tt></a></p>
 <dl class="method">
 <dt id="app.admin.GageView.action_view">
-<code class="descname">action_view</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.GageView.action_view" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">action_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.GageView.action_view" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mass-model action view.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="app.admin.GageView.ajax_lookup">
-<code class="descname">ajax_lookup</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.GageView.ajax_lookup" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">ajax_lookup</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.GageView.ajax_lookup" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="app.admin.GageView.ajax_update">
-<code class="descname">ajax_update</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.GageView.ajax_update" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">ajax_update</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.GageView.ajax_update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edits a single column of a record in list view.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="app.admin.GageView.can_create">
-<code class="descname">can_create</code><em class="property"> = True</em><a class="headerlink" href="#app.admin.GageView.can_create" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">can_create</tt><em class="property"> = True</em><a class="headerlink" href="#app.admin.GageView.can_create" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="app.admin.GageView.column_exclude_list">
-<code class="descname">column_exclude_list</code><em class="property"> = ('key', 'elevationUnits', 'zipcode', 'visible', 'elevation', 'backend_notes', 'description', 'short_description', 'started', 'ended')</em><a class="headerlink" href="#app.admin.GageView.column_exclude_list" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">column_exclude_list</tt><em class="property"> = ('key', 'elevationUnits', 'zipcode', 'visible', 'elevation', 'backend_notes', 'description', 'short_description', 'started', 'ended')</em><a class="headerlink" href="#app.admin.GageView.column_exclude_list" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="app.admin.GageView.column_labels">
-<code class="descname">column_labels</code><em class="property"> = {'slug': 'URL Slug'}</em><a class="headerlink" href="#app.admin.GageView.column_labels" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">column_labels</tt><em class="property"> = {'slug': 'URL Slug'}</em><a class="headerlink" href="#app.admin.GageView.column_labels" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="app.admin.GageView.column_searchable_list">
-<code class="descname">column_searchable_list</code><em class="property"> = ('name', &lt;sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x10d8ee290&gt;, 'slug', 'local_town', 'location')</em><a class="headerlink" href="#app.admin.GageView.column_searchable_list" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">column_searchable_list</tt><em class="property"> = ('name', &lt;sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x110fc10b0&gt;, 'slug', 'local_town', 'location')</em><a class="headerlink" href="#app.admin.GageView.column_searchable_list" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="app.admin.GageView.create_view">
-<code class="descname">create_view</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.GageView.create_view" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">create_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.GageView.create_view" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create model view</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="app.admin.GageView.delete_view">
-<code class="descname">delete_view</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.GageView.delete_view" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">delete_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.GageView.delete_view" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete model view. Only POST method is allowed.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="app.admin.GageView.edit_view">
-<code class="descname">edit_view</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.GageView.edit_view" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">edit_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.GageView.edit_view" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edit model view</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="app.admin.GageView.form_widget_args">
-<code class="descname">form_widget_args</code><em class="property"> = {'point': {'data-width': 500, 'data-height': 500}}</em><a class="headerlink" href="#app.admin.GageView.form_widget_args" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">form_widget_args</tt><em class="property"> = {'point': {'data-width': 600, 'data-height': 400}}</em><a class="headerlink" href="#app.admin.GageView.form_widget_args" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="app.admin.GageView.index_view">
-<code class="descname">index_view</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.GageView.index_view" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">index_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.GageView.index_view" title="Permalink to this definition">¶</a></dt>
 <dd><p>List view</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="class">
+<dt id="app.admin.ModelView">
+<em class="property">class </em><tt class="descclassname">app.admin.</tt><tt class="descname">ModelView</tt><big>(</big><em>model</em>, <em>session</em>, <em>name=None</em>, <em>category=None</em>, <em>endpoint=None</em>, <em>url=None</em>, <em>static_folder=None</em>, <em>menu_class_name=None</em>, <em>menu_icon_type=None</em>, <em>menu_icon_value=None</em><big>)</big><a class="reference internal" href="../_modules/app/admin.html#ModelView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.admin.ModelView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_admin.contrib.geoa.view.ModelView</span></tt></p>
+<dl class="method">
+<dt id="app.admin.ModelView.action_view">
+<tt class="descname">action_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.ModelView.action_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mass-model action view.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.ModelView.ajax_lookup">
+<tt class="descname">ajax_lookup</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.ModelView.ajax_lookup" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="app.admin.ModelView.ajax_update">
+<tt class="descname">ajax_update</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.ModelView.ajax_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edits a single column of a record in list view.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.ModelView.create_view">
+<tt class="descname">create_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.ModelView.create_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create model view</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.ModelView.delete_view">
+<tt class="descname">delete_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.ModelView.delete_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete model view. Only POST method is allowed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.ModelView.edit_view">
+<tt class="descname">edit_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.ModelView.edit_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edit model view</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.ModelView.inaccessible_callback">
+<tt class="descname">inaccessible_callback</tt><big>(</big><em>name</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/app/admin.html#ModelView.inaccessible_callback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.admin.ModelView.inaccessible_callback" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="app.admin.ModelView.index_view">
+<tt class="descname">index_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.ModelView.index_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>List view</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.ModelView.is_accessible">
+<tt class="descname">is_accessible</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/admin.html#ModelView.is_accessible"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.admin.ModelView.is_accessible" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="app.admin.MyAdminIndexView">
+<em class="property">class </em><tt class="descclassname">app.admin.</tt><tt class="descname">MyAdminIndexView</tt><big>(</big><em>name=None</em>, <em>category=None</em>, <em>endpoint=None</em>, <em>url=None</em>, <em>template='admin/index.html'</em>, <em>menu_class_name=None</em>, <em>menu_icon_type=None</em>, <em>menu_icon_value=None</em><big>)</big><a class="reference internal" href="../_modules/app/admin.html#MyAdminIndexView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.admin.MyAdminIndexView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_admin.base.AdminIndexView</span></tt></p>
+<dl class="method">
+<dt id="app.admin.MyAdminIndexView.index">
+<tt class="descname">index</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/app/admin.html#MyAdminIndexView.index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.admin.MyAdminIndexView.index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="app.admin.SectionView">
-<em class="property">class </em><code class="descclassname">app.admin.</code><code class="descname">SectionView</code><span class="sig-paren">(</span><em>model</em>, <em>session</em>, <em>name=None</em>, <em>category=None</em>, <em>endpoint=None</em>, <em>url=None</em>, <em>static_folder=None</em>, <em>menu_class_name=None</em>, <em>menu_icon_type=None</em>, <em>menu_icon_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/admin.html#SectionView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.admin.SectionView" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_admin.contrib.geoa.view.ModelView</span></code></p>
+<em class="property">class </em><tt class="descclassname">app.admin.</tt><tt class="descname">SectionView</tt><big>(</big><em>model</em>, <em>session</em>, <em>name=None</em>, <em>category=None</em>, <em>endpoint=None</em>, <em>url=None</em>, <em>static_folder=None</em>, <em>menu_class_name=None</em>, <em>menu_icon_type=None</em>, <em>menu_icon_value=None</em><big>)</big><a class="reference internal" href="../_modules/app/admin.html#SectionView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.admin.SectionView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="app.admin.html#app.admin.ModelView" title="app.admin.ModelView"><tt class="xref py py-class docutils literal"><span class="pre">app.admin.ModelView</span></tt></a></p>
 <dl class="method">
 <dt id="app.admin.SectionView.action_view">
-<code class="descname">action_view</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.SectionView.action_view" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">action_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.SectionView.action_view" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mass-model action view.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="app.admin.SectionView.ajax_lookup">
-<code class="descname">ajax_lookup</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.SectionView.ajax_lookup" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">ajax_lookup</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.SectionView.ajax_lookup" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="app.admin.SectionView.ajax_update">
-<code class="descname">ajax_update</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.SectionView.ajax_update" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">ajax_update</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.SectionView.ajax_update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edits a single column of a record in list view.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="app.admin.SectionView.column_labels">
-<code class="descname">column_labels</code><em class="property"> = {'slug': 'URL Slug'}</em><a class="headerlink" href="#app.admin.SectionView.column_labels" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">column_labels</tt><em class="property"> = {'slug': 'URL Slug'}</em><a class="headerlink" href="#app.admin.SectionView.column_labels" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="app.admin.SectionView.column_list">
-<code class="descname">column_list</code><em class="property"> = ('name', 'path', 'slug', 'river', 'location')</em><a class="headerlink" href="#app.admin.SectionView.column_list" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">column_list</tt><em class="property"> = ('name', 'path', 'slug', 'river', 'location')</em><a class="headerlink" href="#app.admin.SectionView.column_list" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="app.admin.SectionView.column_searchable_list">
-<code class="descname">column_searchable_list</code><em class="property"> = ('name', &lt;sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x10d8ee290&gt;)</em><a class="headerlink" href="#app.admin.SectionView.column_searchable_list" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">column_searchable_list</tt><em class="property"> = ('name', &lt;sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x110fc10b0&gt;)</em><a class="headerlink" href="#app.admin.SectionView.column_searchable_list" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="app.admin.SectionView.create_view">
-<code class="descname">create_view</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.SectionView.create_view" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">create_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.SectionView.create_view" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create model view</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="app.admin.SectionView.delete_view">
-<code class="descname">delete_view</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.SectionView.delete_view" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">delete_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.SectionView.delete_view" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete model view. Only POST method is allowed.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="app.admin.SectionView.edit_view">
-<code class="descname">edit_view</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.SectionView.edit_view" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">edit_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.SectionView.edit_view" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edit model view</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="app.admin.SectionView.form_widget_args">
-<code class="descname">form_widget_args</code><em class="property"> = {'takeout': {'data-width': 200, 'data-height': 200}, 'path': {'data-width': 600, 'data-height': 600}, 'putin': {'data-width': 400, 'data-height': 400}}</em><a class="headerlink" href="#app.admin.SectionView.form_widget_args" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">form_widget_args</tt><em class="property"> = {'takeout': {'data-width': 600, 'data-height': 400}, 'path': {'data-width': 600, 'data-height': 400}, 'putin': {'data-width': 600, 'data-height': 400}}</em><a class="headerlink" href="#app.admin.SectionView.form_widget_args" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="app.admin.SectionView.index_view">
-<code class="descname">index_view</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.admin.SectionView.index_view" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">index_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.SectionView.index_view" title="Permalink to this definition">¶</a></dt>
 <dd><p>List view</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="app.admin.UserView">
+<em class="property">class </em><tt class="descclassname">app.admin.</tt><tt class="descname">UserView</tt><big>(</big><em>model</em>, <em>session</em>, <em>name=None</em>, <em>category=None</em>, <em>endpoint=None</em>, <em>url=None</em>, <em>static_folder=None</em>, <em>menu_class_name=None</em>, <em>menu_icon_type=None</em>, <em>menu_icon_value=None</em><big>)</big><a class="reference internal" href="../_modules/app/admin.html#UserView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.admin.UserView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="app.admin.html#app.admin.ModelView" title="app.admin.ModelView"><tt class="xref py py-class docutils literal"><span class="pre">app.admin.ModelView</span></tt></a></p>
+<dl class="method">
+<dt id="app.admin.UserView.action_view">
+<tt class="descname">action_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.UserView.action_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mass-model action view.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.UserView.ajax_lookup">
+<tt class="descname">ajax_lookup</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.UserView.ajax_lookup" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="app.admin.UserView.ajax_update">
+<tt class="descname">ajax_update</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.UserView.ajax_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edits a single column of a record in list view.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.UserView.create_view">
+<tt class="descname">create_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.UserView.create_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create model view</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.UserView.delete_view">
+<tt class="descname">delete_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.UserView.delete_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete model view. Only POST method is allowed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.UserView.edit_view">
+<tt class="descname">edit_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.UserView.edit_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edit model view</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.UserView.index_view">
+<tt class="descname">index_view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#app.admin.UserView.index_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>List view</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.admin.UserView.is_accessible">
+<tt class="descname">is_accessible</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/app/admin.html#UserView.is_accessible"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.admin.UserView.is_accessible" title="Permalink to this definition">¶</a></dt>
+<dd><p>Only allow admins to see other users</p>
 </dd></dl>
 
 </dd></dl>
@@ -311,412 +568,19 @@
 <div class="section" id="app-auth-module">
 <h2>app.auth module<a class="headerlink" href="#app-auth-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-app.backup">
-<span id="app-backup-module"></span><h2>app.backup module<a class="headerlink" href="#module-app.backup" title="Permalink to this headline">¶</a></h2>
-<p>Use Dropbox to backup the database every six hours, or import to backup a specific file on demand</p>
-<dl class="function">
-<dt id="app.backup.backup">
-<code class="descclassname">app.backup.</code><code class="descname">backup</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/backup.html#backup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.backup.backup" title="Permalink to this definition">¶</a></dt>
-<dd><p>Backs up a specified file</p>
-</dd></dl>
-
+<div class="section" id="app-backup-module">
+<h2>app.backup module<a class="headerlink" href="#app-backup-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-app.models">
 <span id="app-models-module"></span><h2>app.models module<a class="headerlink" href="#module-app.models" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="app.models.Correlation">
-<em class="property">class </em><code class="descclassname">app.models.</code><code class="descname">Correlation</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Correlation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Correlation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
-<p>Connects sections to sensors with extra data about values and how fast they should change.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>section_id</strong> (<em>int</em>) &#8211; <code class="docutils literal"><span class="pre">Section</span></code>.id for the <code class="docutils literal"><span class="pre">Section</span></code> that this correlation is for</li>
-<li><strong>section</strong> &#8211; gives a <code class="docutils literal"><span class="pre">Section</span></code> object from the section_id</li>
-<li><strong>sensor_id</strong> (<em>int</em>) &#8211; <code class="docutils literal"><span class="pre">Sensor</span></code>.id for the <code class="docutils literal"><span class="pre">Sensor</span></code> that is correlation is for</li>
-<li><strong>sensor</strong> &#8211; gives a <code class="docutils literal"><span class="pre">Sensor</span></code> object from the sensor_id</li>
-<li><strong>minimum</strong> (<em>float</em>) &#8211; The minimum level according to the Sensor that can float a boat</li>
-<li><strong>low</strong> (<em>float</em>) &#8211; A normal sane low level. Below this is ELF territory.</li>
-<li><strong>medium</strong> (<em>float</em>) &#8211; The low end of a medium level.</li>
-<li><strong>high</strong> (<em>float</em>) &#8211; The top of a medium level, and starting to get padded out.</li>
-<li><strong>huge</strong> (<em>float</em>) &#8211; The difference between high and scary.</li>
-<li><strong>trend_slope</strong> (<em>float</em>) &#8211; How fast should the sensor be changing in order for us to be interested?</li>
-<li><strong>trend_samples</strong> (<em>int</em>) &#8211; How many samples should it be changing over for us to be interested?</li>
-<li><strong>description</strong> (<em>text</em>) &#8211; At some point in the future will probably display                                                   the description on the section page with the correlation.                                                       Can contain HTML or Markdown within reason.</li>
-<li><strong>backend_notes</strong> (<em>text</em>) &#8211; Admin/Gage Manager information about the gage</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="class">
-<dt id="app.models.Gage">
-<em class="property">class </em><code class="descclassname">app.models.</code><code class="descname">Gage</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Gage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Gage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
-<p>A Gage is a collection of Sensors at a single location.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>id</strong> (<em>int</em>) &#8211; Primary key for Gage</li>
-<li><strong>name</strong> (<em>string</em>) &#8211; Nice name for gage</li>
-<li><strong>slug</strong> (<em>string</em>) &#8211; slug used in url</li>
-<li><strong>point</strong> (<em>Point</em>) &#8211; PostGIS Point object. Accepts WKT.</li>
-<li><strong>river_id</strong> (<em>int</em>) &#8211; Foreign key of <code class="docutils literal"><span class="pre">River</span></code>.id that the Gage is on.</li>
-<li><strong>river</strong> &#8211; <code class="docutils literal"><span class="pre">River</span></code> object</li>
-<li><strong>user_id</strong> (<em>int</em>) &#8211; Foreign key of <code class="docutils literal"><span class="pre">User</span></code>.id that &#8216;owns&#8217; the Gage.</li>
-<li><strong>user</strong> &#8211; <code class="docutils literal"><span class="pre">User</span></code> object that <cite>owns</cite> the gage.</li>
-<li><strong>visible</strong> (<em>boolean</em>) &#8211; Allows a gage to not be seen on the front end</li>
-<li><strong>zipcode</strong> (<em>string</em>) &#8211; Zip code used to get the weather.</li>
-<li><strong>local_town</strong> (<em>string</em>) &#8211; Local town name, primarily used for getting the weather</li>
-<li><strong>location</strong> (<em>string</em>) &#8211; Descriptive location, often used when Gage is displayed on other pages</li>
-<li><strong>elevation</strong> (<em>int</em>) &#8211; The elevation of the Gage</li>
-<li><strong>elevationUnits</strong> (<em>string</em>) &#8211; Feet or Meters?</li>
-<li><strong>backend_notes</strong> (<em>text</em>) &#8211; Backend info for the Gage for admins.</li>
-<li><strong>started</strong> (<em>datetime</em>) &#8211; When samples started to be collected at this gage</li>
-<li><strong>ended</strong> (<em>datetime</em>) &#8211; If sampling at this gage has stopped, when?</li>
-<li><strong>description</strong> (<em>text</em>) &#8211; Long description for Gage that can contain HTML or Markdown within reason.</li>
-<li><strong>key</strong> (<em>string</em>) &#8211; Secret key that samples are signed with</li>
-<li><strong>short_description</strong> (<em>text</em>) &#8211; Short description for showing on other pages.</li>
-<li><strong>regions</strong> &#8211; List of <code class="docutils literal"><span class="pre">Region</span></code> objects that this Gage is in.</li>
-<li><strong>sensors</strong> &#8211; List of <code class="docutils literal"><span class="pre">Sensor</span></code> objects that are part of this Gage.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="app.models.Gage.latlon">
-<code class="descname">latlon</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Gage.latlon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Gage.latlon" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a shapely point
-gage.latlon().y for latitude
-gage.latlon().x for longitude</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="app.models.Gage.new_sample">
-<code class="descname">new_sample</code><span class="sig-paren">(</span><em>stype</em>, <em>value</em>, <em>sdatetime</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Gage.new_sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Gage.new_sample" title="Permalink to this definition">¶</a></dt>
-<dd><p>Process a new sample for the gage, and finds the right <code class="docutils literal"><span class="pre">Sensor</span></code> that the <code class="docutils literal"><span class="pre">Sample</span></code> should be connected to.           If no <code class="docutils literal"><span class="pre">Sensor</span></code> exists for the type of sample, then a new one is created.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>stype</strong> (<em>str</em>) &#8211; Sensor type</li>
-<li><strong>value</strong> (<em>float</em>) &#8211; Sample value</li>
-<li><strong>sdatetime</strong> (<em>datetime</em>) &#8211; Sample <code class="docutils literal"><span class="pre">datetime</span></code> object</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="app.models.Gage.to_json">
-<code class="descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Gage.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Gage.to_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a JSON Object from Gage. Used where multiple gages may be listed at once.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="app.models.Gage.to_long_json">
-<code class="descname">to_long_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Gage.to_long_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Gage.to_long_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cretes a JSON Object from Gage. Used where a single gage is displayed.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="app.models.Region">
-<em class="property">class </em><code class="descclassname">app.models.</code><code class="descname">Region</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Region"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Region" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
-<p>Regions where Rivers, Sections, and Gages exist</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>id</strong> (<em>int</em>) &#8211; Primary Region Key</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Nice name</li>
-<li><strong>slug</strong> (<em>str</em>) &#8211; slug for url formatting</li>
-<li><strong>description</strong> (<em>text</em>) &#8211; Long description that can contain HTML or Markdown within reason.</li>
-<li><strong>short_description</strong> (<em>text</em>) &#8211; Short description, for showing on other pages.</li>
-<li><strong>header_image</strong> (<em>str</em>) &#8211; Header image to override default.</li>
-<li><strong>rivers</strong> &#8211; List of <code class="docutils literal"><span class="pre">River</span></code> objects for Region.</li>
-<li><strong>sections</strong> &#8211; List of <code class="docutils literal"><span class="pre">Section</span></code> objects for Region.</li>
-<li><strong>gages</strong> &#8211; List of <code class="docutils literal"><span class="pre">Gage</span></code> objects for Region.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="app.models.Region.to_json">
-<code class="descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Region.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Region.to_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a JSON object from region. Used where multiple regions may be displayed simultaneously.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="app.models.Region.to_long_json">
-<code class="descname">to_long_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Region.to_long_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Region.to_long_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a JSON object from region. Used when only one region is to be displayed.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="app.models.River">
-<em class="property">class </em><code class="descclassname">app.models.</code><code class="descname">River</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#River"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.River" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
-<p>River model. Rivers are rivers as we know them,         they have a parent that they flow downstream into and have tributaries that flow into them.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>id</strong> (<em>int</em>) &#8211; Primary River id</li>
-<li><strong>name</strong> (<em>string</em>) &#8211; Nice River name</li>
-<li><strong>slug</strong> (<em>string</em>) &#8211; slug for url formatting</li>
-<li><strong>description</strong> (<em>text</em>) &#8211; Long description that can contain HTML or Markdown within reason.</li>
-<li><strong>short_description</strong> (<em>text</em>) &#8211; Short description for showing on other pages.</li>
-<li><strong>header_image</strong> (<em>string</em>) &#8211; Header image to override default</li>
-<li><strong>parent_id</strong> (<em>int</em>) &#8211; River.id for the river that this one flows into</li>
-<li><strong>parent</strong> &#8211; <code class="docutils literal"><span class="pre">River</span></code> object from parent_id</li>
-<li><strong>tributary</strong> &#8211; List of <code class="docutils literal"><span class="pre">River</span></code> objects for any River that has this one in it&#8217;s parent_id.</li>
-<li><strong>regions</strong> &#8211; List of <code class="docutils literal"><span class="pre">Region</span></code> objects for River</li>
-<li><strong>sections</strong> &#8211; List of <code class="docutils literal"><span class="pre">Section</span></code> objects for River</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="app.models.River.to_json">
-<code class="descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#River.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.River.to_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a JSON Object from River. Used where multiple rivers may be listed at once.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="app.models.River.to_long_json">
-<code class="descname">to_long_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#River.to_long_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.River.to_long_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a JSON Object from River. Used where a single river is being displayed.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="app.models.Sample">
-<em class="property">class </em><code class="descclassname">app.models.</code><code class="descname">Sample</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sample" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
-<p>Sample model</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>id</strong> (<em>int</em>) &#8211; Primary Sample key</li>
-<li><strong>sensor_id</strong> (<em>int</em>) &#8211; Foreign <code class="docutils literal"><span class="pre">Sensor</span></code>.id key</li>
-<li><strong>sensor</strong> &#8211; <code class="docutils literal"><span class="pre">Sensor</span></code> object related to this sample</li>
-<li><strong>datetime</strong> (<em>datetime</em>) &#8211; <code class="docutils literal"><span class="pre">datetime</span></code> object of this sample</li>
-<li><strong>value</strong> (<em>float</em>) &#8211; Value of sample</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="app.models.Sample.to_json">
-<code class="descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Sample.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sample.to_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a JSON object from Sample. Used where multiple samples will be displayed at once.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="app.models.Sample.to_sensor_json">
-<code class="descname">to_sensor_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Sample.to_sensor_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sample.to_sensor_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a JSON object from Sample for used with Sensor JSON.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="app.models.Section">
-<em class="property">class </em><code class="descclassname">app.models.</code><code class="descname">Section</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Section" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
-<p>River section that is commonly paddled and possibly has a correlation developed for it.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>id</strong> (<em>int</em>) &#8211; Primary key for Section</li>
-<li><strong>name</strong> (<em>string</em>) &#8211; Nice name for section</li>
-<li><strong>slug</strong> (<em>string</em>) &#8211; slug used for url</li>
-<li><strong>river_id</strong> &#8211; Foreign River.id that this section is a segment of.                                   If a section spans multiple rivers, use the river that the gage is on.</li>
-<li><strong>river</strong> &#8211; <code class="docutils literal"><span class="pre">River</span></code> object</li>
-<li><strong>description</strong> (<em>text</em>) &#8211; Long description for Section that can contain HTML or Markdown within reason.</li>
-<li><strong>short_description</strong> (<em>text</em>) &#8211; Short description for section for showing on other pages.</li>
-<li><strong>access</strong> (<em>string</em>) &#8211; Access restrictions or issues</li>
-<li><strong>location</strong> (<em>string</em>) &#8211; Where is it?</li>
-<li><strong>putin</strong> (<em>Point</em>) &#8211; PostGIS Point object for putin. Accepts WKT.</li>
-<li><strong>takeout</strong> (<em>Point</em>) &#8211; PostGIS Point object for takeout. Accepts WKT.</li>
-<li><strong>path</strong> (<em>Linestring</em>) &#8211; PostGIS Linestring object for river. Accepts WKT.</li>
-<li><strong>in_elevation</strong> (<em>int</em>) &#8211; Elevation of the putin</li>
-<li><strong>out_elevation</strong> (<em>int</em>) &#8211; Elevation of the takeout</li>
-<li><strong>header_image</strong> (<em>string</em>) &#8211; Header image to override default</li>
-<li><strong>correlations</strong> &#8211; List of <code class="docutils literal"><span class="pre">Correlation</span></code> objects that connect this Section to Sensors.                                             Can do <code class="docutils literal"><span class="pre">section.correlations[#].sensor</span></code> and access the sensor attributes.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="app.models.Section.inlatlon">
-<code class="descname">inlatlon</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Section.inlatlon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Section.inlatlon" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a shapely point for put-in.
-section.inlatlon().y for latitude
-section.inlatlon().y for longitude</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="app.models.Section.outlatlon">
-<code class="descname">outlatlon</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Section.outlatlon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Section.outlatlon" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a shapely point for take-out.
-section.outlatlon().y for latitude
-section.outlatlon().x for longitude</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="app.models.Section.to_json">
-<code class="descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Section.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Section.to_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a JSON Object from Section. Used where multiple sections may be listed at once.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="app.models.Section.to_long_json">
-<code class="descname">to_long_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Section.to_long_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Section.to_long_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a JSON Object from Section. Used where a single section is displayed.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="app.models.Sensor">
-<em class="property">class </em><code class="descclassname">app.models.</code><code class="descname">Sensor</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Sensor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sensor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
-<p>A single sensor value for a Gage</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>id</strong> (<em>int</em>) &#8211; Primary key for Sensor</li>
-<li><strong>gage_id</strong> (<em>int</em>) &#8211; Foreign <code class="docutils literal"><span class="pre">Gage</span></code>.id for the Gage that this Sensor is a part of</li>
-<li><strong>gage</strong> &#8211; <code class="docutils literal"><span class="pre">Gage</span></code> object for associated Gage</li>
-<li><strong>stype</strong> (<em>str</em>) &#8211; Type of sensor as reported by sending station (gage).</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Nice display name for sensor</li>
-<li><strong>slug</strong> (<em>str</em>) &#8211; slug for url</li>
-<li><strong>prefix</strong> (<em>str</em>) &#8211; Prefix for value display</li>
-<li><strong>suffix</strong> (<em>str</em>) &#8211; Suffix for value display</li>
-<li><strong>local</strong> (<em>boolean</em>) &#8211; True if the station(gage) sends this sensor&#8217;s data to the server.</li>
-<li><strong>remote_type</strong> (<em>str</em>) &#8211; Type of remote sensor. Currently only <code class="docutils literal"><span class="pre">'usgs'</span></code> is valid.</li>
-<li><strong>remote_id</strong> (<em>int</em>) &#8211; String element that should be used to query remote sensor.</li>
-<li><strong>remote_parameter</strong> (<em>str</em>) &#8211; Parameter that is required to query remote sensor.</li>
-<li><strong>last</strong> (<em>datetime</em>) &#8211; Last time data was received or retrieved.</li>
-<li><strong>title</strong> (<em>str</em>) &#8211; Title to display on plots.</li>
-<li><strong>xlabel</strong> (<em>str</em>) &#8211; x-axis label to display on plots.</li>
-<li><strong>ylabel</strong> (<em>str</em>) &#8211; y-axis label to display on plots.</li>
-<li><strong>info</strong> (<em>JSON</em>) &#8211; JSON with more detail about sensor for possible future use.</li>
-<li><strong>description</strong> (<em>text</em>) &#8211; Long description of sensor that can contain HTML or Markdown within reason.</li>
-<li><strong>backend_notes</strong> (<em>text</em>) &#8211; Backend info for admins.</li>
-<li><strong>minimum</strong> (<em>float</em>) &#8211; Lowest measurement of sensor. Used for plot formatting.</li>
-<li><strong>maximum</strong> (<em>float</em>) &#8211; Highest measurement of sensor. Used for plot formatting.</li>
-<li><strong>started</strong> (<em>datetime</em>) &#8211; Datetime that sample collection started.</li>
-<li><strong>ended</strong> (<em>datetime</em>) &#8211; Datetime that sample collection ended.</li>
-<li><strong>samples</strong> &#8211; List of <code class="docutils literal"><span class="pre">Sample</span></code> objects from Sensor.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="app.models.Sensor.recent">
-<code class="descname">recent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Sensor.recent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sensor.recent" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return recent sample value.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="app.models.Sensor.to_gage_json">
-<code class="descname">to_gage_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Sensor.to_gage_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sensor.to_gage_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a JSON object from sensor. Displayed with gage JSON and includes most recent sample.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="app.models.Sensor.to_json">
-<code class="descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Sensor.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sensor.to_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a JSON object from sensor. Used where multiple sensors may be displayed at once.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="app.models.Sensor.to_long_json">
-<code class="descname">to_long_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Sensor.to_long_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sensor.to_long_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a JSON object from sensor. Used where a single sensor will be displayed.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="app.models.Sensor.to_sample_json">
-<code class="descname">to_sample_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#Sensor.to_sample_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Sensor.to_sample_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a JSON object from sensor. Displayed with sample JSON and includes gage information.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="app.models.User">
-<em class="property">class </em><code class="descclassname">app.models.</code><code class="descname">User</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#User"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.User" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
-<p>User model</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>id</strong> (<em>int</em>) &#8211; Primary User Key</li>
-<li><strong>username</strong> (<em>str</em>) &#8211; Unique username as chosen by the user</li>
-<li><strong>email</strong> (<em>str</em>) &#8211; User&#8217;s email address</li>
-<li><strong>password_hash</strong> (<em>str</em>) &#8211; Users hashed password</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="app.models.User.verify_password">
-<code class="descname">verify_password</code><span class="sig-paren">(</span><em>password</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/models.html#User.verify_password"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.User.verify_password" title="Permalink to this definition">¶</a></dt>
-<dd><p>Verify&#8217;s user&#8217;s password against stored werkzeug.security hash.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>password</strong> (<em>str</em>) &#8211; password to check against stored hash</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
+<p>Importing the models from their seperate directories</p>
 </div>
 <div class="section" id="module-app">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-app" title="Permalink to this headline">¶</a></h2>
 <p>App builder. Can be imported and used to start the site</p>
 <dl class="function">
 <dt id="app.create_app">
-<code class="descclassname">app.</code><code class="descname">create_app</code><span class="sig-paren">(</span><em>config_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app.html#create_app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.create_app" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">app.</tt><tt class="descname">create_app</tt><big>(</big><em>config_name</em><big>)</big><a class="reference internal" href="../_modules/app.html#create_app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.create_app" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -728,10 +592,10 @@ section.outlatlon().x for longitude</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="app.admin.html" class="btn btn-neutral float-right" title="app.admin package"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="app.admin.html" class="btn btn-neutral float-right" title="app.admin package" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Gage-Web Reference"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="Gage-Web Reference" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -743,9 +607,10 @@ section.outlatlon().x for longitude</p>
         &copy; Copyright 2014, Alex Kerney.
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
+
         </div>
       </div>
 
@@ -769,7 +634,7 @@ section.outlatlon().x for longitude</p>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
