@@ -8,10 +8,6 @@ try:
     from StringIO import StringIO
 except ImportError:
     from io import StringIO
-import matplotlib
-matplotlib.use('Agg')
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-from matplotlib.figure import Figure
 
 from .blueprint import main
 from ..models import Gage, Sensor, Sample
@@ -30,7 +26,8 @@ class SensorPlot(object):
     def __init__(self, gid, stype):
         self.gid = gid
         self.stype = stype.lower()
-        self.sid = Sensor.query.filter_by(gage_id=self.gid).filter_by(stype=self.stype).first_or_404().id
+        self.sensor = Sensor.query.filter_by(gage_id=self.gid).filter_by(stype=self.stype).first_or_404()
+        self.sid = self.sensor.id
 
     def data(self):
         """
@@ -42,6 +39,11 @@ class SensorPlot(object):
         """
         Returns a matplotlib figure for building into a plot
         """
+        import matplotlib
+        matplotlib.use('Agg')
+        from matplotlib.figure import Figure
+        import seaborn as sns
+        sns.set()
         data = self.data()
         fig = Figure()
         ax = fig.add_subplot(1, 1, 1)
@@ -50,13 +52,27 @@ class SensorPlot(object):
         for sample in data:
             x.append(sample.datetime)
             y.append(sample.value)
+        ymin, ymax = min(y), max(y)
+        if ymin == ymax:
+            ybuff = 0.1*ymin
+        else:
+            ybuff = 0.1*(ymax-ymin)
         ax.plot(x, y, '-')
+        if self.sensor.minimum:
+            ax.set_ylim(ymin=self.sensor.minimum)
+        else:
+            ax.set_ylim(ymin=ymin-ybuff)
+        if self.sensor.maximum:
+            ax.set_ylim(ymax=self.sensor.maximum)
+        else:
+            ax.set_ylim(ymax=ymax+ybuff)
         return fig
 
     def png(self):
         """
         Returns a StringIO PNG plot for the sensor
         """
+        from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
         fig = self.matplot()
         canvas = FigureCanvas(fig)
         png_output = StringIO()
@@ -67,6 +83,7 @@ class SensorPlot(object):
         """
         Returns a StringIO JPG plot for the sensor
         """
+        from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
         fig = self.matplot()
         canvas = FigureCanvas(fig)
         jpg_output = StringIO()
