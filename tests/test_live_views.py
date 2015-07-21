@@ -33,3 +33,13 @@ class GageClient01(LiveServerBase):
         r = requests.get('{server}/gage/1/usgs-height.png'.format(
                 server=self.get_server_url()))
         assert 'image/png' == r.headers['content-type']
+
+    @pytest.mark.skipif(sys.version_info > (3,0),
+                        reason='python 3 issues')
+    def test_gage_plot_jpg(self):
+        """
+        Tests that a gage plot jpg can be generated
+        """
+        r = requests.get('{server}/gage/1/usgs-height.jpg'.format(
+                server=self.get_server_url()))
+        assert 'image/jpeg' == r.headers['content-type']
