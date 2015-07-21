@@ -140,7 +140,7 @@ def deploy():
     Push current master to production and restart gunicorn
     """
     with lcd(LOCAL_APP_DIR):
-        local('git push production develop')
+        local('git push production master')
         sudo('supervisorctl restart gage:*')
 
 
