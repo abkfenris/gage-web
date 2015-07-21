@@ -2,89 +2,149 @@
 Ways that a plot of a selected sensor can be displayed
 """
 
-from flask import make_response
+from flask import make_response, request
 import datetime
 try:
     from StringIO import StringIO
 except ImportError:
-    from io import StringIO
-import matplotlib
-matplotlib.use('Agg')
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-from matplotlib.figure import Figure
+    from io import BytesIO
 
 from .blueprint import main
-from ..models import Gage, Sensor, Sample
+from ..models import Sensor, Sample
+
+
+class SensorPlot(object):
+    """
+    Base plot object for Sensors
+
+    Arguments:
+        gid (int): Gage.id
+        stype (string): sensor type for gage
+
+    Currently supports matplotlib, but designed to be adaptable to support bokeh
+    or others
+
+    If ?start=YYYYMMDD(&end=YYYYMMDD) argument, then the plot will use those
+    dates instead of the default 7 days.
+    """
+    def __init__(self, gid, stype):
+        self.gid = gid
+        self.stype = stype.lower()
+        self.sensor = Sensor.query.filter_by(gage_id=self.gid).filter_by(stype=self.stype).first_or_404()
+        self.sid = self.sensor.id
+
+    def data(self):
+        """
+        Returns sensor data
+
+        Defaults to data within last seven days
+        """
+        start = request.args.get('start')
+        end = request.args.get('end')
+        if start:
+            start = datetime.datetime.strptime(start, '%Y%m%d')
+        if end:
+            end = datetime.datetime.strptime(end, '%Y%m%d')
+        if start and end:
+            return Sample.query.filter(start < Sample.datetime,
+                                       Sample.datetime < end,
+                                       Sample.sensor_id == self.sid)\
+                               .order_by(Sample.datetime)
+        if start:
+            return Sample.query.filter(start < Sample.datetime,
+                                       Sample.sensor_id == self.sid)\
+                               .order_by(Sample.datetime)
+        seven_ago = datetime.datetime.utcnow() - datetime.timedelta(days=7)
+        return Sample.query.filter(Sample.datetime > seven_ago,
+                                   Sample.sensor_id == self.sid)\
+                           .order_by(Sample.datetime)
+
+    def _setaxislimits(self, axis, ymin, ymax):
+        """
+        Set limits for y axis. If not set on sensor, then use a buffer of 10%
+        """
+        if ymin == ymax:
+            ybuff = 0.1*ymin
+        else:
+            ybuff = 0.1*(ymax-ymin)
+        if self.sensor.minimum:
+            axis.set_ylim(ymin=self.sensor.minimum)
+        else:
+            axis.set_ylim(ymin=ymin-ybuff)
+        if self.sensor.maximum:
+            axis.set_ylim(ymax=self.sensor.maximum)
+        else:
+            axis.set_ylim(ymax=ymax+ybuff)
+
+    def matplot(self):
+        """
+        Returns a matplotlib figure for building into a plot
+        """
+        import matplotlib
+        matplotlib.use('Agg')
+        from matplotlib.figure import Figure
+        import seaborn as sns
+        sns.set()
+        data = self.data()
+        fig = Figure()
+        ax = fig.add_subplot(1, 1, 1)
+        x = []
+        y = []
+        for sample in data:
+            x.append(sample.datetime)
+            y.append(sample.value)
+        ax.plot(x, y, '-')
+        self._setaxislimits(ax, min(y), max(y))
+        return fig
+
+    def png(self):
+        """
+        Returns a StringIO PNG plot for the sensor
+        """
+        from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+        fig = self.matplot()
+        canvas = FigureCanvas(fig)
+        try:
+            png_output = StringIO()
+        except NameError:
+            png_output = BytesIO()
+        canvas.print_png(png_output)
+        return png_output.getvalue()
+
+    def jpg(self):
+        """
+        Returns a StringIO JPG plot for the sensor
+        """
+        from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+        fig = self.matplot()
+        canvas = FigureCanvas(fig)
+        try:
+            jpg_output = StringIO()
+        except NameError:
+            jpg_output = BytesIO()
+        canvas.print_jpg(jpg_output)
+        return jpg_output.getvalue()
 
 
 @main.route('/gage/<int:gid>/<stype>.png')
-def gagesensorplot(gid,
-                   stype,
-                   days=7,
-                   start=None,
-                   end=None,
-                   minimum=None,
-                   low=None,
-                   medium=None,
-                   high=None,
-                   huge=None):
+def gagesensorplot(gid, stype):
     """**/gage/<id>/<sensor type>.png**
 
-    Draw a plot for the requested gage's sensor
-
-    Defaults to drawing the previous several days, but can draw a different
-    number or previous days, or by explicitly selecting a YYYYMMDD start and
-    end date can plot a custom range
+    Draw a PNG plot for the requested gage's sensor
     """
-    gage = Gage.query.get_or_404(gid)
-    sensor = Sensor.query.filter_by(gage_id=gage.id).filter_by(stype=stype.lower()).first_or_404()
-    if end is None:
-        date_end = datetime.datetime.utcnow()
-    else:
-        date_end = datetime.datetime.strptime(str(end), '%Y%m%d')
-
-    if start is None:
-        date_begin = datetime.datetime.utcnow() - datetime.timedelta(days=days)
-    else:
-        date_begin = datetime.datetime.strptime(str(start), '%Y%m%d')
-
-    date_pad = date_begin - datetime.timedelta(days=1)
-    date_range = date_end - date_begin
-    days = date_range.days
-    fig = Figure()
-    ax = fig.add_subplot(1, 1, 1)
-    ay = fig.add_subplot(1, 1, 1)
-    x = []
-    y = []  # need to figure out how to reverse axi
-    for sample in Sample.query\
-                        .filter_by(sensor_id=sensor.id)\
-                        .order_by(Sample.datetime):
-        x.append(sample.datetime)
-        y.append(sample.value)
-    ax.plot(x, y, '-')
-    if minimum is not None:
-        # Color the plot with correlation levels
-        ax.axhline(minimum, color="#888888")
-    if low is not None:
-        ax.axhline(low, color="#8a6d3b")
-    if medium is not None:
-        ax.axhline(medium, color="#3c763d")
-    if high is not None:
-        ax.axhline(high, color="#31708f")
-    if huge is not None:
-        ax.axhline(huge, color="#a94442")
-
-    # Figure out what we want to use as our sensor title
-    if sensor.title is None:
-        if sensor.name is None:
-            fig.suptitle('%s %s' % (gage.name, sensor.stype))
-        else:
-            fig.suptitle('%s %s' % (gage.name, sensor.name))
-    else:
-        fig.suptitle(sensor.title)
-    canvas = FigureCanvas(fig)
-    png_output = StringIO()
-    canvas.print_png(png_output)
-    response = make_response(png_output.getvalue())
+    response = make_response(SensorPlot(gid, stype).png())
     response.headers['Content-Type'] = 'image/png'
+    return response
+
+
+@main.route('/gage/<int:gid>/<stype>.jpg')
+@main.route('/gage/<int:gid>/<stype>.jpeg')
+def gagesensorplotjpg(gid, stype):
+    """**/gage/<id>/<sensor type>.jpg**
+    **/gage/<id>/<sensor type>.jpeg**
+
+    Draw a JPEG plot for the requested gage's sensor
+    """
+    response = make_response(SensorPlot(gid, stype).jpg())
+    response.headers['Content-Type'] = 'image/jpeg'
     return response

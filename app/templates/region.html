@@ -9,40 +9,40 @@
   			<p>{{ region.shortDescription }}</p>
   		</div>
   	</div>
-  	
+
   	<div class="container">
   		<div class="row">
 	  		<div class="col-md-8" role="main">
 	  			<p>{{ region.description }}</p>
-	  			
+
 	  			<h3>{{ region.name }} Rivers:</h3>
 	  			<div class="list-group">
-		  			{% for river in River.query.filter(River.regions.contains(region)) %}
+		  			{% for river in region.rivers.all() %}
 		  			<a href="{{ url_for('.riverpage', slug=river.slug ) }}" class="list-group-item">
 			  			{{ river.name }}
 		  			</a>
 		  			{% endfor %}
 	  			</div>
-	  			
+
 	  			<h3>{{ region.name }} Sections:</h3>
 	  			<div class="list-group">
-		  			{% for section in Section.query.filter(Section.regions.contains(region)) %}
+		  			{% for section in region.sections.all() %}
 		  			<a href="{{ url_for('.sectionpage', slug=section.slug ) }}" class="list-group-item">
 			  			{{ section.name }}
 		  			</a>
 		  			{% endfor %}
 	  			</div>
-		  			
-	  			
+
+
 	  			<h3>{{ region.name }} Gages:</h3>
 	  			<div class="list-group">
-	  				{% for gage in Gage.query.filter(Gage.regions.contains(region)) %}
-	  					<a href="{{ url_for('.gagepage', id=gage.id ) }}" class="list-group-item">
+	  				{% for gage in region.gages.all() %}
+	  					<a href="{{ url_for('.gagepage', slug=gage.slug ) }}" class="list-group-item">
 	  						{{ gage.name }}
 	  					</a>
 	  				{% endfor %}
 	  			</div>
-	  			
+
 	  			 <h3>Want more gages here?</h3>
 	  			 <p>Once we've left our real Alpha phase of development and testing, we will be definitely looking for other people to deploy gages in other regions. If you want to send data we'll be more than happy to display it. Check out the <a href="{{ url_for('.aboutpage' ) }}">About page</a> if you're interest in what goes into a gage and how you can help.</p>
 
@@ -75,7 +75,7 @@
 	  					<span class="badge alert-danger">Too High</span>
 	  				</li>
 	  			</ul>
-	  			
+
 	  			The arrows indicate the trend of the flow over the last hour or so
 	  			<ul class="list-group">
 	  				<li class="list-group-item">

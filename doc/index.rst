@@ -6,15 +6,23 @@
 Welcome to Gage-Web's documentation!
 ====================================
 
-Logging system built around gages which each have sensors who accept a single value per time.
+
+    .. include:: ../README.rst
+        :end-before: end-readme
+
+
+
+
+
 
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    api
    reference/index
+   developers/index
 
 .. automodule:: app
 
@@ -25,4 +33,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-

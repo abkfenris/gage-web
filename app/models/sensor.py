@@ -80,9 +80,9 @@ class Sensor(db.Model):
         """
         Return recent sample value.
         """
-        current_app.logger.info('Recent for sensor {name}'.format(name=self.name))
+        current_app.logger.debug('Recent for sensor {name}'.format(name=self.name))
         sample = Sample.query.filter_by(sensor_id=self.id).order_by(Sample.datetime.desc()).first()
-        current_app.logger.info('Retrieved sample: {sample}'.format(sample=sample))
+        current_app.logger.debug('Retrieved sample: {sample}'.format(sample=sample))
         return sample
 
     def to_json(self):

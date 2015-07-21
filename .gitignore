@@ -61,3 +61,4 @@ fabhosts.py
 tox.ini
 celerybeat.pid
 celerybeat-schedule
+dump.rdb
