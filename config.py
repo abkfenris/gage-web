@@ -13,6 +13,7 @@ class Config:
     SECURITY_POST_LOGIN_VIEW = 'admin/'
     SECURITY_CHANGEABLE = True
     CELERY_BROKER_URL = 'redis://localhost:6379/1'
+    SENTRY_USER_ATTRS = ['username', 'email']
 
     @staticmethod
     def init_app(app):

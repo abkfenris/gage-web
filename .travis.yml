@@ -18,7 +18,7 @@ before_install:
     # helpful for conda debugging
     - conda info -a
 install:
-    - conda create --yes -n gage-web python=$TRAVIS_PYTHON_VERSION pip numpy matplotlib
+    - conda create --yes -n gage-web python=$TRAVIS_PYTHON_VERSION pip numpy matplotlib pandas scipy seaborn
     - source activate gage-web
     - pip install -r requirements/travis.txt
 script: coverage run --source=app -m py.test -v
