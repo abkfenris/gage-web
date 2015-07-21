@@ -19,11 +19,13 @@ from ..models import Gage, Sensor, Sample
 
 class SensorPlot(object):
     """
-    Basic plotting structure
+    Base plot object for Sensors
 
     Arguments:
         gid (int): Gage.id
         stype (string): sensor type for gage
+
+    Currently supports matplotlib, but designed to be adaptable to support bokeh or others
     """
     def __init__(self, gid, stype):
         self.gid = gid
@@ -38,7 +40,7 @@ class SensorPlot(object):
 
     def matplot(self):
         """
-        Returns a figure for building into a plot
+        Returns a matplotlib figure for building into a plot
         """
         data = self.data()
         fig = Figure()
@@ -76,14 +78,9 @@ class SensorPlot(object):
 def gagesensorplot(gid, stype):
     """**/gage/<id>/<sensor type>.png**
 
-    Draw a plot for the requested gage's sensor
-
-    Defaults to drawing the previous several days, but can draw a different
-    number or previous days, or by explicitly selecting a YYYYMMDD start and
-    end date can plot a custom range
+    Draw a PNG plot for the requested gage's sensor
     """
-    plot = SensorPlot(gid, stype)
-    response = make_response(plot.png())
+    response = make_response(SensorPlot(gid, stype).png())
     response.headers['Content-Type'] = 'image/png'
     return response
 
@@ -92,14 +89,10 @@ def gagesensorplot(gid, stype):
 @main.route('/gage/<int:gid>/<stype>.jpeg')
 def gagesensorplotjpg(gid, stype):
     """**/gage/<id>/<sensor type>.jpg**
+    **/gage/<id>/<sensor type>.jpeg**
 
-    Draw a plot for the requested gage's sensor
-
-    Defaults to drawing the previous several days, but can draw a different
-    number or previous days, or by explicitly selecting a YYYYMMDD start and
-    end date can plot a custom range
+    Draw a JPEG plot for the requested gage's sensor
     """
-    plot = SensorPlot(gid, stype)
-    response = make_response(plot.jpg())
+    response = make_response(SensorPlot(gid, stype).jpg())
     response.headers['Content-Type'] = 'image/jpeg'
     return response
