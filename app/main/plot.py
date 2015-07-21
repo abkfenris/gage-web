@@ -2,7 +2,7 @@
 Ways that a plot of a selected sensor can be displayed
 """
 
-from flask import make_response
+from flask import make_response, request
 import datetime
 try:
     from StringIO import StringIO
@@ -10,7 +10,7 @@ except ImportError:
     from io import StringIO
 
 from .blueprint import main
-from ..models import Gage, Sensor, Sample
+from ..models import Sensor, Sample
 
 
 class SensorPlot(object):
@@ -21,7 +21,11 @@ class SensorPlot(object):
         gid (int): Gage.id
         stype (string): sensor type for gage
 
-    Currently supports matplotlib, but designed to be adaptable to support bokeh or others
+    Currently supports matplotlib, but designed to be adaptable to support bokeh
+    or others
+
+    If ?start=YYYYMMDD(&end=YYYYMMDD) argument, then the plot will use those
+    dates instead of the default 7 days.
     """
     def __init__(self, gid, stype):
         self.gid = gid
@@ -32,8 +36,45 @@ class SensorPlot(object):
     def data(self):
         """
         Returns sensor data
+
+        Defaults to data within last seven days
         """
-        return Sample.query.filter_by(sensor_id=self.sid).order_by(Sample.datetime)
+        start = request.args.get('start', None)
+        end = request.args.get('end', None)
+        if start:
+            start = datetime.datetime.strptime(start, '%Y%m%d')
+        if end:
+            end = datetime.datetime.strptime(end, '%Y%m%d')
+        if start and end:
+            return Sample.query.filter(start < Sample.datetime,
+                                       Sample.datetime < end,
+                                       Sample.sensor_id == self.sid)\
+                               .order_by(Sample.datetime)
+        if start:
+            return Sample.query.filter(start < Sample.datetime,
+                                       Sample.sensor_id == self.sid)\
+                               .order_by(Sample.datetime)
+        seven_ago = datetime.datetime.utcnow() - datetime.timedelta(days=7)
+        return Sample.query.filter(Sample.datetime > seven_ago,
+                                   Sample.sensor_id == self.sid)\
+                           .order_by(Sample.datetime)
+
+    def _setaxislimits(self, axis, ymin, ymax):
+        """
+        Set limits for y axis. If not set on sensor, then use a buffer of 10%
+        """
+        if ymin == ymax:
+            ybuff = 0.1*ymin
+        else:
+            ybuff = 0.1*(ymax-ymin)
+        if self.sensor.minimum:
+            axis.set_ylim(ymin=self.sensor.minimum)
+        else:
+            axis.set_ylim(ymin=ymin-ybuff)
+        if self.sensor.maximum:
+            axis.set_ylim(ymax=self.sensor.maximum)
+        else:
+            axis.set_ylim(ymax=ymax+ybuff)
 
     def matplot(self):
         """
@@ -52,20 +93,8 @@ class SensorPlot(object):
         for sample in data:
             x.append(sample.datetime)
             y.append(sample.value)
-        ymin, ymax = min(y), max(y)
-        if ymin == ymax:
-            ybuff = 0.1*ymin
-        else:
-            ybuff = 0.1*(ymax-ymin)
         ax.plot(x, y, '-')
-        if self.sensor.minimum:
-            ax.set_ylim(ymin=self.sensor.minimum)
-        else:
-            ax.set_ylim(ymin=ymin-ybuff)
-        if self.sensor.maximum:
-            ax.set_ylim(ymax=self.sensor.maximum)
-        else:
-            ax.set_ylim(ymax=ymax+ybuff)
+        self._setaxislimits(ax, min(y), max(y))
         return fig
 
     def png(self):
