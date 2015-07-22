@@ -12,7 +12,7 @@
   			<p>{{ river.short_description }}</p>
   		</div>
   	</div>
-  	
+
   	<div class="container">
   		<div class="row">
 	  		<div class="col-md-9" role="main">
@@ -31,7 +31,7 @@
 	  			<h2>Sections:</h2>
 	  			<div class="list-group">
 		  			{% for section in river.sections %}
-		  			<a href="{{ url_for('.sectionpage', slug=section.slug ) }}" class="list-group-item">
+		  			<a href="{{ url_for('.sectionpage', slug=section.slug, river=river.slug ) }}" class="list-group-item">
 			  			<h4 class="list-group-item-heading">{{ section.name }}</h4>
 			  			<p class="list-group-item-text">{{ section.short_description }}</p>
 		  			</a>

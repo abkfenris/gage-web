@@ -10,41 +10,20 @@ except ImportError:
     from io import BytesIO
 
 from .blueprint import main
-from ..models import Sensor, Sample
+from ..models import Gage, Sensor, Sample, Correlation
 
 
-class SensorPlot(object):
+class BasePlot(object):
     """
-    Base plot object for Sensors
-
-    Arguments:
-        gid (int): Gage.id
-        stype (string): sensor type for gage
-
-    Currently supports matplotlib, but designed to be adaptable to support bokeh
-    or others
-
-    If ?start=YYYYMMDD(&end=YYYYMMDD) argument, then the plot will use those
-    dates instead of the default 7 days.
+    Base class for all plots
     """
-    def __init__(self, gid, stype):
-        self.gid = gid
-        self.stype = stype.lower()
-        self.sensor = Sensor.query.filter_by(gage_id=self.gid).filter_by(stype=self.stype).first_or_404()
-        self.sid = self.sensor.id
-
     def data(self):
         """
         Returns sensor data
 
         Defaults to data within last seven days
         """
-        start = request.args.get('start')
-        end = request.args.get('end')
-        if start:
-            start = datetime.datetime.strptime(start, '%Y%m%d')
-        if end:
-            end = datetime.datetime.strptime(end, '%Y%m%d')
+        start, end = self.startend()
         if start and end:
             return Sample.query.filter(start < Sample.datetime,
                                        Sample.datetime < end,
@@ -58,6 +37,19 @@ class SensorPlot(object):
         return Sample.query.filter(Sample.datetime > seven_ago,
                                    Sample.sensor_id == self.sid)\
                            .order_by(Sample.datetime)
+
+    def startend(self):
+        """
+        Return datetime objects if start and end arguments are in url.
+        Otherwise return None.
+        """
+        start = request.args.get('start')
+        end = request.args.get('end')
+        if start:
+            start = datetime.datetime.strptime(start, '%Y%m%d')
+        if end:
+            end = datetime.datetime.strptime(end, '%Y%m%d')
+        return (start, end)
 
     def _setaxislimits(self, axis, ymin, ymax):
         """
@@ -75,27 +67,6 @@ class SensorPlot(object):
             axis.set_ylim(ymax=self.sensor.maximum)
         else:
             axis.set_ylim(ymax=ymax+ybuff)
-
-    def matplot(self):
-        """
-        Returns a matplotlib figure for building into a plot
-        """
-        import matplotlib
-        matplotlib.use('Agg')
-        from matplotlib.figure import Figure
-        import seaborn as sns
-        sns.set()
-        data = self.data()
-        fig = Figure()
-        ax = fig.add_subplot(1, 1, 1)
-        x = []
-        y = []
-        for sample in data:
-            x.append(sample.datetime)
-            y.append(sample.value)
-        ax.plot(x, y, '-')
-        self._setaxislimits(ax, min(y), max(y))
-        return fig
 
     def png(self):
         """
@@ -125,13 +96,80 @@ class SensorPlot(object):
         canvas.print_jpg(jpg_output)
         return jpg_output.getvalue()
 
+    def matplot(self):
+        """
+        Returns a matplotlib figure for building into a plot
+        """
+        import matplotlib
+        matplotlib.use('Agg')
+        from matplotlib.figure import Figure
+        import seaborn as sns
+        sns.set()
+        data = self.data()
+        fig = Figure()
+        ax = fig.add_subplot(1, 1, 1)
+        x = []
+        y = []
+        for sample in data:
+            x.append(sample.datetime)
+            y.append(sample.value)
+        ax.plot(x, y, '-')
+        self._setaxislimits(ax, min(y), max(y))
+        return fig
+
+
+class SensorPlot(BasePlot):
+    """
+    Plot class for Sensors
+
+    Arguments:
+        gid (int): Gage.id
+        stype (string): sensor type for gage
+
+    Currently supports matplotlib, but designed to be adaptable to support bokeh
+    or others
+
+    If ?start=YYYYMMDD(&end=YYYYMMDD) argument, then the plot will use those
+    dates instead of the default 7 days.
+    """
+    def __init__(self, gid, stype):
+        self.gid = gid
+        self.stype = stype.lower()
+        self.sensor = Sensor.query.filter_by(gage_id=self.gid).filter_by(stype=self.stype).first_or_404()
+        self.sid = self.sensor.id
+
+
+class CorrelationPlot(BasePlot):
+    """
+    Plot class for correlations
+    """
+    def __init__(self, section_id, sensor_id):
+        self.section_id = section_id
+        self.correlation = Correlation.query.filter_by(section_id=section_id)\
+                                            .filter_by(sensor_id=sensor_id)
+        self.sensor = self.correlation.sensors
+        self.sid = self.sensor.id
+
+    def levels(self):
+        """
+        Return the correlated levels
+        """
+        return (self.correlation.minimum,
+                self.correlation.low,
+                self.correlation.medium,
+                self.correlation.high,
+                self.correlation.huge)
+
 
 @main.route('/gage/<int:gid>/<stype>.png')
-def gagesensorplot(gid, stype):
+@main.route('/gage/<slug>/<stype>.png')
+def gagesensorplot(stype, gid=None, slug=None):
     """**/gage/<id>/<sensor type>.png**
 
     Draw a PNG plot for the requested gage's sensor
     """
+    if slug:
+        gid = Gage.query.filter_by(slug=slug).first_or_404().id
     response = make_response(SensorPlot(gid, stype).png())
     response.headers['Content-Type'] = 'image/png'
     return response
@@ -139,12 +177,16 @@ def gagesensorplot(gid, stype):
 
 @main.route('/gage/<int:gid>/<stype>.jpg')
 @main.route('/gage/<int:gid>/<stype>.jpeg')
-def gagesensorplotjpg(gid, stype):
+@main.route('/gage/<slug>/stype.jpeg')
+@main.route('/gage/<slug>/stype.jpg')
+def gagesensorplotjpg(stype, gid=None, slug=None):
     """**/gage/<id>/<sensor type>.jpg**
     **/gage/<id>/<sensor type>.jpeg**
 
     Draw a JPEG plot for the requested gage's sensor
     """
+    if slug:
+        gid = Gage.query.filter_by(slug=slug).first_or_404().id
     response = make_response(SensorPlot(gid, stype).jpg())
     response.headers['Content-Type'] = 'image/jpeg'
     return response
