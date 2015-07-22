@@ -10,7 +10,7 @@ except ImportError:
     from io import BytesIO
 
 from .blueprint import main
-from ..models import Gage, Sensor, Sample, Correlation
+from ..models import Gage, Sensor, Sample, Correlation, River, Section
 
 
 class BasePlot(object):
@@ -96,9 +96,9 @@ class BasePlot(object):
         canvas.print_jpg(jpg_output)
         return jpg_output.getvalue()
 
-    def matplot(self):
+    def _axisfigure(self):
         """
-        Returns a matplotlib figure for building into a plot
+        Returns axis and figure
         """
         import matplotlib
         matplotlib.use('Agg')
@@ -115,6 +115,13 @@ class BasePlot(object):
             y.append(sample.value)
         ax.plot(x, y, '-')
         self._setaxislimits(ax, min(y), max(y))
+        return ax, fig
+
+    def matplot(self):
+        """
+        Returns a matplotlib figure for building into a plot
+        """
+        ax, fig = self._axisfigure()
         return fig
 
 
@@ -146,9 +153,10 @@ class CorrelationPlot(BasePlot):
     def __init__(self, section_id, sensor_id):
         self.section_id = section_id
         self.correlation = Correlation.query.filter_by(section_id=section_id)\
-                                            .filter_by(sensor_id=sensor_id)
-        self.sensor = self.correlation.sensors
-        self.sid = self.sensor.id
+                                            .filter_by(sensor_id=sensor_id)\
+                                            .first_or_404()
+        self.sid = sensor_id
+        self.sensor = self.correlation.sensor
 
     def levels(self):
         """
@@ -159,6 +167,21 @@ class CorrelationPlot(BasePlot):
                 self.correlation.medium,
                 self.correlation.high,
                 self.correlation.huge)
+
+    def matplot(self):
+        ax, fig = self._axisfigure()
+        lmin, llow, lmed, lhig, lhug = self.levels()
+        if lmin:
+            ax.axhline(y=lmin, color='#ffffff', lw=8, ls='dashed', zorder=1)
+        if llow:
+            ax.axhline(y=llow, color='#fcf8e3', lw=8, ls='dashed', zorder=1)
+        if lmed:
+            ax.axhline(y=lmed, color='#dff0d8', lw=8, ls='dashed', zorder=1)
+        if lhig:
+            ax.axhline(y=lhig, color='#d9edf7', lw=8, ls='dashed', zorder=1)
+        if lhug:
+            ax.axhline(y=lhug, color='#f2dede', lw=8, ls='dashed', zorder=1)
+        return fig
 
 
 @main.route('/gage/<int:gid>/<stype>.png')
@@ -189,4 +212,21 @@ def gagesensorplotjpg(stype, gid=None, slug=None):
         gid = Gage.query.filter_by(slug=slug).first_or_404().id
     response = make_response(SensorPlot(gid, stype).jpg())
     response.headers['Content-Type'] = 'image/jpeg'
+    return response
+
+
+@main.route('/river/<river>/<section>/<gage>/<stype>.png')
+def correlationplotpng(stype, gage, section, river):
+    correlation = Correlation.query.join(Correlation.sensor)\
+                                   .join(Sensor.gage)\
+                                   .join(Correlation.section)\
+                                   .join(Section.river)\
+                                   .filter(River.slug==river,
+                                           Section.slug==section,
+                                           Sensor.stype==stype,
+                                           Gage.slug==gage)\
+                                   .first_or_404()
+    print(correlation)
+    response = make_response(CorrelationPlot(correlation.section.id, correlation.sensor.id).png())
+    response.headers['Content-Type'] = 'image/png'
     return response
