@@ -52,7 +52,7 @@
 
 	  				{% for correlation in section.correlations %}
 	  				<div class="tab-pane" id="{{ correlation.sensor.stype}}">
-		  				<img src="{{ url_for('.gagesensorplot', id=correlation.sensor.gage_id, stype=correlation.sensor.stype ) }}" class="img-responsive">
+		  				<img src="{{ url_for('.correlationplotpng', stype=correlation.sensor.stype, gage=correlation.sensor.gage.slug, section=correlation.section.slug, river=correlation.section.river.slug ) }}" class="img-responsive">
 	  				</div>
 	  				{% endfor %}
 

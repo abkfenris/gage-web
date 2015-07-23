@@ -58,6 +58,7 @@ class TestPlot(BasicTestCase):
     def test_plot_png(self):
         """
         Test that SensorPlot.png() will return a PNG
+        And route will return a PNG
         """
         with self.app.test_request_context('/gage/1/usgs-height.png'):
             self.plot = plot.SensorPlot(gid=1, stype='usgs-height')
@@ -66,12 +67,44 @@ class TestPlot(BasicTestCase):
                 assert 'PNG' in self.png
             else:
                 assert 'PNG' in str(self.png)
+        rv = self.client.get('/gage/1/usgs-height.png')
+        assert rv.status_code == 200
+        assert rv.content_type == 'image/png'
 
     def test_plot_jpg(self):
         """
-        Test that SensorPlot.png() will return a JPEG
+        Test that SensorPlot.jpg() will return a JPEG
+        And route will return a JPEG
         """
         with self.app.test_request_context('/gage/1/usgs-height.jpg'):
             self.plot = plot.SensorPlot(gid=1, stype='usgs-height')
             self.jpg = self.plot.jpg()
             assert 'JFIF' in str(self.jpg)
+        rv = self.client.get('/gage/1/usgs-height.jpg')
+        assert rv.status_code == 200
+        assert rv.content_type == 'image/jpeg'
+
+    def test_plot_args(self):
+        """
+        Test that SensorPlot will return a PNG when given start and end
+        time arguments
+        """
+        with self.app.test_request_context('/gage/1/usgs-height.png?start=20150710'):
+            assert request.args['start'] == '20150710'
+        rv = self.client.get('/gage/1/usgs-height.png?start=20150710')
+        assert rv.status_code == 200
+        assert rv.content_type == 'image/png'
+        with self.app.test_request_context('/gage/1/usgs-height.png?start=20150710&end=20160720'):
+            assert request.args['start'] == '20150710'
+            assert request.args['end'] == '20160720'
+        rv = self.client.get('/gage/1/usgs-height.png?start=20150710&end=20160720')
+        assert rv.status_code == 200
+        assert rv.content_type == 'image/png'
+
+    def test_correlation_plot(self):
+        """
+        Test that a correlation plot will draw
+        """
+        rv = self.client.get('/river/wild-river/hasting-to-gilead/wild-river-gilead/usgs-height.png')
+        assert rv.status_code == 200
+        assert rv.content_type == 'image/png'

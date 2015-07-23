@@ -1,14 +1,15 @@
 from flask import redirect, url_for
 from flask_admin import Admin, AdminIndexView, expose
-from flask.ext.admin.contrib.geoa import ModelView as _ModelView
+from flask_admin.contrib.geoa import ModelView as _ModelView
 from flask_admin.base import MenuLink
-from flask.ext.admin.contrib.fileadmin import FileAdmin as _FileAdmin
+from flask_admin.model import InlineFormAdmin
+from flask_admin.contrib.fileadmin import FileAdmin as _FileAdmin
 from flask_security import (roles_required,
                             current_user)
 import os.path as op
 
 from ..database import db
-from ..models import User, Region, River, Section, Gage, Sensor
+from ..models import User, Region, River, Section, Gage, Sensor, Correlation
 
 path = op.join(op.dirname(__file__), '../static/images')
 
@@ -39,6 +40,10 @@ class UserView(ModelView):
         return current_user.has_role('admin')
 
 
+class CorrelationInlineView(InlineFormAdmin):
+    pass
+
+
 class SectionView(ModelView):
     column_list = ('name', 'path', 'slug', 'river', 'location')
     column_labels = dict(slug='URL Slug')
@@ -46,6 +51,7 @@ class SectionView(ModelView):
     form_widget_args = {'putin': h_w,
                         'takeout': h_w,
                         'path': h_w}
+    #inline_models = (Correlation,)
 
 
 class GageView(ModelView):
@@ -68,6 +74,10 @@ class GageView(ModelView):
                               'location')
     # inline_models = (Sensor,)
     form_widget_args = {'point': h_w}
+
+
+class SensorView(ModelView):
+    form_excluded_columns = ['samples']
 
 
 class MyAdminIndexView(AdminIndexView):
@@ -93,7 +103,8 @@ admin.add_view(ModelView(Region, db.session))
 admin.add_view(ModelView(River, db.session))
 admin.add_view(SectionView(Section, db.session))
 admin.add_view(GageView(Gage, db.session))
-admin.add_view(ModelView(Sensor, db.session))
+admin.add_view(SensorView(Sensor, db.session))
+admin.add_view(ModelView(Correlation, db.session))
 admin.add_view(FileAdmin(path, '/static/images/', name='Images'))
 admin.add_link(AuthenticatedMenuLink(name='Logout',
                                      endpoint='security.logout'))
