@@ -38,7 +38,8 @@ class BasePlot(object):
                                    Sample.sensor_id == self.sid)\
                            .order_by(Sample.datetime)
 
-    def startend(self):
+    @staticmethod
+    def startend():
         """
         Return datetime objects if start and end arguments are in url.
         Otherwise return None.
