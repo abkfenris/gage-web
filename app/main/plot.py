@@ -115,6 +115,10 @@ class BasePlot(object):
             y.append(sample.value)
         ax.plot(x, y, '-')
         self._setaxislimits(ax, min(y), max(y))
+        if self.sensor.name:
+            ax.set_title('{0} - {1}'.format(self.sensor.gage.name, self.sensor.name))
+        else:
+            ax.set_title('{0} - {1}'.format(self.sensor.gage.name, self.sensor.stype.capitalize()))
         return ax, fig
 
     def matplot(self):
