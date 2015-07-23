@@ -23,14 +23,14 @@ class BasicTestCase(unittest.TestCase):
         andro = River(name='Androscoggin River',
                       slug='androscoggin')
         wild = River(name='Wild River of the Androsoggin',
-                     slug='wild-androscoggin',
+                     slug='wild-river',
                      parent=andro)
         db.session.add(andro)
         db.session.add(wild)
 
         # Create a section
         wild_section = Section(name='Wild River from Hastings',
-                               slug='wild-river',
+                               slug='hasting-to-gilead',
                                river=wild,
                                putin='SRID=4326;POINT(-71.05996191501617 44.31595096222731)',
                                takeout='SRID=4326;POINT(-70.97963511943817 44.390833083196924)',
@@ -84,6 +84,14 @@ class BasicTestCase(unittest.TestCase):
                              datetime=datetime.datetime.now(),
                              value=5.8)
         db.session.add(wild_sample)
+        wild_correlation = Correlation(sensor=wild_sensor,
+                                       section=wild_section,
+                                       minimum=3.5,
+                                       low=4.0,
+                                       medium=5.0,
+                                       high=6.0,
+                                       huge=9.0)
+        db.session.add(wild_correlation)
         db.session.commit()
 
         # Create a correlation

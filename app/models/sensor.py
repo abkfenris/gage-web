@@ -147,4 +147,4 @@ class Sensor(db.Model):
         return json_sensor
 
     def __repr__(self):
-        return '<Sensor %r>' % self.id
+        return '<Sensor {0} - {1}>'.format(self.gage.name, self.stype)

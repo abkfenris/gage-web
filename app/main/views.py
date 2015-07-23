@@ -93,16 +93,18 @@ def sectionspage():
 
 
 @main.route('/section/<int:sid>/')
-@main.route('/section/<slug>')
-def sectionpage(sid=None, slug=None):
+@main.route('/river/<river>/<slug>/')
+def sectionpage(sid=None, slug=None, river=None):
     """**/section/<slug>/**
 
     Individual section page
     """
-    if slug is None:
-        section = Section.query.get_or_404(sid)
+    if river and slug:
+        section = Section.query.join(Section.river).filter(River.slug==river)\
+                                                   .filter(Section.slug==slug)\
+                                                   .first_or_404()
     else:
-        section = Section.query.filter_by(slug=slug).first_or_404()
+        section = Section.query.get_or_404(sid)
     return render_template('section.html',
                            Gage=Gage,
                            Section=Section,

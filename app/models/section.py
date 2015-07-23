@@ -97,6 +97,7 @@ class Section(db.Model):
             'name': self.name,
             'html': url_for('main.sectionpage',
                             slug=self.slug,
+                            river=self.river.slug,
                             _external=True),
             'url': url_for('api.get_section',
                            sid=self.id,
@@ -113,7 +114,9 @@ class Section(db.Model):
             'id': self.id,
             'name': self.name,
             'html': url_for('main.sectionpage',
-                            slug=self.slug, _external=True),
+                            slug=self.slug,
+                            river=self.river.slug,
+                            _external=True),
             'url': url_for('api.get_section', sid=self.id, _external=True),
             'regions': [region.to_json() for region in self.regions],
             'sensors': [correlation.sensor.to_json()
