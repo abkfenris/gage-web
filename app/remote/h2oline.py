@@ -73,8 +73,7 @@ def natural_to_datetime(timestring):
     t = cal.parse(timestring)
     dt = datetime.datetime(*t[0][0:7])
     # If the datetime parsed is not within 7 days of today just use right now
-    if (dt < (datetime.datetime.now() + datetime.timedelta(days=7)) or
-       dt > (datetime.datetime.now() - datetime.timedelta(days=7))):
+    if (dt > (datetime.datetime.now() - datetime.timedelta(days=1))):
         current_app.logger.info('Found {0}'.format(str(dt)))
         return dt
     else:
