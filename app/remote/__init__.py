@@ -33,15 +33,17 @@ def add_new_sample(sensor_id, dt, svalue, deltaminutes=10):
                     dt,
                     sensor_id)
     else:
-        message = ('Discarded sample ({0} - {1}) for sensor {2}, compared to ({3} - {4})'
-                   .format(svalue, dt,
-                           sensor_id,
-                           sample.value,
-                           sample.datetime))
+        message = ''
         if sample.datetime == dt.replace(tzinfo=None):
-            message = message + ' Sample times are the same.'
+            message = message + 'Sample times are the same. '
         if sample.datetime < delta:
-            message = message + ' Last sample was more than {0} min ago'.format(deltaminutes)
+            message = message + 'Last sample was more than {0} min ago '.format(deltaminutes)
         else:
-            message = message + ' Last sample was less than {0} min ago'.format(deltaminutes)
-        logger.warning(message)
+            message = message + 'Last sample was less than {0} min ago '.format(deltaminutes)
+        logger.warning('Discarded sample (%s - %s) for sensor %s, compared to (%s - %s). %s',
+                       svalue,
+                       dt,
+                       sensor_id,
+                       sample.value,
+                       sample.datetime,
+                       message)
