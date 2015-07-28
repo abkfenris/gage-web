@@ -30,4 +30,4 @@ export PYTHONPATH=$FLASKDIR:$PYTHONPATH
 
 cd $FLASKDIR
 
-exec celery beat -A celery_worker.celery -l info --pidfile=/tmp/celerybeat-myapp.pid
+exec celery beat -A celery_worker.celery -l info --pidfile=/tmp/celerybeat-myapp.pid -f /home/www/logs/gage-web/celery-beat.log

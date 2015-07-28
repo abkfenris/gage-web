@@ -2,16 +2,17 @@
 Get flows (and other parameters) from h2oline.com sites
 """
 import datetime
+import logging
 import re
 
 from bs4 import BeautifulSoup
-from flask import current_app
 import requests
 import parsedatetime
 
 from app.models import Sensor
 from . import add_new_sample
 
+logger = logging.getLogger(__name__)
 
 def get_soup(site_num):
     """
@@ -73,14 +74,16 @@ def natural_to_datetime(timestring):
     t = cal.parse(timestring)
     dt = datetime.datetime(*t[0][0:7])
     # If the datetime parsed is not within 7 days of today just use right now
-    if (dt < (datetime.datetime.now() + datetime.timedelta(days=7)) or
-       dt > (datetime.datetime.now() - datetime.timedelta(days=7))):
-        current_app.logger.info('Found {0}'.format(str(dt)))
+    if (dt > (datetime.datetime.now() - datetime.timedelta(days=1))):
+        message = 'Found {0}'.format(str(dt))
+        print(message)
+        logger.info(message)
         return dt
     else:
-        current_app.logger.warning('Unable to find a valid date within "{}".'
-                                   .format(timestring) + 'Found {} instead'
-                                   .format(str(dt)))
+        message = ('Unable to find a valid date within "{0}". Found {1} instead'
+                   .format(timestring, str(dt)))
+        print(message)
+        logger.warning(message)
         return datetime.datetime.now()
 
 
@@ -93,7 +96,7 @@ def get_dt_cfs(site_num, parameter='CFS', soup=None):
     else:
         cfs_strings = get_cfs_strings(site_num, parameter=parameter, soup=soup)
     start, end = get_parameter_start_end(cfs_strings[0], parameter)
-    dt = natural_to_datetime(cfs_strings[0][:start])
+    dt = datetime.datetime.now()
     return dt, float(cfs_strings[0][start:end])
 
 

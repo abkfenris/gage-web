@@ -1,7 +1,10 @@
 import datetime
+import logging
 
 from app.database import db
 from app.models import Sample
+
+logger = logging.getLogger(__name__)
 
 
 def add_new_sample(sensor_id, dt, svalue, deltaminutes=10):
@@ -24,3 +27,21 @@ def add_new_sample(sensor_id, dt, svalue, deltaminutes=10):
                             datetime=dt)
         db.session.add(new_sample)
         db.session.commit()
+        logger.info('Saved sample (%s - %s - %s) for sensor %s',
+                    new_sample.id,
+                    svalue,
+                    dt,
+                    sensor_id)
+    else:
+        message = ('Discarded sample ({0} - {1}) for sensor {2}, compared to ({3} - {4})'
+                   .format(svalue, dt,
+                           sensor_id,
+                           sample.value,
+                           sample.datetime))
+        if sample.datetime == dt.replace(tzinfo=None):
+            message = message + ' Sample times are the same.'
+        if sample.datetime < delta:
+            message = message + ' Last sample was more than {0} min ago'.format(deltaminutes)
+        else:
+            message = message + ' Last sample was less than {0} min ago'.format(deltaminutes)
+        logger.warning(message)

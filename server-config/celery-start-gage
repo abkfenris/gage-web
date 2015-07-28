@@ -30,4 +30,4 @@ export PYTHONPATH=$FLASKDIR:$PYTHONPATH
 
 cd $FLASKDIR
 
-exec celery worker -A celery_worker.celery --loglevel=info
+exec celery worker -A celery_worker.celery --loglevel=info -f /home/www/logs/gage-web/celery-worker.log
