@@ -1,6 +1,8 @@
 """
 Celery tasks for fetching remote samples
 """
+import logging
+
 from celery.task.schedules import crontab
 from celery.decorators import periodic_task
 
@@ -8,12 +10,16 @@ from app.models import Sensor
 from app.remote import h2oline, usgs
 from app.celery import celery
 
+logger = logging.getLogger(__name__)
+
 
 @celery.task
 def fetch_usgs_level_samples_chunk(sensor_id_list):
     """
     Fetch an individual chunk of samples from the usgs sensors
     """
+    logger.info('Fetching multiple USGS level samples for sensors {0}'
+                .format(sensor_id_list))
     usgs.get_multiple_level(sensor_id_list)
 
 
@@ -40,6 +46,7 @@ def fetch_usgs_other_sample(sensor_id):
     """
     Fetch other types of USGS samples, 1 sensor at a time
     """
+    logger.info('Fetching USGS samples for {0}'.format(sensor_id))
     usgs.get_other_sample(sensor_id)
 
 
@@ -48,6 +55,7 @@ def fetch_h2oline_sample(sensor_id):
     """
     Fetch h2oline sample
     """
+    logger.info('Fetching H2Oline samples for {0}'.format(sensor_id))
     h2oline.get_sample(sensor_id)
 
 
@@ -59,6 +67,7 @@ def fetch_remote_samples():
     Create tasks for all remote sensors to be updated
     """
     # Fetch remote USGS level gages
+    logger.info('Fetching remote samples')
     usgs_level_sensors = Sensor.query.filter_by(local=False,
                                                 remote_type='usgs',
                                                 remote_parameter=None)\
