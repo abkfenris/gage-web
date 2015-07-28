@@ -18,8 +18,8 @@ def fetch_usgs_level_samples_chunk(sensor_id_list):
     """
     Fetch an individual chunk of samples from the usgs sensors
     """
-    logger.info('Fetching multiple USGS level samples for sensors {0}'
-                .format(sensor_id_list))
+    logger.info('Fetching multiple USGS level samples for sensors %s',
+                sensor_id_list)
     usgs.get_multiple_level(sensor_id_list)
 
 
@@ -46,7 +46,7 @@ def fetch_usgs_other_sample(sensor_id):
     """
     Fetch other types of USGS samples, 1 sensor at a time
     """
-    logger.info('Fetching USGS samples for {0}'.format(sensor_id))
+    logger.info('Fetching USGS samples for %s', sensor_id)
     usgs.get_other_sample(sensor_id)
 
 
@@ -55,7 +55,7 @@ def fetch_h2oline_sample(sensor_id):
     """
     Fetch h2oline sample
     """
-    logger.info('Fetching H2Oline samples for {0}'.format(sensor_id))
+    logger.info('Fetching H2Oline samples for %s', sensor_id)
     h2oline.get_sample(sensor_id)
 
 

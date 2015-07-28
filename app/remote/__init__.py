@@ -20,18 +20,18 @@ def add_new_sample(sensor_id, dt, svalue, deltaminutes=10):
     delta = datetime.datetime.now() - datetime.timedelta(minutes=deltaminutes)
     sample = Sample.query.filter_by(sensor_id=sensor_id)\
                          .order_by(Sample.datetime.desc()).first()
-    if sample is None or (sample.datetime > delta and
+    if sample is None or (sample.datetime < delta and
                           (sample.datetime != dt.replace(tzinfo=None))):
         new_sample = Sample(sensor_id=sensor_id,
                             value=svalue,
                             datetime=dt)
         db.session.add(new_sample)
         db.session.commit()
-        logger.info('Saved sample ({0} - {1} - {2}) for sensor {3}'
-                                .format(new_sample.id,
-                                        svalue,
-                                        dt,
-                                        sensor_id))
+        logger.info('Saved sample (%s - %s - %s) for sensor %s',
+                    new_sample.id,
+                    svalue,
+                    dt,
+                    sensor_id)
     else:
         message = ('Discarded sample ({0} - {1}) for sensor {2}, compared to ({3} - {4})'
                    .format(svalue, dt,
