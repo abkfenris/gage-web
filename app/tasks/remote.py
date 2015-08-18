@@ -7,7 +7,7 @@ from celery.task.schedules import crontab
 from celery.decorators import periodic_task
 
 from app.models import Sensor
-from app.remote import h2oline, usgs
+from app.remote import h2oline, usgs, cehq
 from app.celery import celery
 
 logger = logging.getLogger(__name__)
@@ -59,6 +59,15 @@ def fetch_h2oline_sample(sensor_id):
     h2oline.get_sample(sensor_id)
 
 
+@celery.task
+def fetch_cehq_sample(sensor_id):
+    """
+    Fetch cehq sample
+    """
+    logger.info('Fetching CEHQ samples for %s', sensor_id)
+    cehq.get_sample(sensor_id)
+
+
 @periodic_task(run_every=(crontab(minute='*/15')),
                name='fetch_remote_samples',
                ignore_result=True)
@@ -81,6 +90,13 @@ def fetch_remote_samples():
                                      .with_entities(Sensor.id).all()
     for sensor in usgs_other_sensors:
         fetch_usgs_other_sample.delay(sensor[0])
+
+    # Fetch CEHQ gages
+    cehq_remote_sensors = Sensor.query.filter(Sensor.local == False,
+                                              Sensor.remote_type == 'cehq')\
+                                      .with_entities(Sensor.id).all()
+    for sensor in cehq_remote_sensors:
+        fetch_cehq_sample.delay(sensor[0])
 
     # Fetch h2oline gages
     other_remote_sensors = Sensor.query.filter(Sensor.local == False,
