@@ -6,6 +6,7 @@ import arrow
 
 from app.models import Sensor
 from . import add_new_sample
+from .base import add_new_sample, RemoteGage
 
 URLBASE = 'http://waterservices.usgs.gov/nwis/iv/?format=json,1.1'
 

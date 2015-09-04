@@ -6,7 +6,7 @@ import logging
 import requests
 
 from app.models import Sensor
-from . import add_new_sample
+from .base import add_new_sample
 
 logger = logging.getLogger(__name__)
 
