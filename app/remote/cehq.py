@@ -39,18 +39,6 @@ class CEHQ(RemoteGage):
 c = CEHQ()
 
 
-def get_response(site_num):
-    """
-    Retrieve a requests.Response object for the plain text representation of a
-    Quebec CEHQ gage
-    """
-    return c.response(site_num)
-
-
-def get_recent_flow(site_num):
-    return c.recent_flow(site_num)
-
-
 def get_sample(sensor_id):
     """
     Takes a sensor id, tries to retrieve the latest sample from the site

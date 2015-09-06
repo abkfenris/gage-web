@@ -85,6 +85,11 @@ class BasicTestCase(unittest.TestCase):
                               stype='cawater-level',
                               local=False, remote_type='cawater',
                               remote_id='NL_02YL012')
+        cheakamus_discharge = Sensor(name='Cheakamus Discharge',
+                                     stype='cawater-discharge',
+                                     local=False, remote_type='cawater',
+                                     remote_id='BC_08GA043',
+                                     remote_parameter='discharge')
         canaseraga_stage = Sensor(name='Canaseraga Creek',
                                   stype='canaseraga-stage',
                                   local=False, remote_type='corps',

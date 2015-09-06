@@ -5,6 +5,7 @@ Sample.remote_id should be in the form of 2 Letter Province code, underscore,
 then site number. e.g.:
 The Cheticamp River (http://wateroffice.ec.gc.ca/report/report_e.html?type=realTime&stn=01FC002)
 would be NS_01FC002
+If discharge is prefered set the remote_parameter to discharge
 """
 import csv
 
@@ -30,10 +31,7 @@ class WaterOffice(RemoteGage):
             lines.append(row)
         last = lines[-1]
         print(last)
-        try:
-            level = float(last[2])
-        except ValueError:
-            level = None
+        level = float(last[2])
         try:
             discharge = float(last[6])
         except ValueError:
