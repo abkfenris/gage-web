@@ -57,7 +57,7 @@ class RemoteGage(object):
         """
         Returns selected sensor object
         """
-        return Sensor.query.filter(Sensor.id == sensor_id).first()
+        return Sensor.query.get(sensor_id)
 
     def get_sample(self, sensor_id):
         """

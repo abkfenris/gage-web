@@ -30,6 +30,19 @@ class USGS(RemoteGage):
         v = float(value['value'])
         return dt, v
 
+    def get_sample(self, sensor_id):
+        """
+        Takes a sensor id, tries to ge thte latest sample from the site
+        """
+        sensor = self.sensor(sensor_id)
+        parameter = (sensor.remote_parameter or '00065')
+        url = (self.URLBASE +
+               '&sites=' + sensor.remote_id +
+               '&parameterCD=' + parameter)
+        site = requests.get(url).json()['value']['timeSeries'][0]
+        dt, v = self.dt_value(site)
+        add_new_sample(sensor.id, dt, v)
+
 usgs = USGS()
 
 
@@ -56,10 +69,4 @@ def get_multiple_level(sensor_id_list):
 
 
 def get_other_sample(sensor_id):
-    sensor = Sensor.query.filter(Sensor.id == sensor_id).first()
-    url = (URLBASE +
-           '&sites=' + sensor.remote_id +
-           '&parameterCD=' + sensor.remote_parameter)
-    site = requests.get(url).json()['value']['timeSeries'][0]
-    dt, v = usgs.dt_value(site)
-    add_new_sample(sensor.id, dt, v)
+    usgs.get_sample(sensor_id)
