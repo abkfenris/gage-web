@@ -1,5 +1,9 @@
 """
 Get flows from Army Corps of Engineers rivergages.mvr.usace.army.mil
+
+Sensor.remote_id is the sid string in the url. e.g.:
+For Canaserga Creek (http://rivergages.mvr.usace.army.mil/WaterControl/shefdata2.cfm?sid=DSVN6&d=1&dt=S)
+the remote_id is DSVN6
 """
 import arrow
 from bs4 import BeautifulSoup

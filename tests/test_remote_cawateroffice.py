@@ -1,3 +1,5 @@
+import datetime
+
 import vcr
 
 from .test_basics import BasicTestCase
@@ -22,6 +24,7 @@ class TestWaterOffice(BasicTestCase):
         for site_num in self.SITES:
             dt, level, discharge = self.WaterOffice.get_from_wateroffice(site_num)
             assert type(level) == float
+            assert type(dt) == datetime.datetime
             try:
                 assert type(discharge) == float
             except AssertionError:

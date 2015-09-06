@@ -1,5 +1,6 @@
 """
 Get flows from the Quebec CEHQ site
+Sensor.remote_id is the Numero de la station e.g.: 050915 for the Nelson (http://www.cehq.gouv.qc.ca/suivihydro/graphique.asp?NoStation=050915)
 """
 import datetime
 import logging

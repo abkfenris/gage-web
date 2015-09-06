@@ -85,6 +85,10 @@ class BasicTestCase(unittest.TestCase):
                               stype='cawater-level',
                               local=False, remote_type='cawater',
                               remote_id='NL_02YL012')
+        canaseraga_stage = Sensor(name='Canaseraga Creek',
+                                  stype='canaseraga-stage',
+                                  local=False, remote_type='corps',
+                                  remote_id='DSVN6')
         db.session.add(wild_sensor)
         db.session.add(diamond_height)
         db.session.add(diamond_discharge)
@@ -93,6 +97,7 @@ class BasicTestCase(unittest.TestCase):
         db.session.add(neilson_flow)
         db.session.add(skeena_level)
         db.session.add(humber_level)
+        db.session.add(canaseraga_stage)
 
         # Create a sample
         wild_sample = Sample(sensor=wild_sensor,
