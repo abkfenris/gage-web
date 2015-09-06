@@ -5,29 +5,32 @@ import requests
 import arrow
 
 from app.models import Sensor
-from . import add_new_sample
 from .base import add_new_sample, RemoteGage
 
 URLBASE = 'http://waterservices.usgs.gov/nwis/iv/?format=json,1.1'
 
 
-def site_code(site_json):
-    """
-    From a USGS array item within ['value']['timeSeries']
-    get the code back for the site
-    """
-    return str(site_json['sourceInfo']['siteCode'][0]['value'])
+class USGS(RemoteGage):
+    URLBASE = 'http://waterservices.usgs.gov/nwis/iv/?format=json,1.1'
 
+    def site_code(selt, site_json):
+        """
+        From a USGS array item within ['value']['timeSeries']
+        get the code back for the site
+        """
+        return str(site_json['sourceInfo']['siteCode'][0]['value'])
 
-def usgs_dt_value(site_json):
-    """
-    From a USGS array item within ['value']['timeSeries']
-    return datetime, float value of sample
-    """
-    value = site_json['values'][0]['value'][0]
-    dt = arrow.get(value['dateTime']).datetime
-    v = float(value['value'])
-    return dt, v
+    def dt_value(self, site_json):
+        """
+        From a USGS array item within ['value']['timeSeries']
+        return datetime, float value of sample
+        """
+        value = site_json['values'][0]['value'][0]
+        dt = arrow.get(value['dateTime']).datetime
+        v = float(value['value'])
+        return dt, v
+
+usgs = USGS()
 
 
 def get_multiple_level_sites(site_id_list):
@@ -38,8 +41,8 @@ def get_multiple_level_sites(site_id_list):
            '&parameterCD=00065')
     r = requests.get(url).json()
     for site in r['value']['timeSeries']:
-        sc = site_code(site)
-        dt, v = usgs_dt_value(site)
+        sc = usgs.site_code(site)
+        dt, v = usgs.dt_value(site)
         sensor = Sensor.query.filter(Sensor.remote_id == sc).first()
         add_new_sample(sensor.id, dt, v)
 
@@ -58,5 +61,5 @@ def get_other_sample(sensor_id):
            '&sites=' + sensor.remote_id +
            '&parameterCD=' + sensor.remote_parameter)
     site = requests.get(url).json()['value']['timeSeries'][0]
-    dt, v = usgs_dt_value(site)
+    dt, v = usgs.dt_value(site)
     add_new_sample(sensor.id, dt, v)
