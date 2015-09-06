@@ -3,6 +3,7 @@ Retrieving samples from the USGS Instantaneous Values service
 """
 import requests
 import arrow
+from flask import current_app
 
 from app.models import Sensor
 from .base import add_new_sample, RemoteGage
@@ -43,30 +44,17 @@ class USGS(RemoteGage):
         dt, v = self.dt_value(site)
         add_new_sample(sensor.id, dt, v)
 
-usgs = USGS()
-
-
-def get_multiple_level_sites(site_id_list):
-    """
-    Get the latest level from multiple usgs sensors
-    """
-    url = (URLBASE + '&sites=' + ','.join(site_id_list) +
-           '&parameterCD=00065')
-    r = requests.get(url).json()
-    for site in r['value']['timeSeries']:
-        sc = usgs.site_code(site)
-        dt, v = usgs.dt_value(site)
-        sensor = Sensor.query.filter(Sensor.remote_id == sc).first()
-        add_new_sample(sensor.id, dt, v)
-
-
-def get_multiple_level(sensor_id_list):
-    """
-    Get latest level from multiple usgs sensors
-    """
-    remote_sensors = Sensor.query.filter(Sensor.id.in_(sensor_id_list)).all()
-    get_multiple_level_sites([sensor.remote_id for sensor in remote_sensors])
-
-
-def get_other_sample(sensor_id):
-    usgs.get_sample(sensor_id)
+    def get_multiple_samples(self, sensor_ids):
+        parameter = (self.sensor(sensor_ids[0]).remote_parameter or '00065')
+        remote_sensors = Sensor.query.filter(Sensor.id.in_(sensor_ids))\
+                                     .with_entities(Sensor.remote_id)\
+                                     .all()
+        remote_ids = [sensor[0] for sensor in remote_sensors]
+        url = (URLBASE + '&sites=' + ','.join(remote_ids) +
+               '&parameterCD=' + str(parameter))
+        r = requests.get(url).json()
+        for site in r['value']['timeSeries']:
+            sc = self.site_code(site)
+            dt, v = self.dt_value(site)
+            sensor = Sensor.query.filter(Sensor.remote_id == sc).first()
+            add_new_sample(sensor.id, dt, v)

@@ -34,13 +34,3 @@ class CEHQ(RemoteGage):
         v = self.recent_flow(sensor.remote_id)
         dt = datetime.datetime.now()
         add_new_sample(sensor.id, dt, v)
-
-
-c = CEHQ()
-
-
-def get_sample(sensor_id):
-    """
-    Takes a sensor id, tries to retrieve the latest sample from the site
-    """
-    c.get_sample(sensor_id)

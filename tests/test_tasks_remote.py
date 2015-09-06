@@ -1,30 +1,34 @@
-import time
-from celerytest.testcase import CeleryTestCaseMixin, start_celery_worker
-from celery import Celery
+
 import vcr
 
 from .test_basics import BasicTestCase
 
-from celery_worker import app, celery
+from app.database import db
 from app.tasks import remote
-from app.models import Sample
+from app.models import Sample, Sensor
 
 my_vcr = vcr.VCR(
     match_on=['method', 'uri']
 )
 
-#app = Celery()
-celery.conf.CELERY_ALWAYS_EAGER = True
 
-class TestRemoteline(CeleryTestCaseMixin, BasicTestCase):
+class TestRemoteline(BasicTestCase):
     SITE_NUM = 235127
-    celery_app = celery
-    #@my_vcr.use_cassette('tests/fixtures/fetch_remote_samples')
 
+    @my_vcr.use_cassette('tests/fixtures/tasks_fetch_remote_samples')
     def test_fetch_remote_samples(self, delay=False):
         before = Sample.query.count()
         remote.fetch_remote_samples()
-        self.worker.idle.wait()
-        time.sleep(20)
+        after = Sample.query.count()
+        assert after > before
+
+    def test_fetch_remote_samples_error(self, delay=False):
+        random_stage = Sensor(name='Canaseraga Creek',
+                              stype='canaseraga-stage',
+                              local=False, remote_type='random',
+                              remote_id='DSVN6')
+        db.session.add(random_stage)
+        before = Sample.query.count()
+        remote.fetch_remote_samples()
         after = Sample.query.count()
         assert after > before

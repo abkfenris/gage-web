@@ -85,12 +85,3 @@ class H2Oline(RemoteGage):
             dt, v = self.dt_value(sensor.remote_id,
                                   paramter=sensor.remote_parameter)
         add_new_sample(sensor.id, dt, v)
-
-h2 = H2Oline()
-
-
-def get_sample(sensor_id):
-    """
-    Takes a sensor id, tries to get the latest sample from the site
-    """
-    h2.get_sample(sensor_id)

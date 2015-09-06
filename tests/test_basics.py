@@ -105,8 +105,9 @@ class BasicTestCase(unittest.TestCase):
         db.session.add(canaseraga_stage)
 
         # Create a sample
+        dt = datetime.datetime.now() - datetime.timedelta(hours=12)
         wild_sample = Sample(sensor=wild_sensor,
-                             datetime=datetime.datetime.now(),
+                             datetime=dt,
                              value=5.8)
         db.session.add(wild_sample)
         wild_correlation = Correlation(sensor=wild_sensor,
