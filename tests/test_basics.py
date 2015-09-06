@@ -73,11 +73,26 @@ class BasicTestCase(unittest.TestCase):
                                 local=False, remote_type='h2oline',
                                 remote_id='235130',
                                 remote_parameter='FT')
+        neilson_flow = Sensor(name='Neilson flow',
+                              stype='cehq-flow',
+                              local=False, remote_type='cehq',
+                              remote_id='050915')
+        skeena_level = Sensor(name='Skeena Level',
+                              stype='cawater-level',
+                              local=False, remote_type='cawater',
+                              remote_id='BC_08EB003')
+        humber_level = Sensor(name='Humber Level',
+                              stype='cawater-level',
+                              local=False, remote_type='cawater',
+                              remote_id='NL_02YL012')
         db.session.add(wild_sensor)
         db.session.add(diamond_height)
         db.session.add(diamond_discharge)
         db.session.add(rapid_cfs)
         db.session.add(azicohos_level)
+        db.session.add(neilson_flow)
+        db.session.add(skeena_level)
+        db.session.add(humber_level)
 
         # Create a sample
         wild_sample = Sample(sensor=wild_sensor,
