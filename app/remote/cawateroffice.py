@@ -22,8 +22,8 @@ class WaterOffice(RemoteGage):
         province = remote_id.split('_')[0]
         url = 'http://dd.weather.gc.ca/hydrometric/csv/{}/hourly/{}_hourly_hydrometric.csv'.format(province, remote_id)
         response = requests.get(url)
-        riter = response.iter_lines()
-        riter.next()
+        riter = response.iter_lines(decode_unicode=True)
+        next(riter)
         reader = csv.reader(riter)
         lines = []
         for row in reader:
