@@ -31,7 +31,6 @@ class WaterOffice(RemoteGage):
         for row in reader:
             lines.append(row)
         last = lines[-1]
-        print(last)
         level = float(last[2])
         try:
             discharge = float(last[6])
