@@ -85,5 +85,5 @@ class H2Oline(RemoteGage):
             dt, v = self.dt_value(sensor.remote_id)
         else:
             dt, v = self.dt_value(sensor.remote_id,
-                                  paramter=sensor.remote_parameter)
+                                  parameter=sensor.remote_parameter)
         add_new_sample(sensor.id, dt, v)
