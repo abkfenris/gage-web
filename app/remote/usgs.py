@@ -14,14 +14,16 @@ URLBASE = 'http://waterservices.usgs.gov/nwis/iv/?format=json,1.1'
 class USGS(RemoteGage):
     URLBASE = 'http://waterservices.usgs.gov/nwis/iv/?format=json,1.1'
 
-    def site_code(selt, site_json):
+    @staticmethod
+    def site_code(site_json):
         """
         From a USGS array item within ['value']['timeSeries']
         get the code back for the site
         """
         return str(site_json['sourceInfo']['siteCode'][0]['value'])
 
-    def dt_value(self, site_json):
+    @staticmethod
+    def dt_value(site_json):
         """
         From a USGS array item within ['value']['timeSeries']
         return datetime, float value of sample

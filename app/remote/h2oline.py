@@ -16,7 +16,8 @@ logger = logging.getLogger(__name__)
 
 
 class H2Oline(RemoteGage):
-    def soup(self, remote_id):
+    @staticmethod
+    def soup(remote_id):
         """
         Return a beautiful soup object from h2oline
         """
@@ -42,7 +43,8 @@ class H2Oline(RemoteGage):
         p = re.compile('([\d.]+)+(?= {})'.format(parameter))
         return soup.body.findAll(text=p)
 
-    def start_end(self, string, parameter):
+    @staticmethod
+    def start_end(string, parameter):
         """
         Return the start and end of the parameter in the string
         """

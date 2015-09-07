@@ -20,7 +20,7 @@ H2Oline = h2oline.H2Oline()
 USGS = usgs.USGS()
 CEHQ = cehq.CEHQ()
 CAWaterOffice = cawateroffice.WaterOffice()
-Corps = corps.Corps()
+CORPS = corps.Corps()
 Failure = base.RemoteGage()
 
 
@@ -29,7 +29,7 @@ sources = {
     'usgs': USGS.get_multiple_samples,
     'cehq': CEHQ.get_multiple_samples,
     'cawater': CAWaterOffice.get_multiple_samples,
-    'corps': Corps.get_multiple_samples
+    'corps': CORPS.get_multiple_samples
 }
 
 

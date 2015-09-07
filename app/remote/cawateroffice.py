@@ -19,7 +19,8 @@ class WaterOffice(RemoteGage):
     """
     BC_07EA004
     """
-    def get_from_wateroffice(self, remote_id):
+    @staticmethod
+    def get_from_wateroffice(remote_id):
         province = remote_id.split('_')[0]
         url = 'http://dd.weather.gc.ca/hydrometric/csv/{}/hourly/{}_hourly_hydrometric.csv'.format(province, remote_id)
         response = requests.get(url)
