@@ -1,0 +1,254 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.7.0 CPython/2.7.9 Darwin/14.5.0]
+    method: GET
+    uri: http://rivergages.mvr.usace.army.mil/WaterControl/shefdata2.cfm?sid=DSVN6&d=1&dt=S
+  response:
+    body: {string: !!python/unicode "\r\n<html>\r\n<head>\r\n<title>Rivergages.com
+        - SHEF Data ForCanaseraga Creek at Dansville, NY</title>\r\n<SCRIPT language=\"JavaScript\">\r\nvar
+        MouseOverCol = \"#000000\";\r\nvar MouseNotOverCol = \"#0000CC\";\r\nfunction
+        ToColorJS(NewColor)\r\n{\r\nwindow.event.srcElement.style.color = NewColor;\r\n}\r\n</SCRIPT>\r\n<meta
+        http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">\r\n<meta
+        http-equiv=\"X-Frame-Options\" content=\"SAMEORIGIN\">\r\n<link href=\"/WaterControl/watercontrol.css\"
+        rel=\"stylesheet\" type=\"text/css\">\r\n</head>\r\n<body bgcolor=\"#E6E6E6\">\r\n
+        \ \r\n  <table width=\"670\" align=\"center\">\r\n    <tr>\r\n      <td> \r\n<!--
+        Do Nothing -->\r\n\r\n<!-- Fireworks MX Dreamweaver MX target. Created Wed
+        Jul 09 17:23:02 GMT-0500 (Central Daylight Time) 2003-->\r\n<script language=\"JavaScript\">\r\n<!--\r\nfunction
+        MM_findObj(n, d) { //v4.01\r\nvar p,i,x; if(!d) d=document; if((p=n.indexOf(\"?\"))>0&&parent.frames.length)
+        {\r\nd=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}\r\nif(!(x=d[n])&&d.all)
+        x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];\r\nfor(i=0;!x&&d.layers&&i<d.layers.length;i++)
+        x=MM_findObj(n,d.layers[i].document);\r\nif(!x && d.getElementById) x=d.getElementById(n);
+        return x;\r\n}\r\nfunction MM_swapImage() { //v3.0\r\nvar i,j=0,x,a=MM_swapImage.arguments;
+        document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)\r\nif ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x;
+        if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}\r\n}\r\nfunction MM_swapImgRestore()
+        { //v3.0\r\nvar i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++)
+        x.src=x.oSrc;\r\n}\r\nfunction MM_preloadImages() { //v3.0\r\nvar d=document;
+        if(d.images){ if(!d.MM_p) d.MM_p=new Array();\r\nvar i,j=d.MM_p.length,a=MM_preloadImages.arguments;
+        for(i=0; i<a.length; i++)\r\nif (a[i].indexOf(\"#\")!=0){ d.MM_p[j]=new Image;
+        d.MM_p[j++].src=a[i];}}\r\n}\r\nfunction mmLoadMenus() {\r\nif (window.mm_menu_0709172118_0)
+        return;\r\nwindow.mm_menu_0709172118_0 = new Menu(\"root\",126,18,\"Arial,
+        Helvetica, sans-serif\",12,\"#267dff\",\"#ff0000\",\"#ffffff\",\"#ffffff\",\"left\",\"middle\",3,0,1000,-5,7,true,true,true,0,true,true);\r\nmm_menu_0709172118_0.addMenuItem(\"St.&nbsp;Paul&nbsp;District\",\"window.open('/WaterControl/Districts/MVP/districtdefault.cfm',
+        '_blank');\");\r\nmm_menu_0709172118_0.addMenuItem(\"Rock&nbsp;Island&nbsp;District\",\"window.open('/WaterControl/Districts/MVR/districtdefault.cfm',
+        '_blank');\");\r\nmm_menu_0709172118_0.addMenuItem(\"Kansas&nbsp;City&nbsp;District\",\"window.open('/WaterControl/Districts/NWK/districtdefault.cfm',
+        '_blank');\");\r\nmm_menu_0709172118_0.addMenuItem(\"St.&nbsp;Louis&nbsp;District\",\"window.open('/WaterControl/Districts/MVS/districtdefault.cfm',
+        '_blank');\");\r\nmm_menu_0709172118_0.addMenuItem(\"Memphis&nbsp;District\",\"window.open('/WaterControl/Districts/MVM/districtdefault.cfm',
+        '_blank');\");\r\nmm_menu_0709172118_0.addMenuItem(\"Little&nbsp;Rock&nbsp;District\",\"window.open('/WaterControl/Districts/SWL/districtdefault.cfm',
+        '_blank');\");\r\nmm_menu_0709172118_0.addMenuItem(\"Vicksburg&nbsp;District\",\"window.open('/WaterControl/Districts/MVK/districtdefault.cfm',
+        '_blank');\");\r\nmm_menu_0709172118_0.addMenuItem(\"New&nbsp;Orleans&nbsp;District\",\"window.open('/WaterControl/Districts/MVN/districtdefault.cfm',
+        '_blank');\");\r\nmm_menu_0709172118_0.fontWeight=\"bold\";\r\nmm_menu_0709172118_0.hideOnMouseOut=true;\r\nmm_menu_0709172118_0.menuBorder=1;\r\nmm_menu_0709172118_0.menuLiteBgColor='#ffffff';\r\nmm_menu_0709172118_0.menuBorderBgColor='#555555';\r\nmm_menu_0709172118_0.bgColor='#555555';\r\nmm_menu_0709172118_0.writeMenus();\r\n}
+        // mmLoadMenus()\r\n//-->\r\n</script>\r\n<script language=\"JavaScript1.2\"
+        src=\"/WaterControl/images/banner/mm_menu.js\"></script>\r\n</head>\r\n<body
+        bgcolor=\"#ffffff\" onLoad=\"MM_preloadImages('/WaterControl/images/banner/HomeBtn_f2.gif','/WaterControl/images/banner/SearchBtn_f2.gif','/WaterControl/images/banner/RelatedWebsitesBtn_f2.gif','/WaterControl/images/banner/DataMiningBtn_f2.gif','/WaterControl/images/banner/GlossaryBtn_f2.gif','/WaterControl/images/banner/WhoWeAreBtn_f2.gif','/WaterControl/images/banner/ReportsBtn_f2.gif','/WaterControl/images/banner/ContactUsBtn_f2.gif');\">\r\n<script
+        language=\"JavaScript1.2\">mmLoadMenus();</script>\r\n<script language=\"JavaScript\">\r\nfunction
+        map_clicked() {\r\ndocument.frm_menu.fld_district.value = district;\r\nmapbased
+        = confirm(\"If You Wish To View The Map Based Version\\nOf Rivergages.com,
+        Click OK. Otherwise Click Cancel.\");\r\nif (mapbased == false && document.frm_menu.fld_district.value
+        != '') {\r\ndocument.frm_menu.submit();\r\n}\r\nelse {\r\nMM_openBrWindow('https://rsgis.crrel.usace.army.mil/cv_dev/corpsview_dev.cvmain.display?district='
+        + districtabbr,'','')\r\n}\r\n}\r\nfunction check_value() {\r\nif (document.frm_menu.fld_district.value
+        != '') {\r\ndocument.frm_menu.submit();\r\n}\r\n}\r\nfunction check_value2()
+        {\r\nif (document.frm_specific2.fld_basin.value != '') {\r\ndocument.frm_specific2.submit()\r\n}\r\n}\r\nfunction
+        set_district() {\r\ndocument.frm_menu.fld_district.value = district;\r\ncheck_value();\r\n}\r\n</script>\r\n<SCRIPT
+        language=\"JavaScript\">\r\nvar MouseOverCol = \"#FF0000\";\r\nvar MouseNotOverCol
+        = \"#267DFF\";\r\nfunction ToColorJS(NewColor)\r\n{\r\nwindow.event.srcElement.style.color
+        = NewColor;\r\n}\r\n</SCRIPT>\r\n<script language=\"JavaScript\" type=\"text/JavaScript\">\r\n<!--\r\nfunction
+        MM_goToURL() { //v3.0\r\nvar i, args=MM_goToURL.arguments; document.MM_returnValue
+        = false;\r\nfor (i=0; i<(args.length-1); i+=2) eval(args[i]+\".location='\"+args[i+1]+\"'\");\r\n}\r\n//-->\r\n</script>\r\n<table
+        border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"670\">\r\n<!-- fwtable
+        fwsrc=\"banner670.png\" fwbase=\"banner670.gif\" fwstyle=\"Dreamweaver\" fwdocid
+        = \"742308039\" fwnested=\"0\" -->\r\n<tr>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"1\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"49\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"1\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"104\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"1\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"114\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"1\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"82\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"1\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"67\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"1\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"67\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"1\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"88\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"19\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"72\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"1\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"1\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n</tr>\r\n<tr>\r\n<td
+        colspan=\"17\"><img name=\"banner032204_r1_c1\" src=\"/WaterControl/images/banner/MainBanner.gif\"
+        width=\"670\" height=\"67\" border=\"0\" alt=\"\"></td>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"1\" height=\"67\" border=\"0\" alt=\"\"></td>\r\n</tr>\r\n<tr>\r\n<td
+        rowspan=\"3\"><img name=\"banner032204_r2_c1\" src=\"/WaterControl/images/banner/banner032204_r2_c1.gif\"
+        width=\"1\" height=\"18\" border=\"0\" alt=\"\"></td>\r\n<td rowspan=\"3\"><a
+        href=\"/WaterControl/new/layout.cfm\" onMouseOut=\"MM_swapImgRestore();\"
+        onMouseOver=\"MM_swapImage('HomeBtn','','/WaterControl/images/banner/HomeBtn_f2.gif',1);\"><img
+        name=\"HomeBtn\" src=\"/WaterControl/images/banner/HomeBtn.gif\" width=\"49\"
+        height=\"18\" border=\"0\" alt=\"Home\"></a></td>\r\n<td rowspan=\"3\"><img
+        name=\"banner032204_r2_c3\" src=\"/WaterControl/images/banner/banner032204_r2_c3.gif\"
+        width=\"1\" height=\"18\" border=\"0\" alt=\"\"></td>\r\n<td rowspan=\"3\"><a
+        href=\"/WaterControl/search2.cfm\" onMouseOut=\"MM_swapImgRestore();\" onMouseOver=\"MM_swapImage('SearchBtn','','/WaterControl/images/banner/SearchBtn_f2.gif',1);\"><img
+        name=\"SearchBtn\" src=\"/WaterControl/images/banner/SearchBtn.gif\" width=\"104\"
+        height=\"18\" border=\"0\" alt=\"Search This Site\"></a></td>\r\n<td rowspan=\"3\"><img
+        name=\"banner032204_r2_c5\" src=\"/WaterControl/images/banner/banner032204_r2_c5.gif\"
+        width=\"1\" height=\"18\" border=\"0\" alt=\"\"></td>\r\n<td rowspan=\"3\"><a
+        href=\"/WaterControl/relatedsites2.cfm\" onMouseOut=\"MM_swapImgRestore();\"
+        onMouseOver=\"MM_swapImage('RelatedWebsitesBtn','','/WaterControl/images/banner/RelatedWebsitesBtn_f2.gif',1);\"><img
+        name=\"RelatedWebsitesBtn\" src=\"/WaterControl/images/banner/RelatedWebsitesBtn.gif\"
+        width=\"114\" height=\"18\" border=\"0\" alt=\"Related Websites\"></a></td>\r\n<td
+        rowspan=\"3\"><img name=\"banner032204_r2_c7\" src=\"/WaterControl/images/banner/banner032204_r2_c7.gif\"
+        width=\"1\" height=\"18\" border=\"0\" alt=\"\"></td>\r\n<td rowspan=\"3\"><a
+        href=\"/WaterControl/datamining2.cfm\" onMouseOut=\"MM_swapImgRestore();\"
+        onMouseOver=\"MM_swapImage('DataMiningBtn','','/WaterControl/images/banner/DataMiningBtn_f2.gif',1);\"><img
+        name=\"DataMiningBtn\" src=\"/WaterControl/images/banner/DataMiningBtn.gif\"
+        width=\"82\" height=\"18\" border=\"0\" alt=\"Data Mining\"></a></td>\r\n<td
+        rowspan=\"3\"><img name=\"banner032204_r2_c9\" src=\"/WaterControl/images/banner/banner032204_r2_c9.gif\"
+        width=\"1\" height=\"18\" border=\"0\" alt=\"\"></td>\r\n<td rowspan=\"3\"><a
+        href=\"/WaterControl/glossary2.cfm\" onMouseOut=\"MM_swapImgRestore();\" onMouseOver=\"MM_swapImage('GlossaryBtn','','/WaterControl/images/banner/GlossaryBtn_f2.gif',1);\"><img
+        name=\"GlossaryBtn\" src=\"/WaterControl/images/banner/GlossaryBtn.gif\" width=\"67\"
+        height=\"18\" border=\"0\" alt=\"Glossary\"></a></td>\r\n<td rowspan=\"3\"><img
+        name=\"banner032204_r2_c11\" src=\"/WaterControl/images/banner/banner032204_r2_c11.gif\"
+        width=\"1\" height=\"18\" border=\"0\" alt=\"\"></td>\r\n<td rowspan=\"3\"><a
+        href=\"/WaterControl/reports2.cfm\" onMouseOut=\"MM_swapImgRestore();\" onMouseOver=\"MM_swapImage('ReportsBtn','','/WaterControl/images/banner/ReportsBtn_f2.gif',1);\"><img
+        name=\"ReportsBtn\" src=\"/WaterControl/images/banner/ReportsBtn.gif\" width=\"67\"
+        height=\"18\" border=\"0\" alt=\"Reports\"></a></td>\r\n<td rowspan=\"3\"><img
+        name=\"banner032204_r2_c13\" src=\"/WaterControl/images/banner/banner032204_r2_c13.gif\"
+        width=\"1\" height=\"18\" border=\"0\" alt=\"\"></td>\r\n<td rowspan=\"3\"><a
+        href=\"#\" onMouseOut=\"MM_swapImgRestore();MM_startTimeout();\" onMouseOver=\"MM_showMenu(window.mm_menu_0709172118_0,0,18,null,'WhoWeAreBtn');MM_swapImage('WhoWeAreBtn','','/WaterControl/images/banner/WhoWeAreBtn_f2.gif',1);\"><img
+        name=\"WhoWeAreBtn\" src=\"/WaterControl/images/banner/WhoWeAreBtn.gif\" width=\"88\"
+        height=\"18\" border=\"0\" alt=\"Who We Are\"></a></td>\r\n<td colspan=\"3\"><img
+        name=\"banner032204_r2_c15\" src=\"/WaterControl/images/banner/banner032204_r2_c15.gif\"
+        width=\"92\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"1\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n</tr>\r\n<tr>\r\n<td
+        rowspan=\"2\"><img name=\"banner032204_r3_c15\" src=\"/WaterControl/images/banner/banner032204_r3_c15.gif\"
+        width=\"19\" height=\"17\" border=\"0\" alt=\"\"></td>\r\n<td><a href=\"mailto:CEMVRRiverGages@usace.army.mil\"
+        onMouseOut=\"MM_swapImgRestore();\" onMouseOver=\"MM_swapImage('ContactUsBtn','','/WaterControl/images/banner/ContactUsBtn_f2.gif',1);\"><img
+        name=\"ContactUsBtn\" src=\"/WaterControl/images/banner/ContactUsBtn.gif\"
+        width=\"72\" height=\"16\" border=\"0\" alt=\"Contact Us\"></a></td>\r\n<td
+        rowspan=\"2\"><img name=\"banner032204_r3_c17\" src=\"/WaterControl/images/banner/banner032204_r3_c17.gif\"
+        width=\"1\" height=\"17\" border=\"0\" alt=\"\"></td>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"1\" height=\"16\" border=\"0\" alt=\"\"></td>\r\n</tr>\r\n<tr>\r\n<td><img
+        name=\"banner032204_r4_c16\" src=\"/WaterControl/images/banner/banner032204_r4_c16.gif\"
+        width=\"72\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n<td><img src=\"/WaterControl/images/banner/spacer.gif\"
+        width=\"1\" height=\"1\" border=\"0\" alt=\"\"></td>\r\n</tr>\r\n<td colspan=\"17\"><table
+        width=\"670\">\r\n<tr valign=\"top\">\r\n<td width=\"213\" align=\"left\">\r\n<form
+        method=\"post\" name=\"frm_menu\" id=\"frm_menu\">\r\n<strong><font color=\"#FF0000\"
+        size=\"2\" face=\"Arial, Helvetica, sans-serif\">Water\r\nLevels By:</font></strong><br>\r\n<select
+        name=\"fld_district\" id=\"fld_district\" onChange=\"check_value();\">\r\n<option
+        value=\"\" selected>Choose An Option</option>\r\n<option value=\"\">District</option>\r\n\r\n<option
+        value=\"18\" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lakes and Rivers Division</option>\r\n\r\n<option
+        value=\"0\" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;St. Paul District</option>\r\n\r\n<option
+        value=\"14\" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sacramento District</option>\r\n\r\n<option
+        value=\"15\" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tulsa District</option>\r\n\r\n<option
+        value=\"17\" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Huntington District</option>\r\n\r\n<option
+        value=\"6\" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rock Island District</option>\r\n\r\n<option
+        value=\"16\" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pittsburgh District</option>\r\n\r\n<option
+        value=\"8\" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Omaha District</option>\r\n\r\n<option
+        value=\"19\" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buffalo District</option>\r\n\r\n<option
+        value=\"9\" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kansas City District</option>\r\n\r\n<option
+        value=\"2\" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;St. Louis District</option>\r\n\r\n<option
+        value=\"13\" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Louisville District</option>\r\n\r\n<option
+        value=\"20\" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Portland District</option>\r\n\r\n<option
+        value=\"3\" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Memphis District</option>\r\n\r\n<option
+        value=\"11\" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Little Rock District</option>\r\n\r\n<option
+        value=\"12\" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nashville District</option>\r\n\r\n<option
+        value=\"21\" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seattle District</option>\r\n\r\n<option
+        value=\"4\" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vicksburg District</option>\r\n\r\n<option
+        value=\"5\" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New Orleans District</option>\r\n\r\n<option
+        value=\"Basin\" >Basin</option>\r\n<option value=\"Stream\" >Stream</option>\r\n<option
+        value=\"State\" >State</option>\r\n<option value=\"City\" >City</option>\r\n</select>\r\n</form>\r\n</td>\r\n<td
+        width=\"349\" align=\"left\">\r\n<form name=\"frm_specific2\" action=\"/WaterControl/new/layout.cfm\"
+        method=\"POST\">\r\n\r\n</form>\r\n</td>\r\n<td width=\"349\" align=\"left\"><form
+        action=\"\" method=\"post\" name=\"frm_nws\" id=\"frm_nws\">\r\n<div align=\"right\"
+        style=\"cursor:hand\" onMouseOver=\"ToColorJS(MouseOverCol)\" onMouseOut=\"ToColorJS(MouseNotOverCol)\"
+        onClick=\"MM_goToURL('parent','/docs/ldm/index.cfm');return document.MM_returnValue\"><strong><font
+        color=\"#267DFF\" size=\"2\" face=\"Arial, Helvetica, sans-serif\">National
+        Weather <br>\r\n  Service Products</font></strong> </div>\r\n</form></td>\r\n</tr>\r\n</table></td>\r\n</tr>\r\n</table>\r\n</td>\r\n
+        \   </tr>\r\n    <tr valign=\"top\">\r\n      <td> <form name=\"frm_daily\"
+        method=\"post\" action=\"\"><table width=\"640\" border=\"5\" align=\"center\"
+        bordercolor=\"#0066CC\" bgcolor=\"#FFFFFF\"><tr class=\"style11\"><td colspan=\"3\"><div
+        align=\"center\"> <strong>Canaseraga Creek at Dansville, NY</strong><table
+        width=\"640\" align=\"center\"><tr valign=\"top\" class=\"style11\"><td>Stream
+        Name: Canaseraga Creek<br>Gage Zero: 0 Ft. NVGD29<br>Flood&nbsp;Stage:5 Ft.<br>Record
+        High&nbsp;Stage:8.5 Ft. </td><td>Longitude: -77.70444400<br>Latitude: 42.53555600<br>River
+        Mile: 21.4<br>Record High&nbsp;Stage&nbsp;Date: 01/19/1996<br></td></tr></table>Location
+        of Gage: <p>Located on right bank on Poags Hole Road, 0.7 mi upstream from
+        Stony Brook, and 1.7 mi south of Dansville, NY.</p><p>** Raw Date, Subject
+        to change **</p> </div></td></tr><tr bgcolor=FFFFFF class=\"style11\"><td
+        colspan=\"3\"><div align=\"center\" style=\"cursor:hand\"><font color=\"#0000FF\"><u
+        onclick=\"document.frm_daily.hdn_excel.value = 'y'; document.frm_daily.submit()\">Download
+        Data</u></font><input name=\"hdn_excel\" type=\"hidden\" id=\"hdn_excel\"
+        value=\"\"></div></td></tr><tr bgcolor=\"FFFFFF\"><td colspan=\"3\"><div align=\"left\"><strong>
+        <font size=\"2\">Eastern Time Zone</font></strong></div></td></tr><tr bgcolor=\"000055\"
+        class=\"style2\"><td valign=\"top\"><div align=\"center\">Date / Time</div></td><td
+        valign=\"top\"><div align=\"center\">Stage (Ft)</div></td><td valign=\"top\"><div
+        align=\"center\">Battery Voltage (V)</div></td></tr><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/06/2015 12:00</div></td><td><div align=\"center\">0.76</div></td><td><div
+        align=\"center\">13.70</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/06/2015 11:00</div></td><td><div align=\"center\">0.76</div></td><td><div
+        align=\"center\">13.71</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/06/2015 10:00</div></td><td><div align=\"center\">0.76</div></td><td><div
+        align=\"center\">13.71</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/06/2015 09:00</div></td><td><div align=\"center\">0.76</div></td><td><div
+        align=\"center\">2.00</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/06/2015 08:00</div></td><td><div align=\"center\">0.76</div></td><td><div
+        align=\"center\">2.00</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/06/2015 07:00</div></td><td><div align=\"center\">0.76</div></td><td><div
+        align=\"center\">2.00</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/06/2015 06:00</div></td><td><div align=\"center\">0.76</div></td><td><div
+        align=\"center\">2.00</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/06/2015 05:00</div></td><td><div align=\"center\">0.76</div></td><td><div
+        align=\"center\">2.00</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/06/2015 04:00</div></td><td><div align=\"center\">0.76</div></td><td><div
+        align=\"center\">2.00</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/06/2015 03:00</div></td><td><div align=\"center\">0.76</div></td><td><div
+        align=\"center\">2.00</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/06/2015 02:00</div></td><td><div align=\"center\">0.77</div></td><td><div
+        align=\"center\">2.00</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/06/2015 01:00</div></td><td><div align=\"center\">0.77</div></td><td><div
+        align=\"center\">2.00</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/06/2015 00:00</div></td><td><div align=\"center\">0.77</div></td><td><div
+        align=\"center\">2.00</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/05/2015 23:00</div></td><td><div align=\"center\">0.77</div></td><td><div
+        align=\"center\">2.00</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/05/2015 22:00</div></td><td><div align=\"center\">0.77</div></td><td><div
+        align=\"center\">2.00</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/05/2015 21:00</div></td><td><div align=\"center\">0.77</div></td><td><div
+        align=\"center\">2.00</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/05/2015 20:00</div></td><td><div align=\"center\">0.77</div></td><td><div
+        align=\"center\">2.00</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/05/2015 19:00</div></td><td><div align=\"center\">0.77</div></td><td><div
+        align=\"center\">2.00</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/05/2015 18:00</div></td><td><div align=\"center\">0.77</div></td><td><div
+        align=\"center\">2.00</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/05/2015 17:00</div></td><td><div align=\"center\">0.77</div></td><td><div
+        align=\"center\">2.00</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/05/2015 16:00</div></td><td><div align=\"center\">0.77</div></td><td><div
+        align=\"center\">2.00</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/05/2015 15:00</div></td><td><div align=\"center\">0.77</div></td><td><div
+        align=\"center\">2.00</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/05/2015 14:00</div></td><td><div align=\"center\">0.77</div></td><td><div
+        align=\"center\">2.00</div></td><tr bgcolor=FFFFFF class=\"style3\"><td><div
+        align=\"center\">09/05/2015 13:00</div></td><td><div align=\"center\">0.77</div></td><td><div
+        align=\"center\">2.00</div></td><tr class=\"style11\"><td colspan=\"3\"><div
+        align=\"center\"><strong><font color=\"#990000\" size=\"2\">US Army Corps
+        of Engineers - </font><font size=\"2\"><a href=\"/WaterControl/Districts/LRB/districtdefault.cfm\"
+        id=\"districthyper\" target=\"_self\" onMouseOver=\"ToColorJS(MouseOverCol)\"
+        onMouseOut=\"ToColorJS(MouseNotOverCol)\"> <font color=\"#0000CC\">Buffalo
+        District</font></a><font color=\"#990000\"> - Water Control Center - <a href=\"mailto:Lrb.Public.Affairs@usace.army.mil\"
+        onMouseOver=\"ToColorJS(MouseOverCol)\" onMouseOut=\"ToColorJS(MouseNotOverCol)\"><font
+        color=\"#0000CC\">Contact Us </font></a></font></font></strong></div></td></tr></table></form>
+        </td>\r\n    </tr>\r\n\t</table>\r\n  \r\n</body>\r\n</html>\r\n\r\n"}
+    headers:
+      content-type: [text/html; charset=UTF-8]
+      date: ['Sun, 06 Sep 2015 16:45:05 GMT']
+      server: [Microsoft-IIS/7.0]
+      set-cookie: [CFID=3982828;path=/;HTTPOnly, CFTOKEN=16925779;path=/;HTTPOnly,
+        JSESSIONID=8430a0c832da6853e50bd1839f5a14784816;path=/]
+      x-frame-options: [SAMEORIGIN]
+      x-powered-by: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

@@ -73,15 +73,41 @@ class BasicTestCase(unittest.TestCase):
                                 local=False, remote_type='h2oline',
                                 remote_id='235130',
                                 remote_parameter='FT')
+        neilson_flow = Sensor(name='Neilson flow',
+                              stype='cehq-flow',
+                              local=False, remote_type='cehq',
+                              remote_id='050915')
+        skeena_level = Sensor(name='Skeena Level',
+                              stype='cawater-level',
+                              local=False, remote_type='cawater',
+                              remote_id='BC_08EB003')
+        humber_level = Sensor(name='Humber Level',
+                              stype='cawater-level',
+                              local=False, remote_type='cawater',
+                              remote_id='NL_02YL012')
+        cheakamus_discharge = Sensor(name='Cheakamus Discharge',
+                                     stype='cawater-discharge',
+                                     local=False, remote_type='cawater',
+                                     remote_id='BC_08GA043',
+                                     remote_parameter='discharge')
+        canaseraga_stage = Sensor(name='Canaseraga Creek',
+                                  stype='canaseraga-stage',
+                                  local=False, remote_type='corps',
+                                  remote_id='DSVN6')
         db.session.add(wild_sensor)
         db.session.add(diamond_height)
         db.session.add(diamond_discharge)
         db.session.add(rapid_cfs)
         db.session.add(azicohos_level)
+        db.session.add(neilson_flow)
+        db.session.add(skeena_level)
+        db.session.add(humber_level)
+        db.session.add(canaseraga_stage)
 
         # Create a sample
+        dt = datetime.datetime.now() - datetime.timedelta(hours=12)
         wild_sample = Sample(sensor=wild_sensor,
-                             datetime=datetime.datetime.now(),
+                             datetime=dt,
                              value=5.8)
         db.session.add(wild_sample)
         wild_correlation = Correlation(sensor=wild_sensor,

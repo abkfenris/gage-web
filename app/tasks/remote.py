@@ -5,86 +5,95 @@ import logging
 
 from celery.task.schedules import crontab
 from celery.decorators import periodic_task
+from sqlalchemy import func
 
+from app.database import db
 from app.models import Sensor
-from app.remote import h2oline, usgs
+from app.remote import h2oline, usgs, cehq, cawateroffice, corps, base
 from app.celery import celery
 
 logger = logging.getLogger(__name__)
 
+SAMPLES_PER_CHUNK = 25
+
+H2Oline = h2oline.H2Oline()
+USGS = usgs.USGS()
+CEHQ = cehq.CEHQ()
+CAWaterOffice = cawateroffice.WaterOffice()
+CORPS = corps.Corps()
+Failure = base.RemoteGage()
+
+
+sources = {
+    'h2oline': H2Oline.get_multiple_samples,
+    'usgs': USGS.get_multiple_samples,
+    'cehq': CEHQ.get_multiple_samples,
+    'cawater': CAWaterOffice.get_multiple_samples,
+    'corps': CORPS.get_multiple_samples
+}
+
+
+class UnknownSource(Exception):
+    """
+    Raised when an unknown remote_type is used
+    """
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return repr(self.value)
+
+
+def missing_multiple_samples(sensor_ids):
+    """
+    If a remote_type is missing from sources then raise an error
+    with the sensor ids with the remote type
+    """
+    raise UnknownSource('Unknown remote_type for %s', ', '.join(sensor_ids))
+
 
 @celery.task
-def fetch_usgs_level_samples_chunk(sensor_id_list):
+def fetch_samples(sensor_ids, remote_type, remote_parameter):
     """
-    Fetch an individual chunk of samples from the usgs sensors
+    Fetch samples for a group of sensor_ids with the same remote_type
+    and remote_parameter
     """
-    logger.info('Fetching multiple USGS level samples for sensors %s',
-                sensor_id_list)
-    usgs.get_multiple_level(sensor_id_list)
+    logger.info('Fetching a chunk of %s samples', remote_type)
+    sources.get(remote_type, missing_multiple_samples)(sensor_ids)
 
 
-@celery.task
-def fetch_usgs_level_samples_all(sensor_id_list):
+def chunk_sensor_ids(sensor_ids, remote_type, remote_parameter, delay):
     """
-    Fetch USGS level samples from the USGS Instantaneous Values Web Service
-    http://waterservices.usgs.gov/rest/IV-Service.html#Multiple
-    This service can return up to 100 gages worth at a time.
+    Break down tasks into smaller bits based on SAMPLES_PER_CHUNK size
+    then execute fetch_samples (normally as a celery task)
     """
-    samples_per_request = 2
-    # dealing with python 3 renaming xrange
+    logger.info('Chunking %s sensors for tasks', remote_type)
     try:
         x_range = xrange
     except NameError:
         x_range = range
-    for chunk in [sensor_id_list[x:x+samples_per_request] for x in
-                  x_range(0, len(sensor_id_list), samples_per_request)]:
-        fetch_usgs_level_samples_chunk(chunk)
-
-
-@celery.task
-def fetch_usgs_other_sample(sensor_id):
-    """
-    Fetch other types of USGS samples, 1 sensor at a time
-    """
-    logger.info('Fetching USGS samples for %s', sensor_id)
-    usgs.get_other_sample(sensor_id)
-
-
-@celery.task
-def fetch_h2oline_sample(sensor_id):
-    """
-    Fetch h2oline sample
-    """
-    logger.info('Fetching H2Oline samples for %s', sensor_id)
-    h2oline.get_sample(sensor_id)
+    for chunk in [sensor_ids[x:x+SAMPLES_PER_CHUNK] for x in
+                  x_range(0, len(sensor_ids), SAMPLES_PER_CHUNK)]:
+        if delay:
+            fetch_samples.delay(chunk, remote_type, remote_parameter)
+        else:
+            fetch_samples(chunk, remote_type, remote_parameter)
 
 
 @periodic_task(run_every=(crontab(minute='*/15')),
                name='fetch_remote_samples',
                ignore_result=True)
-def fetch_remote_samples():
+def fetch_remote_samples(delay=True):
     """
     Create tasks for all remote sensors to be updated
     """
     # Fetch remote USGS level gages
     logger.info('Fetching remote samples')
-    usgs_level_sensors = Sensor.query.filter_by(local=False,
-                                                remote_type='usgs',
-                                                remote_parameter=None)\
-                                     .with_entities(Sensor.id).all()
-    fetch_usgs_level_samples_all.delay([sensor[0] for sensor in usgs_level_sensors])
-
-    # Fetch other USGS gages
-    usgs_other_sensors = Sensor.query.filter(Sensor.local == False,
-                                             Sensor.remote_type == 'usgs',
-                                             Sensor.remote_parameter != None)\
-                                     .with_entities(Sensor.id).all()
-    for sensor in usgs_other_sensors:
-        fetch_usgs_other_sample.delay(sensor[0])
-
-    # Fetch h2oline gages
-    other_remote_sensors = Sensor.query.filter(Sensor.local == False,
-                                               Sensor.remote_type == 'h2oline')\
-                                       .with_entities(Sensor.id).all()
-    for sensor in other_remote_sensors:
-        fetch_h2oline_sample.delay(sensor[0])
+    remote_sensors = db.session.query(func.array_Agg(Sensor.id),
+                                      Sensor.remote_type,
+                                      Sensor.remote_parameter)\
+                               .group_by(Sensor.remote_type,
+                                         Sensor.remote_parameter)\
+                               .filter(Sensor.local == False).all()
+    for group in remote_sensors:
+        chunk_sensor_ids(group[0], group[1], group[2], delay)
