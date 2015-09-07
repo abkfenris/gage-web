@@ -25,4 +25,6 @@ script: coverage run --source=app -m py.test -v
 after_success:
     - coveralls
     - codecov
+    - pip install scrutinizer-ocular
+    - ocular --data-file ".coverage" --config-file ".coveragerc"
 sudo: false
