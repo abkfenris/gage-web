@@ -17,6 +17,7 @@ class Config:
     SENTRY_DSN = os.environ.get('SENTRY_DSN')
     CELERY_ACKS_LATE = True
     CELERYD_PREFETCH_MULTIPLIER = 1
+    CELERYD_MAX_TASKS_PER_CHILD = 10
 
     @staticmethod
     def init_app(app):

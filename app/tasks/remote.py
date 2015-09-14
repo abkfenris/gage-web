@@ -58,7 +58,7 @@ def fetch_samples(sensor_ids, remote_type, remote_parameter):
     Fetch samples for a group of sensor_ids with the same remote_type
     and remote_parameter
     """
-    logger.info('Fetching a chunk of %s samples', remote_type)
+    logger.info('Fetching a chunk of %s samples for sensors %s', remote_type, sensor_ids)
     sources.get(remote_type, missing_multiple_samples)(sensor_ids)
 
 
@@ -67,7 +67,7 @@ def chunk_sensor_ids(sensor_ids, remote_type, remote_parameter, delay):
     Break down tasks into smaller bits based on SAMPLES_PER_CHUNK size
     then execute fetch_samples (normally as a celery task)
     """
-    logger.info('Chunking %s sensors for tasks', remote_type)
+    logger.info('Chunking %s sensors for tasks for sensors %s', remote_type, sensor_ids)
     try:
         x_range = xrange
     except NameError:
