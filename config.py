@@ -18,6 +18,7 @@ class Config:
     CELERY_ACKS_LATE = True
     CELERYD_PREFETCH_MULTIPLIER = 1
     CELERYD_MAX_TASKS_PER_CHILD = 10
+    CELERYD_TASK_TIME_LIMIT = 600
 
     @staticmethod
     def init_app(app):
