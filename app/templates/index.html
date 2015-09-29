@@ -26,6 +26,12 @@
 	  				{% for gage in Gage.query.all() %}
 	  				<a href="{{ url_for('.gagepage', slug=gage.slug ) }}" class="list-group-item">
 	  					{{ gage.name }}
+                        {% if gage.sensors[0].recent() %}
+                             - {{ gage.sensors[0].recent().value }}
+                             {% if gage.sensors[0].suffix %}
+                                {{ gage.sensors[0].suffix }}
+                             {% endif %}
+                        {% endif %}
 	  			 	</a>
 	  			 {% endfor %}
 	  			 </div>
