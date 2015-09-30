@@ -1,7 +1,10 @@
+import os
 
 import vcr
 
 from .test_basics import BasicTestCase
+
+os.environ['FLASK_CONFIG'] = 'testing'
 
 from app.database import db
 from app.tasks import remote
@@ -22,6 +25,7 @@ class TestRemoteline(BasicTestCase):
         after = Sample.query.count()
         assert after > before
 
+    @my_vcr.use_cassette('tests/fixtures/tasks_fetch_remote_samples_error')
     def test_fetch_remote_samples_error(self, delay=False):
         random_stage = Sensor(name='Canaseraga Creek',
                               stype='canaseraga-stage',
