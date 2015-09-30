@@ -4,39 +4,10 @@
 
 {% block title %}Flows{% endblock %}
 
-{% block content %}
-  	<div class="jumbotron" style="background-image: url({{ url_for('static', filename='img/header.jpg' ) }}); background-size: 100%;">
-  		<div class="container">
-  			<h1>riverflo.ws</h1>
-  		</div>
-  	</div>
 
-  	<div class="container">
-  		<div class="row">
-	  		<div class="col-md-8" role="main">
-		  		<h3>Don't hang around here</h3>
-		  		<p>Find something to drop in to!</p>
-	  			<img src="{{ url_for('static', filename='img/index.jpg' ) }}" class="img-responsive xs-hidden">
-	  			<p>Miles Puleio running Slip and Slide on <a href="http://www.americanwhitewater.org/content/River/detail/id/888/">Sandy Stream, ME</a>.</p>
-
-	  		</div>
-	  		<div class="col-md-4">
-		  		<h4>Gages</h4>
-	  			<div class="list-group">
-	  				{% for gage in Gage.query.all() %}
-	  				<a href="{{ url_for('.gagepage', slug=gage.slug ) }}" class="list-group-item">
-	  					{{ gage.name }}
-                        {% if gage.sensors[0].recent() %}
-                             - {{ gage.sensors[0].recent().value }}
-                             {% if gage.sensors[0].suffix %}
-                                {{ gage.sensors[0].suffix }}
-                             {% endif %}
-                        {% endif %}
-	  			 	</a>
-	  			 {% endfor %}
-	  			 </div>
-
-	  		</div>
-	  	</div>
-  	</div>
+{% block main %}
+<h3>Don't hang around here</h3>
+<p>Find something to drop in to!</p>
+<img src="{{ url_for('static', filename='img/index.jpg' ) }}" class="img-responsive xs-hidden">
+<p>Miles Puleio running Slip and Slide on <a href="http://www.americanwhitewater.org/content/River/detail/id/888/">Sandy Stream, ME</a>.</p>
 {% endblock %}
