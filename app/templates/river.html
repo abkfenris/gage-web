@@ -5,55 +5,37 @@
 {% block title %}Flows | {{ river.name }}{% endblock %}
 
 
-{% block content %}
-  	<div class="jumbotron" style="background-image: url({{ url_for('static', filename='img/header.jpg' ) }}); background-size: 100%;">
-  		<div class="container">
-  			<h1>{{ river.name }}</h1>
-  			<p>{{ river.short_description }}</p>
-  		</div>
-  	</div>
+{% block jumbo_title %}
+<h1>{{ river.name }}</h1>
+<p>{{ river.short_description }}</p>
+{% endblock %}
 
-  	<div class="container">
-  		<div class="row">
-	  		<div class="col-md-9" role="main">
-	  			{{ river.description }}
-	  			{% if river.parent is not none() %}
-	  				<h4>The {{ river.name }}'s parent river is the <a href="{{ url_for('.riverpage', slug=river.parent.slug) }}">{{ river.parent.name }}</a></h4>
-	  			{% endif %}
-	  			{% if river.tributary is not none() %}
-	  			<h4>The {{ river.name }}'s tributaries are:</h4>
-	  				<div class="list-group">
-		  				{% for trib in river.tributary %}
-		  				<a href="{{ url_for('.riverpage', slug=trib.slug) }}" class="list-group-item">{{ trib.name }}</a>
-		  				{% endfor %}
-	  				</div>
-	  			{% endif %}
-	  			<h2>Sections:</h2>
-	  			<div class="list-group">
-		  			{% for section in river.sections %}
-		  			<a href="{{ url_for('.sectionpage', slug=section.slug, river=river.slug ) }}" class="list-group-item">
-			  			<h4 class="list-group-item-heading">{{ section.name }}</h4>
-			  			<p class="list-group-item-text">{{ section.short_description }}</p>
-		  			</a>
-		  			{% endfor %}
-	  			</div>
-	  			<h2>Gages:</h2>
-	  			<div class="list-group">
-		  			{% for gage in river.gages %}
-		  			<a href="{{ url_for('.gagepage', slug=gage.slug) }}" class="list-group-item">{{ gage.name }}</a>
-		  			{% endfor %}
-	  			</div>
-	  		</div>
-	  		<div class="col-md-3">
-	  			<h4>Gages</h4>
-	  			<div class="list-group">
-	  				{% for gage in Gage.query.all() %}
-	  				<a href="{{ url_for('.gagepage', slug=gage.slug ) }}" class="list-group-item">
-	  					{{ gage.name }}
-	  			 	</a>
-	  			 {% endfor %}
-	  			 </div>
-	  		</div>
-	  	</div>
-  	</div>
+{% block main %}
+{{ river.description }}
+{% if river.parent is not none() %}
+	<h4>The {{ river.name }}'s parent river is the <a href="{{ url_for('.riverpage', slug=river.parent.slug) }}">{{ river.parent.name }}</a></h4>
+{% endif %}
+{% if river.tributary is not none() %}
+<h4>The {{ river.name }}'s tributaries are:</h4>
+	<div class="list-group">
+		{% for trib in river.tributary %}
+		<a href="{{ url_for('.riverpage', slug=trib.slug) }}" class="list-group-item">{{ trib.name }}</a>
+		{% endfor %}
+	</div>
+{% endif %}
+<h2>Sections:</h2>
+<div class="list-group">
+	{% for section in river.sections %}
+	<a href="{{ url_for('.sectionpage', slug=section.slug, river=river.slug ) }}" class="list-group-item">
+			<h4 class="list-group-item-heading">{{ section.name }}</h4>
+			<p class="list-group-item-text">{{ section.short_description }}</p>
+	</a>
+	{% endfor %}
+</div>
+<h2>Gages:</h2>
+<div class="list-group">
+	{% for gage in river.gages %}
+	<a href="{{ url_for('.gagepage', slug=gage.slug) }}" class="list-group-item">{{ gage.name }}</a>
+	{% endfor %}
+</div>
 {% endblock %}

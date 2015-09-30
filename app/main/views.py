@@ -5,6 +5,7 @@ The main public routes to view the site
 from flask import render_template
 
 from .blueprint import main
+from app.database import gage_sample
 from ..models import Gage, Region, Section, River, Sensor
 
 # Normal Pages
@@ -16,7 +17,7 @@ def indexpage():
 
     Index page
     """
-    return render_template('index.html', Gage=Gage)
+    return render_template('index.html', gage_sample=gage_sample)
 
 
 @main.route('/about/')
@@ -25,7 +26,7 @@ def aboutpage():
 
     About this site.
     """
-    return render_template('about.html', Gage=Gage)
+    return render_template('about.html', gage_sample=gage_sample)
 
 
 @main.route('/gages/')
@@ -50,7 +51,7 @@ def gagepage(gid=None, slug=None):
         gage = Gage.query.get_or_404(gid)
     else:
         gage = Gage.query.filter_by(slug=slug).first_or_404()
-    return render_template('gage.html', Gage=Gage, gage=gage)
+    return render_template('gage.html', Gage=Gage, gage=gage, gage_sample=gage_sample)
 
 
 @main.route('/regions/')
@@ -75,11 +76,12 @@ def regionpage(rid=None, slug=None):
     else:
         region = Region.query.filter_by(slug=slug).first_or_404()
     return render_template('region.html',
-                            Gage=Gage,
-                            Region=Region,
-                            region=region,
-                            Section=Section,
-                            River=River)
+                           Gage=Gage,
+                           Region=Region,
+                           region=region,
+                           Section=Section,
+                           River=River,
+                           gage_sample=gage_sample)
 
 
 @main.route('/sections/')
@@ -100,16 +102,18 @@ def sectionpage(sid=None, slug=None, river=None):
     Individual section page
     """
     if river and slug:
-        section = Section.query.join(Section.river).filter(River.slug==river)\
-                                                   .filter(Section.slug==slug)\
-                                                   .first_or_404()
+        section = Section.query.join(Section.river)\
+                               .filter(River.slug == river)\
+                               .filter(Section.slug == slug)\
+                               .first_or_404()
     else:
         section = Section.query.get_or_404(sid)
     return render_template('section.html',
                            Gage=Gage,
                            Section=Section,
                            section=section,
-                           Sensor=Sensor)
+                           Sensor=Sensor,
+                           gage_sample=gage_sample)
 
 
 @main.route('/rivers/')
@@ -140,4 +144,5 @@ def riverpage(rid=None, slug=None):
                            Gage=Gage,
                            River=River,
                            Section=Section,
-                           river=river)
+                           river=river,
+                           gage_sample=gage_sample)

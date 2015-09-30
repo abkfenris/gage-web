@@ -4,70 +4,47 @@
 
 {% block title %}About Flows{% endblock %}
 
-{% block content %}
-  	<div class="jumbotron" style="background-image: url({{ url_for('static', filename='img/header.jpg' ) }}); background-size: 100%;">
-  		<div class="container">
-  			<h1>About</h1>
-  		</div>
-  	</div>
-  	
-  	<div class="container">
-  		<div class="row">
-	  		<div class="col-md-8" role="main">
-		  		<h3>What's going on here?</h3>
-		  		<p>This is the human facing side of an open river level gaging system.</p>
-		  		
-		  		<h3>But Why?</h3>
-		  		<p>We're building our own gages to supplement the USGS National Water Information System's selection of gages. The USGS has positioned many of their gages further down in drainages, or in drainages that are more likely to have an adverse impact on people. Most kayakers however consider higher river levels favorable (to the destain of the locals), and creekboaters at least often visit drainages much smaller than the USGS will place a gage on.</p>
-		  		<p>Another unfortunate reason that we've started this project is that the USGS's funding for gages has been drying up<sup id="1back"><a href="#1">1</a></sup>. It does not help matters that the USGS's yearly cost for a gage is over $10,000<sup id="2back"><a href="#2">2</a></sup>. Often the USGS may get help from local organizations in offsetting the cost, but even splitting a single gaging station several different ways can put a major load on local organizations.</p>
-		  		<p>At 400 a pop for our gage design and an open API, we're trying to bring down the cost of a gaging station. It takes a pretty large organization to help support a USGS gage, while a small group or even individuals could sponsor a gage based on our design on their local river.</p>
-		  		
-		  		<h3>Why is my local river not on here?</h3>
-		  		<p>Well, you need to build a gage! We haven't exactly finished the gage design and programming, but we are getting closer. Currently we just have a limited beta going on. Right now, it looks like it will cost about 400 for a gage plus data and mounting hardware, but everything is subject to change as I keep breaking them.</p>
-		  		
-		  		<h3>Want to know more?</h3>
-		  		<p>The source code for both the gages and the website are both on Github. Instructions for building a gage will be coming to the Github repository.</p>
-		  		<ul>
-		  			<li><a href="https://github.com/abkfenris/gage-beaglebone">Gage source</a></li>
-		  			<li><a href="https://github.com/abkfenris/gage-web">Website source</a></li>
-		  		</ul>
-		  		
-		  		<h4>Major Gage Components</h4>
-		  		<ul>
-		  			<li>Beaglebone Black</li>
-		  			<li>Maxbotix Ultrasonic Rangefinder</li>
-		  			<li>6V 5.6W Solar Panel</li>
-		  			<li>3.7V Lithium Ion Battery Pack</li>
-		  			<li>Andicelabs Power Cape</li>
-		  			<li>Sierra Wireless USB Mobile Broadband Adapter</li>
-		  			<li>DS1307 Real Time Clock</li>
-		  		</ul>
-		  		
-		  		<h3>Who is the sexy beast in the header?</h3>
-		  		<p>Thats Nate St. Savier running Particle Accelerator on <a href="http://www.americanwhitewater.org/content/River/detail/id/3283/">Cold Brook, NH</a>. Here's another picture of him running NO<sub>2</sub> Chute, the next rapid.</p>
-		  		<img src="{{ url_for('static', filename='img/about-nate.jpg' ) }}" class="img-responsive">
-		  		
-		  		
-		  		
-		  		<h5>Sources</h5>
-		  		<ul>
-		  			<li id="1"><a href="#1back">1.</a> Bad Pun & <a href="http://streamstatsags.cr.usgs.gov/ThreatenedGages/ThreatenedGages.html">USGS Threatened Stations</a></li>
-		  		    <li id="2"><a href="#2back">2.</a> <a href="http://pubs.usgs.gov/fs/fs-050-03/">New Hampshire's Stream-gaging Network: Status and Future Needs</a> among other sources</li>
-		  		</ul>
-	  			 
+{% block jumbo_title %}<h1>About</h1>{% endblock %}
 
-	  		</div>
-	  		<div class="col-md-4">
-		  		<h4>Gages</h4>
-	  			<div class="list-group">
-	  				{% for gage in Gage.query.all() %}
-	  				<a href="{{ url_for('.gagepage', slug=gage.slug ) }}" class="list-group-item">
-	  					{{ gage.name }}
-	  			 	</a>
-	  			 {% endfor %}
-	  			 </div>
-	  			
-	  		</div>
-	  	</div>
-  	</div>
+{% block main %}
+<h3>What's going on here?</h3>
+<p>This is the human facing side of an open river level gaging system.</p>
+
+<h3>But Why?</h3>
+<p>We're building our own gages to supplement the USGS National Water Information System's selection of gages. The USGS has positioned many of their gages further down in drainages, or in drainages that are more likely to have an adverse impact on people. Most kayakers however consider higher river levels favorable (to the destain of the locals), and creekboaters at least often visit drainages much smaller than the USGS will place a gage on.</p>
+<p>Another unfortunate reason that we've started this project is that the USGS's funding for gages has been drying up<sup id="1back"><a href="#1">1</a></sup>. It does not help matters that the USGS's yearly cost for a gage is over $10,000<sup id="2back"><a href="#2">2</a></sup>. Often the USGS may get help from local organizations in offsetting the cost, but even splitting a single gaging station several different ways can put a major load on local organizations.</p>
+<p>At 400 a pop for our gage design and an open API, we're trying to bring down the cost of a gaging station. It takes a pretty large organization to help support a USGS gage, while a small group or even individuals could sponsor a gage based on our design on their local river.</p>
+
+<h3>Why is my local river not on here?</h3>
+<p>Well, you need to build a gage! We haven't exactly finished the gage design and programming, but we are getting closer. Currently we just have a limited beta going on. Right now, it looks like it will cost about 400 for a gage plus data and mounting hardware, but everything is subject to change as I keep breaking them.</p>
+
+<h3>Want to know more?</h3>
+<p>The source code for both the gages and the website are both on Github. Instructions for building a gage will be coming to the Github repository.</p>
+<ul>
+	<li><a href="https://github.com/abkfenris/gage-beaglebone">Gage source</a></li>
+	<li><a href="https://github.com/abkfenris/gage-web">Website source</a></li>
+</ul>
+
+<h4>Major Gage Components</h4>
+<ul>
+	<li>Beaglebone Black</li>
+	<li>Maxbotix Ultrasonic Rangefinder</li>
+	<li>6V 5.6W Solar Panel</li>
+	<li>3.7V Lithium Ion Battery Pack</li>
+	<li>Andicelabs Power Cape</li>
+	<li>Sierra Wireless USB Mobile Broadband Adapter</li>
+	<li>DS1307 Real Time Clock</li>
+</ul>
+
+<h3>Who is the sexy beast in the header?</h3>
+<p>Thats Nate St. Savier running Particle Accelerator on <a href="http://www.americanwhitewater.org/content/River/detail/id/3283/">Cold Brook, NH</a>. Here's another picture of him running NO<sub>2</sub> Chute, the next rapid.</p>
+<img src="{{ url_for('static', filename='img/about-nate.jpg' ) }}" class="img-responsive">
+
+
+
+<h5>Sources</h5>
+<ul>
+	<li id="1"><a href="#1back">1.</a> Bad Pun & <a href="http://streamstatsags.cr.usgs.gov/ThreatenedGages/ThreatenedGages.html">USGS Threatened Stations</a></li>
+    <li id="2"><a href="#2back">2.</a> <a href="http://pubs.usgs.gov/fs/fs-050-03/">New Hampshire's Stream-gaging Network: Status and Future Needs</a> among other sources</li>
+</ul>
 {% endblock %}
