@@ -18,7 +18,7 @@ from config import Config, config
 celery = Celery(__name__, broker=Config.CELERY_BROKER_URL)
 
 env = os.environ.get('FLASK_CONFIG', 'default')
-if env is 'production' or env is 'development' or env is 'default':
+if env in ('production', 'development', 'default'):
     client = Client(config[env].SENTRY_DSN)
     handler = SentryHandler(client)
     setup_logging(handler)

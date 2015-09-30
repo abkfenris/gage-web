@@ -28,7 +28,8 @@ class Config:
 class DevelopmentConfig(Config):
     DEBUG = True
     API_GAGES_PER_PAGE = 2
-    SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/gage_web'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('GAGE_DB',
+                                             'postgresql://localhost/gage_web')
     # SERVER_NAME = 'flows.ngrok.com'
 
 
@@ -37,7 +38,8 @@ class TestingConfig(Config):
     API_GAGES_PER_PAGE = 1
     SECRET_KEY = '1'  # noqa
     CSRF_ENABLED = False
-    SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/gage_web_testing'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('GAGE_DB',
+                                             'postgresql://localhost/gage_web_testing')
     CELERY_ALWAYS_EAGER = True
     # SQLALCHEMY_ECHO = True
 
