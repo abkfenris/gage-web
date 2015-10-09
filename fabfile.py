@@ -128,17 +128,17 @@ def configure_git():
     """
     require.directory(GIT_DIR, use_sudo=True)
     with cd(GIT_DIR):
-        sudo('mkdir gage-web.git')
+        #sudo('mkdir gage-web.git')
         with cd('gage-web.git'):
-            sudo('git init --bare')
+            #sudo('git init --bare')
             with lcd(LOCAL_CONFIG_DIR):
                 with cd('hooks'):
                     put('./post-receive', './', use_sudo=True)
                     sudo('chmod +x post-receive')
-    with lcd(LOCAL_APP_DIR):
-        local(
-            'git remote add production {user}@{server}:{GIT_DIR}/gage-web.git'
-            .format(user=env.user, server=env.host_string, GIT_DIR=GIT_DIR))
+    #with lcd(LOCAL_APP_DIR):
+    #    local(
+    #        'git remote add production {user}@{server}:{GIT_DIR}/gage-web.git'
+    #        .format(user=env.user, server=env.host_string, GIT_DIR=GIT_DIR))
 
 
 def deploy():
@@ -146,7 +146,7 @@ def deploy():
     Push current master to production and restart gunicorn
     """
     with lcd(LOCAL_APP_DIR):
-        local('git push production master')
+        local('git push production')
         sudo('supervisorctl restart gage:*')
 
 
