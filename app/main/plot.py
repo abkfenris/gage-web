@@ -114,12 +114,14 @@ class BasePlot(object):
         for sample in data:
             x.append(sample.datetime)
             y.append(sample.value)
-        ax.plot(x, y, '-')
+        ax.plot_date(x, y, '-')
         self._setaxislimits(ax, min(y), max(y))
         if self.sensor.name:
             ax.set_title('{0} - {1}'.format(self.sensor.gage.name, self.sensor.name))
         else:
             ax.set_title('{0} - {1}'.format(self.sensor.gage.name, self.sensor.stype.capitalize()))
+        for item in ax.get_xticklabels():
+            item.set_rotation(30)
         return ax, fig
 
     def matplot(self):
