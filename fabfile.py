@@ -110,7 +110,7 @@ def create_database():
     else:
         print('{DB} not found! Creating DB'.format(DB=DB))
         # require.postgres.user(DB_USER, password=DB_PASSWORD)
-        sudo('''psql -c "CREATE USER '{DB_USER}' NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT LOGIN UNENCRYPTED PASSWORD '{DB_PASSWORD}';"'''.format(DB_USER=DB_USER, DB_PASSWORD=DB_PASSWORD),
+        sudo("""psql -c "CREATE USER '{DB_USER}' NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT LOGIN UNENCRYPTED PASSWORD '{DB_PASSWORD}';""".format(DB_USER=DB_USER, DB_PASSWORD=DB_PASSWORD),
              user='postgres')
         # require.postgres.database(DB, owner=DB_USER)
         sudo('createdb --owner {DB_USER} {DB}'.format(DB_USER=DB_USER, DB=DB),
@@ -128,17 +128,17 @@ def configure_git():
     """
     require.directory(GIT_DIR, use_sudo=True)
     with cd(GIT_DIR):
-        sudo('mkdir gage-web.git')
+        #sudo('mkdir gage-web.git')
         with cd('gage-web.git'):
-            sudo('git init --bare')
+            #sudo('git init --bare')
             with lcd(LOCAL_CONFIG_DIR):
                 with cd('hooks'):
                     put('./post-receive', './', use_sudo=True)
                     sudo('chmod +x post-receive')
-    with lcd(LOCAL_APP_DIR):
-        local(
-            'git remote add production {user}@{server}:{GIT_DIR}/gage-web.git'
-            .format(user=env.user, server=env.host_string, GIT_DIR=GIT_DIR))
+    #with lcd(LOCAL_APP_DIR):
+    #    local(
+    #        'git remote add production {user}@{server}:{GIT_DIR}/gage-web.git'
+    #        .format(user=env.user, server=env.host_string, GIT_DIR=GIT_DIR))
 
 
 def deploy():
@@ -146,7 +146,7 @@ def deploy():
     Push current master to production and restart gunicorn
     """
     with lcd(LOCAL_APP_DIR):
-        local('git push production master')
+        local('git push production')
         sudo('supervisorctl restart gage:*')
 
 
@@ -263,6 +263,14 @@ def setup_celery():
             sudo('supervisorctl reread')
             sudo('supervisorctl update')
             sudo('supervisorctl restart gage:*')
+
+
+def gage_restart():
+    """
+    Cron script to restart the supervisorctl gage:gage-celery-beat hourly
+    """
+    fabtools.cron.add_task('restart-gage-beat', '@hourly', 'root', WWW_DIR+'/server-config/restart-gage.sh')
+
 
 
 def bootstrap():

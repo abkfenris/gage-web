@@ -1,2 +1,6 @@
 #!/bin/sh
-GIT_WORK_TREE=/home/www/gage-web git checkout -f
+while read oldrev newrev ref
+do
+    echo "$ref recieved, probably deploying master"
+    GIT_WORK_TREE=/home/www/gage-web git checkout -f $ref
+done
