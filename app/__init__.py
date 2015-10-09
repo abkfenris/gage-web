@@ -33,13 +33,13 @@ def create_app(config_name):
     security.init_app(app, user_datastore)
     toolbar.init_app(app)
 
-    if os.environ.get('OPBEAT_APP_ID', False):
-        from opbeat.contrib.flask import Opbeat
-        opbeat = Opbeat(app, logging=True)
-
-    if config_name in ('production', 'development', 'default'):
+    if config_name is 'production' or config_name is 'development':
         sentry = Sentry(app, logging=True, level=logging.INFO)
         app.wsgi_app = ProxyFix(app.wsgi_app)
+
+        if os.environ.get('OPBEAT_APP_ID', False):
+            from opbeat.contrib.flask import Opbeat
+            opbeat = Opbeat(app, logging=True)
 
     from app.celery import celery
     celery.conf.update(app.config)
