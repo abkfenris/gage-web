@@ -110,7 +110,7 @@ def create_database():
     else:
         print('{DB} not found! Creating DB'.format(DB=DB))
         # require.postgres.user(DB_USER, password=DB_PASSWORD)
-        sudo('''psql -c "CREATE USER '{DB_USER}' NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT LOGIN UNENCRYPTED PASSWORD '{DB_PASSWORD}';"'''.format(DB_USER=DB_USER, DB_PASSWORD=DB_PASSWORD),
+        sudo("""psql -c "CREATE USER '{DB_USER}' NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT LOGIN UNENCRYPTED PASSWORD '{DB_PASSWORD}';""".format(DB_USER=DB_USER, DB_PASSWORD=DB_PASSWORD),
              user='postgres')
         # require.postgres.database(DB, owner=DB_USER)
         sudo('createdb --owner {DB_USER} {DB}'.format(DB_USER=DB_USER, DB=DB),
@@ -263,6 +263,14 @@ def setup_celery():
             sudo('supervisorctl reread')
             sudo('supervisorctl update')
             sudo('supervisorctl restart gage:*')
+
+
+def gage_restart():
+    """
+    Cron script to restart the supervisorctl gage:gage-celery-beat hourly
+    """
+    fabtools.cron.add_task('restart-gage-beat', '@hourly', 'root', WWW_DIR+'/server-config/restart-gage.sh')
+
 
 
 def bootstrap():
