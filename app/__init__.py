@@ -3,6 +3,7 @@
 """
 App builder. Can be imported and used to start the site
 """
+import os
 
 from flask import Flask
 from flask.ext.bootstrap import Bootstrap
@@ -31,6 +32,10 @@ def create_app(config_name):
     db.init_app(app)
     security.init_app(app, user_datastore)
     toolbar.init_app(app)
+
+    if os.environ.get('OPBEAT_APP_ID', False):
+        from opbeat.contrib.flask import Opbeat
+        opbeat = Opbeat(app, logging=True)
 
     if config_name in ('production', 'development', 'default'):
         sentry = Sentry(app, logging=True, level=logging.INFO)

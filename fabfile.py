@@ -17,6 +17,7 @@ import fabtools
 #
 try:
     from fabhosts import (prod,   # noqa
+                          register_deployment,
                           WWW_DIR,
                           ENV_DIR,
                           USER,
@@ -110,7 +111,7 @@ def create_database():
     else:
         print('{DB} not found! Creating DB'.format(DB=DB))
         # require.postgres.user(DB_USER, password=DB_PASSWORD)
-        sudo('''psql -c "CREATE USER '{DB_USER}' NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT LOGIN UNENCRYPTED PASSWORD '{DB_PASSWORD}';"'''.format(DB_USER=DB_USER, DB_PASSWORD=DB_PASSWORD),
+        sudo("""psql -c "CREATE USER '{DB_USER}' NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT LOGIN UNENCRYPTED PASSWORD '{DB_PASSWORD}';""".format(DB_USER=DB_USER, DB_PASSWORD=DB_PASSWORD),
              user='postgres')
         # require.postgres.database(DB, owner=DB_USER)
         sudo('createdb --owner {DB_USER} {DB}'.format(DB_USER=DB_USER, DB=DB),
@@ -148,6 +149,7 @@ def deploy():
     with lcd(LOCAL_APP_DIR):
         local('git push production master')
         sudo('supervisorctl restart gage:*')
+        register_deployment(LOCAL_APP_DIR)
 
 
 def install_requirements():
