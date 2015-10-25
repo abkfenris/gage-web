@@ -19,6 +19,7 @@ from .database import db
 bootstrap = Bootstrap()
 security = Security()
 toolbar = DebugToolbarExtension()
+sentry = Sentry()
 
 from .models import user_datastore
 
@@ -34,12 +35,12 @@ def create_app(config_name):
     toolbar.init_app(app)
 
     if config_name is 'production' or config_name is 'development':
-        sentry = Sentry(app, logging=True, level=logging.INFO)
+        sentry.init_app(app, logging=True, level=logging.INFO)
         app.wsgi_app = ProxyFix(app.wsgi_app)
 
-        if os.environ.get('OPBEAT_APP_ID', False):
-            from opbeat.contrib.flask import Opbeat
-            opbeat = Opbeat(app, logging=True)
+        #if os.environ.get('OPBEAT_APP_ID', False):
+            #from opbeat.contrib.flask import Opbeat
+            #opbeat = Opbeat(app, logging=True)
 
     from app.celery import celery
     celery.conf.update(app.config)
