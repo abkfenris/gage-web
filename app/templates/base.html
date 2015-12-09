@@ -49,7 +49,7 @@
                   <a href="{{ url_for('admin.index') }}">
 		  			<li>
 		  				<button class="btn btn-primary navbar-btn" role="button">
-                          {% if current_user.is_authenticated() %}
+                          {% if current_user.is_authenticated %}
                               Admin
                           {% else %}
                               Login

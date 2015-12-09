@@ -18,12 +18,11 @@ from config import Config, config
 celery = Celery(__name__, broker=Config.CELERY_BROKER_URL)
 
 env = os.environ.get('FLASK_CONFIG', 'default')
-if env is 'production' or env is 'development' or env is 'default':
-    client = Client(config[env].SENTRY_DSN)
-    handler = SentryHandler(client)
-    setup_logging(handler)
-    register_logger_signal(client, loglevel=logging.INFO)
-    register_signal(client)
+client = Client(config[env].SENTRY_DSN)
+handler = SentryHandler(client)
+setup_logging(handler)
+register_logger_signal(client, loglevel=logging.INFO)
+register_signal(client)
 
 TaskBase = celery.Task
 

@@ -38,10 +38,6 @@ def create_app(config_name):
         sentry.init_app(app, logging=True, level=logging.INFO)
         app.wsgi_app = ProxyFix(app.wsgi_app)
 
-        #if os.environ.get('OPBEAT_APP_ID', False):
-            #from opbeat.contrib.flask import Opbeat
-            #opbeat = Opbeat(app, logging=True)
-
     from app.celery import celery
     celery.conf.update(app.config)
 
