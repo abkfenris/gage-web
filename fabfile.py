@@ -17,6 +17,7 @@ import fabtools
 #
 try:
     from fabhosts import (prod,   # noqa
+                          register_deployment,
                           WWW_DIR,
                           ENV_DIR,
                           USER,
@@ -148,6 +149,7 @@ def deploy():
     with lcd(LOCAL_APP_DIR):
         local('git push production master')
         sudo('supervisorctl restart gage:*')
+        register_deployment(LOCAL_APP_DIR)
 
 
 def install_requirements():
