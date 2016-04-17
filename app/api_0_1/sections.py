@@ -52,6 +52,19 @@ def get_sections():
     })
 
 
+@api.route('/sections/map/')
+def get_section_geojson():
+    """
+    Returns a GeoJSON FeatureCollection for the sections
+    """
+    sections = Section.query.all()
+    geojson = {
+        'type': 'FeatureCollection',
+        'features': [section.geojson() for section in sections]
+    }
+    return jsonify(geojson)
+
+
 @api.route('/sections/<int:sid>')
 def get_section(sid):
     """

@@ -62,7 +62,7 @@ def get_gages():
 
 
 @api.route('/gages/map/')
-def get_geojson():
+def get_gage_geojson():
     gages = Gage.query.all()
     geojson = {
         'type': 'FeatureCollection',

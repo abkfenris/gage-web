@@ -4,6 +4,7 @@ Model for section
 from flask import url_for
 from geoalchemy2 import Geometry
 from geoalchemy2.shape import to_shape
+from shapely.geometry import mapping
 
 from app.database import db
 
@@ -132,6 +133,23 @@ class Section(db.Model):
             'out_longitude': self.outlatlon().x
         }
         return json_section
+
+    def geojson(self):
+        """
+        Creates a GeoJSON Feature from the gage
+        """
+        geometry = mapping(to_shape(self.path))
+        geojson = {
+            'type': 'Feature',
+            'geometry': geometry,
+            'properties': {
+                'id': self.id,
+                'name': self.name,
+                'description': self.description
+            }
+        }
+        return geojson
+
 
     def __repr__(self):
         return '<Section %r>' % self.name
