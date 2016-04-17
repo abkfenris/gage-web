@@ -121,6 +121,30 @@ class Gage(db.Model):
         }
         return json_post
 
+    def geojson(self):
+        """
+        Creates a GeoJSON Feature from the gage
+        """
+        point = self.latlon()
+        geojson = {
+            'type': 'Feature',
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [point.x, point.y]
+            },
+            'properties': {
+                'name': self.name,
+                'location': self.location,
+                'id': self.id,
+                'html': url_for('main.gagepage',
+                                slug=self.slug,
+                                _external=True),
+                'sensors': [sensor.to_gage_json() for sensor in self.sensors],
+                'regions': [region.to_json() for region in self.regions]
+            }
+        }
+        return geojson
+
     def new_sample(self, stype, value, sdatetime):
         """
         Process a new sample for the gage, and finds the right ``Sensor`` that

@@ -8,6 +8,7 @@ class Config:
     dropbox_app_secret = os.environ.get('DROPBOX_APP_SECRET')
     dropbox_app_token = os.environ.get('DROPBOX_APP_TOKEN')
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
     MAPBOX_MAP_ID = os.environ.get('MAPBOX_MAP_ID')
     MAPBOX_ACCESS_TOKEN = os.environ.get('MAPBOX_ACCESS_TOKEN')
     SECURITY_POST_LOGIN_VIEW = 'admin/'
