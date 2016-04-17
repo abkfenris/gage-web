@@ -2,7 +2,7 @@
 The main public routes to view the site
 """
 
-from flask import render_template
+from flask import render_template, current_app
 
 from .blueprint import main
 from app.database import gage_sample
@@ -27,6 +27,20 @@ def aboutpage():
     About this site.
     """
     return render_template('about.html', gage_sample=gage_sample)
+
+
+@main.route('/map/')
+def mappage():
+    """**/map/**
+
+    Map of gages and sections
+    """
+    mapbox_access_token = current_app.config['MAPBOX_ACCESS_TOKEN']
+    return render_template('map.html',
+                           gage_sample=gage_sample,
+                           Gage=Gage,
+                           Section=Section,
+                           mapbox_access_token=mapbox_access_token)
 
 
 @main.route('/gages/')

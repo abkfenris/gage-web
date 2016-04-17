@@ -2,36 +2,31 @@
 
 {% set active_page = "map" %}
 
+{% block head %}
+  {{super()}}
+  <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
+{% endblock %}
+
 {% block title %}Flows Map{% endblock %}
 
-{% block content %}
-  	<div class="jumbotron" style="background-image: url({{ url_for('static', filename='img/header.jpg' ) }}); background-size: 100%;">
-  		<div class="container">
-  			<h1>Map</h1>
-  		</div>
-  	</div>
-  	
-  	<div class="container">
-  		<div class="row">
-	  		<div class="col-md-8" role="main">
-		  		
-	  			 <iframe src="{{ url_for('static', filename='html/google-map.html' ) }}" width="616" height="616" marginwidth="0" marginheight="0" scrolling="no" frameborder="0">
-	  			 	<a href="{{ url_for('static', filename='html/google-map.html' ) }}">View the map here.</a>
-	  			 </iframe>
-	  			 
-	  		</div>
-	  		<div class="col-md-4">
-		  		Gages
-	  			 <div class="list-group">
-	  			 	{% for gage in Gage.select() %}
-	  			 	<a href="{{ url_for('gagepage', id=gage.id ) }}" class="list-group-item">
-	  			 		{{ gage.name }}
-		  			 	{{ gage.level_badge() }}
-	  			 	</a>
-	  			 {% endfor %}
-	  			 </div>
-	  			
-	  		</div>
-	  	</div>
-  	</div>
+{% block jumbo_title %}<h1>Map</h1>{% endblock %}
+
+{% block main %}
+  <div id="map" style="height: 600px; width: 100%">
+
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  L.mapbox.accessToken = '{{mapbox_access_token}}'
+  var map = L.mapbox.map('map', 'mapbox.streets')
+
+  var sections = L.mapbox.featureLayer('{{ url_for('api.get_section_geojson', _external=True ) }}')
+  .addTo(map)
+
+  var gages = L.mapbox.featureLayer('{{ url_for('api.get_gage_geojson', _external=True)}}')
+  .addTo(map)
+</script>
 {% endblock %}
