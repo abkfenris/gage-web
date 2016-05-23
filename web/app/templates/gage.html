@@ -63,12 +63,12 @@
 	  		<div class="col-md-3">
 	  			<h4>Gages</h4>
 	  			<div class="list-group">
-	  				{% for gage in Gage.query.all() %}
-	  				<a href="{{ url_for('.gagepage', slug=gage.slug ) }}" class="list-group-item">
-	  					{{ gage.name }}
+	  				{% for other_gage in Gage.query.all() %}
+	  				<a href="{{ url_for('.gagepage', slug=other_gage.slug, gid=other_gage.id ) }}" class="list-group-item">
+	  					{{ other_gage.name }}
 	  			 	</a>
 	  			 {% endfor %}
-	  			 </div>
+         </div>
 	  		</div>
 	  	</div>
   	</div>

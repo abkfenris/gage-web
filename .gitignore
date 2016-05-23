@@ -64,3 +64,5 @@ celerybeat-schedule
 dump.rdb
 
 tmp/
+common.env
+data

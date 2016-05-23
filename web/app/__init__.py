@@ -23,6 +23,18 @@ sentry = Sentry()
 
 from .models import user_datastore
 
+logging_map = {
+    'DEBUG': logging.DEBUG,
+    'INFO': logging.INFO,
+    'WARNING': logging.WARNING,
+    'ERROR': logging.ERROR,
+    'CRITICAL': logging.CRITICAL
+}
+
+log_level = os.environ.get('LOG_LEVEL', 'INFO')
+logger = logging.getLogger(__name__)
+logger.setLevel(logging_map[log_level])
+
 
 def create_app(config_name):
     app = Flask(__name__)
@@ -34,7 +46,7 @@ def create_app(config_name):
     security.init_app(app, user_datastore)
     toolbar.init_app(app)
 
-    if config_name is 'production' or config_name is 'development':
+    if config_name in ('docker', 'development', 'production'):
         sentry.init_app(app, logging=True, level=logging.INFO)
         app.wsgi_app = ProxyFix(app.wsgi_app)
 

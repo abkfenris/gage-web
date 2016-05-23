@@ -1,7 +1,7 @@
 """
 When things go wrong sitewide they are handled by the app_errorhandlers
 """
-from flask import render_template, request, jsonify, current_app
+from flask import render_template, request, jsonify, current_app, g
 from flask_security.core import current_user
 
 from .blueprint import main
@@ -59,4 +59,5 @@ def internal_server_error(e):
         response = jsonify({'error': 'internal server error'})
         response.status_code = 500
         return response
-    return render_template('500.html', Gage=Gage), 500
+    public_dsn = current_app.extensions['sentry'].client.get_public_dsn('http')
+    return render_template('500.html', Gage=Gage, event_id=g.sentry_event_id, public_dsn=public_dsn), 500

@@ -43,13 +43,22 @@ class TestingConfig(Config):
     # SQLALCHEMY_ECHO = True
 
 
-class DockerLocalConfig(Config):
-    DEBUG = True
-    SERVER_NAME = "localhost"
+class DockerConfig(Config):
+    DEBUG = os.environ.get('FLASK_DEBUG', False)
+    SERVER_NAME = os.environ.get('SERVER_NAME')
+    SECURITY_PASSWORD_HASH = 'bcrypt'  # noqa
+    SECURITY_PASSWORD_SALT = (
+        os.environ.get('SECRET_KEY') or
+        'LMB#*42.)tHm4A;9Ce^hoPLN6C[m=3;2oTvK,vXA7EpMG4bg8x')
+    SQLALCHEMY_DATABASE_URI = (
+        os.environ.get('GAGE_DB') or
+        'postgresql://localhost/gage-web')
+    CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL',
+        'redis://localhost:6379/1')
 
 
 class ProductionConfig(Config):
-    SERVER_NAME = 'riverflo.ws'
+    # SERVER_NAME = 'riverflo.ws'
     SECURITY_PASSWORD_HASH = 'bcrypt'  # noqa
     SECURITY_PASSWORD_SALT = (
         os.environ.get('SECRET_KEY') or
@@ -62,6 +71,7 @@ config = {
     'development': DevelopmentConfig,
     'testing': TestingConfig,
     'production': ProductionConfig,
+    'docker': DockerConfig,
 
     'default': DevelopmentConfig
 }
