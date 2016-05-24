@@ -30,10 +30,11 @@ services:
       POSTGRES_PASSWORD: 'J3XxpoVf8rqTBw3BnnGk'
 
   postgis_test:
-    restart: "always"
-    build: ./postgis
+    build: ./postgis_test
     env_file:
       - ./common.env
+    volumes:
+      - ./data/google_key:/google_key
 
   pghoard:
     restart: "always"

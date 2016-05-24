@@ -6,6 +6,7 @@ echo "Configuring pghoard.json"
 cat <<EOCONF > /pghoard.json
 {
   "backup_location": "./metadata",
+  "http_address": "",
   "backup_sites": {
     "default": {
       "active_backup_mode": "pg_receivexlog",
