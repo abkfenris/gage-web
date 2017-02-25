@@ -4,8 +4,7 @@ from flask_admin.contrib.geoa import ModelView as _ModelView
 from flask_admin.base import MenuLink
 from flask_admin.model import InlineFormAdmin
 from flask_admin.contrib.fileadmin import FileAdmin as _FileAdmin
-from flask_security import (roles_required,
-                            current_user)
+from flask_security import roles_required, current_user
 
 import logging
 import os.path as op
@@ -21,20 +20,17 @@ logger = logging.getLogger(__name__)
 
 
 class ModelView(_ModelView):
-    #def is_accessible(self):
-    #    auth = current_user.is_authenticated
-    #    logger.error('ModelView is accessible. Auth=', auth)
-    #    return auth
+    def is_accessible(self):
+        return current_user.is_authenticated
+
 
     def inaccessible_callback(self, name, **kwargs):
         return redirect(url_for('security.login', next=request.url))
 
 
 class FileAdmin(_FileAdmin):
-    #def is_accessible(self):
-    #    auth = current_user.is_authenticated
-    #    logger.error('FileAdmin is accessible. Auth=', auth)
-    #    return auth
+    def is_accessible(self):
+        return current_user.is_authenticated
 
     def inaccessible_callback(self, name, **kwargs):
         return redirect(url_for('security.login', next=request.url))
@@ -45,7 +41,6 @@ class UserView(ModelView):
         """
         Only allow admins to see other users
         """
-        logger.error('Userview', current_user)
         return current_user.has_role('admin')
 
 
@@ -93,14 +88,15 @@ class MyAdminIndexView(AdminIndexView):
 
     @expose('/')
     def index(self):
-        #if not current_user.is_authenticated:
-        #    return redirect(url_for('security.login', next=request.url))
+        if not current_user.is_authenticated:
+            return redirect(url_for('security.login', next=request.url))
         return super(MyAdminIndexView, self).index()
 
 
 class AuthenticatedMenuLink(MenuLink):
     def is_accessible(self):
         return current_user.is_authenticated
+    
 
 
 admin = Admin(name="Riverflo.ws",
