@@ -170,3 +170,6 @@ class Gage(db.Model):
 
     def __repr__(self):
         return '<Gage %r>' % self.name
+
+    def __str__(self):
+        return self.name

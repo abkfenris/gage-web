@@ -61,5 +61,8 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return '<User %r>' % self.username
+    
+    def __str(self):
+        return self.username
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)

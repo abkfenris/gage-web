@@ -148,3 +148,6 @@ class Sensor(db.Model):
 
     def __repr__(self):
         return '<Sensor {0} - {1}>'.format(self.gage.name, self.stype)
+
+    def __str__(self):
+        return self.gage.name + '-' + self.stype

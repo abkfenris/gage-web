@@ -62,3 +62,6 @@ class Region(db.Model):
 
     def __repr__(self):
         return '<Region %r>' % self.name
+    
+    def __str__(self):
+        return self.name
