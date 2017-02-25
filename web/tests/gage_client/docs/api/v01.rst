@@ -1,0 +1,175 @@
+API Version 0.1
+===============
+
+The version 0.1 of the API uses `JSON Web Signatures`_, specifically the
+`itsdangerous implementation`_ (which is a lot more readable).
+
+Using JSON Web Signatures allows us to preshare a secret between the server
+and the gage. This allows for less traffic on constrained connections than even
+an HTTPS handshake.
+
+``itsdangerous.JSONWebSignatureSerializer(password)`` is used to load and dump the
+JSON to and from a string using the shared password.
+
+The client is able to send multiple samples at a time, and can keep track of
+which samples were sucessfully recieved by the server, and which ones were
+rejected. The client will attempt to resend any samples that were not recgonized
+by the server.
+
+Server Password Error
+---------------------
+
+If the server is unable to decode the serialized json, then it will return:
+
+.. code-block:: http
+
+    HTTP/1.0 401 UNAUTHORIZED
+    Connection: close
+    Content-Length: 60
+    Content-Type: application/json
+    Date: Sun, 29 Mar 2015 01:41:02 GMT
+    Server: Werkzeug/0.10.1 Python/2.7.9
+
+    {
+        "error": "unauthorized",
+        "message": "bad signature"
+    }
+
+
+An Example Exchange
+-------------------
+
+Let's work through a whole exchange between the sever and client. The code will
+be in python, but if the JSON Web Signature, and the JSON it is fed is structured
+the same way in another language, it should work the same.
+
+Client setup
+~~~~~~~~~~~~
+
+The client can be initialized with ``Client_0_1`` to specify the API version,
+but if ``Client`` is used, then it will get the correct API version from the url
+string, and initialize the right subclass instead.
+
+``Client`` takes a url, an ``id`` and the shared password. Client checks for
+``/0.1`` in the url to choose the correct version of the API.
+
+.. code-block:: python
+
+    from gage_client import Client
+
+    c = Client('http://example.com/api/0.1/gages/3', 3, 'password')
+
+Here we've setup a client for gage id of ``3`` with a shared password of
+``password`` for an api version 0.1 base of ``http://example.com/api/0.1``. 
+
+Adding Readings
+~~~~~~~~~~~~~~~
+
+Now that we've got the client ``c`` created, we can start adding some sensor
+readings.
+
+A reading takes the type of reading, a datetime string
+('YYYY-MM-DD HH:MM:SS.SSSSSS'), the value of the reading (a float), and
+optionally an id number. The id number is to identify the reading locally on the
+gage, so if there is a failure, or sucess and only the right values need to be
+resent.
+
+.. code-block:: python
+
+    >>> c.reading('level', str(datetime.datetime.now()), 4.4)
+    True
+
+Multiple readings of verious sensor types can be added at one time, and the
+client will attempt to send all of them at once.
+
+To return the current samples that the client has queued to send:
+
+.. code-block:: python
+
+    >>> c.readings()
+    [{'sender_id': 0, 'type': 'level', 'value': 4.4, 'datetime': '2015-03-28 22:16:40.485660'}]
+
+Formed JSON before getting serialized
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The components of the JSON that will be sent (once serialized) is the gage with
+id number, which should match the gage id in the url.
+
+The other component is a list of sample dicts including a datetime, value,
+sensor type and sender id number.
+
+.. code-block:: python
+
+    {
+        'gage': {
+            'id': 3
+        },
+        'samples': [
+            {
+                'datetime': '2015-03-28 21:18:23.662830',
+                'sender_id': 0,
+                'type': 'level',
+                'value': 4.2
+            }
+        ]
+    }
+
+POST
+~~~~
+
+215 bytes
+
+.. code-block:: http
+
+    POST /api/0.1/gages/3/sample HTTP/1.1
+    Host: 542b3900.ngrok.com
+    User-Agent: python-requests/2.6.0 CPython/2.7.9 Darwin/14.1.0
+    Content-Length: 215
+    Accept: */*
+    Accept-Encoding: gzip, deflate
+    Connection: close
+    X-Forwarded-Proto: https
+    X-Real-Ip: 24.39.6.66
+
+.. code-block:: python
+
+    eyJhbGciOiJIUzI1NiJ9.eyJnYWdlIjp7ImlkIjozfSwic2FtcGxlcyI6W3sic2VuZGVyX2lkIj
+    owLCJ0eXBlIjoibGV2ZWwiLCJ2YWx1ZSI6NC4yLCJkYXRldGltZSI6IjIwMTUtMDMtMjggMjE6M
+    Tg6MjMuNjYyODMwIn1dfQ._EA0StNTzfU84AUUd-Va8uI-fWkrOpY6qqg8AnGPyFg
+
+Response
+~~~~~~~~
+
+415 bytes
+
+.. code-block:: http
+
+    HTTP/1.0 200 OK
+    Connection: close
+    Content-Length: 413
+    Content-Type: application/json
+    Date: Sun, 29 Mar 2015 01:18:33 GMT
+    Server: Werkzeug/0.10.1 Python/2.7.9
+
+    {
+        "gage": {
+            "id": 3,
+            "location": "Bear River near RT 2 in Newry Maine",
+            "name": "Bear River at Newry",
+            "url": "http://example.com/api/0.1/gages/3"
+        },
+        "result": "created",
+        "samples": [
+            {
+                    "datetime": "2015-03-28 21:18:23.662830",
+                    "id": 48150,
+                    "sender_id": 0,
+                    "url": "http://542b3900.ngrok.com/api/0.1/samples/48150",
+                    "value": 4.2
+            }
+        ]
+    }
+
+
+.. _JSON Web Signatures: https://tools.ietf.org/html/draft-ietf-jose-json-web-signature-41
+.. _itsdangerous implementation: http://pythonhosted.org/itsdangerous/#json-web-signatures

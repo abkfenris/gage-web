@@ -44,7 +44,7 @@ services:
       - redis:redis
     command: "gunicorn --log-level debug --log-config logging.conf -w 2 -b :8000 wsgi:app"
     volumes:
-      - .:/app
+      - ./web:/usr/src/app
     env_file:
       - ./common.env
 

@@ -6,7 +6,7 @@ App builder. Can be imported and used to start the site
 import os
 
 from flask import Flask
-from flask.ext.bootstrap import Bootstrap
+from flask_bootstrap import Bootstrap
 from flask_security import Security
 from flask_debugtoolbar import DebugToolbarExtension
 import logging

@@ -1,7 +1,7 @@
 import unittest
 from flask import current_app
-from web.app import create_app, db
-from web.app.models import Region, River, Section, Gage, Sensor, Sample, Correlation
+from app import create_app, db
+from app.models import Region, River, Section, Gage, Sensor, Sample, Correlation
 import time
 import datetime
 

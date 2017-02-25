@@ -12,6 +12,11 @@ from .base import add_new_sample, RemoteGage
 logger = logging.getLogger(__name__)
 
 
+def digit_or_period(c):
+    """Returns True if the character c given is a string or a period"""
+    return str.isdigit(c) or c is '.'
+
+
 class CEHQ(RemoteGage):
     URLBASE = 'http://www.cehq.gouv.qc.ca/suivihydro/fichier_donnees.asp'
 
@@ -27,7 +32,8 @@ class CEHQ(RemoteGage):
     def recent_flow(self, site_num):
         r = self.response(site_num)
         line = r.text.splitlines()[2]
-        return float(line.split('\t')[2].replace(',', '.'))
+        number = line.split('\t')[2].replace(',', '.')
+        return float(''.join(list(filter(digit_or_period, number))))
 
     def get_sample(self, sensor_id):
         sensor = self.sensor(sensor_id)
