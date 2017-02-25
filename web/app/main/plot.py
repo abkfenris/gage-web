@@ -12,6 +12,10 @@ except ImportError:
 from .blueprint import main
 from ..models import Gage, Sensor, Sample, Correlation, River, Section
 
+#import PyQt5
+import matplotlib
+matplotlib.use('Cairo', force=True)
+from matplotlib.backends.backend_cairo import FigureCanvasCairo as FigureCanvas
 
 class BasePlot(object):
     """
@@ -73,7 +77,7 @@ class BasePlot(object):
         """
         Returns a StringIO PNG plot for the sensor
         """
-        from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+        
         fig = self.matplot()
         canvas = FigureCanvas(fig)
         try:
@@ -87,7 +91,6 @@ class BasePlot(object):
         """
         Returns a StringIO JPG plot for the sensor
         """
-        from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
         fig = self.matplot()
         canvas = FigureCanvas(fig)
         try:
@@ -101,8 +104,11 @@ class BasePlot(object):
         """
         Returns axis and figure
         """
+        #import matplotlib
+        #matplotlib.use('Qt5Agg')
+        import PyQt5
         import matplotlib
-        matplotlib.use('Agg')
+        matplotlib.use('Qt5Agg', force=True)
         from matplotlib.figure import Figure
         import seaborn as sns
         sns.set()
@@ -126,6 +132,7 @@ class BasePlot(object):
         """
         Returns a matplotlib figure for building into a plot
         """
+        
         ax, fig = self._axisfigure()
         return fig
 

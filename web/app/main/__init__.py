@@ -6,4 +6,4 @@ Main public interface to the website.
 from .blueprint import main  # noqa
 
 # importing views for blueprint
-from . import views, errors, plot  # noqa
+from . import views, errors #, plot  # noqa

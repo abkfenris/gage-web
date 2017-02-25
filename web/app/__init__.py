@@ -31,9 +31,7 @@ logging_map = {
     'CRITICAL': logging.CRITICAL
 }
 
-log_level = os.environ.get('LOG_LEVEL', 'INFO')
-logger = logging.getLogger(__name__)
-logger.setLevel(logging_map[log_level])
+
 
 
 def create_app(config_name):
@@ -45,6 +43,13 @@ def create_app(config_name):
     db.init_app(app)
     security.init_app(app, user_datastore)
     toolbar.init_app(app)
+
+    log_level = os.environ.get('LOG_LEVEL', 'INFO')
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging_map[log_level])
+    stream = logging.StreamHandler()
+    stream.setLevel(logging_map[log_level])
+    logger.addHandler(stream)
 
     if config_name in ('docker', 'development', 'production'):
         sentry.init_app(app, logging=True, level=logging.INFO)
