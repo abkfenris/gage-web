@@ -11,7 +11,7 @@ services:
         build: ./web
         links:
         - postgis:postgis
-        command: "python /app/manage.py runserver -d -r -p 8000 --host=0.0.0.0"
+        command: "python /usr/src/app/manage.py runserver -d -r -p 8000 --host=0.0.0.0"
         volumes:
         - ./web:/usr/src/app
         environment: 
