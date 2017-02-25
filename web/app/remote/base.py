@@ -27,11 +27,11 @@ def add_new_sample(sensor_id, dt, svalue, deltaminutes=10):
                             datetime=dt)
         db.session.add(new_sample)
         db.session.commit()
-        logger.info('Saved sample (%s - %s - %s) for sensor %s',
-                    new_sample.id,
-                    svalue,
-                    dt,
-                    sensor_id)
+        logger.debug('Saved sample (%s - %s - %s) for sensor %s',
+                     new_sample.id,
+                     svalue,
+                     dt,
+                     sensor_id)
     else:
         message = ''
         if sample.datetime == dt.replace(tzinfo=None):
