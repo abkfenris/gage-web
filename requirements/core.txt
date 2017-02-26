@@ -43,7 +43,7 @@ python-dateutil==2.4.2
 pytz==2015.4
 PyYAML==3.11
 requests==2.7.0
-Shapely==1.5.11
+Shapely==1.5.17.post1
 raven==5.5.0
 six==1.9.0
 Werkzeug==0.10.4
