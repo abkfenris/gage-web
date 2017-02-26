@@ -30,7 +30,7 @@ arrow==0.6.0
 beautifulsoup4==4.4.0
 blinker==1.4
 docopt==0.6.2
-ipaddress==1.0.14
+ipaddress==1.0.18
 itsdangerous==0.24
 Jinja2==2.8
 Mako==1.0.1
