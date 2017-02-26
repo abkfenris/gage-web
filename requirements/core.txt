@@ -35,7 +35,7 @@ itsdangerous==0.24
 Jinja2==2.8
 Mako==1.0.1
 MarkupSafe==0.23
-passlib==1.6.5
+passlib==1.7.1
 parsedatetime==1.5
 pillow==2.9.0
 pyparsing==2.0.3
