@@ -1,0 +1,5 @@
+-r core.txt
+-r testing.txt
+#-r not-travis.txt
+
+# Flask Extensions

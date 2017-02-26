@@ -221,3 +221,18 @@ The third will run the server itself.
 
 Then you can go to http://127.0.0.1:5000/ (or whatever the last command showed),
 and start creating things.
+
+Running Everything with Docker-Compose
+--------------------------------------
+
+Now you can get everything going with a good docker-compose setup.
+
+
+https://github.com/boot2docker/boot2docker/issues/581#issuecomment-153512609
+
+.. code-block:: bash
+
+  $ docker-compose build
+  $ docker-compose up -d
+  $ docker-compose run web python manage.py db upgrade
+  $ docker-compose run web python manage.py user create_role -n admin

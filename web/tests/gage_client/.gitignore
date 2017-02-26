@@ -1,7 +1,3 @@
-doc/_build/
-venv
-tmp
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -57,12 +53,3 @@ docs/_build/
 # PyBuilder
 target/
 *.ipynb
-fabhosts.py
-tox.ini
-celerybeat.pid
-celerybeat-schedule
-dump.rdb
-
-tmp/
-common.env
-data

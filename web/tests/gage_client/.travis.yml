@@ -1,0 +1,13 @@
+language: python
+python:
+    - "2.6"
+    - "2.7"
+    - "3.2"
+    - "3.3"
+    - "3.4"
+# install dependencies
+install: "pip install -r dev-requirements.txt"
+# run tests
+script: nosetests --cover-package=gage_client --with-xcoverage
+after_success:
+    - coveralls

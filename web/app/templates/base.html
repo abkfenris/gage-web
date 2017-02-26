@@ -1,0 +1,113 @@
+{% extends "bootstrap/base.html" %}
+
+
+
+{% block navbar %}
+<div class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin-bottom: 0">
+  		<div class="container">
+
+		  	<div class="navbar-header">
+			  	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+			  		<span class="sr-only">Toggle navigation</span>
+			  		<span class="icon-bar"></span>
+			  		<span class="icon-bar"></span>
+			  		<span class="icon-bar"></span>
+			  	</button>
+			  	<ul class="nav navbar-nav">
+			  		<li>
+				  		<a class="navbar-brand active" href="{{ url_for('main.indexpage') }}">riverflo.ws</a>
+			  		</li>
+			  	</ul>
+		  	</div>
+
+		  	<div class="navbar-collapse collapse">
+		  		<ul class="nav navbar-nav">
+		  			{#
+		  				highlighting the active menu items with http://jinja.pocoo.org/docs/tricks/#highlighting-active-menu-items
+		  			#}
+		  			<li>
+		  				<a href="{{ url_for('main.regionspage' ) }}">Regions</a>
+		  			</li>
+		  			<li>
+		  				<a href="{{ url_for('main.riverspage' ) }}">Rivers</a>
+		  			</li>
+		  			<li>
+		  				<a href="{{ url_for('main.sectionspage' ) }}">Sections</a>
+		  			</li>
+		  			<li>
+		  				<a href="{{ url_for('main.gagespage' ) }}">Gages</a>
+		  			</li>
+		  			<li>
+		  				<a href="{{ url_for('main.aboutpage' ) }}">Map</a>
+		  			</li>
+		  			<li>
+		  				<a href="{{ url_for('main.aboutpage' ) }}">About</a>
+		  			</li>
+		  		</ul>
+
+		  		<ul class="nav navbar-nav navbar-right">
+                  <a href="{{ url_for('admin.index') }}">
+		  			<li>
+		  				<button class="btn btn-primary navbar-btn" role="button">
+                          {% if current_user.is_authenticated %}
+                              Admin
+                          {% else %}
+                              Login
+                          {% endif %}
+                        </button>
+		  			</li>
+                  </a>
+		  		</ul>
+		  		{#
+		  		<form class="navbar-form navbar-right" role="form">
+		  			<div class="form-group">
+		  				<input type="text" placeholder="Search Gages" class="form-control">
+		  			</div>
+		  		</form>
+		  		#}
+		  	</div>
+  		</div>
+  	</div>
+{% endblock %}
+
+{% block content %}
+    {% block jumbotron %}
+  	<div class="jumbotron" style="background-image: url({{ url_for('static', filename='img/header.jpg' ) }}); background-size: 100%;">
+  		<div class="container">
+  			{% block jumbo_title %}
+            <h1>riverflo.ws</h1>
+            {% endblock %}
+  		</div>
+  	</div>
+    {% endblock %}
+  	<div class="container">
+  		<div class="row">
+	  		<div class="col-md-{% block main_col_size %}8{% endblock %}" role="main">
+                {% block main %}
+		  		<h3>Don't hang around here</h3>
+		  		<p>Find something to drop in to!</p>
+	  			<img src="{{ url_for('static', filename='img/index.jpg' ) }}" class="img-responsive xs-hidden">
+	  			<p>Miles Puleio running Slip and Slide on <a href="http://www.americanwhitewater.org/content/River/detail/id/888/">Sandy Stream, ME</a>.</p>
+                {% endblock %}
+	  		</div>
+	  		<div class="col-md-{% block sidebar_col_size %}4{% endblock %}">
+                {% block sidebar %}
+		  		<h4>Gages</h4>
+	  			<div class="list-group">
+	  				{% for gage in gage_sample() %}
+	  				<a href="{{ url_for('.gagepage', slug=gage[1] ) }}" class="list-group-item">
+	  					{{ gage[0] }}
+                        {% if gage[5] %}
+                             - {{ gage[5] }}
+                             {% if gage[3] %}
+                                {{ gage[3] }}
+                             {% endif %}
+                        {% endif %}
+	  			 	</a>
+	  			 {% endfor %}
+	  			 </div>
+                 {% endblock %}
+	  		</div>
+	  	</div>
+  	</div>
+{% endblock %}
