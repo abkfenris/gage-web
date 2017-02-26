@@ -16,7 +16,7 @@ Flask-WTF==0.12
 
 # Database
 alembic==0.8.1
-GeoAlchemy2==0.2.5
+GeoAlchemy2==0.4.0
 SQLAlchemy==1.0.8
 psycopg2==2.6.1
 
