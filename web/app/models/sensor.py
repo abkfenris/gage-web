@@ -43,7 +43,7 @@ class Sensor(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    gage_id = db.Column(db.Integer, db.ForeignKey('gages.id'))
+    gage_id = db.Column(db.Integer, db.ForeignKey('gages.id'), index=True)
     gage = db.relationship('Gage',
                            backref=db.backref('sensors', lazy='dynamic'))
 

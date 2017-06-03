@@ -29,10 +29,10 @@ class Correlation(db.Model):
     """
     # Needed to be an http://docs.sqlalchemy.org/en/rel_0_9/orm/relationships.html#association-object
     __tablename__ = 'correlations'
-    section_id = db.Column(db.Integer, db.ForeignKey('sections.id'), primary_key=True)
+    section_id = db.Column(db.Integer, db.ForeignKey('sections.id'), primary_key=True, index=True)
     section = db.relationship('Section', backref='correlations')
 
-    sensor_id = db.Column(db.Integer, db.ForeignKey('sensors.id'), primary_key=True)
+    sensor_id = db.Column(db.Integer, db.ForeignKey('sensors.id'), primary_key=True, index=True)
     sensor = db.relationship('Sensor', backref='correlations')
 
     minimum = db.Column(db.Float)

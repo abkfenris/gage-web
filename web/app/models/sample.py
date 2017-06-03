@@ -21,10 +21,10 @@ class Sample(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    sensor_id = db.Column(db.Integer, db.ForeignKey('sensors.id'))
+    sensor_id = db.Column(db.Integer, db.ForeignKey('sensors.id'), index=True)
     sensor = db.relationship('Sensor', backref=db.backref('samples'))
 
-    datetime = db.Column(db.DateTime)
+    datetime = db.Column(db.DateTime, index=True)
     value = db.Column(db.Float)
 
     def to_json(self):

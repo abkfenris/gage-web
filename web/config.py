@@ -20,6 +20,7 @@ class Config:
     CELERYD_PREFETCH_MULTIPLIER = 1
     CELERYD_MAX_TASKS_PER_CHILD = 10
     CELERYD_TASK_TIME_LIMIT = 600
+    API_GAGES_PER_PAGE = 100
 
     @staticmethod
     def init_app(app):

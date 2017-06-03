@@ -28,7 +28,7 @@ class GageClient01(LiveServerBase):
                 break
         else:
             raise Exception('Sample not found')
-        sample = r['sensors'][1]['recent_sample']
+        sample = r['sensors'][0]['recent_sample']
         self.assertIn('url', sample)
         self.assertIn('id', sample)
         self.assertIn('value', sample)

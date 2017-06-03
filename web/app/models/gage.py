@@ -46,16 +46,16 @@ class Gage(db.Model):
     """
     __tablename__ = 'gages'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, index=True)
     name = db.Column(db.String(80))
-    slug = db.Column(db.String(80), unique=True)
+    slug = db.Column(db.String(80), unique=True, index=True)
     # primary_sensor_id = db.Column(db.Integer, db.ForeignKey('sensor.id'))
     point = db.Column(Geometry('POINT', 4326))
 
-    river_id = db.Column(db.Integer, db.ForeignKey('rivers.id'))
+    river_id = db.Column(db.Integer, db.ForeignKey('rivers.id'), index=True)
     river = db.relationship('River', backref='gages')
 
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), index=True)
     user = db.relationship('User', backref='gages')
 
     visible = db.Column(db.Boolean)

@@ -6,8 +6,8 @@ if os.environ.get('FLASK_COVERAGE'):
     COV = coverage.coverage(branch=True, include='app/*')
     COV.start()
 
-from flask.ext.script import Manager, Shell
-from flask.ext.migrate import Migrate, MigrateCommand
+from flask_script import Manager, Shell
+from flask_migrate import Migrate, MigrateCommand
 
 from app import create_app, db
 from app.models import User, Region, River, Section, Gage, Sensor, Sample
