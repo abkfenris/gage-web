@@ -1,0 +1,174 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: riverflows-patroni
+  labels:
+    component: patroni-client
+spec:
+  selector:
+    component: patroni-patroni
+    app: riverflows
+  ports:
+  - port: 5432
+  clusterIP: None
+
+---
+
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: riverflows-patroni
+  labels:
+    component: patroni-patroni
+    app: riverflows
+    service: riverflows-db
+spec:
+  serviceName: riverflows-patroni
+  replicas: 3
+  template:
+    metadata:
+      name: riverflows-patroni
+      labels:
+        component: patroni-patroni
+        app: riverflows
+        service: riverflows-db
+      annotations:
+        pod.alpha.kubernetes.io/initialized: "true"
+        pod.beta.kubernetes.io/init-containers: '[
+          {
+            "name": "restore",
+            "image": "abkfenris/atomicdb",
+            "imagePullPolicy": "Always",
+            "args": ["restore"],
+            "env": [
+              {
+                "name": "WALE_ENVDIR",
+                "value": "/opt/wale"
+              },
+              {
+                "name": "PG_DATA",
+                "value": "/pgdata/data"
+              },
+              {
+                "name": "IGNORE_WAL_BASEBACKUP_MISSING",
+                "value": "true"
+              },
+              {
+                "name": "POD_NAME",
+                "valueFrom": {
+                  "fieldRef": {
+                    "apiVersion": "v1",
+                    "fieldPath": "metadata.name"
+                  }
+                }
+              }
+            ],
+            "volumeMounts": [
+              {
+                "name": "pgdata",
+                "mountPath": "/pgdata"
+              },
+              {
+                "name": "wale-secret",
+                "mountPath": "/tmp/wale",
+                "readOnly": true
+              },
+              {
+                "name": "wale-config",
+                "mountPath": "/opt/wale",
+                "readOnly": true
+              }
+            ]
+          }
+        ]'
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: service
+                operator: In
+                values:
+                - riverflows-db
+            topologyKey: kubernetes.io/hostname
+      containers:
+      - name: backup
+        image: abkfenris/atomicdb
+        args: 
+        - backup
+        imagePullPolicy: Always
+        envFrom:
+        - configMapRef: 
+            name: riverflows-config
+        volumeMounts:
+        - name: pgdata
+          mountPath: /pgdata
+        - mountPath: /tmp/wale
+          name: wale-secret
+          readOnly: true
+        - mountPath: /opt/wale
+          name: wale-config
+          readOnly: true
+      - name: patroni
+        image: abkfenris/atomicdb
+        imagePullPolicy: Always
+        args:
+        - postgres
+        envFrom:
+        - secretRef: 
+            name: riverflows-secrets
+        - configMapRef: 
+            name: riverflows-config
+        env:
+        - name: POD_NS
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.podIP
+        - name: ETCD_HOST
+          value: etcd-patroni-cluster.$(POD_NS).svc.cluster.local
+        ports:
+        - containerPort: 8008
+        - containerPort: 5432
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        volumeMounts:
+        - name: pgdata
+          mountPath: /pgdata
+        - mountPath: /opt/patroni
+          name: patroni-template
+          readOnly: true
+        - mountPath: /tmp/wale
+          name: wale-secret
+          readOnly: true
+        - mountPath: /opt/wale
+          name: wale-config
+          readOnly: true
+      volumes:
+      - name: wale-config
+        configMap:
+          name: wale-config
+      - name: pgdata
+        emptyDir: {}
+      - name: patroni-template
+        configMap:
+          name: patroni-template
+          items:
+          - key: patroni.template.yml
+            path: patroni.template.yml
+      - name: wale-secret
+        secret:
+          secretName: patroni-wale

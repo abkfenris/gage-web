@@ -13,9 +13,11 @@ class Config:
     MAPBOX_ACCESS_TOKEN = os.environ.get('MAPBOX_ACCESS_TOKEN')
     SECURITY_POST_LOGIN_VIEW = 'admin/'
     SECURITY_CHANGEABLE = True
-    CELERY_BROKER_URL = 'redis://localhost:6379/1'
+    CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL',
+        'redis://localhost:6379/1')
     SENTRY_USER_ATTRS = ['username', 'email']
     SENTRY_DSN = os.environ.get('SENTRY_DSN')
+    SENTRY_PUBLIC_DSN = os.environ.get('SENTRY_PUBLIC_DSN')
     CELERY_ACKS_LATE = True
     CELERYD_PREFETCH_MULTIPLIER = 1
     CELERYD_MAX_TASKS_PER_CHILD = 10
@@ -54,8 +56,7 @@ class DockerConfig(Config):
     SQLALCHEMY_DATABASE_URI = (
         os.environ.get('GAGE_DB') or
         'postgresql://localhost/gage-web')
-    CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL',
-        'redis://localhost:6379/1')
+    
 
 
 class ProductionConfig(Config):

@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: riverflows-redis
+  labels:
+    app: riverflows
+    service: redis
+    role: master
+    tier: backend
+spec:
+  ports:
+  - port: 6379
+    protocol: TCP
+  selector:
+    app: riverflows
+    service: redis
+    role: master
+    tier: backend
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: riverflows-redis-master
+  labels:
+    app: riverflows
+    service: redis
+    role: master
+    tier: backend
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: riverflows-redis-master
+      labels:
+        app: riverflows
+        service: redis
+        role: master
+        tier: backend
+    spec:
+      containers:
+      - name: master
+        image: redis:3.2-alpine
+        resources:
+          requests:
+            cpu: 10m
+          limits:
+            cpu: 400m
+        ports:
+        - containerPort: 6379

@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: riverflows
+    service: web
+    tier: frontend
+  name: riverflows-web
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: riverflows
+        service: web
+        tier: frontend
+    spec:
+      containers:
+      - name: web
+        image: gcr.io/alex-kerney/riverflows:0.1
+        command:
+        - gunicorn
+        - --log-level
+        - debug
+        - -w
+        - '2'
+        - -b
+        - :8000
+        - wsgi:app
+        envFrom:
+        - secretRef: 
+            name: riverflows-secrets
+        - configMapRef: 
+            name: riverflows-config
+        ports:
+        - containerPort: 8000
+        resources:
+          limits:
+            cpu: 400m
+          requests:
+            cpu: 10m

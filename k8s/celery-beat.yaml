@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: riverflows
+    service: celery-beat
+    tier: backend
+  name: riverflows-celery-beat
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: riverflows
+        service: celery-beat
+        tier: frontend
+    spec:
+      containers:
+      - name: celery-beat
+        image: gcr.io/alex-kerney/riverflows:0.1
+        command:
+        - celery
+        - beat
+        - -A
+        - celery_worker.celery
+        - -l
+        - info
+        env:
+        - name: C_FORCE_ROOT
+          value: 'True'
+        envFrom:
+        - secretRef: 
+            name: riverflows-secrets
+        - configMapRef: 
+            name: riverflows-config
+        ports:
+        - containerPort: 8000
+        resources:
+          limits:
+            cpu: 400m
+          requests:
+            cpu: 10m
