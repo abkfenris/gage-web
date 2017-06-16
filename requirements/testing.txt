@@ -5,4 +5,4 @@ Flask-Testing==0.6.2
 mock==2.0.0
 pytest==3.1.2
 vcrpy==1.11.1
-codecov
+codecov==2.0.9
