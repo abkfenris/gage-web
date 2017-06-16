@@ -45,6 +45,6 @@ PyYAML==3.12
 requests==2.18.1
 Shapely==1.5.17.post1
 raven==6.1.0
-six==1.9.0
+six==1.10.0
 Werkzeug==0.10.4
 WTForms==2.0.2
