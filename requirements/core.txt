@@ -36,7 +36,7 @@ Jinja2==2.9.6
 Mako==1.0.6
 MarkupSafe==1.0
 passlib==1.7.1
-parsedatetime==1.5
+parsedatetime==2.4
 pillow==2.9.0
 pyparsing==2.0.3
 python-dateutil==2.4.2
