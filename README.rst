@@ -10,10 +10,6 @@ A web interface for a low cost stream height gauging system.
     | Test Coverage | |codecov|         |
     |               | |coveralls|       |
     +---------------+-------------------+
-    | Requirements  | |requires.io|     |
-    +---------------+-------------------+
-    | Python 3      | |caniuse|         |
-    +---------------+-------------------+
     | Code Health   | |landscape|       |
     |               | |quantifiedcode|  |
     |               |                   |
