@@ -46,7 +46,7 @@ A web interface for a low cost stream height gauging system.
     :target: https://codeclimate.com/github/abkfenris/gage-web
 .. |caniuse| image:: https://caniusepython3.com/check/903e9600-cba1-47b4-9765-bc91b57ec1ad.svg?style=flat
     :target: https://caniusepython3.com/check/903e9600-cba1-47b4-9765-bc91b57ec1ad
-.. |cadacy| image:: https://api.codacy.com/project/badge/grade/aa6dac425b134a3f8249ce690c74d983
+.. |codacy| image:: https://api.codacy.com/project/badge/grade/aa6dac425b134a3f8249ce690c74d983
     :target: https://www.codacy.com/app/abk/gage-web
 
 .. end-readme
