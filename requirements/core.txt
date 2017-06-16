@@ -47,4 +47,4 @@ Shapely==1.5.17.post1
 raven==6.1.0
 six==1.10.0
 Werkzeug==0.12.2
-WTForms==2.0.2
+WTForms==2.1
