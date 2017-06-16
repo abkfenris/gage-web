@@ -27,7 +27,7 @@ redis==2.10.5
 
 # Utilities
 arrow==0.10.0
-beautifulsoup4==4.4.0
+beautifulsoup4==4.6.0
 blinker==1.4
 docopt==0.6.2
 ipaddress==1.0.14
