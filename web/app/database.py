@@ -21,6 +21,7 @@ FROM gages g
     SELECT *
     FROM samples
     WHERE sensor_id = s.id
+    AND datetime > NOW()::DATE-EXTRACT(DOW FROM NOW())::INTEGER-1
     ORDER BY samples.datetime DESC
     LIMIT 1
 ) sa

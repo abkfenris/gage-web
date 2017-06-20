@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: riverflows-nginx
+  labels:
+    app: riverflows
+    service: nginx
+    tier: frontend
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: riverflows
+        service: nginx
+        tier: frontend
+    spec:
+      containers:
+      - image: nginx:1.10.1-alpine
+        name: nginx
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            cpu: 400m
+        ports:
+        - containerPort: 80
+          name: http
+        - containerPort: 443
+          name: https
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/conf.d/
+          readOnly: true
+        - name: riverflows-ssl
+          mountPath: /ssl
+          readOnly: true
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: riverflows-nginx
+      - name: riverflows-ssl
+        secret:
+          secretName: riverflo.ws

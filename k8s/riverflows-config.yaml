@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: riverflows-config
+data:
+  WALE_ENVDIR: /opt/wale
+  PG_DATA: /pgdata/data
+  WALE_CRON_TIMING: '13 */3 * * *' # backup 13 min past ever 3rd hour
+  CLUSTERNAME: riverflowsDB
+  POD_GROUP: riverflows-patroni
+  PATRONI_TEMPLATE_PATH: /opt/patroni/patroni.template.yml
+  SERVER_NAME: riverflo.ws
+  FLASK_CONFIG: production

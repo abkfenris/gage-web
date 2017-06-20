@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: riverflows-nginx
+  labels:
+    app: riverflows
+    service: nginx
+    tier: frontend
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    name: http
+  - port: 443
+    protocol: TCP
+    name: https
+  selector:
+    app: riverflows
+    service: nginx
+    tier: frontend
+  type: LoadBalancer
+  clusterIP: 10.3.245.87

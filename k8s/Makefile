@@ -1,6 +1,6 @@
-etcd:
+#etcd:
 	# create etcd cluster that patroni will talk to
-	kubectl apply -f etcd-cluster.yaml
+#	kubectl apply -f etcd-cluster.yaml
 
 config:
 	# kubectl create -f sec-patroni.yaml
@@ -32,3 +32,19 @@ load-sql:
 
 redis:
 	kubectl create -f redis.yaml
+
+certs:
+	kubectl create -f riverflo-ws.yaml
+
+nginx:
+	kubectl create configmap riverflows-nginx --from-file=configs/riverflows.conf
+	kubectl create -f nginx.yaml
+
+nginx-service:
+	kubectl create -f nginx-service.yaml
+
+web-service:
+	kubectl create -f web-service.yaml
+
+etcd-statefulset:
+	helm install --name riverflows-etcd-set -f etcd-statefulset-values.yaml incubator/etcd

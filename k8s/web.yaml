@@ -21,7 +21,7 @@ spec:
         command:
         - gunicorn
         - --log-level
-        - debug
+        - info
         - -w
         - '2'
         - -b
