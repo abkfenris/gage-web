@@ -68,17 +68,12 @@ def gagepage(gid=None, slug=None):
     else:
         gage = Gage.query.filter_by(slug=slug).first_or_404()
     sensors = Sensor.query.filter_by(gage_id=gage.id).all()
-    #current_app.logger.debug(sensors)
 
     plots = [SensorPlot(gage.id, sensor.stype).bokeh() for sensor in sensors]
-    #current_app.logger.info(plots)
 
     script, divs = components(plots)
-    #current_app.logger.info(script)
-    #current_app.logger.info(divs)
 
     sensor_divs = zip(sensors, divs)
-    #current_app.logger.info(list(sensor_divs))
 
     return render_template('gage.html', 
             Gage=Gage,

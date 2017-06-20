@@ -3,7 +3,7 @@ import copy, os
 from fabric.api import local, prompt
 from fabric.contrib.console import confirm
 import yaml
-from git import Repo
+from git import Repo as _Repo
 
 
 def _image_version(config):
@@ -39,9 +39,17 @@ def _git_tag(version):
     Tags the latest commit with the new version
     """
     if confirm('Tag latest commit to repo?'):
-        repo = Repo(os.path.dirname(os.path.abspath(__file__)))
+        repo = _Repo(os.path.dirname(os.path.abspath(__file__)))
         commit = repo.head.commit
         repo.create_tag(version, ref=commit)
+
+
+def _update_config_image(config, tag):
+    """
+    Returns a new config object with updated image tag
+    """
+    config['spec']['template']['spec']['containers'][0]['image'] = tag
+    return config
 
 
 def _update_config(filename, tag):
@@ -58,6 +66,18 @@ def _update_config(filename, tag):
     print('')
     print(yaml_config)
     print('')
+
+    if confirm('Write config to file?'):
+        with open(filename, 'w') as f:
+            f.write(yaml_config)
+
+
+def _k8s_replace(filename):
+    """
+    Kubectl replace given filename
+    """
+    if confirm('Replace ' + filename + ' in k8s?'):
+        local('kubectl replace -f ' + filename)
 
 
 def deploy():
@@ -80,10 +100,19 @@ def deploy():
     print('')
 
     _push(image, new_version)
+    print('')
+
+    tag = image + ':' + str(new_version)
+
+    for path in paths:
+        _update_config(path, tag)
+        _k8s_replace(path)
+
 
     # git tag, push
     # sentry release tracking?
     # for path in paths:
         # write new config
         # replace
-    
+
+    # copy static files to nginx pod and push

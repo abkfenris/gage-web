@@ -73,7 +73,6 @@ class BasePlot(object):
         p = figure(x_axis_type='datetime', title=str(self.sensor))
 
         datetimes, values = self.data_datetimes_values()
-        current_app.logger.info(self.sensor.nice_name())
 
         p.circle(datetimes, values, legend=self.sensor.nice_name())
 
