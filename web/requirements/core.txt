@@ -54,3 +54,10 @@ bcrypt<2.0.0
 
 # Logging from Gunicorn on docker
 json-logging-py
+
+
+#plotting
+bokeh==0.12.6
+numpy==1.13.0
+tornado==4.5.1
+bkcharts==0.2

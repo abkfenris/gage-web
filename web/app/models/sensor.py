@@ -150,4 +150,9 @@ class Sensor(db.Model):
         return '<Sensor {0} - {1}>'.format(self.gage.name, self.stype)
 
     def __str__(self):
-        return self.gage.name + '-' + self.stype
+        return self.gage.name + ' - ' + self.nice_name()
+    
+    def nice_name(self):
+        if self.name:
+            return self.name
+        return self.stype

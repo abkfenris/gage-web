@@ -2,9 +2,11 @@
 The main public routes to view the site
 """
 
+from bokeh.embed import components
 from flask import render_template, current_app
 
 from .blueprint import main
+from .plot import SensorPlot
 from app.database import gage_sample
 from ..models import Gage, Region, Section, River, Sensor
 
@@ -65,7 +67,25 @@ def gagepage(gid=None, slug=None):
         gage = Gage.query.get_or_404(gid)
     else:
         gage = Gage.query.filter_by(slug=slug).first_or_404()
-    return render_template('gage.html', Gage=Gage, gage=gage, gage_sample=gage_sample)
+    sensors = Sensor.query.filter_by(gage_id=gage.id).all()
+    #current_app.logger.debug(sensors)
+
+    plots = [SensorPlot(gage.id, sensor.stype).bokeh() for sensor in sensors]
+    #current_app.logger.info(plots)
+
+    script, divs = components(plots)
+    #current_app.logger.info(script)
+    #current_app.logger.info(divs)
+
+    sensor_divs = zip(sensors, divs)
+    #current_app.logger.info(list(sensor_divs))
+
+    return render_template('gage.html', 
+            Gage=Gage,
+            gage=gage, 
+            gage_sample=gage_sample,
+            script=script,
+            sensor_divs=sensor_divs)
 
 
 @main.route('/regions/')

@@ -1,21 +1,15 @@
 """
 Ways that a plot of a selected sensor can be displayed
 """
-
-from flask import make_response, request
 import datetime
-try:
-    from StringIO import StringIO
-except ImportError:
-    from io import BytesIO
+
+from bokeh.plotting import figure
+from flask import make_response, request, current_app
+
 
 from .blueprint import main
 from ..models import Gage, Sensor, Sample, Correlation, River, Section
 
-#import PyQt5
-import matplotlib
-matplotlib.use('Cairo', force=True)
-from matplotlib.backends.backend_cairo import FigureCanvasCairo as FigureCanvas
 
 class BasePlot(object):
     """
@@ -56,86 +50,35 @@ class BasePlot(object):
             end = datetime.datetime.strptime(end, '%Y%m%d')
         return (start, end)
 
-    def _setaxislimits(self, axis, ymin, ymax):
-        """
-        Set limits for y axis. If not set on sensor, then use a buffer of 10%
-        """
-        if ymin == ymax:
-            ybuff = 0.1*ymin
-        else:
-            ybuff = 0.1*(ymax-ymin)
-        if self.sensor.minimum:
-            axis.set_ylim(ymin=self.sensor.minimum)
-        else:
-            axis.set_ylim(ymin=ymin-ybuff)
-        if self.sensor.maximum:
-            axis.set_ylim(ymax=self.sensor.maximum)
-        else:
-            axis.set_ylim(ymax=ymax+ybuff)
 
-    def png(self):
+    def data_datetimes_values(self):
         """
-        Returns a StringIO PNG plot for the sensor
+        Returns the date as two lists, datetimes and values
         """
-        
-        fig = self.matplot()
-        canvas = FigureCanvas(fig)
-        try:
-            png_output = StringIO()
-        except NameError:
-            png_output = BytesIO()
-        canvas.print_png(png_output)
-        return png_output.getvalue()
+        datetimes, values = [], []
 
-    def jpg(self):
-        """
-        Returns a StringIO JPG plot for the sensor
-        """
-        fig = self.matplot()
-        canvas = FigureCanvas(fig)
-        try:
-            jpg_output = StringIO()
-        except NameError:
-            jpg_output = BytesIO()
-        canvas.print_jpg(jpg_output)
-        return jpg_output.getvalue()
-
-    def _axisfigure(self):
-        """
-        Returns axis and figure
-        """
-        #import matplotlib
-        #matplotlib.use('Qt5Agg')
-        import PyQt5
-        import matplotlib
-        matplotlib.use('Qt5Agg', force=True)
-        from matplotlib.figure import Figure
-        import seaborn as sns
-        sns.set()
         data = self.data()
-        fig = Figure()
-        ax = fig.add_subplot(1, 1, 1)
-        x = []
-        y = []
+
         for sample in data:
-            x.append(sample.datetime)
-            y.append(sample.value)
-        ax.plot(x, y, '-')
-        self._setaxislimits(ax, min(y), max(y))
-        if self.sensor.name:
-            ax.set_title('{0} - {1}'.format(self.sensor.gage.name, self.sensor.name))
-        else:
-            ax.set_title('{0} - {1}'.format(self.sensor.gage.name, self.sensor.stype.capitalize()))
-        return ax, fig
+            datetimes.append(sample.datetime)
+            values.append(sample.value)
 
-    def matplot(self):
-        """
-        Returns a matplotlib figure for building into a plot
-        """
-        
-        ax, fig = self._axisfigure()
-        return fig
+        return datetimes, values
 
+
+    def bokeh(self):
+        """
+        Returns a bokeh plot object
+        """
+        p = figure(x_axis_type='datetime', title=str(self.sensor))
+
+        datetimes, values = self.data_datetimes_values()
+        current_app.logger.info(self.sensor.nice_name())
+
+        p.circle(datetimes, values, legend=self.sensor.nice_name())
+
+        return p
+    
 
 class SensorPlot(BasePlot):
     """

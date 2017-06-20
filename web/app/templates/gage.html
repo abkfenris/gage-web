@@ -4,6 +4,19 @@
 
 {% block title %}Flows | {{ gage.name }}{% endblock %}
 
+{% block styles %}
+{{super()}}
+<link href="https://cdn.pydata.org/bokeh/release/bokeh-0.12.6.min.css"
+    rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.pydata.org/bokeh/release/bokeh-0.12.6.min.js"></script>
+{% autoescape false %}
+	{{ script }}
+{% endautoescape %}
+{{super()}}
+{% endblock %}
 
 {% block content %}
   	<div class="jumbotron">
@@ -39,9 +52,11 @@
 		  						<li>Longitude: {{ gage.latlon().x }}</li>
 	  					</div>
 	  				</div>
-	  				{% for sensor in gage.sensors.all() %}
+	  				{% for sensor, div in sensor_divs %}
 	  					<div class="tab-pane" id="{{ sensor.stype }}">
-							  Sometime soon a plot will return to here.
+							  {% autoescape false %}
+								{{ div }}
+							  {% endautoescape %}
 	  					</div>
 	  				{% endfor %}
 
