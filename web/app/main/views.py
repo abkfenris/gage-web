@@ -6,7 +6,7 @@ from bokeh.embed import components
 from flask import render_template, current_app
 
 from .blueprint import main
-from .plot import SensorPlot
+from .plot import CorrelationPlot, SensorPlot
 from app.database import gage_sample
 from ..models import Gage, Region, Section, River, Sensor
 
@@ -137,12 +137,22 @@ def sectionpage(sid=None, slug=None, river=None):
                                .first_or_404()
     else:
         section = Section.query.get_or_404(sid)
+    
+    correlations = section.correlations
+    
+    plots = [CorrelationPlot(correlation.section_id, correlation.sensor_id).bokeh() for correlation in correlations]
+    script, divs = components(plots)
+
+    correlation_divs = list(zip(correlations, divs))
+
     return render_template('section.html',
                            Gage=Gage,
                            Section=Section,
                            section=section,
                            Sensor=Sensor,
-                           gage_sample=gage_sample)
+                           gage_sample=gage_sample,
+                           script=script,
+                           correlation_divs=correlation_divs)
 
 
 @main.route('/rivers/')

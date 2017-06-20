@@ -4,17 +4,30 @@
 
 {% block title %}Flows | {{ section.name }}{% endblock %}
 
-
 {% block jumbo_title %}
 <h1>{{ section.name }}</h1>
 <p>{{ section.shortDescription }}</p>
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link href="https://cdn.pydata.org/bokeh/release/bokeh-0.12.6.min.css"
+    rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.pydata.org/bokeh/release/bokeh-0.12.6.min.js"></script>
+{% autoescape false %}
+	{{ script }}
+{% endautoescape %}
+{{super()}}
 {% endblock %}
 
 {% block main %}
 <ul class="nav nav-tabs">
 	<li class="active"><a href="#info" data-toggle="tab">Section Info</a></li>
 	<li><a href="#weather" data-toggle="tab">Weather</a></li>
-	{% for correlation in section.correlations %}
+	{% for correlation, div in correlation_divs %}
 	<li><a href="#{{ correlation.sensor.stype }}" data-toggle="tab">{{ correlation.sensor.gage.name }} - {{ correlation.sensor.recent().value }}</a></li>
 	{% endfor %}
 </ul>
@@ -44,9 +57,11 @@
 
 	</div>
 
-	{% for correlation in section.correlations %}
+	{% for correlation, div in correlation_divs  %}
 	<div class="tab-pane" id="{{ correlation.sensor.stype}}">
-		Plots will return sometime
+		{% autoescape false %}
+			{{ div }}
+		{% endautoescape %}
 	</div>
 	{% endfor %}
 
