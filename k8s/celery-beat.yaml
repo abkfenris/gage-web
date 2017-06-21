@@ -16,9 +16,7 @@ spec:
         tier: frontend
     spec:
       containers:
-      - name: celery-beat
-        image: gcr.io/alex-kerney/riverflows:0.1
-        command:
+      - command:
         - celery
         - beat
         - -A
@@ -29,10 +27,12 @@ spec:
         - name: C_FORCE_ROOT
           value: 'True'
         envFrom:
-        - secretRef: 
+        - secretRef:
             name: riverflows-secrets
-        - configMapRef: 
+        - configMapRef:
             name: riverflows-config
+        image: gcr.io/alex-kerney/riverflows:0.1.6
+        name: celery-beat
         ports:
         - containerPort: 8000
         resources:

@@ -42,8 +42,8 @@ services:
     links:
       - postgis:postgis
       - redis:redis
-    command: "gunicorn --log-level debug --log-config logging.conf -w 2 -b :8000 wsgi:app"
-    #command: "python manage.py runserver --host=0.0.0.0 --port=8000"
+    #command: "gunicorn --log-level debug --log-config logging.conf -w 2 -b :8000 wsgi:app"
+    command: "python manage.py runserver --host=0.0.0.0 --port=8000"
     volumes:
       - ./web:/usr/src/app
     env_file:

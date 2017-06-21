@@ -66,3 +66,13 @@ dump.rdb
 tmp/
 common.env
 data
+k8s/configs
+k8s/etcd-operator
+k8s/sql
+k8s/etcd-0.2.0.tgz
+k8s/etcd-operator-0.2.1.tgz
+k8s/etcd-statefulset-values.yaml
+k8s/riverflo-ws.yaml
+k8s/riverflows-secrets.yaml
+k8s/sec-patroni.yaml
+k8s/wale-config.yaml
