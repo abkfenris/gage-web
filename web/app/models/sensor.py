@@ -126,7 +126,8 @@ class Sensor(db.Model):
         sample = self.recent()
         json_post = {
             'id': self.id,
-            'type': self.stype,
+            'type': self.nice_name(),
+            'suffix': self.suffix,
             'url': url_for('api.get_sensor', sid=self.id, _external=True)
         }
         if sample is not None:
@@ -155,4 +156,4 @@ class Sensor(db.Model):
     def nice_name(self):
         if self.name:
             return self.name
-        return self.stype
+        return self.stype.capitalize()

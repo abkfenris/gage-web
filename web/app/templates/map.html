@@ -33,15 +33,18 @@
     var feature = marker.feature;
     var properties = marker.feature.properties;
     var content = '<a href="' + properties.html + '"><h2>' + properties.name + '</h2></a>';
-    content += '<ul>';
+    //content += '<ul>';
     
     properties.sensors.forEach(function(sensor) {
-      content += '<li>' + sensor.type + ' - ' + sensor.recent_sample.value + '</li>';
-      console.log(sensor)
+      if (sensor.suffix != null ) {
+        var suffix = ' ' + sensor.suffix;
+      } else {
+        var suffix = ''
+      }
+      content += '<p>' + sensor.type + ' - ' + sensor.recent_sample.value + suffix + '</p>';
     })
 
-    content += '</ul>'
-    console.log(feature);
+    //content += '</ul>'
     marker.bindPopup(content);
     map.fitBounds(gages.getBounds());
   });
