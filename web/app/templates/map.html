@@ -45,7 +45,7 @@
     marker.bindPopup(content);
     map.fitBounds(gages.getBounds());
   });
-  gages.loadURL('{{ url_for('api.get_gage_geojson', _external=True)}}');
+  gages.loadURL('{{ url_for('api.get_gage_geojson')}}');
   
 </script>
 {% endblock %}
