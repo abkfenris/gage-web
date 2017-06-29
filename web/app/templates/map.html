@@ -23,10 +23,29 @@
   L.mapbox.accessToken = '{{mapbox_access_token}}'
   var map = L.mapbox.map('map', 'mapbox.streets')
 
-  var sections = L.mapbox.featureLayer('{{ url_for('api.get_section_geojson', _external=True ) }}')
-  .addTo(map)
+  //var sections = L.mapbox.featureLayer('{{ url_for('api.get_section_geojson', _external=True ) }}')
+  //.addTo(map)
 
-  var gages = L.mapbox.featureLayer('{{ url_for('api.get_gage_geojson', _external=True)}}')
-  .addTo(map)
+  var gages = L.mapbox.featureLayer().addTo(map);
+
+  gages.on('layeradd', function(e) {
+    var marker = e.layer;
+    var feature = marker.feature;
+    var properties = marker.feature.properties;
+    var content = '<a href="' + properties.html + '"><h2>' + properties.name + '</h2></a>';
+    content += '<ul>';
+    
+    properties.sensors.forEach(function(sensor) {
+      content += '<li>' + sensor.type + ' - ' + sensor.recent_sample.value + '</li>';
+      console.log(sensor)
+    })
+
+    content += '</ul>'
+    console.log(feature);
+    marker.bindPopup(content);
+    map.fitBounds(gages.getBounds());
+  });
+  gages.loadURL('{{ url_for('api.get_gage_geojson', _external=True)}}');
+  
 </script>
 {% endblock %}
