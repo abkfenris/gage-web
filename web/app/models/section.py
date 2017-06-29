@@ -138,14 +138,22 @@ class Section(db.Model):
         """
         Creates a GeoJSON Feature from the gage
         """
-        geometry = mapping(to_shape(self.path))
+        try:
+            geometry = mapping(to_shape(self.path))
+        except AssertionError:
+            return None
         geojson = {
             'type': 'Feature',
             'geometry': geometry,
             'properties': {
                 'id': self.id,
                 'name': self.name,
-                'description': self.description
+                'description': self.description,
+                'html': url_for('main.sectionpage',
+                                slug=self.slug,
+                                river=self.river.slug,
+                                _external=True),
+                'correlations': [correlation.section_json() for correlation in self.correlations]
             }
         }
         return geojson

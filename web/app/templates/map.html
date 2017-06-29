@@ -49,6 +49,22 @@
     map.fitBounds(gages.getBounds());
   });
   gages.loadURL('{{ url_for('api.get_gage_geojson')}}');
+
+  var sections = L.mapbox.featureLayer().addTo(map);
+
+  sections.on('layeradd', function(e) {
+    var marker = e.layer;
+    var properties = marker.feature.properties;
+
+    var content = '<a href="' + properties.html + '"><h2>' + properties.name + '</h2></a>'
+
+    properties.correlations.forEach(function(correlation) {
+      content += '<p>' + correlation.gage_name + ' - ' + correlation.sensor.type + ' - ' + correlation.sensor.recent_sample.value + '</p>'
+    })
+
+    marker.bindPopup(content);
+  })
+  sections.loadURL('{{ url_for('api.get_section_geojson') }}')
   
 </script>
 {% endblock %}

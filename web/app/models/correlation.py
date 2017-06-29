@@ -1,6 +1,8 @@
 """
 Model for section correlation to sensor levels.
 """
+from flask import url_for
+
 from app.database import db
 
 
@@ -44,3 +46,15 @@ class Correlation(db.Model):
     trend_samples = db.Column(db.Integer)
     description = db.Column(db.Text)
     backend_notes = db.Column(db.Text)
+
+    def section_json(self):
+        """
+        Returns a json object 
+        """
+        return {
+            'gage_html': url_for('main.gagepage',
+                                 slug=self.sensor.gage.slug,
+                                 _external=True),
+            'sensor': self.sensor.to_gage_json(),
+            'gage_name': self.sensor.gage.name
+        }
