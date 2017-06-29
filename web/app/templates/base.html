@@ -1,6 +1,10 @@
 {% extends "bootstrap/base.html" %}
 
-
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('static', filename='css/riverflows.css')}}">
+{% endblock %}
 
 {% block navbar %}
 <div class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin-bottom: 0">

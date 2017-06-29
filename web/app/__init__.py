@@ -9,6 +9,7 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_security import Security
 from flask_debugtoolbar import DebugToolbarExtension
+from flask_misaka import Misaka
 import logging
 from raven.contrib.flask import Sentry
 from werkzeug.contrib.fixers import ProxyFix
@@ -17,6 +18,7 @@ from config import config
 from .database import db
 
 bootstrap = Bootstrap()
+md = Misaka()
 security = Security()
 toolbar = DebugToolbarExtension()
 sentry = Sentry()
@@ -41,6 +43,7 @@ def create_app(config_name):
     bootstrap.init_app(app)
 
     db.init_app(app)
+    md.init_app(app)
     security.init_app(app, user_datastore)
     toolbar.init_app(app)
 

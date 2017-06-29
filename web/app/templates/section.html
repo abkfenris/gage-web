@@ -36,7 +36,7 @@
 
 	<div class="tab-pane active" id="info">
 		<div>
-			{{ section.description }}
+			{{ section.description|markdown }}
 			<ul>
 				<li>Location: {{ section.location }}</li>
 				<li>Latitude: {{ section.inlatlon().y }}</li>
