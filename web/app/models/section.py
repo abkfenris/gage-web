@@ -141,7 +141,7 @@ class Section(db.Model):
         try:
             geometry = mapping(to_shape(self.path))
         except AssertionError:
-            return None
+            return 
         geojson = {
             'type': 'Feature',
             'geometry': geometry,

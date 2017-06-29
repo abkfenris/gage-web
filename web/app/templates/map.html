@@ -59,7 +59,13 @@
     var content = '<a href="' + properties.html + '"><h2>' + properties.name + '</h2></a>'
 
     properties.correlations.forEach(function(correlation) {
-      content += '<p>' + correlation.gage_name + ' - ' + correlation.sensor.type + ' - ' + correlation.sensor.recent_sample.value + '</p>'
+      if (correlation.sensor.suffix != null) {
+        var suffix = ' ' + correlation.sensor.suffix;
+      } else {
+        var suffix = ''
+      }
+
+      content += '<p>' + correlation.gage_name + ' - ' + correlation.sensor.type + ' - ' + correlation.sensor.recent_sample.value + suffix + '</p>'
     })
 
     marker.bindPopup(content);

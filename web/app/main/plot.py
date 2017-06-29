@@ -74,7 +74,14 @@ class BasePlot(object):
 
         datetimes, values = self.data_datetimes_values()
 
-        p.circle(datetimes, values, legend=self.sensor.nice_name())
+        p.circle(datetimes, values)  # , legend=self.sensor.nice_name()
+
+        if self.sensor.suffix:
+            suffix = ' (' + self.sensor.suffix + ')'
+        else:
+            suffix = ''
+
+        p.yaxis.axis_label = self.sensor.nice_name() + suffix
 
         return p
     
