@@ -34,11 +34,7 @@
 	  				<li class="active"><a href="#info" data-toggle="tab">Gage Info</a></li>
 	  				<li><a href="#weather" data-toggle="tab">Weather</a></li>
 	  				{% for sensor in gage.sensors.all() %}
-	  					{% if sensor.name is none() %}
-	  					<li><a href="#{{ sensor.stype }}" data-toggle="tab">{{ sensor.stype }}{% if sensor.recent() is not none() %} - {{ sensor.recent().value }}{% endif %}</a></li>
-	  					{% else %}
-	  					<li><a href="#{{ sensor.stype }}" data-toggle="tab">{{ sensor.name }}{% if sensor.recent() is not none() %} - {{ sensor.recent().value }}{% endif %}</a></li>
-	  					{% endif %}
+	  					<li><a href="#{{ sensor.stype }}" data-toggle="tab">{{ sensor.nice_name() }}{% if sensor.recent() is not none() %} - {{ sensor.recent().value }}{% if sensor.suffix is not none() %}{{ sensor.suffix }}{% endif %}{% endif %}</a></li>
 	  				{% endfor %}
 	  			</ul>
 	  			<!-- Tab contents -->
