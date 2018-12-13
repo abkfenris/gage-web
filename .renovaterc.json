@@ -10,7 +10,7 @@
   "kubernetes": {
     "fileMatch": [
         "k8s/.+\\.yaml$"
-    ],
+    ]
   },
   "pinDigests": true,
   "prConcurrentLimit": 5,
