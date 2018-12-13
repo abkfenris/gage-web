@@ -1,0 +1,22 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "pip_requirements": {
+    "fileMatch": [
+      "web\/requirements\/"
+    ]
+  },
+  "kubernetes": {
+    "fileMatch": [
+        "k8s/.+\\.yaml$"
+    ]
+  },
+  "pinDigests": true,
+  "prConcurrentLimit": 5,
+  "schedule": "after 6am and before 8am every weekday",
+  "timezone": "America/New_York",
+  "assignees": [
+    "abkfenris"
+  ]
+}
