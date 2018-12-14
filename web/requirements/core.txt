@@ -1,53 +1,53 @@
 # Flask
-Flask==0.12
-Flask-Admin==1.4.2
+Flask==1.0.2
+Flask-Admin==1.5.2
 Flask-Bootstrap==3.3.7.1
 Flask-Cache==0.13.1
 Flask-DebugToolbar==0.10.1
 Flask-Login<0.4.0
 Flask-Mail==0.9.1
-Flask-Migrate==2.0.3
+Flask-Migrate==2.3.1
 Flask-Principal==0.4.0
-Flask-Script==2.0.5
-Flask-Security==1.7.5
-Flask-SQLAlchemy==2.1
+Flask-Script==2.0.6
+Flask-Security==3.0.0
+Flask-SQLAlchemy==2.3.2
 Flask-WTF==0.14.2
 
 
 # Database
-alembic==0.8.10
-GeoAlchemy2==0.4.0
-SQLAlchemy==1.1.5
-psycopg2==2.6.2
+alembic==1.0.5
+GeoAlchemy2==0.5.0
+SQLAlchemy==1.2.15
+psycopg2==2.7.6.1
 
 
 # Celery
-celery==4.0.2
-redis==2.10.5
+celery==4.2.1
+redis==3.0.1
 
 # Utilities
-arrow==0.10.0
-beautifulsoup4==4.5.3
+arrow==0.12.1
+beautifulsoup4==4.6.3
 blinker==1.4
 docopt==0.6.2
-ipaddress==1.0.18
-itsdangerous==0.24
-Jinja2==2.9.5
-Mako==1.0.6
-MarkupSafe==0.23
+ipaddress==1.0.22
+itsdangerous==1.1.0
+Jinja2==2.10
+Mako==1.0.7
+MarkupSafe==1.1.0
 passlib==1.7.1
-parsedatetime==1.5
-pillow==4.0.0
-pyparsing==2.1.10
-python-dateutil==2.6.0
-pytz==2016.10
-PyYAML==3.12
-requests==2.13.0
-Shapely==1.5.17
-raven==6.0.0
-six==1.10.0
-Werkzeug==0.11.15
-WTForms==2.1
+parsedatetime==2.4
+pillow==5.3.0
+pyparsing==2.3.0
+python-dateutil==2.7.5
+pytz==2018.7
+PyYAML==3.13
+requests==2.21.0
+Shapely==1.6.4.post2
+raven==6.9.0
+six==1.12.0
+Werkzeug==0.14.1
+WTForms==2.2.1
 
 gunicorn
 bcrypt<2.0.0
