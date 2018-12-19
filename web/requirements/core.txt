@@ -44,7 +44,7 @@ pytz==2018.7
 PyYAML==3.13
 requests==2.21.0
 Shapely==1.6.4.post2
-raven==6.9.0
+raven==6.10.0
 six==1.12.0
 Werkzeug==0.14.1
 WTForms==2.2.1
