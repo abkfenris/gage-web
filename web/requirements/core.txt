@@ -40,7 +40,7 @@ parsedatetime==2.4
 pillow==5.4.1
 pyparsing==2.3.0
 python-dateutil==2.7.5
-pytz==2018.7
+pytz==2018.9
 PyYAML==3.13
 requests==2.21.0
 Shapely==1.6.4.post2
