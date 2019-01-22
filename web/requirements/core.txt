@@ -18,7 +18,7 @@ Flask-WTF==0.14.2
 alembic==1.0.6
 GeoAlchemy2==0.5.0
 SQLAlchemy==1.2.16
-psycopg2==2.7.6.1
+psycopg2==2.7.7
 
 
 # Celery
