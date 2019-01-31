@@ -1,7 +1,7 @@
 # Some packages are much faster installed by conda on travis.ci
 # So we keep them seperate and let travis grab them from there instead
 
-numpy==1.16.0
+numpy==1.16.1
 matplotlib==3.0.2
 scipy==1.2.0
 pandas==0.24.0
