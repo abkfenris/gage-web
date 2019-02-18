@@ -23,7 +23,7 @@ psycopg2==2.7.7
 
 # Celery
 celery==4.2.1
-redis==3.1.0
+redis==3.2.0
 
 # Utilities
 arrow==0.13.1
