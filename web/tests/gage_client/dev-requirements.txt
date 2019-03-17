@@ -6,6 +6,6 @@ nosexcover==1.0.11
 python-coveralls==2.9.1
 PyYAML==5.1
 requests==2.21.0
-responses==0.10.5
+responses==0.10.6
 sh==1.12.14
 six==1.12.0
