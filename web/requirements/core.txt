@@ -33,7 +33,7 @@ docopt==0.6.2
 ipaddress==1.0.22
 itsdangerous==1.1.0
 Jinja2==2.10
-Mako==1.0.7
+Mako==1.0.8
 MarkupSafe==1.1.1
 passlib==1.7.1
 parsedatetime==2.4
