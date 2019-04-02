@@ -17,7 +17,7 @@ Flask-WTF==0.14.2
 # Database
 alembic==1.0.8
 GeoAlchemy2==0.6.1
-SQLAlchemy==1.3.1
+SQLAlchemy==1.3.2
 psycopg2==2.7.7
 
 
@@ -46,7 +46,7 @@ requests==2.21.0
 Shapely==1.6.4.post2
 raven==6.10.0
 six==1.12.0
-Werkzeug==0.15.1
+Werkzeug==0.15.2
 WTForms==2.2.1
 
 gunicorn
