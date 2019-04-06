@@ -32,7 +32,7 @@ blinker==1.4
 docopt==0.6.2
 ipaddress==1.0.22
 itsdangerous==1.1.0
-Jinja2==2.10
+Jinja2==2.10.1
 Mako==1.0.8
 MarkupSafe==1.1.1
 passlib==1.7.1
