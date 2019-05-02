@@ -1,7 +1,7 @@
 # Testing
 coverage==4.5.3
 Flask-Testing==0.7.1
-mock==3.0.2
+mock==3.0.3
 pytest==4.4.1
 vcrpy==2.0.1
 pytest-cov==2.6.1
