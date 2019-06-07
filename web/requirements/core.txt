@@ -41,7 +41,7 @@ pillow==6.0.0
 pyparsing==2.4.0
 python-dateutil==2.8.0
 pytz==2019.1
-PyYAML==5.1
+PyYAML==5.1.1
 requests==2.22.0
 Shapely==1.6.4.post2
 raven==6.10.0
