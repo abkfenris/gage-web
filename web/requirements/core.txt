@@ -46,7 +46,7 @@ requests==2.22.0
 Shapely==1.6.4.post2
 raven==6.10.0
 six==1.12.0
-Werkzeug==0.15.4
+Werkzeug==0.15.5
 WTForms==2.2.1
 
 gunicorn
