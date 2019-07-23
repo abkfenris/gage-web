@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM python:3.6@sha256:715c905479b18933f54c92feb247d6ed64509c6adc9b64989fc041d597ed94b4
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app

@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
       - name: master
-        image: redis:3.2-alpine
+        image: redis:3.2-alpine@sha256:e9083e10f5f81d350a3f687d582aefd06e114890b03e7f08a447fa1a1f66d967
         resources:
           requests:
             cpu: 10m

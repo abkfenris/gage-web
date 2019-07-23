@@ -3,7 +3,7 @@ version: '2'
 services:
   redis:
     restart: "always"
-    image: redis:alpine
+    image: redis:alpine@sha256:4a09815a6755e372b9ab96a0ed3229cbb34a8d1998ef18f5072278ff2cb86923
     volumes:
       - ./data/redis:/data
 
@@ -21,7 +21,7 @@ services:
 
   postgis:
     restart: "always"
-    image: mdillon/postgis:9.6
+    image: mdillon/postgis:9.6@sha256:4512d076541461f1e5d3178dcd37fedaf59af66e679310c412677222f629ed49
     ports:
       - "5432:5432"
     env_file:

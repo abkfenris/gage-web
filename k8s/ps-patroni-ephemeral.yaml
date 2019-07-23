@@ -94,7 +94,7 @@ spec:
             topologyKey: kubernetes.io/hostname
       containers:
       - name: backup
-        image: abkfenris/atomicdb
+        image: abkfenris/atomicdb@sha256:e841b033414ae1eea89fbbbef50b8a0920bf57251c4f8ba1b61d7d953c7cd27d
         args: 
         - backup
         imagePullPolicy: Always
@@ -111,7 +111,7 @@ spec:
           name: wale-config
           readOnly: true
       - name: patroni
-        image: abkfenris/atomicdb
+        image: abkfenris/atomicdb@sha256:e841b033414ae1eea89fbbbef50b8a0920bf57251c4f8ba1b61d7d953c7cd27d
         imagePullPolicy: Always
         args:
         - postgres

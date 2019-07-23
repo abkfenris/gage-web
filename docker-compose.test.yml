@@ -2,7 +2,7 @@ version: '2'
 
 services: 
     postgis:
-        image: "mdillon/postgis:9.6"
+        image: "mdillon/postgis:9.6@sha256:4512d076541461f1e5d3178dcd37fedaf59af66e679310c412677222f629ed49"
         environment:
         - POSTGRES_PASSWORD=testing
         - POSTGRES_DB=gage-web
@@ -20,6 +20,6 @@ services:
     wait:
         links:
         - postgis:postgis
-        image: waisbrot/wait
+        image: waisbrot/wait@sha256:6f2185daa4ab1711181c30d03f565508e8e978ebd0f263030e7de98deee5f330
         environment:
         - TARGETS=postgis:5432
